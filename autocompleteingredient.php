@@ -1,7 +1,7 @@
 <?php
 
-include 'application_context.php';
-$filename = "autocompleteingredient.php"
+//include 'application_context.php';
+$filename = "autocompleteingredient.php";
 
 // array for final json response
 $response = array();
@@ -10,11 +10,13 @@ $text = isset($_POST['text']) ? $_POST['text'] : '';
 
 if($text == '')
 {
+	/*
 	$response['PHP'] = "autocompleteingredient";
 	$response['IS_ERROR'] = "N";
 	$response['ERROR_MESSAGE'] = "No Error";
 	$response['EXCEPTION'] = "No Exception";
 	$response['USER_MESSAGE'] = "No User Message";
+	*/
 	echo json_encode($response);
 }
 else
@@ -24,7 +26,7 @@ else
 
 function searchIngredientData($data)
 {
-	//include 'application-context.php';
+	include 'application_context.php';
 
 	$SQL = "Select * from INGREDIENT where `ING_NAME` LIKE '%$data%'";
 	
@@ -37,22 +39,23 @@ function searchIngredientData($data)
                $tempArray = $result_val;
                array_push($myArray, $tempArray);
         	}
-
+/*
 		$response['PHP'] = "autocompleteingredient";
 		$response['IS_ERROR'] = "N";
 		$response['ERROR_MESSAGE'] = "No Error Message";
 		$response['EXCEPTION'] = "No Exception";
-		$response['USER_MESSAGE'] = "No User Message";	
-		$response['INGREDIENT_LIST'] = $myArray;
+		$response['USER_MESSAGE'] = "No User Message";	*/
+		$response = $myArray;
 		mysqli_close($db);
 	}
 	else
 	{
+		/*
 		$response['PHP'] = "autocompleteingredient";
 		$response['IS_ERROR'] = "Y";
 		$response['ERROR_MESSAGE'] = "SQL failed: ".$SQL;
 		$response['EXCEPTION'] = "No Exception";
-		$response['USER_MESSAGE'] = "No User Message";
+		$response['USER_MESSAGE'] = "No User Message"; */
 		mysqli_close($db);
 	}
 
