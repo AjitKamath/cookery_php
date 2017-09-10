@@ -6,7 +6,7 @@
 
 function logger($filename, $type, $message)
 {
-	include "error_code.php";
+	include 'error_code.php';
 
 	date_default_timezone_set('Asia/Kolkata');
 	$datetime = date('d-m-y H:i:s');

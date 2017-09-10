@@ -12,6 +12,7 @@ $USER_NOT_EXISTS		= "106";
 $MOBILE_EXISTS 			= "107";
 $EMAIL_EXISTS			= "108";
 
-$LOG_PATH = "/opt/lampp/htdocs/cookery/Log/log.log";
+//$LOG_PATH = "/opt/lampp/htdocs/cookery/Log/log.log";
+$LOG_PATH = "/home/cabox/workspace/Log/log.log";
 
 ?>
