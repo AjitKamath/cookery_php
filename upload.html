@@ -4,7 +4,7 @@
 
 <form action="multiimgupload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
-    <input type="file" name="images" id="fileToUpload">
+    <input type="file" name="images[]" id="fileToUpload" multiple>
     <input type="submit" value="Upload Image" name="submit">
 </form>
 
