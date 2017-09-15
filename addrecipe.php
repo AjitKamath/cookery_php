@@ -6,6 +6,7 @@
     $errorMessage;
     $exception;
     $userMessage;
+    $response = array();
 
     $rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
     $food_csn_nm    = isset($_POST['food_csn_nm']) ? $_POST['food_csn_nm'] : '';
@@ -96,11 +97,10 @@
 
 
 
-    if($ing_id == null || $ing_id == '')
+ function addingredient($ing_nm)
     {
-
-        try {
-                $ingredientsql = INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP);                         
+     try {
+                $ingredientsql = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP)";                         
 
                 $ing_id = $mysqli->insert_id;                                                       
 
@@ -126,6 +126,7 @@
                 $mysqli->rollback();
 
             }
+      return $ing_id;
     }
 
 
@@ -139,68 +140,79 @@
         $q3_ok = "true";
         $q4_ok = "true";
 
-
-        $recipesql = INSERT INTO `RECIPE` (`RCP_NM` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `TST_ID` , `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`) VALUES 
-                                          ('$rcp_nm' , '$food_typ_id' , '$food_csn_nm' , '$tst_id' , '$rcp_proc' , '$rcp_plating' , '$rcp_note');
+        $recipesql = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`, `CREATE_DTM`) VALUES 
+                                          ('$rcp_nm' , '$food_typ_id' , '$food_csn_nm' , '$rcp_proc' , '$rcp_plating' , '$rcp_note' , CURRENT_TIMESTAMP)";
 
         
         $mysqli->query($recipesql) ? null : $q1_ok=false;
 
         if(!$q1_ok)
         {
+           // include 'Logger.php';
             logger($filename, "E", "Query failure : ".$recipesql);
             throw new Exception("Query failure : ".$recipesql);
         }
 
         $rcp_id = $mysqli->insert_id;
 
-        
-
-        foreach( $ing_id as $ing_id_val ) 
+        for($i = 0; $i< count($ing_id); $i++)
         {
+          if($ing_id[$i] == '' || $ing_id[$i] == null)
+          {
+              $ing_id = addingredient($ing_nm[$i]); 
+          }
 
-            $dishsql = INSERT INTO `DISH` (`RCP_ID` , `ING_OR_AKA_ID` , `QTY_ID` , `ING_QTY`) VALUES
-                                          ('$rcp_id' , '$ing_id_val' , '$qty_id' , '$ing_qty');
+            $dishsql = "INSERT INTO `DISH` (`RCP_ID` , `ING_OR_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) VALUES
+                                          ('$rcp_id' , '$ing_id[$i]' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
 
             $mysqli->query($dishsql) ? null : $q2_ok=false;
 
             if(!$q2_ok)
             {
+             //  include 'Logger.php';
                 logger($filename, "E", "Query failure : ".$dishsql);
                 throw new Exception("Query failure : ".$dishsql);
             }
 
         }
 
-
-        $recipetastesql = INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY`) VALUES ('$rcp_id' , '$tst_id' , '$tst_qty');
-
-        $mysqli->query($recipetastesql) ? null : $q3_ok=false;
-
-        if(!$q3_ok)
+        for($i = 0; $i< count($tst_id); $i++)
         {
-            logger($filename, "E", "Query failure : ".$recipetastesql);
-            throw new Exception("Query failure : ".$recipetastesql);
-        }
+          $recipetastesql = "INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY` , `CREATE_DTM`)
+                            VALUES ('$rcp_id' , '$tst_id[$i]' , '$tst_qty[$i]' , CURRENT_TIMESTAMP)";
 
+          $mysqli->query($recipetastesql) ? null : $q3_ok=false;
+
+          if(!$q3_ok)
+          {
+             //include 'Logger.php';
+              logger($filename, "E", "Query failure : ".$recipetastesql);
+              throw new Exception("Query failure : ".$recipetastesql);
+          }
+        }
         
         
 
         // For multiple images 
 
-        $target_path = "/opt/lampp/htdocs/cookery/images/appuploads/";
-      //$target_path = "/home/cabox/workspace/images/appuploads/";
+       // $target_path = "/opt/lampp/htdocs/cookery/images/appuploads/";
+      $target_path = "/home/cabox/workspace/images/appuploads/";
+      $target_path_rel = "/images/appuploads/";
 
+   if($_SERVER['REQUEST_METHOD'] == 'POST')
+      {
         $i = 0;
+     try{
         while($i < count($_FILES['images']['name']))
         {
             $filescount = count($_FILES['images']['name']);
-            $rcp_img = $target_path.$rcp_id.'-'.$i.'.jpg';
-
-            if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$rcp_img))
+            $rcp_img = $target_path.$rcp_id.'plus'.$i.'.jpg';
+            $imgname = $_FILES['images']['name'];
+            if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$target_path.$rcp_id.'plus'.$i.'.jpg'))
             {
-             
-               $recipeimgtable = INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img');                                                                                
+               logger($filename, "E", "Upload Successful : ".$rcp_img);
+               $rcp_img_path = $target_path_rel.$rcp_id.'plus'.$i.'.jpg';
+               $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img_path')";                                                                                
                $mysqli->query($recipeimgtable) ? null : $q4_ok=false;
 
                 if(!$q4_ok)
@@ -211,13 +223,22 @@
             }
             else
             {
+               //include 'Logger.php';
                 logger($filename, "E", "Image upload Failed");
-                throw new Exception("Image upload Failed");
+                logger($filename, "E", "Failed upload image : ".$imgname);
+                $response['FAILED_IMG'] = $imgname;
+                //throw new Exception("Image upload Failed");
             }
 
             $i++;
         }
-
+     }
+         catch(Exception $e) 
+         {
+           logger($filename, "E", 'Message: ' .$e->getMessage());
+            //echo 'Message: ' .$e->getMessage();
+         }
+   }
 
 
        
@@ -225,9 +246,12 @@
 
         // Check for all query are successful
 
-        if($q1_ok && $q2_ok && $q3_ok && $q4_ok)
+        //if($q1_ok && $q2_ok && $q3_ok && $q4_ok)
+        if($q1_ok && $q2_ok && $q3_ok)
         {
             $mysqli->commit();
+            $success = "Recipe added successfully";
+            echo json_encode($success); 
         }
 
 
@@ -235,6 +259,7 @@
     }
     catch(Exception $e)
     {
+//       include 'Logger.php';
         $isError = true;
         $errorMessage = 'Query Failed';
         $exception = $e."MYSQL ERROR:";

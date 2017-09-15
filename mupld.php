@@ -2,7 +2,8 @@
 
 // For multiple files upload
 
-$target_path = "/opt/lampp/htdocs/cookery/testimg/";
+//$target_path = "/opt/lampp/htdocs/cookery/testimg/";
+$target_path = "/home/cabox/workspace/images/appuploads/";
 
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
