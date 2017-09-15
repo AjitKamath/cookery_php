@@ -6,6 +6,7 @@
     $errorMessage;
     $exception;
     $userMessage;
+    $response = array();
 
     $rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
     $food_csn_nm    = isset($_POST['food_csn_nm']) ? $_POST['food_csn_nm'] : '';
@@ -96,11 +97,10 @@
 
 
 
-  /*  if($ing_id[0] == null || $ing_id[0] == '')
+ function addingredient($ing_nm)
     {
-
-        try {
-                $ingredientsql = INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP);                         
+     try {
+                $ingredientsql = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP)";                         
 
                 $ing_id = $mysqli->insert_id;                                                       
 
@@ -126,7 +126,8 @@
                 $mysqli->rollback();
 
             }
-    }*/
+      return $ing_id;
+    }
 
 
  try {
@@ -156,6 +157,10 @@
 
         for($i = 0; $i< count($ing_id); $i++)
         {
+          if($ing_id[$i] == '' || $ing_id[$i] == null)
+          {
+              $ing_id = addingredient($ing_nm[$i]); 
+          }
 
             $dishsql = "INSERT INTO `DISH` (`RCP_ID` , `ING_OR_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) VALUES
                                           ('$rcp_id' , '$ing_id[$i]' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
@@ -192,6 +197,7 @@
 
        // $target_path = "/opt/lampp/htdocs/cookery/images/appuploads/";
       $target_path = "/home/cabox/workspace/images/appuploads/";
+      $target_path_rel = "/images/appuploads/";
 
    if($_SERVER['REQUEST_METHOD'] == 'POST')
       {
@@ -201,16 +207,16 @@
         {
             $filescount = count($_FILES['images']['name']);
             $rcp_img = $target_path.$rcp_id.'plus'.$i.'.jpg';
-
+            $imgname = $_FILES['images']['name'];
             if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$target_path.$rcp_id.'plus'.$i.'.jpg'))
             {
                logger($filename, "E", "Upload Successful : ".$rcp_img);
-               $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img')";                                                                                
+               $rcp_img_path = $target_path_rel.$rcp_id.'plus'.$i.'.jpg';
+               $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img_path')";                                                                                
                $mysqli->query($recipeimgtable) ? null : $q4_ok=false;
 
                 if(!$q4_ok)
                 {
-               //    include 'Logger.php';
                     logger($filename, "E", "Query failure : ".$recipeimgtable);
                     throw new Exception("Query failure : ".$recipeimgtable);
                 }
@@ -219,8 +225,9 @@
             {
                //include 'Logger.php';
                 logger($filename, "E", "Image upload Failed");
-                logger($filename, "E", $filescount);
-                throw new Exception("Image upload Failed");
+                logger($filename, "E", "Failed upload image : ".$imgname);
+                $response['FAILED_IMG'] = $imgname;
+                //throw new Exception("Image upload Failed");
             }
 
             $i++;
@@ -239,9 +246,12 @@
 
         // Check for all query are successful
 
-        if($q1_ok && $q2_ok && $q3_ok && $q4_ok)
+        //if($q1_ok && $q2_ok && $q3_ok && $q4_ok)
+        if($q1_ok && $q2_ok && $q3_ok)
         {
             $mysqli->commit();
+            $success = "Recipe added successfully";
+            echo json_encode($success); 
         }
 
 
