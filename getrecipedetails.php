@@ -60,7 +60,7 @@ $rcpimgarray = array();
   }
 
 
-$rcpdetails['ingerdients'] = $ingarray;
+$rcpdetails['ingredients'] = $ingarray;
 $rcpdetails['RCP_IMGS'] = $rcpimgarray;
 
 $finalresponse = array();
