@@ -6,7 +6,7 @@ $filename = "autocompleteingredient.php";
 // array for final json response
 $response = array();
 
-$text = isset($_POST['text']) ? $_POST['text'] : '';
+$text = isset($_POST['text']) ? $_POST['text'] : 'um';
 
 if($text == '')
 {

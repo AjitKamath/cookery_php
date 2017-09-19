@@ -48,3 +48,6 @@
 10-09-17 16:09:53 : addrecipe.php : E : Upload Successful : /home/cabox/workspace/images/appuploads/7plus0.jpg
 10-09-17 16:09:53 : addrecipe.php : E : Upload Successful : /home/cabox/workspace/images/appuploads/7plus1.jpg
 10-09-17 16:12:49 : addrecipe.php : E : Upload Successful : /home/cabox/workspace/images/appuploads/8plus0.jpg
+15-09-17 23:34:57 : addrecipe.php : E : Image upload Failed
+15-09-17 23:34:57 : addrecipe.php : E : Failed upload image : Array
+16-09-17 00:24:58 : addrecipe.php : E : Upload Successful : /home/cabox/workspace/images/appuploads/10plus0.jpg

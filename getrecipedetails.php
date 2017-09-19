@@ -13,9 +13,11 @@ $rcpdetailsquery = "SELECT RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATI
  
 $rcpimgquery = "SELECT RCP_IMG_ID, RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$rcp_id' ";
 
-$ingquery = "SELECT ING.ING_ID, ING.ING_NAME FROM `DISH` AS DSH INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
-                                                    INNER JOIN  `INGREDIENT` AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
-                                                    WHERE RCP.RCP_ID = '$rcp_id' ";
+$ingquery = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
+                                                            INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
+                                                            INNER JOIN  `INGREDIENT` AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
+                                                            INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
+                                                            WHERE RCP.RCP_ID = '$rcp_id' ";
 
 
 
@@ -43,22 +45,28 @@ $ingarray = array();
   {
         $temparr['ING_ID'] = $ingobj->ING_ID;
         $temparr['ING_NAME'] = $ingobj->ING_NAME;
+        $temparr['QTY_NAME'] = $ingobj->QTY_NAME;
+        $temparr['ING_QTY'] = $ingobj->ING_QTY;
+      
       array_push($ingarray, $temparr);  
   }
 
 $rcpimgarray = array();
  while($rcpimgobj = $rcp_imgs->fetch_object()) 
   {
-        $temparry['RCP_IMG_ID'] = $rcpimgobj->RCP_IMG_ID;
-        $temparry['RCP_IMG'] = $rcpimgobj->RCP_IMG;
+        //$temparry['RCP_IMG_ID'] = $rcpimgobj->RCP_IMG_ID;
+        $temparry = $rcpimgobj->RCP_IMG;
       array_push($rcpimgarray, $temparry);  
   }
 
 
 $rcpdetails['INGREDIENTS'] = $ingarray;
-$rcpdetails['RCP_IMAGES'] = $rcpimgarray;
+$rcpdetails['RCP_IMGS'] = $rcpimgarray;
 
-echo json_encode($rcpdetails);
+$finalresponse = array();
+array_push($finalresponse, $rcpdetails);
+
+echo json_encode($finalresponse);
 
 
 

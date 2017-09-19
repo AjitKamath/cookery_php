@@ -13,6 +13,8 @@ $MOBILE_EXISTS 			= "107";
 $EMAIL_EXISTS			= "108";
 
 //$LOG_PATH = "/opt/lampp/htdocs/cookery/Log/log.log";
-$LOG_PATH = "/home/cabox/workspace/Log/log.log";
+$ERR_LOG_PATH = "/home/cabox/workspace/Log/errlog.log";
+
+$INFO_LOG_PATH = "/home/cabox/workspace/Log/infolog.log";
 
 ?>

@@ -109,9 +109,13 @@
 
                 if(!$q0_ok)
                 {
-                    logger($filename, "E", "Query failure : ".$ingredientsql);
+                    errlogger($filename, "E", "Query failure : ".$ingredientsql);
                     throw new Exception("Query failure : ".$ingredientsql);
                 }
+               else
+               {
+                    infologger($filename, "I" , "New Ingredient added Successfully as ".$ing_nm);
+               }
                 
                 $mysqli->commit();
             }
@@ -121,7 +125,7 @@
                 $errorMessage = 'Query Failed';
                 $exception = $e."MYSQL ERROR:";
                 $userMessage = 'Could not add recipe. Please try again.';
-                logger($filename, "E", $userMessage);
+                errlogger($filename, "E", $userMessage);
             
                 $mysqli->rollback();
 
@@ -149,11 +153,13 @@
         if(!$q1_ok)
         {
            // include 'Logger.php';
-            logger($filename, "E", "Query failure : ".$recipesql);
+            errlogger($filename, "E", "Query failure : ".$recipesql);
             throw new Exception("Query failure : ".$recipesql);
         }
 
         $rcp_id = $mysqli->insert_id;
+      
+        infologger($filename, "I" , "New Recipe inserted but not committed to the table with recipe id as ".$rcp_id);  
 
         for($i = 0; $i< count($ing_id); $i++)
         {
@@ -170,8 +176,12 @@
             if(!$q2_ok)
             {
              //  include 'Logger.php';
-                logger($filename, "E", "Query failure : ".$dishsql);
+                errlogger($filename, "E", "Query failure : ".$dishsql);
                 throw new Exception("Query failure : ".$dishsql);
+            }
+            else
+            {
+              infologger($filename, "I" , "Insertion in Dish table with recipe id as ".$rcp_id." and ingredient id as ".$ing_id[$i]." but not committed");  
             }
 
         }
@@ -186,8 +196,12 @@
           if(!$q3_ok)
           {
              //include 'Logger.php';
-              logger($filename, "E", "Query failure : ".$recipetastesql);
+              errlogger($filename, "E", "Query failure : ".$recipetastesql);
               throw new Exception("Query failure : ".$recipetastesql);
+          }
+          else
+          {
+            infologger($filename, "I" , "Insertion in RECIPE_TASTE table with recipe id as ".$rcp_id." and taste id as ".$tst_id[$i]." but not committed");  
           }
         }
         
@@ -201,47 +215,51 @@
 
    if($_SERVER['REQUEST_METHOD'] == 'POST')
       {
-        $i = 0;
-     try{
-        while($i < count($_FILES['images']['name']))
-        {
-            $filescount = count($_FILES['images']['name']);
-            $rcp_img = $target_path.$rcp_id.'plus'.$i.'.jpg';
-            $imgname = $_FILES['images']['name'];
-            if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$target_path.$rcp_id.'plus'.$i.'.jpg'))
-            {
-               logger($filename, "E", "Upload Successful : ".$rcp_img);
-               $rcp_img_path = $target_path_rel.$rcp_id.'plus'.$i.'.jpg';
-               $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img_path')";                                                                                
-               $mysqli->query($recipeimgtable) ? null : $q4_ok=false;
-
-                if(!$q4_ok)
+            $i = 0;
+         try{
+                while($i < count($_FILES['images']['name']))
                 {
-                    logger($filename, "E", "Query failure : ".$recipeimgtable);
-                    throw new Exception("Query failure : ".$recipeimgtable);
+                    $filescount = count($_FILES['images']['name']);
+                    $rcp_img = $target_path.$rcp_id.'plus'.$i.'.jpg';
+                    $imgname = $_FILES['images']['name'];
+                    if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$target_path.$rcp_id.'plus'.$i.'.jpg'))
+                    {
+                       errlogger($filename, "E", "Upload Successful : ".$rcp_img);
+                       $rcp_img_path = $target_path_rel.$rcp_id.'plus'.$i.'.jpg';
+
+                       $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img_path')";                                                                                
+                       $mysqli->query($recipeimgtable) ? null : $q4_ok=false;
+
+                        if(!$q4_ok)
+                        {
+                            errlogger($filename, "E", "Query failure : ".$recipeimgtable);
+                            throw new Exception("Query failure : ".$recipeimgtable);
+                        }
+                        else
+                        {
+                            infologger($filename, "I" , "Insertion in RECIPE_IMG table with recipe id as ".$rcp_id." and image no ".$i);  
+                        }
+                      
+                        infologger($filename, "I" , "Image uploaded successfully as ".$rcp_img_path);  
+                    }
+                    else
+                    {
+                       //include 'Logger.php';
+                        errlogger($filename, "E", "Image upload Failed");
+                        errlogger($filename, "E", "Failed upload image : ".$imgname);
+                        $response['FAILED_IMG'] = $imgname;
+                        //throw new Exception("Image upload Failed");
+                    }
+
+                    $i++;
                 }
-            }
-            else
-            {
-               //include 'Logger.php';
-                logger($filename, "E", "Image upload Failed");
-                logger($filename, "E", "Failed upload image : ".$imgname);
-                $response['FAILED_IMG'] = $imgname;
-                //throw new Exception("Image upload Failed");
-            }
-
-            $i++;
-        }
-     }
-         catch(Exception $e) 
-         {
-           logger($filename, "E", 'Message: ' .$e->getMessage());
-            //echo 'Message: ' .$e->getMessage();
-         }
-   }
-
-
-       
+              }
+             catch(Exception $e) 
+             {
+               errlogger($filename, "E", 'Message: ' .$e->getMessage());
+                //echo 'Message: ' .$e->getMessage();
+             }
+       }
 
 
         // Check for all query are successful
@@ -250,12 +268,10 @@
         if($q1_ok && $q2_ok && $q3_ok)
         {
             $mysqli->commit();
+            infologger($filename, "I" , "Recipe Added Successfully with Recipe Id as ".$rcp_id);  
             $success = "Recipe added successfully";
             echo json_encode($success); 
         }
-
-
-
     }
     catch(Exception $e)
     {
@@ -264,7 +280,7 @@
         $errorMessage = 'Query Failed';
         $exception = $e."MYSQL ERROR:";
         $userMessage = 'Could not add recipe. Please try again.';
-        logger($filename, "E", $userMessage);
+        errlogger($filename, "E", $userMessage);
     
         $mysqli->rollback();
 

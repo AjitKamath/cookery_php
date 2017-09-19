@@ -2,7 +2,7 @@
 
 include 'application_context.php';
 
-$text = isset($_POST['text']) ? $_POST['text'] : 'ax';
+$text = isset($_POST['text']) ? $_POST['text'] : '';
 
 $recipesql = "SELECT * FROM  `RECIPE` WHERE RCP_NAME LIKE '%$text%'";
 
@@ -63,13 +63,13 @@ foreach($rcpids as $val)
   
    while($rcpdataobj = $rcp_details->fetch_object()) 
       {      
-          $rcpdatalist['RCP_NM'] = $rcpdataobj->RCP_NAME;
-          $rcpdatalist['RCP_IMG'] = $rcpdataobj->RCP_IMG;
+          $rcpdatalist['RCP_NAME'] = $rcpdataobj->RCP_NAME;
+          $rcpdatalist['RCP_IMGS'][] = $rcpdataobj->RCP_IMG;
           $rcpdatalist['RCP_ID'] = $rcpdataobj->RCP_ID;
           $rcpdatalist['RATING'] = "5";
           $rcpdatalist['NAME'] = "Don";
-          $rcpdatalist['FOOD_TYPE'] = $rcpdataobj->FOOD_TYP_NAME;
-          $rcpdatalist['FOOD_CUISINE'] = $rcpdataobj->FOOD_CSN_NAME;
+          $rcpdatalist['FOOD_TYPE_NAME'] = $rcpdataobj->FOOD_TYP_NAME;
+          $rcpdatalist['FOOD_CSN_NAME'] = $rcpdataobj->FOOD_CSN_NAME;
       }
   array_push($finaldata , $rcpdatalist);
 }
