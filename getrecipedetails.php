@@ -2,6 +2,8 @@
 
 include 'application_context.php';
 
+$filename = "getrecipedetails.php";
+
 $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
 
 $rcpdetailsquery = "SELECT RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME,
@@ -21,9 +23,41 @@ $ingquery = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DI
 
 
 
-$rcp_data = mysqli_query($db,$rcpdetailsquery);
-$ing_data = mysqli_query($db,$ingquery);
-$rcp_imgs = mysqli_query($db,$rcpimgquery);
+
+
+try
+{
+  $rcp_data = mysqli_query($db,$rcpdetailsquery);
+	infologger($filename, "I", "Recipe data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+
+
+try
+{
+	$ing_data = mysqli_query($db,$ingquery);
+	infologger($filename, "I", "Ingredient data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+
+
+try
+{
+	$rcp_imgs = mysqli_query($db,$rcpimgquery);
+	infologger($filename, "I", "Recipe images fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
 
 $rcpdetails = array();
 

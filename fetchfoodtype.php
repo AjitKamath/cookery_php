@@ -1,9 +1,20 @@
 <?php
 include 'application_context.php';
 
+$filename = "fetchfoodtype.php";
 $sql = "SELECT * FROM `FOOD_TYPE` ";
 
-$cat_data = mysqli_query($db,$sql);
+try
+{
+	$cat_data = mysqli_query($db,$sql);
+	infologger($filename, "I", "Food Type fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+
 $myArray = array();
        while($catobj = $cat_data->fetch_object()) 
 	    {

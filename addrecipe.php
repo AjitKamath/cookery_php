@@ -20,6 +20,7 @@
     $tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
     $tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
     $food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
+    $user_id        = isset($_POST['user_id']) ? $_POST['user_id'] : '1';
 
     //$rcp_img        = isset($_POST['rcp_img']) ? $_POST['rcp_img'] : '';
 
@@ -144,8 +145,8 @@
         $q3_ok = "true";
         $q4_ok = "true";
 
-        $recipesql = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`, `CREATE_DTM`) VALUES 
-                                          ('$rcp_nm' , '$food_typ_id' , '$food_csn_nm' , '$rcp_proc' , '$rcp_plating' , '$rcp_note' , CURRENT_TIMESTAMP)";
+        $recipesql = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`,`USER_ID`, `CREATE_DTM`) VALUES 
+                                          ('$rcp_nm' , '$food_typ_id' , '$food_csn_nm' , '$rcp_proc' , '$rcp_plating' , '$rcp_note' , '$user_id' , CURRENT_TIMESTAMP)";
 
         
         $mysqli->query($recipesql) ? null : $q1_ok=false;

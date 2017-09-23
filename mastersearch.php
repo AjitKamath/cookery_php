@@ -2,6 +2,7 @@
 
 include 'application_context.php';
 
+$filename = "mastersearch.php";
 $text = isset($_POST['text']) ? $_POST['text'] : '';
 
 $recipesql = "SELECT * FROM  `RECIPE` WHERE RCP_NAME LIKE '%$text%'";
@@ -15,13 +16,56 @@ $foodtypsql = "SELECT * FROM `FOOD_TYPE` AS FDTYP INNER JOIN `RECIPE` AS RCP ON 
 // Will Use later
 $usersql = "SELECT * FROM `USER` WHERE NAME LIKE '%$text%'";
 
+try
+{
+	$rcp_data = mysqli_query($db,$recipesql);
+	infologger($filename, "I", "Recipe data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
 
-$rcp_data = mysqli_query($db,$recipesql);
-$ing_data = mysqli_query($db,$ingsql);
-$csn_data = mysqli_query($db,$cuisinesql);
-$foodtyp_data = mysqli_query($db,$foodtypsql);
+try
+{
+	$ing_data = mysqli_query($db,$ingsql);
+	infologger($filename, "I", "Ingredient data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
 
-$user_data = mysqli_query($db,$usersql);
+try
+{
+  $csn_data = mysqli_query($db,$cuisinesql);
+	infologger($filename, "I", "Cuisine data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+try
+{
+	$foodtyp_data = mysqli_query($db,$foodtypsql);
+	infologger($filename, "I", "Food Type fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+try
+{
+	$user_data = mysqli_query($db,$usersql);
+	infologger($filename, "I", "User Data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
 
 $rcpids = array();
 
@@ -59,7 +103,15 @@ foreach($rcpids as $val)
                                             INNER JOIN `RECIPE_IMG` AS RCPIMG ON RCPIMG.RCP_ID = RCP.RCP_ID
                                             WHERE RCP.RCP_ID = '$val'";
   
-  $rcp_details = mysqli_query($db,$rcpdata);
+  try
+  {
+    $rcp_details = mysqli_query($db,$rcpdata);
+    infologger($filename, "I", "Full and final recipe details fetched successfully");
+  }
+  catch(Exception $e)
+  {
+      errlogger($filename, "E", 'Message: ' .$e->getMessage());
+  }
   
    while($rcpdataobj = $rcp_details->fetch_object()) 
       {      

@@ -1,9 +1,19 @@
 <?php
 include 'application_context.php';
 
+$filename = "fetchtastes.php";
 $sql = "SELECT * FROM `TASTES` ";
+ 
+try
+{
+	$cat_data = mysqli_query($db,$sql);
+	infologger($filename, "I", "Tastes fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
 
-$cat_data = mysqli_query($db,$sql);
 $myArray = array();
        while($catobj = $cat_data->fetch_object()) 
 	    {
