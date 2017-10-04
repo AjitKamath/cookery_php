@@ -3,8 +3,8 @@
 $filename = "config.php";
 
 $hostname = "localhost";
-$user = "root";
-$password = "cookery";
+$user = "cookeryuser";
+$password = "cookeryuser";
 $database = "Cookery";
 $db = mysqli_connect($hostname, $user, $password);
 if (mysqli_connect_errno())

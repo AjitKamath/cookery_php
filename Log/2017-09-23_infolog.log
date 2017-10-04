@@ -1,3 +1,483 @@
 23-09-17 10:54:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
 23-09-17 11:03:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
 23-09-17 11:12:26 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:36:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:36:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:36:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:05 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:09 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:12 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:45:57 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:54:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:54:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:54:18 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 12:54:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:32:38 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 13:32:39 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 13:32:41 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 13:32:41 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 13:32:56 : config.php : I : Ingredient auto - search successully
+23-09-17 13:32:56 : config.php : I : Ingredient auto - search successully
+23-09-17 13:32:57 : config.php : I : Ingredient auto - search successully
+23-09-17 13:33:01 : config.php : I : Ingredient auto - search successully
+23-09-17 13:33:02 : config.php : I : Ingredient auto - search successully
+23-09-17 13:33:02 : config.php : I : Ingredient auto - search successully
+23-09-17 13:33:11 : config.php : I : Ingredient auto - search successully
+23-09-17 13:33:11 : config.php : I : Ingredient auto - search successully
+23-09-17 13:53:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:53:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:53:17 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:53:30 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 13:53:31 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 13:53:33 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 13:53:33 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 13:53:41 : config.php : I : Ingredient auto - search successully
+23-09-17 13:53:41 : config.php : I : Ingredient auto - search successully
+23-09-17 13:53:45 : config.php : I : Ingredient auto - search successully
+23-09-17 13:53:46 : config.php : I : Ingredient auto - search successully
+23-09-17 13:53:47 : config.php : I : Ingredient auto - search successully
+23-09-17 13:54:14 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 11
+23-09-17 13:54:14 : addrecipe.php : I : Insertion in Dish table with recipe id as 11 and ingredient id as 1 but not committed
+23-09-17 13:54:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 11 and taste id as 1 but not committed
+23-09-17 13:54:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 11 and taste id as 2 but not committed
+23-09-17 13:54:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 11 and taste id as 3 but not committed
+23-09-17 13:54:14 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 11 and image no 0
+23-09-17 13:54:14 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/11plus0.jpg
+23-09-17 13:54:14 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 11
+23-09-17 13:54:20 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 12
+23-09-17 13:54:20 : addrecipe.php : I : Insertion in Dish table with recipe id as 12 and ingredient id as 1 but not committed
+23-09-17 13:54:20 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 12 and taste id as 1 but not committed
+23-09-17 13:54:20 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 12 and taste id as 2 but not committed
+23-09-17 13:54:20 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 12 and taste id as 3 but not committed
+23-09-17 13:54:20 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 12 and image no 0
+23-09-17 13:54:20 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/12plus0.jpg
+23-09-17 13:54:20 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 12
+23-09-17 13:54:27 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 13
+23-09-17 13:54:27 : addrecipe.php : I : Insertion in Dish table with recipe id as 13 and ingredient id as 1 but not committed
+23-09-17 13:54:27 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 13 and taste id as 1 but not committed
+23-09-17 13:54:27 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 13 and taste id as 2 but not committed
+23-09-17 13:54:27 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 13 and taste id as 3 but not committed
+23-09-17 13:54:27 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 13 and image no 0
+23-09-17 13:54:27 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/13plus0.jpg
+23-09-17 13:54:27 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 13
+23-09-17 13:54:28 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 14
+23-09-17 13:54:28 : addrecipe.php : I : Insertion in Dish table with recipe id as 14 and ingredient id as 1 but not committed
+23-09-17 13:54:28 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 14 and taste id as 1 but not committed
+23-09-17 13:54:28 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 14 and taste id as 2 but not committed
+23-09-17 13:54:28 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 14 and taste id as 3 but not committed
+23-09-17 13:54:28 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 14 and image no 0
+23-09-17 13:54:28 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/14plus0.jpg
+23-09-17 13:54:28 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 14
+23-09-17 13:54:36 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 15
+23-09-17 13:54:36 : addrecipe.php : I : Insertion in Dish table with recipe id as 15 and ingredient id as 1 but not committed
+23-09-17 13:54:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 15 and taste id as 1 but not committed
+23-09-17 13:54:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 15 and taste id as 2 but not committed
+23-09-17 13:54:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 15 and taste id as 3 but not committed
+23-09-17 13:54:36 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 15 and image no 0
+23-09-17 13:54:36 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/15plus0.jpg
+23-09-17 13:54:36 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 15
+23-09-17 13:54:38 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 16
+23-09-17 13:54:38 : addrecipe.php : I : Insertion in Dish table with recipe id as 16 and ingredient id as 1 but not committed
+23-09-17 13:54:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 16 and taste id as 1 but not committed
+23-09-17 13:54:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 16 and taste id as 2 but not committed
+23-09-17 13:54:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 16 and taste id as 3 but not committed
+23-09-17 13:54:38 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 16 and image no 0
+23-09-17 13:54:38 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/16plus0.jpg
+23-09-17 13:54:38 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 16
+23-09-17 13:55:43 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:55:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:56:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 13:56:51 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 13:56:52 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 13:56:55 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 13:56:55 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 13:57:08 : config.php : I : Ingredient auto - search successully
+23-09-17 13:57:09 : config.php : I : Ingredient auto - search successully
+23-09-17 13:57:36 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 17
+23-09-17 13:57:36 : addrecipe.php : I : Insertion in Dish table with recipe id as 17 and ingredient id as 1 but not committed
+23-09-17 13:57:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 17 and taste id as 1 but not committed
+23-09-17 13:57:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 17 and taste id as 2 but not committed
+23-09-17 13:57:36 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 17 and taste id as 3 but not committed
+23-09-17 13:57:36 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 17 and image no 0
+23-09-17 13:57:36 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/17plus0.jpg
+23-09-17 13:57:36 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 17
+23-09-17 14:33:29 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:33:38 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:33:52 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:34:08 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 14:34:08 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 14:34:10 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 14:34:10 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 14:34:24 : config.php : I : Ingredient auto - search successully
+23-09-17 14:34:25 : config.php : I : Ingredient auto - search successully
+23-09-17 14:34:47 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 18
+23-09-17 14:34:47 : addrecipe.php : I : Insertion in Dish table with recipe id as 18 and ingredient id as 1 but not committed
+23-09-17 14:34:47 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 18 and taste id as 1 but not committed
+23-09-17 14:34:47 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 18 and taste id as 2 but not committed
+23-09-17 14:34:47 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 18 and taste id as 3 but not committed
+23-09-17 14:34:47 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 18 and image no 0
+23-09-17 14:34:47 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/18plus0.jpg
+23-09-17 14:34:47 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 18
+23-09-17 14:36:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:36:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:36:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:49:42 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:50:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:50:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:51:42 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 14:51:44 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 14:51:45 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 14:51:56 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 14:51:59 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 14:52:25 : config.php : I : Ingredient auto - search successully
+23-09-17 14:52:26 : config.php : I : Ingredient auto - search successully
+23-09-17 14:52:29 : config.php : I : Ingredient auto - search successully
+23-09-17 14:52:35 : config.php : I : Ingredient auto - search successully
+23-09-17 14:53:14 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 19
+23-09-17 14:53:14 : addrecipe.php : I : Insertion in Dish table with recipe id as 19 and ingredient id as 2 but not committed
+23-09-17 14:53:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 19 and taste id as 1 but not committed
+23-09-17 14:53:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 19 and taste id as 2 but not committed
+23-09-17 14:53:14 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 19 and taste id as 3 but not committed
+23-09-17 14:53:14 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 19 and image no 0
+23-09-17 14:53:14 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/19plus0.jpg
+23-09-17 14:53:14 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 19
+23-09-17 14:55:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:58:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:58:29 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 14:58:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:02:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:02:57 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:03:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:03:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:03:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:03:23 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:03:56 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 15:03:57 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 15:03:58 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 15:03:59 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 15:04:37 : config.php : I : Ingredient auto - search successully
+23-09-17 15:07:23 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:07:25 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:07:27 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:07:50 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 15:07:51 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 15:07:52 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 15:07:52 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 15:08:01 : config.php : I : Ingredient auto - search successully
+23-09-17 15:08:49 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 20
+23-09-17 15:08:49 : addrecipe.php : I : Insertion in Dish table with recipe id as 20 and ingredient id as 1 but not committed
+23-09-17 15:08:49 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 20 and taste id as 1 but not committed
+23-09-17 15:08:49 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 20 and taste id as 2 but not committed
+23-09-17 15:08:49 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 20 and taste id as 3 but not committed
+23-09-17 15:08:49 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 20 and image no 0
+23-09-17 15:08:49 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/20plus0.jpg
+23-09-17 15:08:49 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 20
+23-09-17 15:13:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:13:31 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:13:37 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:14:23 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 15:14:24 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 15:14:30 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 15:14:31 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 15:14:38 : config.php : I : Ingredient auto - search successully
+23-09-17 15:14:38 : config.php : I : Ingredient auto - search successully
+23-09-17 15:15:07 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 21
+23-09-17 15:15:07 : addrecipe.php : I : Insertion in Dish table with recipe id as 21 and ingredient id as 1 but not committed
+23-09-17 15:15:07 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 21 and taste id as 1 but not committed
+23-09-17 15:15:07 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 21 and taste id as 2 but not committed
+23-09-17 15:15:07 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 21 and taste id as 3 but not committed
+23-09-17 15:15:07 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 21 and image no 0
+23-09-17 15:15:07 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/21plus0.jpg
+23-09-17 15:15:07 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 21
+23-09-17 15:17:50 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:17:51 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:17:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:17:59 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 15:18:00 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 15:18:01 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 15:18:01 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 15:18:11 : config.php : I : Ingredient auto - search successully
+23-09-17 15:18:11 : config.php : I : Ingredient auto - search successully
+23-09-17 15:18:22 : config.php : I : Ingredient auto - search successully
+23-09-17 15:25:10 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 15:25:50 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 22:26:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 22:26:47 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 22:26:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 22:27:31 : fetchfoodtype.php : I : Food Type fetched successfully
+23-09-17 22:27:32 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-09-17 22:27:33 : fetchqty.php : I : Quantity fetched successfully
+23-09-17 22:27:33 : fetchtastes.php : I : Tastes fetched successfully
+23-09-17 23:37:36 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 23:37:38 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-09-17 23:37:40 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:09:49 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 00:10:06 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 00:10:07 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:10:08 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 00:22:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:22:58 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:23:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:27:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:27:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:27:37 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:28:37 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 00:28:56 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 00:29:06 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:29:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:29:08 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 00:29:08 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 00:29:09 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 00:29:10 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:29:10 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 00:29:10 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:29:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:29:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:39:02 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:39:05 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:39:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:40:02 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:40:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:40:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:40:58 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:05 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:51 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:41:57 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:42:25 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:42:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:42:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:47:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:47:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:47:34 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:48:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:48:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:48:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:49:43 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:49:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:49:47 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:50:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:50:12 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:50:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:52:57 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:52:57 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 00:52:58 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 00:52:58 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:52:59 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:52:59 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 00:52:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:54:33 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 00:54:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:54:34 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 00:54:34 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 00:54:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:54:35 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 00:54:36 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:56:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:56:26 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 00:56:29 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:03:27 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:03:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:03:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:03:47 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:03:59 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:04:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:04:18 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:04:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:04:49 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:04:50 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:04:51 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:04:51 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:04:51 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:04:53 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:04:58 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:05:16 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:06:34 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:06:35 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:06:36 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:06:36 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:06:38 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:06:38 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:06:39 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:06:40 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:06:40 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:06:40 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:06:42 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:07:11 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:10:53 : config.php : I : Ingredient auto - search successully
+24-09-17 01:10:53 : config.php : I : Ingredient auto - search successully
+24-09-17 01:11:17 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 22
+24-09-17 01:12:16 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:12:50 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:12:53 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:12:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:12:58 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:12:59 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:13:00 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:13:00 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:13:26 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:26 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:27 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:28 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:28 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:28 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:33 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:40 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:40 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:51 : config.php : I : Ingredient auto - search successully
+24-09-17 01:13:51 : config.php : I : Ingredient auto - search successully
+24-09-17 01:21:42 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:21:42 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:21:42 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:21:43 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:21:43 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:21:44 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:21:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:22:05 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:06 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:11 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:12 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:20 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:21 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:26 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:27 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:27 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:37 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:37 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:39 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:40 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:40 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:41 : config.php : I : Ingredient auto - search successully
+24-09-17 01:22:42 : config.php : I : Ingredient auto - search successully
+24-09-17 01:26:56 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:26:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:26:57 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:26:58 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:26:59 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:26:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:27:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:28:04 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:28:04 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:28:05 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:28:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:28:07 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:28:08 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:28:09 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:28:10 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:28:10 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:28:13 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:28:13 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:29:04 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:04 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:29:04 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:29:05 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:29:06 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:29:06 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:21 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:29:22 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:29:23 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:23 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:29:23 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:29:24 : config.php : I : Ingredient auto - search successully
+24-09-17 01:29:24 : config.php : I : Ingredient auto - search successully
+24-09-17 01:29:24 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:29:24 : config.php : I : Ingredient auto - search successully
+24-09-17 01:29:25 : config.php : I : Ingredient auto - search successully
+24-09-17 01:30:43 : config.php : I : Ingredient auto - search successully
+24-09-17 01:30:44 : config.php : I : Ingredient auto - search successully
+24-09-17 01:31:51 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 23
+24-09-17 01:37:18 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:37:18 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:37:19 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:37:20 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:37:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:37:20 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:37:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:38:12 : config.php : I : Ingredient auto - search successully
+24-09-17 01:38:14 : config.php : I : Ingredient auto - search successully
+24-09-17 01:38:14 : config.php : I : Ingredient auto - search successully
+24-09-17 01:42:42 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:42:42 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:42:43 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:42:44 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:42:44 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:42:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:42:46 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:43:10 : config.php : I : Ingredient auto - search successully
+24-09-17 01:43:10 : config.php : I : Ingredient auto - search successully
+24-09-17 01:45:20 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:45:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:45:21 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:45:22 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:45:22 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:45:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:45:24 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:45:51 : config.php : I : Ingredient auto - search successully
+24-09-17 01:45:53 : config.php : I : Ingredient auto - search successully
+24-09-17 01:45:54 : config.php : I : Ingredient auto - search successully
+24-09-17 01:45:54 : config.php : I : Ingredient auto - search successully
+24-09-17 01:45:54 : config.php : I : Ingredient auto - search successully
+24-09-17 01:46:54 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 24
+24-09-17 01:47:01 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:47:12 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:47:42 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:48:04 : mastersearch.php : I : Recipe data fetched successfully
+24-09-17 01:48:26 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:50:06 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:50:07 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:50:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:50:09 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:50:09 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:50:24 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:50:51 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:52:31 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:52:31 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:52:32 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:52:33 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:52:34 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:52:38 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:52:38 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:52:39 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:52:40 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:52:40 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:52:42 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:52:44 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:52:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:53:04 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:53:04 : getrecipedetails.php : I : Recipe data fetched successfully
+24-09-17 01:55:43 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:55:43 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:55:43 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:55:44 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:55:45 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:55:50 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:55:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:56:21 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 01:56:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:56:22 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 01:56:23 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 01:56:23 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 01:56:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 01:56:36 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:12:55 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 02:12:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:12:55 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 02:12:58 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 02:12:59 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 02:13:04 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:13:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:15:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:15:56 : fetchfoodtype.php : I : Food Type fetched successfully
+24-09-17 02:15:57 : fetchcuisine.php : I : Food Cuisine fetched successfully
+24-09-17 02:15:58 : fetchqty.php : I : Quantity fetched successfully
+24-09-17 02:15:58 : fetchtastes.php : I : Tastes fetched successfully
+24-09-17 02:16:09 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+24-09-17 02:16:17 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully

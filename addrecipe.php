@@ -225,7 +225,6 @@
                     $imgname = $_FILES['images']['name'];
                     if(move_uploaded_file($_FILES['images']['tmp_name'][$i],$target_path.$rcp_id.'plus'.$i.'.jpg'))
                     {
-                       errlogger($filename, "E", "Upload Successful : ".$rcp_img);
                        $rcp_img_path = $target_path_rel.$rcp_id.'plus'.$i.'.jpg';
 
                        $recipeimgtable = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`) VALUES ('$rcp_id' , '$rcp_img_path')";                                                                                
@@ -271,7 +270,8 @@
             $mysqli->commit();
             infologger($filename, "I" , "Recipe Added Successfully with Recipe Id as ".$rcp_id);  
             $success = "Recipe added successfully";
-            echo json_encode($success); 
+            //echo json_encode($success); 
+          echo $success; 
         }
     }
     catch(Exception $e)
