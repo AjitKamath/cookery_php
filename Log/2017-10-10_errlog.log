@@ -1,0 +1,30 @@
+10-10-17 23:16:00 : myrecipelikes.php : E : Query failure : INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('2', 'RCP', '4',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:16:00 : myrecipelikes.php : E : Could not add like. Please try again.
+10-10-17 23:19:16 : myrecipelikes.php : E : Query failure : INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('1', 'RCP', '4',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:19:16 : myrecipelikes.php : E : Could not add like. Please try again.
+10-10-17 23:21:07 : myrecipelikes.php : E : Query failure : INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('1', 'RCP', '4',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:21:07 : myrecipelikes.php : E : Could not add like. Please try again. Error exception 'Exception' with message 'Query failure : INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('1', 'RCP', '4',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)' in /home/cabox/workspace/myrecipelikes.php:19
+Stack trace:
+#0 {main}MYSQL ERROR:
+10-10-17 23:43:06 : myrecipecomments.php : E : Query failure : INSERT INTO `COMMENTS` (`USER_ID`, `RCP_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('1', '2', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:43:06 : myrecipecomments.php : E : Could not add like. Please try again. Error exception 'Exception' with message 'Query failure : INSERT INTO `COMMENTS` (`USER_ID`, `RCP_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('1', '2', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)' in /home/cabox/workspace/myrecipecomments.php:20
+Stack trace:
+#0 {main}MYSQL ERROR:
+10-10-17 23:44:32 : myrecipecomments.php : E : Query failure : INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('2', '1', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:44:32 : myrecipecomments.php : E : Could not add like. Please try again. Error exception 'Exception' with message 'Query failure : INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('2', '1', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)' in /home/cabox/workspace/myrecipecomments.php:20
+Stack trace:
+#0 {main}MYSQL ERROR:
+10-10-17 23:44:34 : myrecipecomments.php : E : Query failure : INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('2', '1', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+10-10-17 23:44:34 : myrecipecomments.php : E : Could not add like. Please try again. Error exception 'Exception' with message 'Query failure : INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
+                                             ('2', '1', 'mast hai',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)' in /home/cabox/workspace/myrecipecomments.php:20
+Stack trace:
+#0 {main}MYSQL ERROR:
