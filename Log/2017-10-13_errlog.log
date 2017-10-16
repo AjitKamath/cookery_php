@@ -1,0 +1,10 @@
+13-10-17 21:32:05 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET TYPE_ID = '27' AND USER_ID = '' AND TYPE = 'RECIPE' 
+13-10-17 21:33:59 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET TYPE_ID = '27' AND USER_ID = '' AND TYPE = 'RECIPE' 
+13-10-17 21:34:56 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET RCP_ID = '27' AND USER_ID = ''
+13-10-17 21:37:20 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET ('RCP_ID', 'USER_ID', `CREATE_DTM`) VALUES ('27', '', CURRENT_TIMESTAMP)
+13-10-17 21:45:51 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET ('RCP_ID', 'USER_ID', `CREATE_DTM`) VALUES ('27', '12345', CURRENT_TIMESTAMP)
+13-10-17 23:24:35 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET ('RCP_ID', 'USER_ID', `CREATE_DTM`) VALUES ('27', '1', CURRENT_TIMESTAMP)
+13-10-17 23:25:24 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` SET ('RCP_ID', 'USER_ID', `CREATE_DTM`) VALUES ('27', '1', CURRENT_TIMESTAMP)
+13-10-17 23:27:05 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS` ('RCP_ID', 'USER_ID', `CREATE_DTM`) VALUES ('27', '1', CURRENT_TIMESTAMP)
+13-10-17 23:29:49 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `CREATE_DTM`) VALUES('27', '1', CURRENT_TIMESTAMP)
+13-10-17 23:33:01 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `MOD_DTM`, `CREATE_DTM`) VALUES('27', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
