@@ -1,0 +1,381 @@
+17-10-17 19:49:33 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 19:49:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:49:33 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:49:33 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 19:49:34 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 19:49:34 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:49:34 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 19:49:41 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 19:56:18 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 19:56:18 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:56:18 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:56:18 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 19:56:19 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 19:56:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 19:56:19 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 19:56:29 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:03:16 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:03:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:03:16 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:03:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:03:16 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:03:17 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:03:17 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:03:32 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:04:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:04:21 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:04:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:04:21 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:04:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:04:21 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:04:22 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:04:26 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:16:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:16:19 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:16:20 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:16:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:16:20 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:16:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:16:21 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:16:24 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:18:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:18:28 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:18:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:18:28 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:18:29 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:18:29 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:18:29 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:20:09 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:23:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:23:15 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:23:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:23:16 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:23:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:23:16 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:23:17 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:23:29 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:28:31 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:28:31 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:28:31 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:28:31 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:28:32 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:28:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:28:32 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:28:36 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:31:39 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:31:40 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:31:40 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:31:40 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:31:40 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:31:40 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:31:41 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:31:44 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:43:26 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:43:26 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:43:27 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:43:27 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:43:27 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:43:27 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:43:27 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:43:46 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:45:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:45:00 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:45:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:45:02 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:45:02 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:45:03 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:45:04 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:45:09 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 20:47:53 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:47:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:47:54 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 20:47:55 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 20:47:55 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 20:47:56 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 20:47:56 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 20:47:58 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 22:57:06 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:57:07 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 22:57:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:57:08 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 22:57:08 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:57:08 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 22:57:09 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 22:57:11 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 22:58:02 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:58:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:58:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 22:58:03 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 22:58:04 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 22:58:05 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 22:58:05 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 22:58:13 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 23:06:41 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:06:41 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 23:06:41 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:06:41 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 23:06:41 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 23:06:41 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:06:42 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 23:06:45 : getrecipedetails.php : I : Rating data fetched successfully
+17-10-17 23:07:01 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+17-10-17 23:07:01 : submitlike.php : I : The user(1) has unliked the type(RECIPE) with type id(27) successfully.
+17-10-17 23:07:01 : submitlike.php : I : The user(1) for the type(RECIPE) with type id(27) has liked ? 
+17-10-17 23:07:01 : submitlike.php : I : The type(RECIPE) with type id(27) has been liked 0 times
+17-10-17 23:07:03 : submitlike.php : I : The user() has not yet liked the type() with type id(). So liking it
+17-10-17 23:07:03 : submitlike.php : I : The user() for the type() with type id() has liked ? 
+17-10-17 23:07:03 : submitlike.php : I : The type() with type id() has been liked 0 times
+17-10-17 23:07:50 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+17-10-17 23:07:50 : submitlike.php : I : The user(1) has liked the type(RECIPE) with type id(27) successfully.
+17-10-17 23:07:50 : submitlike.php : I : The user(1) for the type(RECIPE) with type id(27) has liked ? 
+17-10-17 23:07:50 : submitlike.php : I : The type(RECIPE) with type id(27) has been liked 0 times
+17-10-17 23:47:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:47:59 : fetchfoodtype.php : I : Food Type fetched successfully
+17-10-17 23:47:59 : fetchcuisine.php : I : Food Cuisine fetched successfully
+17-10-17 23:48:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:48:00 : fetchqty.php : I : Quantity fetched successfully
+17-10-17 23:48:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+17-10-17 23:48:00 : fetchtastes.php : I : Tastes fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Recipe view data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Recipe data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Ingredient data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Recipe images fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Like data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : User like data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : View data fetched successfully
+17-10-17 23:48:33 : getrecipedetails.php : I : Rating data fetched successfully
+18-10-17 00:09:00 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:09:28 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:12:09 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:14:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:14:00 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:14:00 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:14:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:14:01 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:14:01 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:14:46 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:15:00 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:15:25 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:26:59 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:26:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:26:59 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:26:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:27:00 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:27:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:27:00 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:27:17 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:28:21 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:29:20 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:32:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:32:13 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:32:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:32:13 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:32:13 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:32:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:32:14 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:32:18 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:32:29 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:32:33 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:32:42 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:35:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:35:30 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:35:30 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:35:32 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:35:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:35:34 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:35:37 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:36:31 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:37:09 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:39:46 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:39:46 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:39:47 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:39:47 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:39:47 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:39:48 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:39:48 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:40:15 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:42:35 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:42:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:42:35 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:42:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:42:36 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:42:36 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:42:36 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:43:10 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:43:23 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 00:43:34 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:50:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:50:14 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:50:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:50:14 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:50:15 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:50:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:50:15 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:51:03 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 00:56:48 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 00:56:48 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:56:49 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 00:56:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:56:49 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 00:56:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 00:56:49 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 00:56:53 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:00:34 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:00:34 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 01:00:35 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 01:00:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:00:35 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 01:00:35 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:00:35 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 01:00:40 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:01:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:01:28 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 01:01:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:01:28 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 01:01:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:01:28 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 01:01:29 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 01:01:36 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:04:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:04:20 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 01:04:21 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 01:04:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:04:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:04:22 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 01:04:22 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 01:04:25 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:05:14 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 01:05:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:05:14 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 01:05:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:05:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:05:15 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 01:05:15 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 01:05:18 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:06:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:06:56 : fetchfoodtype.php : I : Food Type fetched successfully
+18-10-17 01:06:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:06:56 : fetchcuisine.php : I : Food Cuisine fetched successfully
+18-10-17 01:06:57 : fetchqty.php : I : Quantity fetched successfully
+18-10-17 01:06:57 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+18-10-17 01:06:57 : fetchtastes.php : I : Tastes fetched successfully
+18-10-17 01:07:00 : getrecipedetails.php : I : Recipe view data fetched successfully
+18-10-17 01:09:12 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 01:43:56 : submitrecipereview.php : I : TEST:UPDATE REVIEWS SET IS_DEL = 'N' AND REVIEW = 'second' AND MOD_DTM = CURRENT_TIMESTAMP AND RATING = '1' WHERE RCP_ID = 27 AND USER_ID = 1
+18-10-17 01:46:09 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 01:47:09 : submitrecipereview.php : I : The user(1) has reviewed recipe('27') successfully.
+18-10-17 01:47:26 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+18-10-17 01:47:32 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+18-10-17 01:47:36 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+18-10-17 01:48:08 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+18-10-17 01:48:16 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+18-10-17 01:49:31 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+18-10-17 01:49:34 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+18-10-17 01:49:43 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+18-10-17 01:49:45 : submitlike.php : I : The user(1) has already liked the type(RECIPE) with type id(27). unliking it.
+18-10-17 01:49:47 : submitlike.php : I : The user(1) has not liked the type(RECIPE) with type id(27). liking it.
+18-10-17 01:49:56 : getrecipedetails.php : I : Recipe view data fetched successfully

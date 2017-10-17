@@ -24,12 +24,15 @@ $ingquery = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DI
                                                             WHERE RCP.RCP_ID = '$rcp_id' ";
 
 
-$likequery = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id'";
-$userhaslikedquery = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id' AND USER_ID = '$user_id'";
+$likequery = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id' AND IS_DEL = 'N'";
+$userhaslikedquery = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
 
 $checkviewquery = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id'";
 $insertviewquery = "INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `MOD_DTM`, `CREATE_DTM`) VALUES('$user_id', '$rcp_id', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 $viewquery = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id'";
+
+$avgratingquery = "SELECT ROUND(AVG(RATING), 1) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
+$userhasreviewedquery = "SELECT COUNT(*) AS REVIEW_COUNT FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
 
 //if the view is not registered for this recipe by this user, register it
 try
@@ -124,6 +127,25 @@ catch(Exception $e)
 	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
+try
+{
+	$avg_rating_data = mysqli_query($db,$avgratingquery);
+	infologger($filename, "I", "Rating data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
+
+try
+{
+	$has_reviewed_data = mysqli_query($db,$userhasreviewedquery);
+	infologger($filename, "I", "User review data fetched successfully");
+}
+catch(Exception $e)
+{
+	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+}
 
 $rcpdetails = array();
 
@@ -151,6 +173,14 @@ if($userlikedobj = $has_liked_data->fetch_object()){
 
 if($viewobj = $view_data->fetch_object()){
 	$rcpdetails['views'] = $viewobj->VIEWS_COUNT;
+}
+
+if($avgratingobj = $avg_rating_data->fetch_object()){
+	$rcpdetails['rating'] = $avgratingobj->RATING;
+}
+
+if($userhasreviewedobj = $has_reviewed_data->fetch_object()){
+	$rcpdetails['isReviewed'] = $userhasreviewedobj->REVIEW_COUNT > 0;
 }
 
 $ingarray = array();

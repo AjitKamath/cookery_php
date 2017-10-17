@@ -1,0 +1,4 @@
+16-10-17 22:45:50 : mylikes.php : E : Failed !! The user(1) could not like the type(1) with type id(1) successfully.
+16-10-17 22:50:18 : mylikes.php : E : Failed !! The user(1) could not like the type(1) with type id(1) successfully.
+16-10-17 22:50:19 : mylikes.php : E : Failed !! The user() could not like the type() with type id() successfully.
+16-10-17 23:22:13 : getrecipedetails.php : E : Query failure : INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `MOD_DTM`, `CREATE_DTM`) VALUES('', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)

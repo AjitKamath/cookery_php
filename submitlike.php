@@ -1,12 +1,12 @@
 <?php
   include 'application_context.php';
 
-  $filename = "mylikes.php";
+  $filename = "submitlike.php";
 
   //request
-  $user_id = isset($_POST['user_id']);
-  $type = isset($_POST['type']);
-  $type_id = isset($_POST['type_id']);
+  $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+  $type = isset($_POST['type']) ? $_POST['type'] : '';
+  $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
   //request
 
   try{
@@ -15,12 +15,12 @@
     $result = mysqli_query($db,$query);
 
     //if there is already an entry in LIKES table
-    if($result_data = $result->fetch_row()){
+    if($result_data = $result->fetch_object()){
       //if the user has unliked it, like it
       if('Y' == $result_data->IS_DEL){
         infologger($filename, "I", "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
 
-        $query = "UPDATE LIKES SET IS_DEL = 'N' WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
+        $query = "UPDATE LIKES SET IS_DEL = 'N',MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
         if(mysqli_query($db,$query)){
           infologger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
@@ -34,7 +34,7 @@
       else{
         infologger($filename, "I", "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
 
-        $query = "UPDATE LIKES SET IS_DEL = 'Y' WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
+        $query = "UPDATE LIKES SET IS_DEL = 'Y',MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
         if(mysqli_query($db,$query)){
           infologger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
@@ -52,7 +52,7 @@
 
       $query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 
-      if($mysqli->query($likesql)){
+      if($mysqli->query($query)){
         infologger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
       }
       else{
@@ -68,15 +68,15 @@
     $query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
     $result = mysqli_query($db,$query);
 
-    if($result_data = $result->fetch_row()){
+    if($result_data = $result->fetch_object()){
       if($result_data->LIKES_COUNT != 0){
-        $result_array['isliked'] = true;
+        $result_array['isLiked'] = true;
       }
       else{
-        $result_array['isliked'] = false;
+        $result_array['isLiked'] = false;
       }
 
-      infologger($filename, "I" , "The user(".$user_id.") for the type(".$type.") with type id(".$type_id.") has liked ? ".$result_array['isliked']);
+      infologger($filename, "I" , "The user(".$user_id.") for the type(".$type.") with type id(".$type_id.") has liked ? ".$result_array['isLiked']);
     }
     //check the status (liked/unliked)
 
@@ -84,7 +84,7 @@
     $query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
     $result = mysqli_query($db,$query);
 
-    if($result_data = $result->fetch_row()){
+    if($result_data = $result->fetch_object()){
       $result_array['likes'] = $result_data->LIKES_COUNT;
 
       infologger($filename, "I" , "The type(".$type.") with type id(".$type_id.") has been liked ".$result_array['likes']." times");
