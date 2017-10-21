@@ -31,7 +31,7 @@ $checkviewquery = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$
 $insertviewquery = "INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `MOD_DTM`, `CREATE_DTM`) VALUES('$user_id', '$rcp_id', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 $viewquery = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id'";
 
-$avgratingquery = "SELECT ROUND(AVG(RATING), 1) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
+$avgratingquery = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
 $userhasreviewedquery = "SELECT COUNT(*) AS REVIEW_COUNT FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
 
 //if the view is not registered for this recipe by this user, register it

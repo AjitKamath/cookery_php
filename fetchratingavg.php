@@ -9,7 +9,7 @@
 
   try{
     //get average rating for $rcp_id
-    $query = "SELECT ROUND(AVG(RATING), 1) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
+    $query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
     $result = mysqli_query($db,$query);
     
     $result_array = array();
