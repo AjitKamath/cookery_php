@@ -14,8 +14,7 @@
 
   try{
     //get all recipes for $user_id
-    $query = "SELECT RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME,
-              FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID, RCP.CREATE_DTM, RCP.MOD_DTM, USR.NAME
+    $query = "SELECT RCP.RCP_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME, RCP.CREATE_DTM, RCP.MOD_DTM, USR.NAME
               FROM `RECIPE` AS RCP 
 							INNER JOIN `USER` USR ON USR.USER_ID = RCP.USER_ID
               INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
@@ -23,7 +22,8 @@
 							INNER JOIN `LIKES` AS LIK ON LIK.USER_ID = RCP.USER_ID AND LIK.TYPE_ID = RCP.RCP_ID
 							WHERE RCP.USER_ID = '$user_id'
 							AND LIK.TYPE = 'RECIPE'
-							AND LIK.IS_DEL = 'N'";
+							AND LIK.IS_DEL = 'N'
+							AND RCP.IS_DEL = 'N'";
     
     $result = mysqli_query($db,$query);
     
@@ -35,8 +35,8 @@
       $recipe_array['RCP_NAME'] = $result_data->RCP_NAME;
       $recipe_array['FOOD_CSN_NAME'] = $result_data->FOOD_CSN_NAME;
       $recipe_array['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
-			$recipe_array['createDateTime'] = $result_data->CREATE_DTM;
-			$recipe_array['modifiedDateTime'] = $result_data->MOD_DTM;
+			$recipe_array['CREATE_DTM'] = $result_data->CREATE_DTM;
+			$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 			$recipe_array['NAME'] = $result_data->NAME;
       
       //fetch likes for the recipe

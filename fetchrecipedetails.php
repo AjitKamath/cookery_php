@@ -12,7 +12,8 @@ $rcpdetailsquery = "SELECT USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP
                     from `RECIPE` AS RCP INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
                                          INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
 																				 INNER JOIN `USER` AS USR ON RCP.USER_ID = USR.USER_ID 
-                                         WHERE RCP.RCP_ID = '$rcp_id'";
+                                         WHERE RCP.RCP_ID = '$rcp_id'
+																				 AND RCP.IS_DEL = 'N'";
 
  
 $rcpimgquery = "SELECT RCP_IMG_ID, RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$rcp_id' ";

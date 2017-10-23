@@ -214,3 +214,93 @@
 22-10-17 02:46:18 : fetchuserreviewedrecipes.php : I : 
 22-10-17 02:46:18 : fetchuserreviewedrecipes.php : I : -------------fetchuserreviewedrecipes.php-------------
 22-10-17 02:46:18 : fetchuserreviewedrecipes.php : I : 
+22-10-17 22:51:41 : fetchfoodtype.php : I : Food Type fetched successfully
+22-10-17 22:51:41 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:51:42 : fetchcuisine.php : I : Food Cuisine fetched successfully
+22-10-17 22:51:42 : fetchqty.php : I : Quantity fetched successfully
+22-10-17 22:51:43 : fetchtastes.php : I : Tastes fetched successfully
+22-10-17 22:53:31 : fetchfoodtype.php : I : Food Type fetched successfully
+22-10-17 22:53:31 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:53:32 : fetchcuisine.php : I : Food Cuisine fetched successfully
+22-10-17 22:53:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:53:32 : fetchqty.php : I : Quantity fetched successfully
+22-10-17 22:53:32 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:53:32 : fetchtastes.php : I : Tastes fetched successfully
+22-10-17 22:54:38 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:54:38 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:54:38 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id(1)
+22-10-17 22:54:40 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:54:40 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:54:40 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id()
+22-10-17 22:56:43 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:56:43 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:56:43 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id(1)
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id(1)
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : Total Recipes Reviews fetched : 1
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 22:58:25 : fetchuserrecipesreviews.php : I : 
+22-10-17 22:58:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:58:55 : fetchfoodtype.php : I : Food Type fetched successfully
+22-10-17 22:58:56 : fetchcuisine.php : I : Food Cuisine fetched successfully
+22-10-17 22:58:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:58:56 : fetchqty.php : I : Quantity fetched successfully
+22-10-17 22:58:56 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 22:58:56 : fetchtastes.php : I : Tastes fetched successfully
+22-10-17 23:00:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 23:00:15 : fetchfoodtype.php : I : Food Type fetched successfully
+22-10-17 23:00:15 : fetchcuisine.php : I : Food Cuisine fetched successfully
+22-10-17 23:00:15 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 23:00:15 : fetchqty.php : I : Quantity fetched successfully
+22-10-17 23:00:16 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 23:00:16 : fetchtastes.php : I : Tastes fetched successfully
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id(1)
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : Total Recipes Reviews fetched : 1
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:01:57 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : REQUEST PARAM : user_id(1)
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : Total Recipes Reviews fetched : 1
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : -------------fetchuserrecipesreviews.php-------------
+22-10-17 23:02:02 : fetchuserrecipesreviews.php : I : 
+22-10-17 23:26:28 : fetchfoodtype.php : I : Food Type fetched successfully
+22-10-17 23:26:28 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 23:26:28 : fetchcuisine.php : I : Food Cuisine fetched successfully
+22-10-17 23:26:28 : fetchqty.php : I : Quantity fetched successfully
+22-10-17 23:26:29 : fetchtastes.php : I : Tastes fetched successfully
+22-10-17 23:27:06 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+22-10-17 23:27:07 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:29:59 : fetchfoodtype.php : I : Food Type fetched successfully
+23-10-17 00:29:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:29:59 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-10-17 00:29:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:30:00 : fetchqty.php : I : Quantity fetched successfully
+23-10-17 00:30:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:30:00 : fetchtastes.php : I : Tastes fetched successfully
+23-10-17 00:30:12 : fetchuserrecipesreviews.php : I : 
+23-10-17 00:34:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:34:03 : fetchfoodtype.php : I : Food Type fetched successfully
+23-10-17 00:34:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:34:03 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-10-17 00:34:03 : fetchqty.php : I : Quantity fetched successfully
+23-10-17 00:34:03 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:34:04 : fetchtastes.php : I : Tastes fetched successfully
+23-10-17 00:35:32 : fetchuserrecipesreviews.php : I : 
+23-10-17 00:38:45 : fetchfoodtype.php : I : Food Type fetched successfully
+23-10-17 00:38:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:38:45 : fetchcuisine.php : I : Food Cuisine fetched successfully
+23-10-17 00:38:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:38:45 : fetchqty.php : I : Quantity fetched successfully
+23-10-17 00:38:45 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+23-10-17 00:38:46 : fetchtastes.php : I : Tastes fetched successfully
+23-10-17 00:38:51 : fetchuserrecipesreviews.php : I : 
