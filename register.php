@@ -1,6 +1,7 @@
 <?php
 
 include 'application_context.php';
+include('constants.php');
 
 $filename = "register.php";
 
@@ -69,7 +70,7 @@ $row = $usercheck->fetch_row();
 
 	try
 	{		
-		$result = mysqli_query($db,"INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,VERI_CODE,SALT,CREATE_DTM) values('$email','$mobile','$password','$name','$gender','$veri_code','$salt',CURRENT_TIMESTAMP)");
+		$user_id = mysqli_query($db,"INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,VERI_CODE,SALT,CREATE_DTM) values('$email','$mobile','$password','$name','$gender','$veri_code','$salt',CURRENT_TIMESTAMP)");
 
 		mailtrigger($email,$veri_code);
 
@@ -79,6 +80,14 @@ $row = $usercheck->fetch_row();
 		$data["err_code"]= $SUCCESS;
 		$data["err_message"]="User Registered Successfully";
 		echo json_encode($data);
+		
+		//register timeline
+		session_start();
+		$_SESSION["user_id"] = $user_id;
+		$_SESSION["type"] = USER_ADD;
+		$_SESSION["type_id"] = $user_id;
+		header('Location: registerusertimeline.php');  
+		//register timeline
 	}
 	catch(Exception $e)
 	{

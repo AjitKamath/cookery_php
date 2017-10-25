@@ -1,5 +1,6 @@
 <?php
     include 'application_context.php';
+    include('constants.php');
 
     $filename = "submitcomment.php";
 
@@ -20,8 +21,14 @@
         //insert comment
         $query = "INSERT INTO COMMENTS('RCP_ID', 'USER_ID', 'COMMENT', 'CREAT_DTM', 'MOD_DTM') VALUES('$rcp_id', '$user_id', '$comment', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 
-        if($mysqli->query($query)){
+        if($comment_id = $mysqli->query($query)){
             infologger($filename, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
+            
+            session_start();
+            $_SESSION["user_id"] = $user_id;
+            $_SESSION["type"] = COMMENT_RECIPE_ADD;
+            $_SESSION["type_id"] = $comment_id;
+            header('Location: registerusertimeline.php');
         }
         else{
             errlogger($filename, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");

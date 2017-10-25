@@ -1,5 +1,6 @@
 <?php
     include 'application_context.php';
+    include('constants.php');
 
     $filename = "submitrecipereview.php";
 
@@ -26,6 +27,14 @@
 
             if(mysqli_query($db,$query)){
                 infologger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+                
+                //register timeline
+                session_start();
+                $_SESSION["user_id"] = $user_id;
+                $_SESSION["type"] = REVIEW_RECIPE_UPDATE;
+                $_SESSION["type_id"] = $result->REV_ID;
+                header('Location: registerusertimeline.php'); 
+                //register timeline
             }
             else{
                 errlogger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
@@ -35,8 +44,16 @@
         else{
             $query = "INSERT INTO `REVIEWS` (`RCP_ID`, `USER_ID`, `REVIEW`, `RATING`, `CREATE_DTM`, `MOD_DTM`) VALUES('$rcp_id', '$user_id', '$review', '$rating' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 
-            if($mysqli->query($query)){
+            if($review_id = $mysqli->query($query)){
                 infologger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+                
+                //register timeline
+                session_start();
+                $_SESSION["user_id"] = $user_id;
+                $_SESSION["type"] = REVIEW_RECIPE_ADD;
+                $_SESSION["type_id"] = $review_id;
+                header('Location: registerusertimeline.php'); 
+                //register timeline
             }
             else{
                 errlogger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");

@@ -1,5 +1,6 @@
 <?php
     include 'application_context.php';
+    include('constants.php');
 
     $filename = "submitlike.php";
 
@@ -27,10 +28,30 @@
             if('Y' == $result_data->IS_DEL){
                 infologger($filename, "I", "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
 
-                $query = "UPDATE LIKES SET IS_DEL = 'N',MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
+                $query = "UPDATE LIKES SET IS_DEL = 'N', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
                 if(mysqli_query($db,$query)){
                     infologger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+                    
+                    //register timeline
+                    session_start();
+                    $_SESSION["user_id"] = $user_id;
+                    
+                    $timeline_type = 'UNKNOWN';
+                    if($type == 'RECIPE'){
+                        $timeline_type = LIKE_RECIPE_ADD;
+                    }
+                    else if($type == 'COMMENT'){
+                        $timeline_type = LIKE_COMMENT_ADD;
+                    }
+                    else if($type == 'REVIEW'){
+                        $timeline_type = LIKE_REVIEW_ADD;
+                    }
+                    
+                    $_SESSION["type"] = $timeline_type;
+                    $_SESSION["type_id"] = $result->LIKE_ID;
+                    header('Location: registerusertimeline.php');
+                    //register timeline
                 }
                 else{
                     errlogger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
@@ -41,10 +62,30 @@
             else{
                 infologger($filename, "I", "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
 
-                $query = "UPDATE LIKES SET IS_DEL = 'Y',MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
+                $query = "UPDATE LIKES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
                 if(mysqli_query($db,$query)){
                     infologger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
+                    
+                    //register timeline
+                    session_start();
+                    $_SESSION["user_id"] = $user_id;
+                    
+                    $timeline_type = 'UNKNOWN';
+                    if($type == 'RECIPE'){
+                        $timeline_type = LIKE_RECIPE_REMOVE;
+                    }
+                    else if($type == 'COMMENT'){
+                        $timeline_type = LIKE_COMMENT_REMOVE;
+                    }
+                    else if($type == 'REVIEW'){
+                        $timeline_type = LIKE_REVIEW_REMOVE;
+                    }
+                    
+                    $_SESSION["type"] = $timeline_type;
+                    $_SESSION["type_id"] = $result->LIKE_ID;
+                    header('Location: registerusertimeline.php');
+                    //register timeline
                 }
                 else{
                     errlogger($filename, "E", "Failed !! The user(".$user_id.") could not unlike the type(".$type.") with type id(".$type_id.") successfully.");
@@ -57,10 +98,30 @@
         else{
             infologger($filename, "I", "The user(".$user_id.") has not yet liked the type(".$type.") with type id(".$type_id."). So liking it");
 
-            $query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`, `MOD_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+            $query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP)";
 
-            if($mysqli->query($query)){
+            if($like_id = $mysqli->query($query)){
                 infologger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+                
+                //register timeline
+                session_start();
+                $_SESSION["user_id"] = $user_id;
+
+                $timeline_type = 'UNKNOWN';
+                if($type == 'RECIPE'){
+                    $timeline_type = LIKE_RECIPE_ADD;
+                }
+                else if($type == 'COMMENT'){
+                    $timeline_type = LIKE_COMMENT_ADD;
+                }
+                else if($type == 'REVIEW'){
+                    $timeline_type = LIKE_REVIEW_ADD;
+                }
+
+                $_SESSION["type"] = $timeline_type;
+                $_SESSION["type_id"] = $like_id;
+                header('Location: registerusertimeline.php');
+                //register timeline
             }
             else{
                 errlogger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");

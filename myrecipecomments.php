@@ -1,5 +1,6 @@
 <?php
     include 'application_context.php';
+    include('constants.php');
 
     $filename = "myrecipecomments.php";
 
@@ -17,11 +18,12 @@
     //response
 
     try{
-        $commentsql = "INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`, `MOD_DTM`) VALUES 
-                    ('$rcp_id', '$user_id', '$comment',  CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";                         
+        $commentsql = "INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`) VALUES 
+                    ('$rcp_id', '$user_id', '$comment',  CURRENT_TIMESTAMP)";                         
 
         $q0_ok = true;
-        $mysqli->query($commentsql) ? null : $q0_ok=false;
+        $comment_id = $mysqli->query($commentsql);
+        $comment_id ? null : $q0_ok=false;
 
         if(!$q0_ok){
             errlogger($filename, "E", "Query failure : ".$commentsql);
@@ -31,6 +33,14 @@
             infologger($filename, "I" , "Comment added successfully as ".$comment);
             $success = "Comment Added Successfully";
             echo $success;
+            
+            //register timeline
+            session_start();
+            $_SESSION["user_id"] = $user_id;
+            $_SESSION["type"] = COMMENT_RECIPE_ADD;
+            $_SESSION["type_id"] = $comment_id;
+            header('Location: registerusertimeline.php'); 
+            //register timeline
         }
     }
     catch(Exception $e){

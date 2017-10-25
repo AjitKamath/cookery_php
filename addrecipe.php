@@ -1,6 +1,7 @@
 <?php
-
     include 'application_context.php';
+    include('constants.php');
+
     $filename = "addrecipe.php";
     $isError;
     $errorMessage;
@@ -272,6 +273,12 @@
             $success = "Recipe added successfully";
             //echo json_encode($success); 
           echo $success; 
+            
+            session_start();
+            $_SESSION["user_id"] = $user_id;
+            $_SESSION["type"] = RECIPE_ADD;
+            $_SESSION["type_id"] = $comment_id;
+            header('Location: registerusertimeline.php');  
         }
     }
     catch(Exception $e)
