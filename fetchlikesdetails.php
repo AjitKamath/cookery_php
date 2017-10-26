@@ -3,15 +3,15 @@
 
     $filename = "fetchlikesdetails.php";
 
-    infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
     //request
     $type = isset($_POST['type']) ? $_POST['type'] : '';
     $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
     
-    infologger($filename, "I", "REQUEST PARAM : type(".$type.")");
-    infologger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
+    logger($filename, "I", "REQUEST PARAM : type(".$type.")");
+    logger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
     //request
 
     try{
@@ -25,16 +25,15 @@
         }
         //get likes details for $type & $type_id
 
-        infologger($filename, "I", "Total likes fetched for type('.$type.') & type_id('.$type_id.') : ".sizeof($result_array));
+        logger($filename, "I", "Total likes fetched for type('.$type.') & type_id('.$type_id.') : ".sizeof($result_array));
         
         //response
         echo json_encode($result_array);
         //response
     }
     catch(Exception $e){
-        errlogger($filename, "E", 'Message: ' .$e->getMessage());
+        logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

@@ -4,17 +4,17 @@
 
     $filename = "myrecipecomments.php";
 
-    infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
     //response
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
     $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
     $comment = isset($_POST['comment']) ? $_POST['comment'] : '';
 
-    infologger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
-    infologger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-    infologger($filename, "I", "REQUEST PARAM : comment(".$comment.")");
+    logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
+    logger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+    logger($filename, "I", "REQUEST PARAM : comment(".$comment.")");
     //response
 
     try{
@@ -26,11 +26,11 @@
         $comment_id ? null : $q0_ok=false;
 
         if(!$q0_ok){
-            errlogger($filename, "E", "Query failure : ".$commentsql);
+            logger($filename, "E", "Query failure : ".$commentsql);
             throw new Exception("Query failure : ".$commentsql);
         }
         else{
-            infologger($filename, "I" , "Comment added successfully as ".$comment);
+            logger($filename, "I" , "Comment added successfully as ".$comment);
             $success = "Comment Added Successfully";
             echo $success;
             
@@ -48,9 +48,8 @@
         $errorMessage = 'Query Failed';
         $exception = $e."MYSQL ERROR:";
         $userMessage = 'Could not add comment. Please try again.';
-        errlogger($filename, "E", $userMessage." Error ".$exception);
+        logger($filename, "E", $userMessage." Error ".$exception);
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

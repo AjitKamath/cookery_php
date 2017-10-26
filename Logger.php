@@ -1,4 +1,6 @@
 <?php
+include('constants.php');
+
 //Logs format
 //datetime filename type message
 
@@ -75,15 +77,51 @@ function infologger($filename, $type, $message)
 	}
 }
 
-function checkforfile($name)
-{
+//this common method will log into info/debug based on the $type. Also, this logger logs the application version.
+function logger($filename, $type, $message){
+	include 'error_code.php';
+
+	$name = "info";
+	if($type == 'E'){
+		$name = "error";
+	}
+	
+	$status = checkforfile($name);
+	$pieces = explode("|", $status);
+	
+	if($pieces[0]){
+		date_default_timezone_set('Asia/Kolkata');
+		$datetime = date('d-m-y H:i:s');
+
+		$file_handle = fopen($pieces[1], "a");
+		$file_contents = "[v".APP_VERSION."] : ".$datetime." : ".$filename." : ".$type." : ".$message;
+
+		fwrite($file_handle, $file_contents."\n");
+
+		fclose($file_handle);
+	}
+	else{
+		date_default_timezone_set('Asia/Kolkata');
+		$datetime = date('d-m-y H:i:s');
+		
+		$PO1 = "dial2vishal@gmail.com";
+		$PO2 = "ajitkamathk@gmail.com";
+		$subject = "ALERT, Loggers Stopped working";
+		$msg = "Both Info and Error Logs stopped working from ".$datetime." ,check urgently";
+		
+		mail($PO1,$subject,$msg);
+		mail($PO2,$subject,$msg);
+	}
+}
+
+function checkforfile($name){
 	$flag = "false";
 	$errfile =  "false";
 	$infofile =  "false";
 	
 	$currentdate = date("Y-m-d");
-	$errfilename = "/home/cabox/workspace/Log/".$currentdate."_errlog.log";
-	$infofilename = "/home/cabox/workspace/Log/".$currentdate."_infolog.log";
+	$errfilename = HOME_DIRECTORY.$currentdate."_errlog.log";
+	$infofilename = HOME_DIRECTORY.$currentdate."_infolog.log";
 	
 	if(file_exists($errfilename))
 	{

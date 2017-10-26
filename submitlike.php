@@ -4,17 +4,17 @@
 
     $filename = "submitlike.php";
 
-    infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
     //request
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
     $type = isset($_POST['type']) ? $_POST['type'] : '';
     $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
 
-    infologger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
-    infologger($filename, "I", "REQUEST PARAM : type(".$type.")");
-    infologger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
+    logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
+    logger($filename, "I", "REQUEST PARAM : type(".$type.")");
+    logger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
     //request
 
     try{
@@ -26,12 +26,12 @@
         if($result_data = $result->fetch_object()){
             //if the user has unliked it, like it
             if('Y' == $result_data->IS_DEL){
-                infologger($filename, "I", "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
+                logger($filename, "I", "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
 
                 $query = "UPDATE LIKES SET IS_DEL = 'N', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
                 if(mysqli_query($db,$query)){
-                    infologger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+                    logger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
                     session_start();
@@ -54,7 +54,7 @@
                     //register timeline
                 }
                 else{
-                    errlogger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
+                    logger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
                 }
             }
             //if the user has unliked it, like it
@@ -65,7 +65,7 @@
                 $query = "UPDATE LIKES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
                 if(mysqli_query($db,$query)){
-                    infologger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
+                    logger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
                     session_start();
@@ -88,7 +88,7 @@
                     //register timeline
                 }
                 else{
-                    errlogger($filename, "E", "Failed !! The user(".$user_id.") could not unlike the type(".$type.") with type id(".$type_id.") successfully.");
+                    logger($filename, "E", "Failed !! The user(".$user_id.") could not unlike the type(".$type.") with type id(".$type_id.") successfully.");
                 }
             }
             //if the user has liked it, unlike it
@@ -96,12 +96,12 @@
         //if there is already an entry in LIKES table
         //if there is no entry in LIKES table
         else{
-            infologger($filename, "I", "The user(".$user_id.") has not yet liked the type(".$type.") with type id(".$type_id."). So liking it");
+            logger($filename, "I", "The user(".$user_id.") has not yet liked the type(".$type.") with type id(".$type_id."). So liking it");
 
             $query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP)";
 
             if($like_id = $mysqli->query($query)){
-                infologger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+                logger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                 
                 //register timeline
                 session_start();
@@ -124,7 +124,7 @@
                 //register timeline
             }
             else{
-                errlogger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
+                logger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
             } 
         }
         //if there is no entry in LIKES table
@@ -144,7 +144,7 @@
                 $result_array['isLiked'] = false;
             }
 
-            infologger($filename, "I" , "The user(".$user_id.") for the type(".$type.") with type id(".$type_id.") has liked ? ".$result_array['isLiked']);
+            logger($filename, "I" , "The user(".$user_id.") for the type(".$type.") with type id(".$type_id.") has liked ? ".$result_array['isLiked']);
         }
         //check the status (liked/unliked)
 
@@ -155,7 +155,7 @@
         if($result_data = $result->fetch_object()){
             $result_array['likes'] = $result_data->LIKES_COUNT;
 
-            infologger($filename, "I" , "The type(".$type.") with type id(".$type_id.") has been liked ".$result_array['likes']." times");
+            logger($filename, "I" , "The type(".$type.") with type id(".$type_id.") has been liked ".$result_array['likes']." times");
         }
         //get total likes for the $type & $type_id
 
@@ -164,9 +164,8 @@
         //response
     }
     catch(Exception $e){
-        errlogger($filename, "E", 'Message: ' .$e->getMessage());
+        logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

@@ -4,16 +4,19 @@
 
     $filename = "submitrecipereview.php";
 
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
+
     //request
     $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
     $review = isset($_POST['review']) ? $_POST['review'] : '';
     $rating = isset($_POST['rating']) ? $_POST['rating'] : '';
 
-    infologger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-    infologger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
-    infologger($filename, "I", "REQUEST PARAM : review(".$review.")");
-    infologger($filename, "I", "REQUEST PARAM : rating(".$rating.")");
+    logger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+    logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
+    logger($filename, "I", "REQUEST PARAM : review(".$review.")");
+    logger($filename, "I", "REQUEST PARAM : rating(".$rating.")");
     //request
 
     try{
@@ -23,10 +26,10 @@
 
         //user has already reviewed
         if($result_data = $result->fetch_object()){
-            $query = "UPDATE REVIEWS SET IS_DEL = 'N',REVIEW = '$review',MOD_DTM = CURRENT_TIMESTAMP,RATING = '$rating' WHERE RCP_ID = $rcp_id AND USER_ID = $user_id";
+            $query = "UPDATE REVIEWS SET IS_DEL = 'N', REVIEW = '$review', MOD_DTM = CURRENT_TIMESTAMP, RATING = '$rating' WHERE RCP_ID = $rcp_id AND USER_ID = $user_id";
 
             if(mysqli_query($db,$query)){
-                infologger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+                logger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
                 
                 //register timeline
                 session_start();
@@ -37,15 +40,15 @@
                 //register timeline
             }
             else{
-                errlogger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+                logger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
             }
         }
         //user is reviewing for the first time
         else{
-            $query = "INSERT INTO `REVIEWS` (`RCP_ID`, `USER_ID`, `REVIEW`, `RATING`, `CREATE_DTM`, `MOD_DTM`) VALUES('$rcp_id', '$user_id', '$review', '$rating' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+            $query = "INSERT INTO `REVIEWS` (`RCP_ID`, `USER_ID`, `REVIEW`, `RATING`, `CREATE_DTM`) VALUES('$rcp_id', '$user_id', '$review', '$rating' , CURRENT_TIMESTAMP)";
 
             if($review_id = $mysqli->query($query)){
-                infologger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+                logger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
                 
                 //register timeline
                 session_start();
@@ -56,7 +59,7 @@
                 //register timeline
             }
             else{
-                errlogger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+                logger($filename, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
             } 
         }
         //check if user already reviewed the $rcp_id
@@ -91,9 +94,8 @@
         //response
     }
     catch(Exception $e){
-        errlogger($filename, "E", 'Message: ' .$e->getMessage());
+        logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

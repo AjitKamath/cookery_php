@@ -3,13 +3,13 @@
 
 	$filename = "fetchuserfavrecipes.php";
 
-	infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+	logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
 	//request
 	$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
-	infologger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
+	logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
 	//request
 
 	try{
@@ -44,7 +44,7 @@
 			$likes_result = mysqli_query($db,$query);
 
 			if($likes_result_data = $likes_result->fetch_object()){
-			$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
+				$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
 			}
 			//fetch likes for the recipe
 
@@ -81,16 +81,15 @@
 		}
 		//get all recipes for $user_id
 
-		infologger($filename, "I", "Total Recipes fetched : ".sizeof($result_array));
+		logger($filename, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 		//response
 		echo json_encode($result_array);
 		//response
 	}
 	catch(Exception $e){
-		errlogger($filename, "E", 'Message: ' .$e->getMessage());
+		logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 
-	infologger($filename, "I", "-------------'.$filename.'-------------");
-	infologger($filename, "I", "");
+	logger($filename, "I", "-------------"$filename"-------------");
 ?>

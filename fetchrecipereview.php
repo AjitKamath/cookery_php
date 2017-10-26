@@ -3,15 +3,15 @@
 
     $filename = "fetchrecipereview.php";
 
-    infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
     //request
     $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
-    infologger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-    infologger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
+    logger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+    logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
     //request
 
     try{
@@ -35,9 +35,8 @@
         //response
     }
     catch(Exception $e){
-        errlogger($filename, "E", 'Message: ' .$e->getMessage());
+        logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

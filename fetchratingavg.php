@@ -3,13 +3,13 @@
 
     $filename = "fetchratingavg.php";
 
-    infologger($filename, "I", "");
-    infologger($filename, "I", "-------------'.$filename.'-------------");
+    logger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 
     //request
     $rcp_id = isset($_POST['$rcp_id']) ? $_POST['$rcp_id'] : '';
 
-    infologger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+    logger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
     //request
 
     try{
@@ -28,9 +28,8 @@
     //response
     }
     catch(Exception $e){
-    errlogger($filename, "E", 'Message: ' .$e->getMessage());
+        logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    infologger($filename, "I", "-------------'.$filename.'-------------");
-    infologger($filename, "I", "");
+    logger($filename, "I", "-------------"$filename"-------------");
 ?>

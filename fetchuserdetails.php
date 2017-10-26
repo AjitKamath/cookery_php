@@ -3,13 +3,13 @@
 
   $filename = "fetchuserdetails.php";
 
-  infologger($filename, "I", "");
-  infologger($filename, "I", "-------------'.$filename.'-------------");
+  logger($filename, "I", "");
+  logger($filename, "I", "-------------"$filename"-------------");
 
   //request
   $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
-  infologger($filename, "I", "REQUEST PARAM : user_id("$user_id")");
+  logger($filename, "I", "REQUEST PARAM : user_id("$user_id")");
   //request
 
   try{
@@ -31,9 +31,8 @@
     //response
   }
   catch(Exception $e){
-    errlogger($filename, "E", 'Message: ' .$e->getMessage());
+    logger($filename, "E", 'Message: ' .$e->getMessage());
   }
 
-  infologger($filename, "I", "-------------'.$filename.'-------------");
-  infologger($filename, "I", "");
+  logger($filename, "I", "-------------"$filename"-------------");
 ?>

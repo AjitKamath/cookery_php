@@ -1,5 +1,6 @@
 <?php
-    include('constants.php');
+    include("application_context.php");
 
-  echo RECIPE_ADD;
+    logger("ABC", "E", "Test Error");
+    logger("ABC", "I", "Test Info");
 ?>
