@@ -34,23 +34,8 @@
                     logger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
-                    session_start();
-                    $_SESSION["user_id"] = $user_id;
-                    
-                    $timeline_type = 'UNKNOWN';
-                    if($type == 'RECIPE'){
-                        $timeline_type = LIKE_RECIPE_ADD;
-                    }
-                    else if($type == 'COMMENT'){
-                        $timeline_type = LIKE_COMMENT_ADD;
-                    }
-                    else if($type == 'REVIEW'){
-                        $timeline_type = LIKE_REVIEW_ADD;
-                    }
-                    
-                    $_SESSION["type"] = $timeline_type;
-                    $_SESSION["type_id"] = $result->LIKE_ID;
-                    header('Location: registerusertimeline.php');
+                    include_once('registerusertimeline.php');
+                    register_timeline($user_id, $timeline_type, $result->LIKE_ID);
                     //register timeline
                 }
                 else{

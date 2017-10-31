@@ -24,11 +24,10 @@
         if($comment_id = $mysqli->query($query)){
             logger($filename, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
             
-            session_start();
-            $_SESSION["user_id"] = $user_id;
-            $_SESSION["type"] = COMMENT_RECIPE_ADD;
-            $_SESSION["type_id"] = $comment_id;
-            header('Location: registerusertimeline.php');
+            //register timeline
+            include_once('registerusertimeline.php');
+            register_timeline($user_id, COMMENT_RECIPE_ADD, $comment_id);
+            //register timeline
         }
         else{
             logger($filename, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");

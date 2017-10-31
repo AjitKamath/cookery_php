@@ -85,11 +85,8 @@ $row = $usercheck->fetch_row();
 		echo json_encode($data);
 		
 		//register timeline
-		session_start();
-		$_SESSION["user_id"] = $user_id;
-		$_SESSION["type"] = USER_ADD;
-		$_SESSION["type_id"] = $user_id;
-		header('Location: registerusertimeline.php');  
+		include_once('registerusertimeline.php');
+        register_timeline($user_id, USER_ADD, $user_id);
 		//register timeline
 	}
 	catch(Exception $e)

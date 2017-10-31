@@ -32,11 +32,8 @@
                 logger($filename, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
                 
                 //register timeline
-                session_start();
-                $_SESSION["user_id"] = $user_id;
-                $_SESSION["type"] = REVIEW_RECIPE_UPDATE;
-                $_SESSION["type_id"] = $result->REV_ID;
-                header('Location: registerusertimeline.php'); 
+                include_once('registerusertimeline.php');
+                register_timeline($user_id, REVIEW_RECIPE_UPDATE, $result->REV_ID);
                 //register timeline
             }
             else{

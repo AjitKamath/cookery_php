@@ -35,11 +35,9 @@
             echo $success;
             
             //register timeline
+            include_once('registerusertimeline.php');
+            register_timeline($user_id, COMMENT_RECIPE_ADD, $comment_id);
             session_start();
-            $_SESSION["user_id"] = $user_id;
-            $_SESSION["type"] = COMMENT_RECIPE_ADD;
-            $_SESSION["type_id"] = $comment_id;
-            header('Location: registerusertimeline.php'); 
             //register timeline
         }
     }
