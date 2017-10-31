@@ -1,5 +1,5 @@
 <?php
-include('constants.php');
+include_once('constants.php');
 
 //Logs format
 //datetime filename type message

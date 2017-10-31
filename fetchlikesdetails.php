@@ -4,7 +4,7 @@
     $filename = "fetchlikesdetails.php";
 
     logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
     //request
     $type = isset($_POST['type']) ? $_POST['type'] : '';
@@ -35,5 +35,5 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 ?>

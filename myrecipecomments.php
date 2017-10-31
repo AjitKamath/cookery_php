@@ -5,7 +5,7 @@
     $filename = "myrecipecomments.php";
 
     logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
     //response
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
@@ -51,5 +51,5 @@
         logger($filename, "E", $userMessage." Error ".$exception);
     }
 
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 ?>

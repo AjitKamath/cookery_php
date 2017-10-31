@@ -6,13 +6,13 @@
     $filename = "registerusertimeline.php";
 
     logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
     //request
     $user_id = isset($_SESSION["user_id"]) ? $_SESSION["user_id"] : '';
     $type = isset($_SESSION["type"]) ? $_SESSION["type"] : '';
     $type_id = isset($_SESSION["type_id"]) ? $_SESSION["type_id"] : '';
-    
+
     logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
     logger($filename, "I", "REQUEST PARAM : type(".$type.")");
     logger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
@@ -37,5 +37,5 @@
     session_unset(); 
     session_destroy(); 
 
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 ?>

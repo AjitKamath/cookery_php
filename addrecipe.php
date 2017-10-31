@@ -1,6 +1,6 @@
 <?php
     include 'application_context.php';
-    include('constants.php');
+    include_once('constants.php');
 
     $filename = "addrecipe.php";
     $isError;
@@ -21,7 +21,7 @@
     $tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
     $tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
     $food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
-    $user_id        = isset($_POST['user_id']) ? $_POST['user_id'] : '1';
+    $user_id        = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
     //$rcp_img        = isset($_POST['rcp_img']) ? $_POST['rcp_img'] : '';
 
@@ -274,11 +274,24 @@
             //echo json_encode($success); 
           echo $success; 
             
-            session_start();
-            $_SESSION["user_id"] = $user_id;
-            $_SESSION["type"] = RECIPE_ADD;
-            $_SESSION["type_id"] = $comment_id;
-            header('Location: registerusertimeline.php');  
+          //register timeline
+          try{
+              //register the timeline
+              $query = "INSERT INTO `TIMELINES` (`USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '".RECIPE_ADD."', '$rcp_id', CURRENT_TIMESTAMP)";
+
+              if($mysqli->query($query)){
+                  logger($filename, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
+              }
+              else{
+                  logger($filename, "E", "Failed !! The timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.") could not be registered");
+              } 
+              //register the timeline
+          }
+          catch(Exception $e){
+              logger($filename, "E", 'Message: ' .$e->getMessage());
+          }
+          //register timeline
+          
         }
     }
     catch(Exception $e)
