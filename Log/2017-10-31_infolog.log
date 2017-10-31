@@ -35,3 +35,53 @@
 [v0.1] : 31-10-17 14:21:47 : registerusertimeline.php : I : REQUEST PARAM : type_id()
 [v0.1] : 31-10-17 14:21:47 : registerusertimeline.php : I : Registered a timeline for the user() for the type(USER_ADD) with type id()
 [v0.1] : 31-10-17 14:21:47 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+31-10-17 14:30:57 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,VERI_CODE,SALT,CREATE_DTM) values('testemail@cookery.com','9962218578','aWFtdGVzdEFmeldZ','testuser1','m','J7TrKxGgEt','QWZ6V1k=',CURRENT_TIMESTAMP)
+31-10-17 14:30:57 : config.php : I : User Registered Successfully
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : type(USER_ADD)
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : Registered a timeline for the user() for the type(USER_ADD) with type id()
+[v0.1] : 31-10-17 14:30:57 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+31-10-17 14:35:03 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('testemail@cookery.com','9962218578','aWFtdGVzdE15RkJE','testuser1','m','BlsXt3B4aS','TXlGQkQ=',CURRENT_TIMESTAMP)
+31-10-17 14:35:03 : config.php : I : User Registered Successfully
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 31-10-17 14:35:03 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : REQUEST PARAM : type(USER_ADD)
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : REQUEST PARAM : type_id(1)
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : Registered a timeline for the user(1) for the type(USER_ADD) with type id(1)
+[v0.1] : 31-10-17 14:35:04 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+31-10-17 14:50:48 : config.php : I : User Logged in with email id as: testemail@cookery.com
+31-10-17 14:51:27 : config.php : I : User Login Failed with email id as: testemail@cookery.com
+31-10-17 14:52:11 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('testemail2@cookery.com','7503876065','aWFtdGVzdG9TS3Ay','testuser1','m','UgbYfiDJNG','b1NLcDI=',CURRENT_TIMESTAMP)
+31-10-17 14:52:11 : config.php : I : User Registered Successfully
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 31-10-17 14:52:11 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : REQUEST PARAM : type(USER_ADD)
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : REQUEST PARAM : type_id(1)
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : Registered a timeline for the user(1) for the type(USER_ADD) with type id(1)
+[v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : -------------registerusertimeline.php-------------

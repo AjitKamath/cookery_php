@@ -35,8 +35,8 @@ function register()
 include 'config.php';
 include 'error_code.php';
 	
-$email=(isset($_POST['email'])? $_POST['email']:'testemail@cookery.com');
-$mobile=(isset($_POST['mobile'])? $_POST['mobile']:'9962218578');
+$email=(isset($_POST['email'])? $_POST['email']:'testemail2@cookery.com');
+$mobile=(isset($_POST['mobile'])? $_POST['mobile']:'7503876065');
 $password=(isset($_POST['password'])? $_POST['password']:'iamtest');
 $name=(isset($_POST['name'])? $_POST['name']:'testuser1');
 $gender=(isset($_POST['gender'])? $_POST['gender']:'m');
@@ -69,8 +69,11 @@ $row = $usercheck->fetch_row();
 	$salt = base64_encode($salt_str);
 
 	try
-	{		
-		$user_id = mysqli_query($db,"INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,VERI_CODE,SALT,CREATE_DTM) values('$email','$mobile','$password','$name','$gender','$veri_code','$salt',CURRENT_TIMESTAMP)");
+	{	
+		// VERI_CODE is just changed to SSID for the fix but later need to have both the columns.
+		$query = "INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('$email','$mobile','$password','$name','$gender','$veri_code','$salt',CURRENT_TIMESTAMP)";
+		infologger($filename, "I", "New user Register Query: ".$query);
+		$user_id = mysqli_query($db, $query);
 
 		mailtrigger($email,$veri_code);
 
@@ -236,14 +239,21 @@ $row = $usercheck->fetch_row();
 
 function login()
 {
+include 'config.php';
+include 'error_code.php';
 
-$email=(isset($_POST['email'])? $_POST['email']:'');
-$password=(isset($_POST['password'])? $_POST['password']:'');
+$email=(isset($_POST['email'])? $_POST['email']:'testemail@cookery.com');
+$password=(isset($_POST['password'])? $_POST['password']:'iamtestf');
 
 try{
-	$result = mysqli_query($db,"Select EMAIL,PASSWORD from USER where EMAIL = '$email' AND PASSWORD = '$password'");
-
+	$result = mysqli_query($db,"Select EMAIL,PASSWORD,SALT from USER where EMAIL = '$email'");
 	$row = $result->fetch_row();
+	
+	$saltvalue = $row[2];
+	$salt = base64_decode($saltvalue);
+	$password = $password.$salt;
+	$password = base64_encode($password);
+	
 	if($row[0]==$email && $row[1]==$password)
 	{
 		infologger($filename, "I", "User Logged in with email id as: ".$email);
