@@ -5,7 +5,7 @@
     $filename = "fetchusertimelinedetails.php";
 
     logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
     //request
     $tmln_id = isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
@@ -139,5 +139,5 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 ?>

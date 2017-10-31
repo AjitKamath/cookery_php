@@ -4,7 +4,7 @@
 	$filename = "fetchuserrecipesreviews.php";
 
 	logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
 	//request
 	$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
@@ -87,5 +87,5 @@
 		logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 
-	logger($filename, "I", "-------------"$filename"-------------");
+	logger($filename, "I", "-------------".$filename."-------------");
 ?>

@@ -4,7 +4,7 @@
     $filename = "fetchviewsdetails.php";
 
     logger($filename, "I", "");
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 
     //request
     $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
@@ -33,5 +33,5 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
 
-    logger($filename, "I", "-------------"$filename"-------------");
+    logger($filename, "I", "-------------".$filename."-------------");
 ?>
