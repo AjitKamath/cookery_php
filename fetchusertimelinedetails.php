@@ -15,14 +15,25 @@
 
     try{
         //get timeline details for $tmln_id
-        $query = "SELECT TYPE, TYPE_ID FROM `TIMELINES` WHERE TMLN_ID '$tmln_id'";
+        $query = "SELECT TMLN_ID, TYPE, TYPE_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
+                  FROM `TIMELINES` AS TMLN
+                  INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USR_ID
+                  WHERE TMLN_ID '$tmln_id'";
         $result = mysqli_query($db, $query);
 
         $result_array = array();
         if($result_data = $result->fetch_object()){
             $timeline_array = array();
             $type = $result_data->TYPE;
-
+          
+            $timeline_array['TMLN_ID'] = $timeline_result_data->TMLN_ID;
+            $timeline_array['TYPE'] = $timeline_result_data->TYPE;
+            $timeline_array['TYPE_ID'] = $timeline_result_data->TYPE_ID;
+            $timeline_array['USER_ID'] = $timeline_result_data->USER_ID;
+            $timeline_array['timelineUserName'] = $timeline_result_data->NAME;
+            $timeline_array['timelineUserImage'] = $timeline_result_data->IMG;
+            $timeline_array['CREATE_DTM'] = $timeline_result_data->CREATE_DTM;
+            
             if(USER_ADD == $type){
                 $timeline_query = "SELECT CREATE_DTM FROM `USER` WHERE USER_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
@@ -33,94 +44,201 @@
                 }
             }
             else if(RECIPE_ADD == $type || RECIPE_MODIFY == $type || RECIPE_REMOVE = $type){
-                $timeline_query = "SELECT RCP_NAME, RCP_IMG, RCP.CREATE_DTM FROM `RECIPE` AS RCP
+                $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
+                                FROM `RECIPE` AS RCP
                                 INNER JOIN `RECIPE_IMG` AS IMG ON RCP.RCP_ID = IMG.RCP_ID
+                                INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
+                                INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USR_ID
                                 WHERE RCP.RCP_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['RCP_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
-                    
-                    $image_array = array();
-                    $temparr['RCP_IMG'] = $timeline_result_data->RCP_IMG;
-                    array_push($image_array, $temparr);
-                    
-                    $timeline_array['RCP_IMGS'] = $image_array;
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else if(COMMENT_RECIPE_ADD == $type || COMMENT_RECIPE_MODIFY == $type || COMMENT_RECIPE_REMOVE == $type){
-                $timeline_query = "SELECT RCP_NAME, NAME, COM.CREATE_DTM FROM `COMMENTS` AS COM
+                $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, COMMENT, FOOD_TYP_NAME, FOOD_CSN_NAME 
+                                   FROM `COMMENTS` AS COM
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = COM.RCP_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE COM_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['COM_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['NAME'] = $timeline_result_data->NAME;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
+                    $timeline_array['comment'] = $timeline_result_data->COMMENT;
+                    
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else if(LIKE_RECIPE_ADD == $type || LIKE_RECIPE_MODIFY == $type || LIKE_RECIPE_REMOVE == $type){
-                $timeline_query = "SELECT RCP_NAME, NAME, LIK.CREATE_DTM FROM `LIKES` AS LIK
+                $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
+                                   FROM `LIKES` AS LIK
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = LIK.RCP_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['LIKE_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['NAME'] = $timeline_result_data->NAME;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else if(LIKE_COMMENT_ADD == $type || LIKE_COMMENT_MODIFY == $type || LIKE_COMMENT_REMOVE == $type){
-                $timeline_query = "SELECT NAME, RCP_NAME, LIK.CREATE_DTM FROM `LIKES` AS LIK
+                $timeline_query = "SELECT COMMENT, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
+                                   FROM `LIKES` AS LIK
                                    INNER JOIN `COMMENTS` AS COM ON COM.COM_ID = LIK.TYPE_ID
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = COM.RCP_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['LIKE_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['NAME'] = $timeline_result_data->NAME;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
+                    $timeline_array['comment'] = $timeline_result_data->COMMENT;
+                  
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else if(LIKE_REVIEW_ADD == $type || LIKE_REVIEW_MODIFY == $type || LIKE_REVIEW_REMOVE == $type){
-                $timeline_query = "SELECT NAME, RCP_NAME, LIK.CREATE_DTM FROM `LIKES` AS LIK
+                $timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
+                                   FROM `LIKES` AS LIK
                                    INNER JOIN `REVIEWS` AS REV ON REV.REV_ID = LIK.TYPE_ID
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['LIKE_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['NAME'] = $timeline_result_data->NAME;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
+                    $timeline_array['review'] = $timeline_result_data->REVIEW;
+                    $timeline_array['rating'] = $timeline_result_data->RATING;
+                  
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else if(REVIEW_RECIPE_ADD == $type || REVIEW_RECIPE_MODIFY == $type || REVIEW_RECIPE_REMOVE == $type){
-                $timeline_query = "SELECT RATING, NAME, RCP_NAME, REV.CREATE_DTM FROM `REVIEWS` AS REV
+                $timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
+                                   FROM `REVIEWS` AS REV
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['REV_ID'] = $result_data->TYPE_ID;
-                    $timeline_array['RATING'] = $timeline_result_data->RATING;
-                    $timeline_array['NAME'] = $timeline_result_data->NAME;
-                    $timeline_array['RCP_NAME'] = $timeline_result_data->RCP_NAME;
-                    $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
+                    $timeline_array['review'] = $timeline_result_data->REVIEW;
+                    $timeline_array['rating'] = $timeline_result_data->RATING;
+                  
+                    //recipe details
+                    $timeline_array['recipeId'] = $timeline_result_data->RCP_ID;
+                    $timeline_array['recipeName'] = $timeline_result_data->RCP_NAME;
+                    $timeline_array['recipeTypeName'] = $timeline_result_data->FOOD_TYP_NAME;
+                    $timeline_array['recipeCuisineName'] = $timeline_result_data->FOOD_CSN_NAME;
+                    $timeline_array['recipeOwnerId'] = $timeline_result_data->USER_ID;
+                    $timeline_array['recipeOwnerName'] = $timeline_result_data->NAME;
+                    $timeline_array['recipeOwnerImage'] = $timeline_result_data->IMG;
+                  
+                    //get 1st image for the recipe
+                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                
+                    if($recipe_image_result_data = $recipe_image_result->fetch_object()){
+                       $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
+                    }
+                    //get 1st image for the recipe
+                    //recipe details
                 }
             }
             else{

@@ -5,6 +5,10 @@
     //paths
     define("HOME_DIRECTORY", "/home/cabox/workspace/Log/");
 
+    //timeline
+    //timelines count to load at a time
+    define("TIMELINES_COUNT","10");
+
     //user
     define("USER_ADD","USER_ADD");
     //user
@@ -40,4 +44,5 @@
     define("REVIEW_RECIPE_UPDATE","REVIEW_RECIPE_UPDATE");
     define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_ADD");
     //review
+    //timeline
 ?>

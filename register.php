@@ -6,7 +6,7 @@ include('constants.php');
 $filename = "register.php";
 
 
-$code=(isset($_POST['code'])? $_POST['code']:null);
+$code=(isset($_POST['code'])? $_POST['code']:'1');
 
 if($code == 1)
 {
@@ -35,11 +35,11 @@ function register()
 include 'config.php';
 include 'error_code.php';
 	
-$email=(isset($_POST['email'])? $_POST['email']:'');
-$mobile=(isset($_POST['mobile'])? $_POST['mobile']:'');
-$password=(isset($_POST['password'])? $_POST['password']:'');
-$name=(isset($_POST['name'])? $_POST['name']:'');
-$gender=(isset($_POST['gender'])? $_POST['gender']:'');
+$email=(isset($_POST['email'])? $_POST['email']:'testemail@cookery.com');
+$mobile=(isset($_POST['mobile'])? $_POST['mobile']:'9962218578');
+$password=(isset($_POST['password'])? $_POST['password']:'iamtest');
+$name=(isset($_POST['name'])? $_POST['name']:'testuser1');
+$gender=(isset($_POST['gender'])? $_POST['gender']:'m');
 
 $SQL = "Select MOBILE,EMAIL from USER where MOBILE = '$mobile' OR EMAIL = '$email' ";
 
