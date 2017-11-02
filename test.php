@@ -1,9 +1,6 @@
 <?php
-    include_once('registerusertimeline.php');
-    include_once('constants.php');
-
-    //register timeline
-          register_timeline(1, RECIPE_ADD, 1);
-          //register timeline
-   
+    include_once('util.php');
+    include_once('util_recipe.php');
+    
+    echo check_for_null(true);
 ?>
