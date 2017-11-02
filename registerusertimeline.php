@@ -1,10 +1,9 @@
 <?php
-    include_once('util.php');
-
     $filename = "registerusertimeline.php";
 
     function register_timeline($user_id, $type, $type_id){
-        include 'application_context.php';
+        include_once('util.php');
+        include_once('application_context.php');
         
         $filename = $GLOBALS['filename'];
         

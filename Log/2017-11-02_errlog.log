@@ -1,0 +1,2 @@
+[v0.1] : 02-11-17 14:55:27 : fetchusertimelinedetails.php : E : Error ! null/empty timeline id
+02-11-17 15:05:46 : fetchrecipedetails.php : E : Query failure : INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `MOD_DTM`, `CREATE_DTM`) VALUES('1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)

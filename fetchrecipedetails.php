@@ -2,10 +2,10 @@
 
 include 'application_context.php';
 
-$filename = "getrecipedetails.php";
+$filename = "fetchrecipedetails.php";
 
-$rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
-$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+$rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '1';
+$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '1';
 
 $rcpdetailsquery = "SELECT USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME,
                     FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID

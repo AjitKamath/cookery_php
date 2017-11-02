@@ -1,7 +1,7 @@
 <?php
 
 include 'application_context.php';
-include('constants.php');
+include_once('constants.php');
 
 $filename = "register.php";
 

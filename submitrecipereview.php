@@ -33,7 +33,7 @@
                 
                 //register timeline
                 include_once('registerusertimeline.php');
-                register_timeline($user_id, REVIEW_RECIPE_UPDATE, $result->REV_ID);
+                register_timeline($user_id, REVIEW_RECIPE_MODIFY, $result->REV_ID);
                 //register timeline
             }
             else{

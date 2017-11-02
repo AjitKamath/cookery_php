@@ -1,6 +1,7 @@
 <?php
     include('application_context.php');
-    include('constants.php');
+    include_once('constants.php');
+    include_once('util.php');
 
     $filename = "fetchusertimelinedetails.php";
 
@@ -10,15 +11,22 @@
     //request
     $tmln_id = isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
 
-    logger($filename, "I", "REQUEST PARAM : user_id("$tmln_id")");
+    logger($filename, "I", "REQUEST PARAM : user_id(".$tmln_id.")");
     //request
+
+    //validations
+    if(!check_for_null($tmln_id)){
+        logger($filename, "E", "Error ! null/empty timeline id");
+        return;
+    }
+    //validations
 
     try{
         //get timeline details for $tmln_id
         $query = "SELECT TMLN_ID, TYPE, TYPE_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
                   FROM `TIMELINES` AS TMLN
-                  INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USR_ID
-                  WHERE TMLN_ID '$tmln_id'";
+                  INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USER_ID
+                  WHERE TMLN_ID = '$tmln_id'";
         $result = mysqli_query($db, $query);
 
         $result_array = array();
@@ -26,16 +34,16 @@
             $timeline_array = array();
             $type = $result_data->TYPE;
           
-            $timeline_array['TMLN_ID'] = $timeline_result_data->TMLN_ID;
-            $timeline_array['TYPE'] = $timeline_result_data->TYPE;
-            $timeline_array['TYPE_ID'] = $timeline_result_data->TYPE_ID;
-            $timeline_array['USER_ID'] = $timeline_result_data->USER_ID;
-            $timeline_array['timelineUserName'] = $timeline_result_data->NAME;
-            $timeline_array['timelineUserImage'] = $timeline_result_data->IMG;
-            $timeline_array['CREATE_DTM'] = $timeline_result_data->CREATE_DTM;
+            $timeline_array['TMLN_ID'] = $result_data->TMLN_ID;
+            $timeline_array['TYPE'] = $result_data->TYPE;
+            $timeline_array['TYPE_ID'] = $result_data->TYPE_ID;
+            $timeline_array['USER_ID'] = $result_data->USER_ID;
+            $timeline_array['timelineUserName'] = $result_data->NAME;
+            $timeline_array['timelineUserImage'] = $result_data->IMG;
+            $timeline_array['CREATE_DTM'] = $result_data->CREATE_DTM;
             
             if(USER_ADD == $type){
-                $timeline_query = "SELECT CREATE_DTM FROM `USER` WHERE USER_ID '$result_data->TYPE_ID'";
+                $timeline_query = "SELECT CREATE_DTM FROM `USER` WHERE USER_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -43,14 +51,14 @@
                     $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
                 }
             }
-            else if(RECIPE_ADD == $type || RECIPE_MODIFY == $type || RECIPE_REMOVE = $type){
+            else if(RECIPE_ADD == $type || RECIPE_MODIFY == $type || RECIPE_REMOVE == $type){
                 $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
                                 FROM `RECIPE` AS RCP
                                 INNER JOIN `RECIPE_IMG` AS IMG ON RCP.RCP_ID = IMG.RCP_ID
-                                INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                 INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
-                                INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USR_ID
-                                WHERE RCP.RCP_ID '$result_data->TYPE_ID'";
+                                INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
+                                WHERE RCP.RCP_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -78,10 +86,10 @@
                 $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, COMMENT, FOOD_TYP_NAME, FOOD_CSN_NAME 
                                    FROM `COMMENTS` AS COM
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = COM.RCP_ID
-                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-                                   WHERE COM_ID '$result_data->TYPE_ID'";
+                                   WHERE COM_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -111,10 +119,10 @@
                 $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
                                    FROM `LIKES` AS LIK
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = LIK.RCP_ID
-                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-                                   WHERE LIKE_ID '$result_data->TYPE_ID'";
+                                   WHERE LIKE_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -143,10 +151,10 @@
                                    FROM `LIKES` AS LIK
                                    INNER JOIN `COMMENTS` AS COM ON COM.COM_ID = LIK.TYPE_ID
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = COM.RCP_ID
-                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-                                   WHERE LIKE_ID '$result_data->TYPE_ID'";
+                                   WHERE LIKE_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -177,10 +185,10 @@
                                    FROM `LIKES` AS LIK
                                    INNER JOIN `REVIEWS` AS REV ON REV.REV_ID = LIK.TYPE_ID
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
-                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-                                   WHERE LIKE_ID '$result_data->TYPE_ID'";
+                                   WHERE LIKE_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
@@ -211,10 +219,10 @@
                 $timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME
                                    FROM `REVIEWS` AS REV
                                    INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
-                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYPE_ID = RCP.FOOD_TYPE_ID
+                                   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-                                   WHERE LIKE_ID '$result_data->TYPE_ID'";
+                                   WHERE LIKE_ID = '$result_data->TYPE_ID'";
                 $timeline_result = mysqli_query($db, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){

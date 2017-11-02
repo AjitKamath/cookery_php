@@ -1,0 +1,109 @@
+01-11-17 21:04:27 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('ajitkamathk@gmail.com','9884463437','MTIzNEM2ZWlY','Ajit','M','FR2UhiugwY','QzZlaVg=',CURRENT_TIMESTAMP)
+01-11-17 21:04:27 : config.php : I : User Registered Successfully
+01-11-17 21:18:13 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('ajitkamathk@gmail.com','9884463437','MTIzNDU2TlhpaG4=','Ajit','M','thFS5yfvg7','TlhpaG4=',CURRENT_TIMESTAMP)
+01-11-17 21:18:13 : config.php : I : User Registered Successfully
+01-11-17 22:29:21 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:29:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:29:21 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:29:21 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:29:22 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 22:29:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:29:22 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:29:22 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:29:24 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 22:30:16 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:30:16 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:30:16 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 22:30:16 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 22:30:16 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:30:17 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:30:17 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:30:17 : fetchusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 01-11-17 22:30:17 : fetchusertimeline.php : I : REQUEST PARAM : index()
+01-11-17 22:32:05 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:32:05 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:32:05 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:32:05 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:32:06 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:32:06 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 22:32:06 : fetchtastes.php : I : Tastes fetched successfully
+01-11-17 22:32:06 : fetchtastes.php : I : Tastes fetched successfully
+01-11-17 22:32:07 : fetchqty.php : I : Quantity fetched successfully
+[v0.1] : 01-11-17 22:32:15 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:32:15 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:32:15 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 22:32:15 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 22:32:15 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 22:47:11 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:47:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:47:11 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:47:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:47:12 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:47:12 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:47:12 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 22:47:13 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 22:47:31 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:47:31 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:47:31 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 22:47:31 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 22:47:31 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 22:52:25 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:52:25 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:52:26 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:52:26 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:52:26 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 22:52:26 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:52:26 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 22:52:52 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:52:52 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:52:52 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 22:52:52 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 22:52:52 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 23:22:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:22:59 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 23:22:59 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:22:59 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 23:23:00 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:23:00 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 23:23:00 : fetchtastes.php : I : Tastes fetched successfully
+01-11-17 23:44:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:44:19 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:44:20 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:44:20 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 23:44:20 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 23:44:20 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 23:44:21 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 23:44:28 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 23:44:28 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 23:44:28 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 23:44:28 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 23:44:28 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 23:45:13 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 23:45:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:45:13 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 23:45:13 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:45:14 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 23:45:14 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:45:14 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 23:45:22 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 23:45:22 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 23:45:22 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 23:45:22 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 23:45:22 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 23:48:48 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 23:48:48 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:48:48 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 23:48:48 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:48:49 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 23:48:49 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 23:48:49 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 23:49:09 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 23:49:09 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 23:49:09 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 23:49:09 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 23:49:09 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 23:50:38 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 23:50:38 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 23:50:38 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 23:50:38 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 23:50:38 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
