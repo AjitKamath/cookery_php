@@ -24,33 +24,28 @@
         if($comment_id = $mysqli->query($query)){
             logger($filename, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
             
+            echo "SUCCESS";
+            
             //register timeline
-            include_once('registerusertimeline.php');
-            register_timeline($user_id, COMMENT_RECIPE_ADD, $comment_id);
+            //get user_id of the recipe
+            $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
+            $result = mysqli_query($db,$query);
+            if($result_data = $result->fetch_object()){  
+                include_once('registerusertimeline.php');
+                register_timeline($user_id, $result_data->USER_ID, COMMENT_RECIPE_ADD, $comment_id);
+            }
+            //get user_id of the recipe
             //register timeline
         }
         else{
             logger($filename, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");
+            echo "FAIL";
         } 
         //insert comment
-
-        //get all the comments data for $rcp_id
-        $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM.COMMENT, COM.CREAT_DTM, COM.MOD_DTM FROM COMMENTS COM 
-                INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID WHERE COM.RCP_ID = '$rcp_id' AND COM.IS_DEL = 'N'";
-        $result = mysqli_query($db,$query);
-
-        $result_array = array();
-        if($result_data = $result->fetch_object()){
-            array_push($result_array, $result_data);
-        }
-        //get all the comments data for $rcp_id
-
-        //response
-        echo json_encode($result_array);
-        //response
     }
     catch(Exception $e){
         logger($filename, "E", 'Message: ' .$e->getMessage());
+        echo "FAIL";
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

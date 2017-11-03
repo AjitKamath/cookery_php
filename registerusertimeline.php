@@ -1,7 +1,7 @@
 <?php
     $filename = "registerusertimeline.php";
 
-    function register_timeline($user_id, $type, $type_id){
+    function register_timeline($user_id, $ref_user_id, $type, $type_id){
         include_once('util.php');
         include_once('application_context.php');
         
@@ -13,6 +13,11 @@
         //check for null/empty
         if(!check_for_null($user_id)){
             logger($filename, "E", "Error ! null/empty user id");
+            return;
+        }
+        
+        if(!check_for_null($ref_user_id)){
+            logger($filename, "E", "Error ! null/empty ref user id");
             return;
         }
         
@@ -29,7 +34,7 @@
         
         try{
             //register the timeline
-            $query = "INSERT INTO `TIMELINES` (`USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
+            $query = "INSERT INTO `TIMELINES` (`USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$ref_user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
 
             if($mysqli->query($query)){
                 logger($filename, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");

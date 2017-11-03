@@ -276,7 +276,7 @@
             
           //register timeline
           include_once('registerusertimeline.php');
-          register_timeline($user_id, RECIPE_ADD, $rcp_id);
+          register_timeline($user_id, $user_id, RECIPE_ADD, $rcp_id);
           //register timeline
           
         }
