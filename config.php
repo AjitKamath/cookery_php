@@ -2,10 +2,10 @@
 
 $filename = "config.php";
 
-$hostname = "localhost";
-$user = "cookeryuser";
-$password = "cookeryuser";
-$database = "Cookery";
+$hostname = "sql12.freemysqlhosting.net";
+$user = "sql12202940";
+$password = "tiDHfUMZEq";
+$database = "sql12202940";
 $db = mysqli_connect($hostname, $user, $password);
 if (mysqli_connect_errno())
   {
