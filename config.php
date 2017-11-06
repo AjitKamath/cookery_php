@@ -1,18 +1,24 @@
 <?php
-$filename = "config.php";
-$hostname = "deicidal-haul.000webhostapp.com";
-$user = "id3505680_cookery";
-$password = "cookeryuser";
-$database = "id3505680_cookery";
-$db = mysqli_connect($hostname, $user, $password);
-if (mysqli_connect_errno())
-  {
-	errlogger($filename, "E", "Connection Failed");
-	errlogger($filename, "E", "Failed to connect to MySQL: " . mysqli_connect_error());
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
-else{
-//			echo "Connected sucessfully";
+	$filename = "config.php";
+	
+	$hostname = "db4free.net";
+	$user = "cookeryuser";
+	$password = "cookeryuser";
+	$database = "cookery";
+	$port = "3307";
+	
+	try{
+		$db = mysqli_connect($hostname, $user, $password, $database, $port);
+		
+		if (mysqli_connect_errno()){
+			logger($filename, "E", "Connection Failed");
+			logger($filename, "E", "Failed to connect to MySQL: " . mysqli_connect_error());
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		}
+
+		mysqli_select_db($db,$database);
 	}
-	mysqli_select_db($db,$database);
+	catch(Exception $e){
+        logger($filename, "E", 'Message: ' .$e->getMessage());
+    }
 ?>
