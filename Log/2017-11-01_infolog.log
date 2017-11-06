@@ -1,0 +1,43 @@
+01-11-17 00:50:38 : addrecipe.php : I : Insertion in Dish table with recipe id as 52 and ingredient id as 1 but not committed
+01-11-17 00:50:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 52 and taste id as 1 but not committed
+01-11-17 00:50:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 52 and taste id as 2 but not committed
+01-11-17 00:50:38 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 52 and taste id as 3 but not committed
+01-11-17 00:50:38 : addrecipe.php : I : Insertion in RECIPE_IMG table with recipe id as 52 and image no 0
+01-11-17 00:50:38 : addrecipe.php : I : Image uploaded successfully as /images/appuploads/52plus0.jpg
+01-11-17 00:50:38 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 52
+[v0.1] : 01-11-17 00:50:38 : addrecipe.php : I : Registered a timeline for the user(1) for the type() with type id()
+01-11-17 00:56:30 : config.php : I : User Registered Successfully
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+01-11-17 00:57:48 : config.php : I : User Registered Successfully
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+01-11-17 01:37:32 : config.php : I : User Registered Successfully
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+01-11-17 22:30:34 : config.php : I : User Logged in with email id as: testme@cookery.com
+01-11-17 22:30:53 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:30:54 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 22:30:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:30:55 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 22:30:55 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 22:30:56 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 22:30:56 : fetchtastes.php : I : Tastes fetched successfully
+[v0.1] : 01-11-17 22:31:13 : fetchusertimeline.php : I : 
+[v0.1] : 01-11-17 22:31:13 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 01-11-17 22:31:13 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 01-11-17 22:31:13 : fetchusertimeline.php : I : REQUEST PARAM : index(0)
+[v0.1] : 01-11-17 22:31:13 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+01-11-17 22:31:47 : config.php : I : User Login Failed with email id as: tedthbv@hotmail.com

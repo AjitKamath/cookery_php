@@ -85,3 +85,39 @@
 [v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : REQUEST PARAM : type_id(1)
 [v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : Registered a timeline for the user(1) for the type(USER_ADD) with type id(1)
 [v0.1] : 31-10-17 14:52:12 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+31-10-17 18:07:33 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 51
+31-10-17 18:07:33 : addrecipe.php : I : Insertion in Dish table with recipe id as 51 and ingredient id as 1 but not committed
+31-10-17 18:07:33 : addrecipe.php : I : Insertion in RECIPE_TASTE table with recipe id as 51 and taste id as 1 but not committed
+31-10-17 18:07:33 : addrecipe.php : I : Recipe Added Successfully with Recipe Id as 51
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : REQUEST PARAM : type(RECIPE_ADD)
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : REQUEST PARAM : type_id(51)
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : Registered a timeline for the user() for the type(RECIPE_ADD) with type id(51)
+[v0.1] : 31-10-17 18:07:33 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+31-10-17 23:07:06 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('vishal@cookery.com','8124627522','cm9jazJaUEtw','Vishal','M','zXpcSp5CRx','MlpQS3A=',CURRENT_TIMESTAMP)
+31-10-17 23:07:06 : config.php : I : User Registered Successfully
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : REQUEST PARAM : user_id()
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : REQUEST PARAM : type()
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : REQUEST PARAM : type_id()
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : Registered a timeline for the user() for the type() with type id()
+[v0.1] : 31-10-17 23:07:06 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+01-11-17 00:35:11 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 00:35:11 : fetchfoodtype.php : I : Food Type fetched successfully
+01-11-17 00:35:12 : fetchcuisine.php : I : Food Cuisine fetched successfully
+01-11-17 00:35:12 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 00:35:12 : fetchqty.php : I : Quantity fetched successfully
+01-11-17 00:35:12 : fetchtrendingrecipes.php : I : Trending Recipes fetched successfully
+01-11-17 00:35:12 : fetchtastes.php : I : Tastes fetched successfully
+01-11-17 00:50:00 : config.php : I : Ingredient auto - search successully
+01-11-17 00:50:03 : config.php : I : Ingredient auto - search successully
+01-11-17 00:50:38 : addrecipe.php : I : New Recipe inserted but not committed to the table with recipe id as 52
+01-11-17 00:56:30 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('vishal@cookert.com','8124627854','cm9ja1Rwajlo','Vishak','M','9Aczl4pES1','VHBqOWg=',CURRENT_TIMESTAMP)
+[v0.1] : 01-11-17 00:56:30 : registerusertimeline.php : I : 
+01-11-17 00:57:48 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('testme@cook.com','9897404080','dGVzdFBYdnVp','Test','M','p0EEHaEJhA','UFh2dWk=',CURRENT_TIMESTAMP)
+[v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : 
+01-11-17 01:37:32 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('testme@cookery.com','9966331144','dGVzdHZJSXBk','Test','M','BSrh8TQgeW','dklJcGQ=',CURRENT_TIMESTAMP)
+[v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : 

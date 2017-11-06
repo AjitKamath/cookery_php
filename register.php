@@ -1,10 +1,10 @@
 <?php
 
-include 'application_context.php';
-include('constants.php');
+include_once('application_context.php');
+include_once('constants.php');
 
 $filename = "register.php";
-
+$data = array();
 
 $code=(isset($_POST['code'])? $_POST['code']:'1');
 
@@ -32,8 +32,9 @@ else
 
 function register()
 {
+	
 include 'config.php';
-include 'error_code.php';
+include_once( 'error_code.php');
 	
 $email=(isset($_POST['email'])? $_POST['email']:'testemail2@cookery.com');
 $mobile=(isset($_POST['mobile'])? $_POST['mobile']:'7503876065');
@@ -48,14 +49,14 @@ $row = $usercheck->fetch_row();
 
 	if($row[0]==$mobile)  
 	{
-		$data["errorCode"]= $MOBILE_EXISTS;
-		$data["errorMessage"]="Mobile no already exist";
+		$data['err_code']= $MOBILE_EXISTS;
+		$data['err_message']="Mobile no already exist";
 		echo json_encode($data);
 	}
 	else if($row[1]==$email)
 	{
-		$data["errorCode"]= $EMAIL_EXISTS;
-		$data["errorMessage"]="Email id already exist";
+		$data['err_code']= $EMAIL_EXISTS;
+		$data['err_message']="Email id already exist";
 		echo json_encode($data);
 	}
 	else
@@ -80,8 +81,8 @@ $row = $usercheck->fetch_row();
 		infologger($filename, "I", "User Registered Successfully");
 		$json_response = array();
 		mysqli_close($db);
-		$data["err_code"]= $SUCCESS;
-		$data["err_message"]="User Registered Successfully";
+		$data['err_code']= $SUCCESS;
+		$data['err_message']="User Registered Successfully";
 		echo json_encode($data);
 		
 		//register timeline
@@ -150,8 +151,8 @@ function generateSalt($length = 5) {
 
 function modify()
 {
-include 'error_code.php';
-include 'config.php';
+include_once( 'error_code.php');
+include_once( 'config.php');
 $user_id=(isset($_POST['user_id'])? $_POST['user_id']:'vishal');
 $email=(isset($_POST['email'])? $_POST['email']:'vishalva06egmail.com');
 $mobile=(isset($_POST['mobile'])? $_POST['mobile']:8124627522);
@@ -197,8 +198,8 @@ $row = $usercheck->fetch_row();
 
 function delete()
 {
-include 'error_code.php';
-include 'config.php';
+include_once( 'error_code.php');
+include_once( 'config.php');
 $user_id=(isset($_POST['user_id'])? $_POST['user_id']:vishal);
 
 
@@ -240,7 +241,7 @@ $row = $usercheck->fetch_row();
 function login()
 {
 include 'config.php';
-include 'error_code.php';
+include_once( 'error_code.php');
 
 $email=(isset($_POST['email'])? $_POST['email']:'testemail@cookery.com');
 $password=(isset($_POST['password'])? $_POST['password']:'iamtestf');
@@ -257,16 +258,16 @@ try{
 	if($row[0]==$email && $row[1]==$password)
 	{
 		infologger($filename, "I", "User Logged in with email id as: ".$email);
-		$data["errorCode"]=$SUCCESS;
-		$data["errorMessage"]="login success";
+		$data["err_code"]=$SUCCESS;
+		$data["err_message"]="login success";
 		echo json_encode($data);
 
 	}
 	else
 	{
 		infologger($filename, "I", "User Login Failed with email id as: ".$email);
-		$data["errorCode"]=$FAILURE;
-		$data["errorMessage"]="login failed";
+		$data["err_code"]=$FAILURE;
+		$data["err_message"]="login failed";
 		echo json_encode($data);
 		mysqli_close($db);
 	}
