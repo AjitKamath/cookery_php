@@ -34,24 +34,30 @@
                     logger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
-                    session_start();
-                    $_SESSION["user_id"] = $user_id;
-                    
-                    $timeline_type = 'UNKNOWN';
-                    if($type == 'RECIPE'){
-                        $timeline_type = LIKE_RECIPE_ADD;
-                    }
-                    else if($type == 'COMMENT'){
+                    //get user_id of the type
+                    $query = "";
+                    $timeline_type = "UNKNOWN";
+                    if("COMMENT" == $type){
+                        $query = "SELECT USER_ID FROM `COMMENTS` WHERE COM_ID = '$type_id'";
                         $timeline_type = LIKE_COMMENT_ADD;
                     }
-                    else if($type == 'REVIEW'){
+                    else if("RECIPE" == $type){
+                        $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$type_id'";
+                        $timeline_type = LIKE_RECIPE_ADD;
+                    }
+                    else if("REVIEW" == $type){
+                        $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
                         $timeline_type = LIKE_REVIEW_ADD;
                     }
-                    
-                    $_SESSION["type"] = $timeline_type;
-                    $_SESSION["type_id"] = $result->LIKE_ID;
-                    header('Location: registerusertimeline.php');
+                                        
+                    $result = mysqli_query($db,$query);
+                    if($result_data = $result->fetch_object()){  
+                        include_once('registerusertimeline.php');
+                        register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                    }
+                    //get user_id of the type
                     //register timeline
+                    
                 }
                 else{
                     logger($filename, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
@@ -68,23 +74,28 @@
                     logger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
-                    session_start();
-                    $_SESSION["user_id"] = $user_id;
-                    
-                    $timeline_type = 'UNKNOWN';
-                    if($type == 'RECIPE'){
-                        $timeline_type = LIKE_RECIPE_REMOVE;
+                    //get user_id of the type
+                    $query = "";
+                    $timeline_type = "UNKNOWN";
+                    if("COMMENT" == $type){
+                        $query = "SELECT USER_ID FROM `COMMENTS` WHERE COM_ID = '$type_id'";
+                        $timeline_type = LIKE_COMMENT_ADD;
                     }
-                    else if($type == 'COMMENT'){
-                        $timeline_type = LIKE_COMMENT_REMOVE;
+                    else if("RECIPE" == $type){
+                        $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$type_id'";
+                        $timeline_type = LIKE_RECIPE_ADD;
                     }
-                    else if($type == 'REVIEW'){
-                        $timeline_type = LIKE_REVIEW_REMOVE;
+                    else if("REVIEW" == $type){
+                        $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
+                        $timeline_type = LIKE_REVIEW_ADD;
                     }
-                    
-                    $_SESSION["type"] = $timeline_type;
-                    $_SESSION["type_id"] = $result->LIKE_ID;
-                    header('Location: registerusertimeline.php');
+                                        
+                    $result = mysqli_query($db,$query);
+                    if($result_data = $result->fetch_object()){  
+                        include_once('registerusertimeline.php');
+                        register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                    }
+                    //get user_id of the type
                     //register timeline
                 }
                 else{
@@ -104,23 +115,28 @@
                 logger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                 
                 //register timeline
-                session_start();
-                $_SESSION["user_id"] = $user_id;
-
-                $timeline_type = 'UNKNOWN';
-                if($type == 'RECIPE'){
-                    $timeline_type = LIKE_RECIPE_ADD;
-                }
-                else if($type == 'COMMENT'){
+                //get user_id of the type
+                $query = "";
+                $timeline_type = "UNKNOWN";
+                if("COMMENT" == $type){
+                    $query = "SELECT USER_ID FROM `COMMENTS` WHERE COM_ID = '$type_id'";
                     $timeline_type = LIKE_COMMENT_ADD;
                 }
-                else if($type == 'REVIEW'){
+                else if("RECIPE" == $type){
+                    $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$type_id'";
+                    $timeline_type = LIKE_RECIPE_ADD;
+                }
+                else if("REVIEW" == $type){
+                    $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
                     $timeline_type = LIKE_REVIEW_ADD;
                 }
 
-                $_SESSION["type"] = $timeline_type;
-                $_SESSION["type_id"] = $like_id;
-                header('Location: registerusertimeline.php');
+                $result = mysqli_query($db,$query);
+                if($result_data = $result->fetch_object()){  
+                    include_once('registerusertimeline.php');
+                    register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                }
+                //get user_id of the type
                 //register timeline
             }
             else{

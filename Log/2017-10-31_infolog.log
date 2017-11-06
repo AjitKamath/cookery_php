@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 31-10-17 14:21:23 : config.php : I : User Registered Successfully
 [v0.1] : 31-10-17 14:21:24 : registerusertimeline.php : I : 
 [v0.1] : 31-10-17 14:21:24 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
@@ -121,3 +122,15 @@
 [v0.1] : 01-11-17 00:57:48 : registerusertimeline.php : I : 
 01-11-17 01:37:32 : config.php : I : New user Register Query: INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('testme@cookery.com','9966331144','dGVzdHZJSXBk','Test','M','BSrh8TQgeW','dklJcGQ=',CURRENT_TIMESTAMP)
 [v0.1] : 01-11-17 01:37:32 : registerusertimeline.php : I : 
+=======
+31-10-17 23:52:36 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 23:52:36 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 23:55:43 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 23:55:43 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 23:57:25 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 23:57:25 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 23:58:08 : registerusertimeline.php : I : 
+[v0.1] : 31-10-17 23:58:08 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+[v0.1] : 31-10-17 23:58:08 : registerusertimeline.php : I : Registered a timeline for the user(1) for the type(RECIPE_ADD) with type id(1)
+[v0.1] : 31-10-17 23:58:08 : registerusertimeline.php : I : -------------registerusertimeline.php-------------
+>>>>>>> e3321736b7e9aedeb989d7f14163a483cae2db56

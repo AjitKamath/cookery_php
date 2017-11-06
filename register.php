@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 include_once('application_context.php');
+=======
+include 'application_context.php';
+>>>>>>> e3321736b7e9aedeb989d7f14163a483cae2db56
 include_once('constants.php');
 
 $filename = "register.php";
@@ -86,11 +90,8 @@ $row = $usercheck->fetch_row();
 		echo json_encode($data);
 		
 		//register timeline
-		session_start();
-		$_SESSION["user_id"] = $user_id;
-		$_SESSION["type"] = USER_ADD;
-		$_SESSION["type_id"] = $user_id;
-		header('Location: registerusertimeline.php');  
+		include_once('registerusertimeline.php');
+        register_timeline($user_id, $user_id, USER_ADD, $user_id);
 		//register timeline
 	}
 	catch(Exception $e)

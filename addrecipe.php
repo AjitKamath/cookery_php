@@ -275,21 +275,8 @@
           echo $success; 
             
           //register timeline
-          try{
-              //register the timeline
-              $query = "INSERT INTO `TIMELINES` (`USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '".RECIPE_ADD."', '$rcp_id', CURRENT_TIMESTAMP)";
-
-              if($mysqli->query($query)){
-                  logger($filename, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
-              }
-              else{
-                  logger($filename, "E", "Failed !! The timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.") could not be registered");
-              } 
-              //register the timeline
-          }
-          catch(Exception $e){
-              logger($filename, "E", 'Message: ' .$e->getMessage());
-          }
+          include_once('registerusertimeline.php');
+          register_timeline($user_id, $user_id, RECIPE_ADD, $rcp_id);
           //register timeline
           
         }

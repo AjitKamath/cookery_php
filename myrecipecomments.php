@@ -35,11 +35,14 @@
             echo $success;
             
             //register timeline
-            session_start();
-            $_SESSION["user_id"] = $user_id;
-            $_SESSION["type"] = COMMENT_RECIPE_ADD;
-            $_SESSION["type_id"] = $comment_id;
-            header('Location: registerusertimeline.php'); 
+            //get user_id of the recipe
+            $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
+            $result = mysqli_query($db,$query);
+            if($result_data = $result->fetch_object()){  
+                include_once('registerusertimeline.php');
+                register_timeline($user_id, $result_data->USER_ID, COMMENT_RECIPE_ADD, $comment_id);
+            }
+            //get user_id of the recipe
             //register timeline
         }
     }
