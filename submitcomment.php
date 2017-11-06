@@ -11,7 +11,7 @@
     $rcp_id = isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
     $comment = isset($_POST['comment']) ? $_POST['comment'] : '';
-
+    
     logger($filename, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
     logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
     logger($filename, "I", "REQUEST PARAM : comment(".$comment.")");

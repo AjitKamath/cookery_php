@@ -5,7 +5,9 @@
     //paths
     define("HOME_DIRECTORY", "/home/cabox/workspace/Log/");
 
-    //timeline
+
+
+    //---------------------timeline---------------------
     //timelines count to load at a time
     define("TIMELINES_COUNT","10");
 
@@ -21,7 +23,6 @@
 
     //comment
     define("COMMENT_RECIPE_ADD","COMMENT_RECIPE_ADD");
-    define("COMMENT_RECIPE_MODIFY","COMMENT_RECIPE_MODIFY");
     define("COMMENT_RECIPE_REMOVE","COMMENT_RECIPE_REMOVE");
     //comment
 
@@ -38,8 +39,7 @@
 
     //review
     define("REVIEW_RECIPE_ADD","REVIEW_RECIPE_ADD");
-    define("REVIEW_RECIPE_MODIFY","REVIEW_RECIPE_MODIFY");
     define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_ADD");
     //review
-    //timeline
+    //---------------------timeline---------------------
 ?>

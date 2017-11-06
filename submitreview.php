@@ -2,7 +2,7 @@
     include 'application_context.php';
     include('constants.php');
 
-    $filename = "submitrecipereview.php";
+    $filename = "submitreview.php";
 
     logger($filename, "I", "");
     logger($filename, "I", "-------------".$filename."-------------");
