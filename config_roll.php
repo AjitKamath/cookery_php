@@ -3,7 +3,7 @@ $filename = "config_roll.php";
 
 try
 {
-  $mysqli = new mysqli("localhost", "cookeryuser", "cookeryuser", "Cookery");
+  $mysqli = new mysqli("db4free.net", "cookeryuser", "cookeryuser", "cookery", "3307");
 }
 catch(Exception $e)
 {

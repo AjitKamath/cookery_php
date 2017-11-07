@@ -1,5 +1,5 @@
 <?php
-    include 'application_context.php';
+    include_once('import_util.php');
 
     $filename = "fetchlikesdetails.php";
 
@@ -14,10 +14,24 @@
     logger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
     //request
 
+    //check for null/empty
+    if(!check_for_null($type)){
+        logger($filename, "E", "Error ! null/empty type");
+        return;
+    }
+
+    if(!check_for_null($type_id)){
+        logger($filename, "E", "Error ! null/empty type id");
+        return;
+    }
+    //check for null/empty
+
     try{
+        $con = open_connection();
+        
         //get likes details for $type & $type_id
         $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG FROM LIKES LIKE INNER JOIN USER USR ON USR.USER_ID = LIKE.USER_ID WHERE TYPE                    = '$type' AND TYPE_ID = '$type_id'";
-        $result = mysqli_query($db,$query);
+        $result = mysqli_query($con, $query);
 
         $result_array = array();
         while($result_data = $result->fetch_object()){
@@ -33,6 +47,9 @@
     }
     catch(Exception $e){
         logger($filename, "E", 'Message: ' .$e->getMessage());
+    }
+    finally{
+        close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

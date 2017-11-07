@@ -1,6 +1,5 @@
 <?php
-    include 'application_context.php';
-    include('constants.php');
+    include_once('import_util.php');
 
     $filename = "deletereview.php";
 
@@ -15,17 +14,30 @@
     logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
     //request
 
+    //check for null/empty
+    if(!check_for_null($user_id)){
+        logger($filename, "E", "Error ! null/empty user id");
+        return;
+    }
+
+    if(!check_for_null($rev_id)){
+        logger($filename, "E", "Error ! null/empty rev id");
+        return;
+    }
+    //check for null/empty
+
     try{
+        $con = open_connection();
+        
         //delete review
         $query = "UPDATE `REVIEWS` SET IS_DEL = 'Y' WHERE REV_ID = '".$rev_id."' AND USER_ID = '".$user_id."'";
 
-        if(mysqli_query($db, $query)){
+        if(mysqli_query($con, $query)){
             logger($filename, "I" , "Review('$rev_id') successfully deleted by the user('$user_id')");
             echo "SUCCESS";
             
             //register timeline
-            include_once('registerusertimeline.php');
-            register_timeline($user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id);
+            register_timeline($con, $user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id);
             //register timeline
         }
         else{

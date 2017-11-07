@@ -275,8 +275,12 @@
           echo $success; 
             
           //register timeline
-          include_once('registerusertimeline.php');
-          register_timeline($user_id, $user_id, RECIPE_ADD, $rcp_id);
+            include_once('registerusertimeline.php');
+            include_once('db_util.php');
+
+            $con = open_connection();
+            register_timeline($con, $user_id, $user_id, RECIPE_ADD, $rcp_id);
+            close_connection($con);
           //register timeline
           
         }

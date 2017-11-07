@@ -1,10 +1,7 @@
 <?php
     $filename = "registerusertimeline.php";
 
-    function register_timeline($user_id, $ref_user_id, $type, $type_id){
-        include_once('util.php');
-        include_once('application_context.php');
-        
+    function register_timeline($con, $user_id, $ref_user_id, $type, $type_id){
         $filename = $GLOBALS['filename'];
         
         logger($filename, "I", "");
@@ -35,8 +32,8 @@
         try{
             //register the timeline
             $query = "INSERT INTO `TIMELINES` (`USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$ref_user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
-
-            if($mysqli->query($query)){
+            
+            if(mysqli_query($con, $query)){
                 logger($filename, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
             }
             else{

@@ -1,7 +1,5 @@
 <?php
-    include('application_context.php');
-    include_once('constants.php');
-    include_once('util.php');
+    include_once('import_util.php');
 
     $filename = "fetchusertimelinedetails.php";
 
@@ -14,20 +12,22 @@
     logger($filename, "I", "REQUEST PARAM : user_id(".$tmln_id.")");
     //request
 
-    //validations
+    //check for null/empty
     if(!check_for_null($tmln_id)){
         logger($filename, "E", "Error ! null/empty timeline id");
         return;
     }
-    //validations
+    //check for null/empty
 
     try{
+        $con = open_connection();
+        
         //get timeline details for $tmln_id
         $query = "SELECT TMLN_ID, TYPE, TYPE_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
                   FROM `TIMELINES` AS TMLN
                   INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USER_ID
                   WHERE TMLN_ID = '$tmln_id'";
-        $result = mysqli_query($db, $query);
+        $result = mysqli_query($con, $query);
 
         $result_array = array();
         if($result_data = $result->fetch_object()){
@@ -44,7 +44,7 @@
             
             if(USER_ADD == $type){
                 $timeline_query = "SELECT CREATE_DTM FROM `USER` WHERE USER_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     $timeline_array['USER_ID'] = $timeline_result_data->TYPE_ID;
@@ -59,7 +59,7 @@
                                 INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                 INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                 WHERE RCP.RCP_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     //recipe details
@@ -73,7 +73,7 @@
                   
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -91,7 +91,7 @@
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE COM_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     $timeline_array['comment'] = $timeline_result_data->COMMENT;
@@ -107,7 +107,7 @@
                   
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -125,7 +125,7 @@
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     //recipe details
@@ -139,7 +139,7 @@
                     
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -158,7 +158,7 @@
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     $timeline_array['comment'] = $timeline_result_data->COMMENT;
@@ -174,7 +174,7 @@
                   
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -193,7 +193,7 @@
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     $timeline_array['review'] = $timeline_result_data->REVIEW;
@@ -210,7 +210,7 @@
                   
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -228,7 +228,7 @@
                                    INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
                                    INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
                                    WHERE LIKE_ID = '$result_data->TYPE_ID'";
-                $timeline_result = mysqli_query($db, $timeline_query);
+                $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
                     $timeline_array['review'] = $timeline_result_data->REVIEW;
@@ -245,7 +245,7 @@
                   
                     //get 1st image for the recipe
                     $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
-                    $recipe_image_result = mysqli_query($db, $recipe_image_query);
+                    $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
                        $timeline_array['recipeImage'] = $recipe_image_result_data->RCP_IMG;
@@ -268,6 +268,9 @@
     }
     catch(Exception $e){
         logger($filename, "E", 'Message: ' .$e->getMessage());
+    }
+    finally{
+        close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

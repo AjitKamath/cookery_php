@@ -5,7 +5,13 @@
     //paths
     define("HOME_DIRECTORY", "/home/cabox/workspace/Log/");
 
-
+    //---------------------database config---------------------
+    define("DATABASE_HOSTNAME", "db4free.net");
+    define("DATABASE_USER", "cookeryuser");
+    define("DATABASE_PASSWORD", "cookeryuser");
+    define("DATABASE_NAME", "cookery");
+    define("DATABASE_PORT", "3307");
+    //---------------------database config---------------------
 
     //---------------------timeline---------------------
     //timelines count to load at a time

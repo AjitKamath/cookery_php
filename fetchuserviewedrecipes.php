@@ -1,5 +1,5 @@
 <?php
-	include 'application_context.php';
+	include_once('import_util.php');
 
 	$filename = "fetchuserviewedrecipes.php";
 
@@ -11,18 +11,27 @@
 	logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
 	//request
 
+	//check for null/empty
+    if(!check_for_null($user_id)){
+        logger($filename, "E", "Error ! null/empty user id");
+        return;
+    }
+	//check for null/empty
+
 	try{
+		$con = open_connection();
+		
 		//get all recipes for $user_id
 		$query = "SELECT RCP.RCP_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME, RCP.CREATE_DTM, RCP.MOD_DTM, USR.NAME
-				FROM `RECIPE` AS RCP 
-				INNER JOIN `USER` USR ON USR.USER_ID = RCP.USER_ID
-				INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
-				INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
-				INNER JOIN `VIEWS` AS VW ON VW.USER_ID = RCP.USER_ID AND VW.RCP_ID = RCP.RCP_ID
-				WHERE RCP.USER_ID = '$user_id'
-				AND RCP.IS_DEL = 'N'";
+						FROM `RECIPE` AS RCP 
+						INNER JOIN `USER` USR ON USR.USER_ID = RCP.USER_ID
+						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
+						INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
+						INNER JOIN `VIEWS` AS VW ON VW.USER_ID = RCP.USER_ID AND VW.RCP_ID = RCP.RCP_ID
+						WHERE RCP.USER_ID = '$user_id'
+						AND RCP.IS_DEL = 'N'";
 
-		$result = mysqli_query($db,$query);
+		$result = mysqli_query($con, $query);
 
 		$result_array = array();
 		while($result_data = $result->fetch_object()){
@@ -38,7 +47,7 @@
 
 			//fetch likes for the recipe
 			$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
-			$likes_result = mysqli_query($db,$query);
+			$likes_result = mysqli_query($con, $query);
 
 			if($likes_result_data = $likes_result->fetch_object()){
 				$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
@@ -47,7 +56,7 @@
 
 			//fetch views for the recipe
 			$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
-			$views_result = mysqli_query($db,$query);
+			$views_result = mysqli_query($con, $query);
 
 			if($views_result_data = $views_result->fetch_object()){
 				$recipe_array['views'] = $views_result_data->VIEWS_COUNT;
@@ -56,7 +65,7 @@
 
 			//fetch avg rating for the recipe
 			$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$result_data->RCP_ID'";
-			$review_result = mysqli_query($db,$query);
+			$review_result = mysqli_query($con, $query);
 
 			if($review_result_data = $review_result->fetch_object()){
 				$recipe_array['rating'] = $review_result_data->RATING;
@@ -65,7 +74,7 @@
 
 			//fetch images for the recipe
 			$query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$result_data->RCP_ID' LIMIT 1";
-			$img_result = mysqli_query($db,$query);
+			$img_result = mysqli_query($con, $query);
 
 			$img_result_array = array();
 			if($img_result_data = $img_result->fetch_object()){
@@ -86,6 +95,9 @@
 	}
 	catch(Exception $e){
 		logger($filename, "E", 'Message: ' .$e->getMessage());
+	}
+	finally{
+		close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");

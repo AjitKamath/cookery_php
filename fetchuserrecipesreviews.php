@@ -1,5 +1,5 @@
 <?php
-	include 'application_context.php';
+	include_once('import_util.php');
 
 	$filename = "fetchuserrecipesreviews.php";
 
@@ -12,7 +12,16 @@
 	logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
 	//request
 
+	//check for null/empty
+    if(!check_for_null($user_id)){
+        logger($filename, "E", "Error ! null/empty user id");
+        return;
+    }
+	//check for null/empty
+
 	try{
+		$con = open_connection();
+		
 		//get all recipes & its reviews for $user_id
 		$query = "SELECT RCP.RCP_ID, RW.REV_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME, USR.NAME
 				FROM `RECIPE` AS RCP 
@@ -24,7 +33,7 @@
 				AND RCP.IS_DEL = 'N'
 				AND RW.IS_DEL = 'N'";
 
-		$result = mysqli_query($db,$query);
+		$result = mysqli_query($con, $query);
 
 		$result_array = array();
 		while($result_data = $result->fetch_object()){
@@ -38,7 +47,7 @@
 
 			//fetch review for the particular recipe
 			$query = "SELECT REVIEW, RATING, CREATE_DTM, MOD_DTM FROM `REVIEWS` WHERE REV_ID = '$result_data->REV_ID' AND IS_DEL = 'N'";
-			$review_result = mysqli_query($db,$query);
+			$review_result = mysqli_query($con, $query);
 
 			$review_result_array = array();
 			if($review_result_data = $review_result->fetch_object()){
@@ -49,7 +58,7 @@
 
 				//fetch likes count for this particular review
 				$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->REV_ID' AND TYPE = 'REVIEW' AND IS_DEL = 'N'";
-				$like_result = mysqli_query($db,$query);
+				$like_result = mysqli_query($con, $query);
 
 				if($like_result_data = $like_result->fetch_object()){
 					$temp_array['likeCount'] = $like_result_data->LIKES_COUNT;
@@ -61,7 +70,7 @@
 
 			//fetch images for the recipe
 			$query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$result_data->RCP_ID' LIMIT 1";
-			$img_result = mysqli_query($db,$query);
+			$img_result = mysqli_query($con, $query);
 
 			$img_result_array = array();
 			if($img_result_data = $img_result->fetch_object()){
@@ -85,6 +94,9 @@
 	}
 	catch(Exception $e){
 		logger($filename, "E", 'Message: ' .$e->getMessage());
+	}
+	finally{
+		close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");

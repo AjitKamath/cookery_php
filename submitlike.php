@@ -1,6 +1,5 @@
 <?php
-    include 'application_context.php';
-    include('constants.php');
+    include_once('import_util.php');
 
     $filename = "submitlike.php";
 
@@ -8,19 +7,38 @@
     logger($filename, "I", "-------------".$filename."-------------");
 
     //request
-    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
-    $type = isset($_POST['type']) ? $_POST['type'] : '';
-    $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '';
+    $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '1';
+    $type = isset($_POST['type']) ? $_POST['type'] : 'RECIPE';
+    $type_id = isset($_POST['type_id']) ? $_POST['type_id'] : '27';
 
     logger($filename, "I", "REQUEST PARAM : user_id(".$user_id.")");
     logger($filename, "I", "REQUEST PARAM : type(".$type.")");
     logger($filename, "I", "REQUEST PARAM : type_id(".$type_id.")");
     //request
 
+    //check for null/empty
+    if(!check_for_null($user_id)){
+        logger($filename, "E", "Error ! null/empty user id");
+        return;
+    }
+
+    if(!check_for_null($type)){
+        logger($filename, "E", "Error ! null/empty type");
+        return;
+    }
+
+    if(!check_for_null($type_id)){
+        logger($filename, "E", "Error ! null/empty type id");
+        return;
+    }
+    //check for null/empty
+
     try{
+        $con = open_connection();
+        
         //check if $user_id has already liked $type & $type_id
         $query = "SELECT LIKE_ID, IS_DEL FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
-        $result = mysqli_query($db,$query);
+        $result = mysqli_query($con, $query);
 
         //if there is already an entry in LIKES table
         if($result_data = $result->fetch_object()){
@@ -30,7 +48,7 @@
 
                 $query = "UPDATE LIKES SET IS_DEL = 'N', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
-                if(mysqli_query($db,$query)){
+                if(mysqli_query($con, $query)){
                     logger($filename, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
@@ -49,11 +67,13 @@
                         $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
                         $timeline_type = LIKE_REVIEW_ADD;
                     }
+                    else{
+                        logger($filename, "E", "Could not understand the like TYPE('".$type."')");
+                    }
                                         
-                    $result = mysqli_query($db,$query);
-                    if($result_data = $result->fetch_object()){  
-                        include_once('registerusertimeline.php');
-                        register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                    $result_temp = mysqli_query($con, $query);
+                    if($result_temp_data = $result_temp->fetch_object()){  
+                        register_timeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID);
                     }
                     //get user_id of the type
                     //register timeline
@@ -70,7 +90,7 @@
 
                 $query = "UPDATE LIKES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 
-                if(mysqli_query($db,$query)){
+                if(mysqli_query($con, $query)){
                     logger($filename, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
                     
                     //register timeline
@@ -89,11 +109,13 @@
                         $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
                         $timeline_type = LIKE_REVIEW_ADD;
                     }
+                    else{
+                        logger($filename, "E", "Could not understand the like TYPE('".$type."')");
+                    }
                                         
-                    $result = mysqli_query($db,$query);
-                    if($result_data = $result->fetch_object()){  
-                        include_once('registerusertimeline.php');
-                        register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                    $result_temp = mysqli_query($con, $query);
+                    if($result_temp_data = $result_temp->fetch_object()){  
+                        register_timeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID);
                     }
                     //get user_id of the type
                     //register timeline
@@ -111,7 +133,9 @@
 
             $query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP)";
 
-            if($like_id = $mysqli->query($query)){
+            if(mysqli_query($con, $query)){
+                $like_id = mysqli_insert_id($con);
+                
                 logger($filename, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
                 
                 //register timeline
@@ -130,11 +154,13 @@
                     $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
                     $timeline_type = LIKE_REVIEW_ADD;
                 }
+                else{
+                    logger($filename, "E", "Could not understand the like TYPE('".$type."')");
+                }
 
-                $result = mysqli_query($db,$query);
+                $result = mysqli_query($con, $query);
                 if($result_data = $result->fetch_object()){  
-                    include_once('registerusertimeline.php');
-                    register_timeline($user_id, $result_data->USER_ID, $timeline_type, $result->LIKE_ID);
+                    register_timeline($con, $user_id, $result_data->USER_ID, $timeline_type, $like_id);
                 }
                 //get user_id of the type
                 //register timeline
@@ -150,7 +176,7 @@
 
         //check the status (liked/unliked)
         $query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
-        $result = mysqli_query($db,$query);
+        $result = mysqli_query($con, $query);
 
         if($result_data = $result->fetch_object()){
             if($result_data->LIKES_COUNT != 0){
@@ -166,7 +192,7 @@
 
         //get total likes for the $type & $type_id
         $query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
-        $result = mysqli_query($db,$query);
+        $result = mysqli_query($con, $query);
 
         if($result_data = $result->fetch_object()){
             $result_array['likes'] = $result_data->LIKES_COUNT;
@@ -182,6 +208,9 @@
     catch(Exception $e){
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
-
+    finally{
+        close_connection($con);
+    }
+    
     logger($filename, "I", "-------------".$filename."-------------");
 ?>

@@ -86,7 +86,11 @@ $row = $usercheck->fetch_row();
 		
 		//register timeline
 		include_once('registerusertimeline.php');
-        register_timeline($user_id, $user_id, USER_ADD, $user_id);
+		include_once('db_util.php');
+		
+		$con = open_connection();
+        register_timeline($con, $user_id, $user_id, USER_ADD, $user_id);
+		close_connection($con);
 		//register timeline
 	}
 	catch(Exception $e)
