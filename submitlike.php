@@ -99,15 +99,15 @@
                     $timeline_type = "UNKNOWN";
                     if("COMMENT" == $type){
                         $query = "SELECT USER_ID FROM `COMMENTS` WHERE COM_ID = '$type_id'";
-                        $timeline_type = LIKE_COMMENT_ADD;
+                        $timeline_type = LIKE_COMMENT_REMOVE;
                     }
                     else if("RECIPE" == $type){
                         $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$type_id'";
-                        $timeline_type = LIKE_RECIPE_ADD;
+                        $timeline_type = LIKE_RECIPE_REMOVE;
                     }
                     else if("REVIEW" == $type){
                         $query = "SELECT USER_ID FROM `REVIEWS` WHERE REV_ID = '$type_id'";
-                        $timeline_type = LIKE_REVIEW_ADD;
+                        $timeline_type = LIKE_REVIEW_REMOVE;
                     }
                     else{
                         logger($filename, "E", "Could not understand the like TYPE('".$type."')");

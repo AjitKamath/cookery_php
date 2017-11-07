@@ -37,9 +37,9 @@
             $timeline_array['TMLN_ID'] = $result_data->TMLN_ID;
             $timeline_array['TYPE'] = $result_data->TYPE;
             $timeline_array['TYPE_ID'] = $result_data->TYPE_ID;
-            $timeline_array['whoName'] = $timeline_result_data->NAME;
-            $timeline_array['whoUserId'] = $timeline_result_data->USER_ID;
-            $timeline_array['whoUserImage'] = $timeline_result_data->IMG;
+            $timeline_array['whoName'] = $result_data->NAME;
+            $timeline_array['whoUserId'] = $result_data->USER_ID;
+            $timeline_array['whoUserImage'] = $result_data->IMG;
             $timeline_array['CREATE_DTM'] = $result_data->CREATE_DTM;
             
             if(USER_ADD == $type){
@@ -47,7 +47,7 @@
                 $timeline_result = mysqli_query($con, $timeline_query);
                 
                 if($timeline_result_data = $timeline_result->fetch_object()){
-                    $timeline_array['USER_ID'] = $timeline_result_data->TYPE_ID;
+                    $timeline_array['USER_ID'] = $result_data->TYPE_ID;
                     $timeline_array['createdDateTime'] = $timeline_result_data->CREATE_DTM;
                 }
             }
@@ -72,7 +72,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                   
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
@@ -82,7 +82,7 @@
                     //recipe details
                 }
             }
-            else if(COMMENT_RECIPE_ADD == $type || COMMENT_RECIPE_MODIFY == $type || COMMENT_RECIPE_REMOVE == $type){
+            else if(COMMENT_RECIPE_ADD == $type || COMMENT_RECIPE_REMOVE == $type){
                 $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, COMMENT, FOOD_TYP_NAME, FOOD_CSN_NAME,
                                    USR.NAME AS WHOSE_NAME, USR.USER_ID AS WHOSE_USER_ID, USR.IMG AS RCP_OWN_IMG
                                    FROM `COMMENTS` AS COM
@@ -106,7 +106,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                   
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
@@ -116,7 +116,7 @@
                     //recipe details
                 }
             }
-            else if(LIKE_RECIPE_ADD == $type || LIKE_RECIPE_MODIFY == $type || LIKE_RECIPE_REMOVE == $type){
+            else if(LIKE_RECIPE_ADD == $type || LIKE_RECIPE_REMOVE == $type){
                 $timeline_query = "SELECT RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME,
                                    USR.NAME AS WHOSE_NAME, USR.USER_ID AS WHOSE_USER_ID, USR.IMG AS RCP_OWN_IMG
                                    FROM `LIKES` AS LIK
@@ -138,7 +138,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                     
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
@@ -148,7 +148,7 @@
                     //recipe details
                 }
             }
-            else if(LIKE_COMMENT_ADD == $type || LIKE_COMMENT_MODIFY == $type || LIKE_COMMENT_REMOVE == $type){
+            else if(LIKE_COMMENT_ADD == $type || LIKE_COMMENT_REMOVE == $type){
                 $timeline_query = "SELECT COMMENT, RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME,
                                    USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
                                    FROM `LIKES` AS LIK
@@ -173,7 +173,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                   
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
@@ -183,7 +183,7 @@
                     //recipe details
                 }
             }
-            else if(LIKE_REVIEW_ADD == $type || LIKE_REVIEW_MODIFY == $type || LIKE_REVIEW_REMOVE == $type){
+            else if(LIKE_REVIEW_ADD == $type || LIKE_REVIEW_REMOVE == $type){
                 $timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME,
                                    USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
                                    FROM `LIKES` AS LIK
@@ -209,7 +209,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                   
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
@@ -219,7 +219,7 @@
                     //recipe details
                 }
             }
-            else if(REVIEW_RECIPE_ADD == $type || REVIEW_RECIPE_MODIFY == $type || REVIEW_RECIPE_REMOVE == $type){
+            else if(REVIEW_RECIPE_ADD == $type || REVIEW_RECIPE_REMOVE == $type){
                 $timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME,
                                    USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
                                    FROM `REVIEWS` AS REV
@@ -244,7 +244,7 @@
                     $timeline_array['whoseUserId'] = $timeline_result_data->WHOSE_USER_ID;
                   
                     //get 1st image for the recipe
-                    $recipe_image_query = "SELECT TOP 1 RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID'";
+                    $recipe_image_query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$timeline_result_data->RCP_ID' LIMIT 1";
                     $recipe_image_result = mysqli_query($con, $recipe_image_query);
                 
                     if($recipe_image_result_data = $recipe_image_result->fetch_object()){
