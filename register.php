@@ -77,12 +77,12 @@ $row = $usercheck->fetch_row();
 	{	
 		// VERI_CODE is just changed to SSID for the fix but later need to have both the columns.
 		$query = "INSERT INTO USER (EMAIL,MOBILE,PASSWORD,NAME,GENDER,SSID,SALT,CREATE_DTM) values('$email','$mobile','$password','$name','$gender','$veri_code','$salt',CURRENT_TIMESTAMP)";
-		infologger($filename, "I", "New user Register Query: ".$query);
+		logger($filename, "I", "New user Register Query: ".$query);
 		$user_id = mysqli_query($db, $query);
 
 		mailtrigger($email,$veri_code);
 
-		infologger($filename, "I", "User Registered Successfully");
+		logger($filename, "I", "User Registered Successfully");
 		$json_response = array();
 		mysqli_close($db);
 		$data['err_code']= $SUCCESS;
@@ -100,7 +100,7 @@ $row = $usercheck->fetch_row();
 	}
 	catch(Exception $e)
 	{
-		 errlogger($filename, "E", 'Message: ' .$e->getMessage());
+		 logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 }
 }
@@ -262,7 +262,7 @@ try{
 	
 	if($row[0]==$email && $row[1]==$password)
 	{
-		infologger($filename, "I", "User Logged in with email id as: ".$email);
+		logger($filename, "I", "User Logged in with email id as: ".$email);
 		$data["err_code"]=$SUCCESS;
 		$data["err_message"]="login success";
 		echo json_encode($data);
@@ -270,7 +270,7 @@ try{
 	}
 	else
 	{
-		infologger($filename, "I", "User Login Failed with email id as: ".$email);
+		logger($filename, "I", "User Login Failed with email id as: ".$email);
 		$data["err_code"]=$FAILURE;
 		$data["err_message"]="login failed";
 		echo json_encode($data);
@@ -279,7 +279,7 @@ try{
 }
 catch(Exception $e)
 	{
-		 errlogger($filename, "E", 'Message: ' .$e->getMessage());
+		 logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 	
 }

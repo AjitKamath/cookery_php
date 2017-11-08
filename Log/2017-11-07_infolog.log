@@ -1305,3 +1305,27 @@
 [v0.1] : 07-11-17 22:41:27 : fetchusertimeline.php : I : REQUEST PARAM : user_id(1)
 [v0.1] : 07-11-17 22:41:27 : fetchusertimeline.php : I : REQUEST PARAM : index(12)
 [v0.1] : 07-11-17 22:41:27 : fetchusertimeline.php : I : -------------fetchusertimeline.php-------------
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(5)
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:04 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(6)
+[v0.1] : 07-11-17 22:48:05 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:05 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:05 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:05 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:05 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(4)
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(3)
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:06 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(2)
+[v0.1] : 07-11-17 22:48:07 : fetchusertimelinedetails.php : I : 
+[v0.1] : 07-11-17 22:48:07 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:07 : fetchusertimelinedetails.php : I : REQUEST PARAM : user_id(1)
+[v0.1] : 07-11-17 22:48:07 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------
+[v0.1] : 07-11-17 22:48:07 : fetchusertimelinedetails.php : I : -------------fetchusertimelinedetails.php-------------

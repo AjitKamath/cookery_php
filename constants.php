@@ -3,7 +3,11 @@
     define("APP_VERSION", "0.1");
 
     //paths
-    define("HOME_DIRECTORY", "/home/cabox/workspace/Log/");
+    define("HOME_DIRECTORY", "/home/cabox/workspace/");
+    define("LOGS_DIRECTORY", HOME_DIRECTORY."Log/");
+
+    //logs
+    define("LOGS_MAX_HISTORY", "7");    //in days
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");

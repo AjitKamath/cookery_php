@@ -7,6 +7,6 @@ try
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 ?>

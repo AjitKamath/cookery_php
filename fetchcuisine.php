@@ -7,11 +7,11 @@ $sql = "SELECT * FROM `FOOD_CUISINE` ";
 try
 {
 	$cat_data = mysqli_query($db,$sql);
-	infologger($filename, "I", "Food Cuisine fetched successfully");
+	logger($filename, "I", "Food Cuisine fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 $myArray = array();

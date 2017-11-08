@@ -33,7 +33,7 @@ function searchIngredientData($data)
 	$result = mysqli_query($db,$SQL);
 	if($result)
 	{
-		infologger($filename, "I", "Ingredient auto - search successully");
+		logger($filename, "I", "Ingredient auto - search successully");
 		$myArray = array();
        	while($result_val = $result->fetch_object()) 
 	    	{
@@ -51,7 +51,7 @@ function searchIngredientData($data)
 	}
 	else
 	{
-		errlogger($filename, "E", "Query failure : ".$SQL);
+		logger($filename, "E", "Query failure : ".$SQL);
 		/*
 		$response['PHP'] = "autocompleteingredient";
 		$response['IS_ERROR'] = "Y";

@@ -1,7 +1,0 @@
-17-10-17 23:07:03 : submitlike.php : E : Failed !! The user() could not like the type() with type id() successfully.
-17-10-17 23:07:22 : submitrecipereview.php : E : Failed !! The user(1) could not review the recipe('') successfully.
-17-10-17 23:07:23 : submitrecipereview.php : E : Failed !! The user() could not review the recipe('') successfully.
-17-10-17 23:48:59 : submitrecipereview.php : E : Failed !! The user(1) could not review the recipe('27') successfully.
-17-10-17 23:52:06 : submitrecipereview.php : E : Failed !! The user(1) could not review the recipe('27') successfully.
-17-10-17 23:56:34 : submitrecipereview.php : E : Failed !! The user(1) could not review the recipe('27') successfully.
-17-10-17 23:56:47 : submitrecipereview.php : E : Failed !! The user(1) could not review the recipe('27') successfully.

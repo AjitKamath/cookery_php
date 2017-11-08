@@ -19,51 +19,51 @@ $usersql = "SELECT * FROM `USER` WHERE NAME LIKE '%$text%'";
 try
 {
 	$rcp_data = mysqli_query($db,$recipesql);
-	infologger($filename, "I", "Recipe data fetched successfully");
+	logger($filename, "I", "Recipe data fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 try
 {
 	$ing_data = mysqli_query($db,$ingsql);
-	infologger($filename, "I", "Ingredient data fetched successfully");
+	logger($filename, "I", "Ingredient data fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 try
 {
   $csn_data = mysqli_query($db,$cuisinesql);
-	infologger($filename, "I", "Cuisine data fetched successfully");
+	logger($filename, "I", "Cuisine data fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 try
 {
 	$foodtyp_data = mysqli_query($db,$foodtypsql);
-	infologger($filename, "I", "Food Type fetched successfully");
+	logger($filename, "I", "Food Type fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 try
 {
 	$user_data = mysqli_query($db,$usersql);
-	infologger($filename, "I", "User Data fetched successfully");
+	logger($filename, "I", "User Data fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 
@@ -106,11 +106,11 @@ foreach($rcpids as $val)
   try
   {
     $rcp_details = mysqli_query($db,$rcpdata);
-    infologger($filename, "I", "Full and final recipe details fetched successfully");
+    logger($filename, "I", "Full and final recipe details fetched successfully");
   }
   catch(Exception $e)
   {
-      errlogger($filename, "E", 'Message: ' .$e->getMessage());
+      logger($filename, "E", 'Message: ' .$e->getMessage());
   }
   
    while($rcpdataobj = $rcp_details->fetch_object()) 

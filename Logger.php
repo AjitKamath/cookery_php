@@ -77,10 +77,14 @@ function infologger($filename, $type, $message)
 	}
 }
 
-//this common method will log into info/debug based on the $type. Also, this logger logs the application version.
+//this common method will log into info/debug based on the $type. Also, this logger logs the application version. Zip's the logs whic are older than 
 function logger($filename, $type, $message){
 	include 'error_code.php';
-
+	include_once("util.php");
+	
+	//clean old logs
+	clean_logs();
+	
 	$name = "info";
 	if($type == 'E'){
 		$name = "error";
@@ -120,8 +124,8 @@ function checkforfile($name){
 	$infofile =  "false";
 	
 	$currentdate = date("Y-m-d");
-	$errfilename = HOME_DIRECTORY.$currentdate."_errlog.log";
-	$infofilename = HOME_DIRECTORY.$currentdate."_infolog.log";
+	$errfilename = LOGS_DIRECTORY.$currentdate."_errlog.log";
+	$infofilename = LOGS_DIRECTORY.$currentdate."_infolog.log";
 	
 	if(file_exists($errfilename))
 	{

@@ -8,11 +8,11 @@ $sql = "SELECT * FROM `QTY` ";
 try
 {
 	$cat_data = mysqli_query($db,$sql);
-	infologger($filename, "I", "Quantity fetched successfully");
+	logger($filename, "I", "Quantity fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 $myArray = array();

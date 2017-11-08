@@ -1,6 +1,5 @@
 <?php
-    include_once('util.php');
-    include_once('util_recipe.php');
+    include_once("Logger.php");
     
-    echo check_for_null(true);
+    logger("", "E", 'Message: ');
 ?>

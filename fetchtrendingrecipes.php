@@ -11,11 +11,11 @@ $sql = "SELECT RCP.RCP_ID, RCPIMG.RCP_IMG, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FD
 try
 {
 	$cat_data = mysqli_query($db,$sql);
-	infologger($filename, "I", "Trending Recipes fetched successfully");
+	logger($filename, "I", "Trending Recipes fetched successfully");
 }
 catch(Exception $e)
 {
-	  errlogger($filename, "E", 'Message: ' .$e->getMessage());
+	  logger($filename, "E", 'Message: ' .$e->getMessage());
 }
 
 $myArray = array();
