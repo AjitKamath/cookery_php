@@ -37,7 +37,7 @@
         $con = open_connection();
         
         //insert comment
-        $query = "INSERT INTO COMMENTS('RCP_ID', 'USER_ID', 'COMMENT', 'CREAT_DTM') VALUES('$rcp_id', '$user_id', '$comment', CURRENT_TIMESTAMP)";
+        $query = "INSERT INTO `COMMENTS`(`RCP_ID`, `USER_ID`, `COMMENT`, `CREATE_DTM`) VALUES('$rcp_id', '$user_id', '$comment', CURRENT_TIMESTAMP)";
 
         if(mysqli_query($con, $query)){
             $com_id = mysqli_insert_id($con);
