@@ -1,5 +1,5 @@
 <?php
-    include_once("Logger.php");
+    include_once("import_util.php");
     
-    logger("", "E", 'Message: ');
+    echo get_relative_path(APP_DATA_DIRECTORY);
 ?>

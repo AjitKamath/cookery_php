@@ -4,7 +4,11 @@
 
     //paths
     define("HOME_DIRECTORY", "/home/cabox/workspace/");
-    define("LOGS_DIRECTORY", HOME_DIRECTORY."Log/");
+    define("LOGS_DIRECTORY", HOME_DIRECTORY."logs/");
+    define("APP_DATA_DIRECTORY", HOME_DIRECTORY."app_data/");
+    define("APP_DATA_USERS_DIRECTORY", APP_DATA_DIRECTORY."users/");
+    define("APP_DATA_RECIPES_DIRECTORY", "recipes/");
+    define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
 
     //logs
     define("LOGS_MAX_HISTORY", "7");    //in days

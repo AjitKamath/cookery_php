@@ -1,5 +1,4 @@
 <?php
-
 	function check_for_null($value) {
 		if (is_array($value)) {
 			if (count($value) > 0) {
@@ -59,5 +58,57 @@
 			//TODO: mail the admins
 		}
 		//zip log files whic are loder than LOGS_MAX_HISTORY on every LOGS_MAX_HISTORY day of the month
+	}
+
+	function create_directory($path){
+		if(!file_exists($path)){
+			$result = mkdir($path, 0777, true);
+			chmod($path, 0777);
+			
+			return $result;
+		}
+		
+		return true;
+	}
+
+	function prepare_directories($user_id){
+		$filename = "util.php";
+		
+		if(!file_exists(APP_DATA_DIRECTORY)){
+			logger($filename, "E", "Error ! Directory(".APP_DATA_DIRECTORY.") does not exist ! Create it manually with 0777 permission !");
+			return false;
+		}
+		
+		if(!file_exists(APP_DATA_USERS_DIRECTORY)){
+			logger($filename, "I", "Directory(".APP_DATA_USERS_DIRECTORY.") does not exist. Creating it.");
+			if(!create_directory(APP_DATA_USERS_DIRECTORY)){
+				logger($filename, "E", "Error ! Directory(".APP_DATA_USERS_DIRECTORY.") could not be created !");
+				return false;
+			}
+		}
+		
+		$directory = APP_DATA_USERS_DIRECTORY.$user_id;
+		if(!file_exists($directory)){
+			logger($filename, "I", "Directory(".$directory.") does not exist. Creating it.");
+			if(!create_directory($directory)){
+				logger($filename, "E", "Error ! Directory(".$directory.") could not be created !");
+				return false;
+			}
+		}
+		
+		$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY;
+		if(!file_exists($directory)){
+			logger($filename, "I", "Directory(".$directory.") does not exist. Creating it.");
+			if(!create_directory($directory)){
+				logger($filename, "E", "Error ! Directory(".$directory.") could not be created !");
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	function get_relative_path($absolute_path){
+		return str_replace(HOME_DIRECTORY,"",$absolute_path);
 	}
 ?>
