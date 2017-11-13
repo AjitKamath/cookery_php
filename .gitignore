@@ -1,2 +1,9 @@
-**/Log
+# log files
+logs/*
 *.log
+!logs/.gitkeep 
+
+# app_data
+app_data/*
+*.jpg
+!app_data/.gitkeep 
