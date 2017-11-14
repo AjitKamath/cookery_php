@@ -20,7 +20,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get average rating for $rcp_id
         $query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
@@ -40,7 +40,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

@@ -34,7 +34,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //check if $user_id has already liked $type & $type_id
         $query = "SELECT LIKE_ID, IS_DEL FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
@@ -209,7 +209,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
     
     logger($filename, "I", "-------------".$filename."-------------");

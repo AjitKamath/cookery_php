@@ -20,7 +20,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get reviews for $rcp_id
         $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, REV.RATING, REV.REVIEW, REV.CREATE_DTM, REV.MOD_DTM 
@@ -46,7 +46,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

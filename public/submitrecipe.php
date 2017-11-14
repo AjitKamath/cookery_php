@@ -166,7 +166,7 @@
     //validations
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
 
         //submit recipe transaction begins here
         mysqli_begin_transaction($con, MYSQLI_TRANS_START_READ_WRITE);
@@ -554,7 +554,7 @@
         mysqli_rollback($con);
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

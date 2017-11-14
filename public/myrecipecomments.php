@@ -34,7 +34,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         $query = "INSERT INTO `COMMENTS` (`RCP_ID`, `USER_ID`, `COMMENT` , `CREATE_DTM`) VALUES 
                     ('$rcp_id', '$user_id', '$comment',  CURRENT_TIMESTAMP)";                         
@@ -69,7 +69,7 @@
         logger($filename, "E", $userMessage." Error ".$exception);
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

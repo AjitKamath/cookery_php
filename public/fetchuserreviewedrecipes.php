@@ -20,7 +20,7 @@
 	//check for null/empty
 
 	try{
-		$con = open_connection();
+		$con = DatabaseUtil::getInstance()->open_connection();
 		
 		//get all recipes for $user_id
 		$query = "SELECT RCP.RCP_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME, RCP.CREATE_DTM, RCP.MOD_DTM, USR.NAME
@@ -99,7 +99,7 @@
 		logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 	finally{
-		close_connection();
+		DatabaseUtil::getInstance()->close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");

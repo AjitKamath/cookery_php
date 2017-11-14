@@ -7,7 +7,7 @@
     logger($filename, "I", "-------------".$filename."-------------");
 
 	try{
-		$con = open_connection();
+		$con = DatabaseUtil::getInstance()->open_connection();
 
 		$query = "SELECT RCP.RCP_ID, RCPIMG.RCP_IMG, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME 
 				  FROM `RECIPE_IMG` AS RCPIMG
@@ -49,7 +49,7 @@
 		logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 	finally{
-		close_connection($con);
+		DatabaseUtil::getInstance()->close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");

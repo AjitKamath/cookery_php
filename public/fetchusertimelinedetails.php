@@ -20,7 +20,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get timeline details for $tmln_id
         $query = "SELECT TMLN_ID, TYPE, TYPE_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
@@ -270,7 +270,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

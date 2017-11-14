@@ -7,7 +7,7 @@
     logger($filename, "I", "-------------".$filename."-------------");
 	
 	try{
-		$con = open_connection();
+		$con = DatabaseUtil::getInstance()->open_connection();
 		
 		$query = "SELECT * FROM `FOOD_TYPE`";
 		$result = mysqli_query($con, $query);
@@ -23,7 +23,7 @@
 		logger($filename, "E", 'Message: ' .$e->getMessage());
 	}
 	finally{
-		close_connection($con);
+		DatabaseUtil::getInstance()->close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");

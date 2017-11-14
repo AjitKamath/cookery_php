@@ -27,7 +27,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get likes details for $type & $type_id
         $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG FROM LIKES LIKE INNER JOIN USER USR ON USR.USER_ID = LIKE.USER_ID WHERE TYPE                    = '$type' AND TYPE_ID = '$type_id'";
@@ -49,7 +49,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

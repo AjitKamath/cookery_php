@@ -27,7 +27,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //delete recipe
         $query = "UPDATE `RECIPE` SET IS_DEL = 'Y' WHERE RCP_ID = '".$com_id."' AND USER_ID = '".$user_id."'";
@@ -51,7 +51,7 @@
         echo "FAIL";
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

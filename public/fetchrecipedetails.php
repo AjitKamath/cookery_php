@@ -22,7 +22,7 @@
 	//validations
 
 	try{
-		$con = open_connection();
+		$con = DatabaseUtil::getInstance()->open_connection();
 		
 		$query = "SELECT USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
 							FDTYP.FOOD_TYP_NAME, FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID
@@ -149,7 +149,7 @@
 		logger($filename, "E", $e->getMessage());
 	}
 	finally{
-		close_connection($con);
+		DatabaseUtil::getInstance()->close_connection($con);
 	}
 
 	logger($filename, "I", "-------------".$filename."-------------");	

@@ -27,7 +27,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get timeline performed by user or performed on his items
         $query = "SELECT TMLN_ID, TYPE, TYPE_ID, USER_ID, REF_USER_ID, CREATE_DTM FROM `TIMELINES` WHERE USER_ID = '$user_id' OR REF_USER_ID = '$user_id' LIMIT $index , ".TIMELINES_COUNT;
@@ -56,7 +56,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

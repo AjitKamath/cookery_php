@@ -20,7 +20,7 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
+        $con = DatabaseUtil::getInstance()->open_connection();
         
         //get comments for $rcp_id
         $query = "SELECT COM_ID, COMMENT, COM.CREATE_DTM, USR.IMG, USR.USER_ID 
@@ -60,7 +60,7 @@
         logger($filename, "E", 'Message: ' .$e->getMessage());
     }
     finally{
-        close_connection($con);
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");

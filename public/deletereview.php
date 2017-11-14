@@ -27,8 +27,8 @@
     //check for null/empty
 
     try{
-        $con = open_connection();
-        
+        $con = DatabaseUtil::getInstance()->open_connection();
+
         //delete review
         $query = "UPDATE `REVIEWS` SET IS_DEL = 'Y' WHERE REV_ID = '".$rev_id."' AND USER_ID = '".$user_id."'";
 
@@ -49,6 +49,9 @@
     catch(Exception $e){
         logger($filename, "E", 'Message: ' .$e->getMessage());
         echo "FAIL";
+    }
+    finally{
+        DatabaseUtil::getInstance()->close_connection($con);
     }
 
     logger($filename, "I", "-------------".$filename."-------------");
