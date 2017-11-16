@@ -1,4 +1,6 @@
 <?php
+    //DUPLICATE
+
     include_once("../util/import_util.php");
 
     $filename = "fetchreviewsdetails.php";

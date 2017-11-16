@@ -1,10 +1,8 @@
 <?php
 
-<<<<<<< HEAD
-include_once('application_context.php');
-=======
+//UPGRADED
+
 include 'application_context.php';
->>>>>>> e3321736b7e9aedeb989d7f14163a483cae2db56
 include_once('constants.php');
 
 $filename = "register.php";
