@@ -3,22 +3,22 @@
 		public static function addTimeline($con, $user_id, $ref_user_id, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
 				return;
 			}
 
 			if(!Util::check_for_null($ref_user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty ref user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ref user id");
 				return;
 			}
 
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
 				return;
 			}
 			//check for null/empty
@@ -28,26 +28,26 @@
 				$query = "INSERT INTO `TIMELINES` (`USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$ref_user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, "E", "Failed !! The timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.") could not be registered");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.") could not be registered");
 				} 
 				//register the timeline
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 		
 		public static function fetchUserTimeline($tmln_id){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$tmln_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$tmln_id.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($tmln_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty timeline id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty timeline id");
 				return;
 			}
 			//check for null/empty
@@ -288,7 +288,7 @@
 						}
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, "E", 'Error ! The timeline type('.$result->TYPE.') is not yet implemented.');
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! The timeline type('.$result->TYPE.') is not yet implemented.');
 					}
 
 					array_push($result_array, $timeline_array);
@@ -300,7 +300,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -309,18 +309,18 @@
 		
 		public static function fetchUserTimelines($user_id, $index){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : index(".$index.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
 				return;
 			}
 
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -352,7 +352,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

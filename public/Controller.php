@@ -29,16 +29,16 @@
     //function key
     $function_key = isset($_POST['function_key']) ? $_POST['function_key'] : 'TASTE_FETCH_ALL';
 
-	LoggerUtil::logger(__FILE__, "I", "");
-    LoggerUtil::logger(__FILE__, "I", "-------------".$function_key."-------------");
+	LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "");
+    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "-------------".$function_key."-------------");
     
     //check for null/empty
     if(!Util::check_for_null($function_key)){
-        LoggerUtil::logger(__FILE__, "E", "Error ! null/empty function_key");
+        LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "E", "Error ! null/empty function_key");
         return;
     }
     else{
-        LoggerUtil::logger(__FILE__, "I", "REQUEST PARAM : function_key(".$function_key.")");
+        LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "REQUEST PARAM : function_key(".$function_key.")");
     }
 	//check for null/empty
     //function key
@@ -186,5 +186,5 @@
         echo UNIDENTIFIED_FUNCTION_KEY;    
     }
     
-    LoggerUtil::logger(__FILE__, "I", "-------------".$function_key."-------------");
+    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "-------------".$function_key."-------------");
 ?>

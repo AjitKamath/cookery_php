@@ -2,18 +2,18 @@
 	class User{
 		public static function login($email, $password){
 			//request
-            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : email(".$email.")");
-            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : password(".$password.")");
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : password(".$password.")");
             //request
 
             //check for null/empty
             if(!Util::check_for_null($email)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty email");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
                 return;
             }
 
             if(!Util::check_for_null($password)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty password");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty password");
                 return;
             }
             //check for null/empty
@@ -31,18 +31,18 @@
 					$password = base64_encode($password);
 					
 					if($result_data->EMAIL == $email && $result_data->PASSWORD == $password){
-						LoggerUtil::logger(__CLASS__, "I", "User Logged in with email id as: ".$email);
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Logged in with email id as: ".$email);
 						$data["err_code"]="SUCCESS";
 						$data["err_message"]="login success";
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, "I", "User Login Failed with email id as: ".$email);
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Login Failed with email id as: ".$email);
 						$data["err_code"]="FAILURE";
 						$data["err_message"]="login failed";
 					}
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, "I", "User Login Failed with email id as: ".$email);
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Login Failed with email id as: ".$email);
 					$data["err_code"]="FAILURE";
 					$data["err_message"]="login failed";
 				}
@@ -50,7 +50,7 @@
 				echo json_encode($data);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -59,30 +59,30 @@
 		
 		public static function register($email, $mobile, $password, $name, $gender){
 			//request
-            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : email(".$email.")");
-            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : mobile(".$mobile.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : mobile(".$name.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : gender(".$gender.")");
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile(".$mobile.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile(".$name.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : gender(".$gender.")");
             //request
 
             //check for null/empty
             if(!Util::check_for_null($email)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty email");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
                 return;
             }
 
             if(!Util::check_for_null($mobile)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty mobile");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty mobile");
                 return;
             }
 			
 			if(!Util::check_for_null($name)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty name");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty name");
                 return;
             }
 			
 			if(!Util::check_for_null($gender)){
-                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty gender");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty gender");
                 return;
             }
             //check for null/empty
@@ -134,7 +134,7 @@
 				echo json_encode($data);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

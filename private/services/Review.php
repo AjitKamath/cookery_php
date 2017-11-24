@@ -2,12 +2,12 @@
 	class Review{
 		public static function fetchAverageRecipeRating($rcp_id){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
 				return;
 			}
 			//check for null/empty
@@ -30,7 +30,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -39,18 +39,18 @@
 		
 		public static function deleteReview($rev_id, $user_id){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rev_id(".$rev_id.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rev_id(".$rev_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rev_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rev id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rev id");
 				return;
 			}
 			//check for null/empty
@@ -62,7 +62,7 @@
 				$query = "UPDATE `REVIEWS` SET IS_DEL = 'Y' WHERE REV_ID = '".$rev_id."' AND USER_ID = '".$user_id."'";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, "I" , "Review('$rev_id') successfully deleted by the user('$user_id')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Review('$rev_id') successfully deleted by the user('$user_id')");
 					echo "SUCCESS";
 
 					//register timeline
@@ -70,13 +70,13 @@
 					//register timeline
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, "E", "Failed !! Review('$rev_id') could not be deleted by the user('$user_id')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Review('$rev_id') could not be deleted by the user('$user_id')");
 					echo "FAIL";
 				} 
 				//delete review
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				echo "FAIL";
 			}
 			finally{
@@ -86,30 +86,30 @@
 		
 		public static function submitReview($rcp_id, $user_id, $review, $rating){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : review(".$review.")");
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rating(".$rating.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : review(".$review.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rating(".$rating.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
 				return;
 			}
 
 			if(!Util::check_for_null($review)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty review");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty review");
 				return;
 			}
 
 			if(!Util::check_for_null($rating)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rating");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rating");
 				return;
 			}
 			//check for null/empty
@@ -126,7 +126,7 @@
 					$query = "UPDATE REVIEWS SET IS_DEL = 'N', REVIEW = '$review', MOD_DTM = CURRENT_TIMESTAMP, RATING = '$rating' WHERE RCP_ID = $rcp_id AND USER_ID = $user_id";
 
 					if(mysqli_query($con, $query)){
-						LoggerUtil::logger(__CLASS__, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
 
 						//register timeline
 						//get user_id of the recipe
@@ -139,7 +139,7 @@
 						//register timeline
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
 					}
 				}
 				//user is reviewing for the first time
@@ -149,7 +149,7 @@
 					if(mysqli_query($con, $query)){
 						$rev_id = mysqli_insert_id($con);
 
-						LoggerUtil::logger(__CLASS__, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has reviewed recipe('$rcp_id') successfully.");
 
 						//register timeline
 						//get user_id of the recipe
@@ -162,7 +162,7 @@
 						//register timeline
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
 					} 
 				}
 				//check if user already reviewed the $rcp_id
@@ -197,7 +197,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -206,12 +206,12 @@
 		
         public static function fetchUsersReviews($user_id){
 			//request
-			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
 				return;
 			}
 			//check for null/empty
@@ -283,14 +283,14 @@
 				}
 				//get all recipes & its reviews for $user_id
 
-				LoggerUtil::logger(__CLASS__, "I", "Total Recipes Reviews fetched : ".sizeof($result_array));
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes Reviews fetched : ".sizeof($result_array));
 
 				//response
 				echo json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

@@ -1,6 +1,5 @@
 <?php
 	class DatabaseUtil {
-		private static $filename = "DatabaseUtil.php";
 		private static $instance = NULL;
 		
 		public static function getInstance(){
@@ -14,7 +13,7 @@
 			$conn = mysqli_connect(DATABASE_HOSTNAME, DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_PORT);
 
 			if(! $conn) {
-				logger($filename, "E", "Failed to connect to MySQL: " . mysqli_connect_error());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to connect to MySQL: " . mysqli_connect_error());
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
 				die("Failed to connect to MySQL: " . mysqli_error());
 			}

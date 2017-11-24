@@ -2,7 +2,7 @@
 	class LoggerUtil{
 		
 		//this common method will log into info/debug based on the $type. Also, this logger logs the application version. Zip's the logs whic are older than 
-		public static function logger($filename, $type, $message){
+		public static function logger($filename, $methodName, $lineNumber, $type, $message){
 			if(!file_exists(LOGS_DIRECTORY)){
 				echo "Error ! Directory(".LOGS_DIRECTORY.") does not exist !";
 				return;
@@ -24,7 +24,7 @@
 				$datetime = date('d-m-y H:i:s');
 
 				$file_handle = fopen($pieces[1], "a");
-				$file_contents = "[v".APP_VERSION."] : ".$datetime." : ".$filename." : ".$type." : ".$message;
+				$file_contents = "[v".APP_VERSION."] : ".$datetime." : ".$filename." : ".$methodName."(".$lineNumber.")"." : ".$type." : ".$message;
 
 				fwrite($file_handle, $file_contents."\n");
 
