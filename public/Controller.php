@@ -1,33 +1,47 @@
 <?php
-	//This file is public !!! Make sure no sensitive info's are recorded here.	
+	// !!! This file is public !!! Make sure no sensitive info's are recorded here. !!!	
 
-    include_once("../scripts/util/LoggerUtil.php");
-	include_once("../scripts/util/FunctionKeys.php");
-    include_once("../scripts/util/Util.php");
-	include_once("../scripts/util/Messages.php");
+	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
-    $filename = "Controller";
-    
+	//this function triggers on every class object creation or static method calls
+	function __autoload($class_name){
+        //relative paths to directories to scan for autoload
+        $directorys = array(
+            'private/services/',
+            'private/util/'
+        );
+		//relative paths to directories to scan for autoload
+        
+        //for each directory
+        foreach($directorys as $directory){
+			$file_path = $_SERVER['DOCUMENT_ROOT'].'/'.$directory.$class_name . '.php';
+			
+			//see if the file exsists
+            if(file_exists($file_path)){
+				require_once($file_path);
+                //echo "autoloaded : ".$file_path;
+                return;
+            }            
+        }
+    }
+    //this function triggers on every class object creation or static method calls
+
     //function key
-    $function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
+    $function_key = isset($_POST['function_key']) ? $_POST['function_key'] : 'TASTE_FETCH_ALL';
 
-	logger($filename, "I", "");
-    logger($filename, "I", "-------------".$function_key."-------------");
+	LoggerUtil::logger(__FILE__, "I", "");
+    LoggerUtil::logger(__FILE__, "I", "-------------".$function_key."-------------");
     
     //check for null/empty
-    if(!check_for_null($function_key)){
-        logger($filename, "E", "Error ! null/empty function_key");
+    if(!Util::check_for_null($function_key)){
+        LoggerUtil::logger(__FILE__, "E", "Error ! null/empty function_key");
         return;
     }
     else{
-        logger($filename, "I", "REQUEST PARAM : function_key(".$function_key.")");
+        LoggerUtil::logger(__FILE__, "I", "REQUEST PARAM : function_key(".$function_key.")");
     }
 	//check for null/empty
     //function key
-
-    //scripts
-    include_once("../scripts/*");
-    //scripts
 
     //params
 	$searchQuery 	= isset($_POST['searchQuery']) ? $_POST['searchQuery'] : '';
@@ -60,7 +74,7 @@
     $tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
     $tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
     $food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
-    $rcp_images     = $_FILES['images'];
+    $rcp_images     = isset($_FILES['images']) ? $_FILES['images'] : '';
 
 	$email			= isset($_POST['email']) ? $_POST['email'] : '';
 	$password		= isset($_POST['password']) ? $_POST['password'] : '';
@@ -86,7 +100,7 @@
 	//food type
 	//taste
 	else if(TASTE_FETCH_ALL == $function_key){
-		echo Taste::fetchAllTatses();
+		echo Taste::fetchAllTastes();
 	}
 	//taste
 	//comment
@@ -172,5 +186,5 @@
         echo UNIDENTIFIED_FUNCTION_KEY;    
     }
     
-    logger($filename, "I", "-------------".$function_key."-------------");
+    LoggerUtil::logger(__FILE__, "I", "-------------".$function_key."-------------");
 ?>

@@ -1,15 +1,13 @@
 <?php
-	include_once("../util/ImportUtil.php");
-
 	class Ingredient{
 		public static function fetchIngredients($searchQuery){
 			//request
-            logger(__CLASS__, "I", "REQUEST PARAM : searchQuery(".$searchQuery.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : searchQuery(".$searchQuery.")");
             //request
 
             //check for null/empty
-            if(!check_for_null($searchQuery)){
-                logger(__CLASS__, "E", "Error ! null/empty user id");
+            if(!Util::check_for_null($searchQuery)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
                 return;
             }
 			//check for null/empty
@@ -28,7 +26,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

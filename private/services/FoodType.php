@@ -1,12 +1,10 @@
 <?php
-	include_once("../util/ImportUtil.php");
-
-	class Taste{
-		public static function fetchAllTastes(){
+	class FoodType{
+		public static function fetchAllFoodTypes(){
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT * FROM `TASTES`";
+				$query = "SELECT * FROM `FOOD_TYPE`";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
@@ -17,7 +15,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

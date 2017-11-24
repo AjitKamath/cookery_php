@@ -1,21 +1,19 @@
 <?php
-	include_once("../util/ImportUtil.php");
-
 	class Comment{
 		public static function deleteComment($com_id, $user_id){
             //request
-            logger(__CLASS__, "I", "REQUEST PARAM : com_id(".$com_id.")");
-            logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : com_id(".$com_id.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
             //request
 
             //check for null/empty
-            if(!check_for_null($user_id)){
-                logger(__CLASS__, "E", "Error ! null/empty user id");
+            if(!Util::check_for_null($user_id)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
                 return;
             }
 
-            if(!check_for_null($com_id)){
-                logger(__CLASS__, "E", "Error ! null/empty com id");
+            if(!Util::check_for_null($com_id)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty com id");
                 return;
             }
             //check for null/empty
@@ -27,21 +25,21 @@
                 $query = "UPDATE `COMMENTS` SET IS_DEL = 'Y' WHERE COM_ID = '".$com_id."' AND USER_ID = '".$user_id."'";
 
                 if(mysqli_query($con,  $query)){
-                    logger(__CLASS__, "I" , "Comment('$com_id') successfully deleted by the user('$user_id')");
+                    LoggerUtil::logger(__CLASS__, "I" , "Comment('$com_id') successfully deleted by the user('$user_id')");
                     echo "SUCCESS";
 
                     //register timeline
-                    register_timeline($con, $user_id, $user_id, COMMENT_RECIPE_REMOVE, $com_id);
+                    Timeline::addTimeline($con, $user_id, $user_id, COMMENT_RECIPE_REMOVE, $com_id);
                     //register timeline
                 }
                 else{
-                    logger(__CLASS__, "E", "Failed !! Comment('$com_id') could not be deleted by the user('$user_id')");
+                    LoggerUtil::logger(__CLASS__, "E", "Failed !! Comment('$com_id') could not be deleted by the user('$user_id')");
                     echo "FAIL";
                 } 
                 //delete comment
             }
             catch(Exception $e){
-                logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+                LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
                 echo "FAIL";
             }
             finally{
@@ -51,12 +49,12 @@
         
         public static function fetchRecipeComments($rcp_id){
             //request
-            logger(__CLASS__, "I", "REQUEST PARAM : rcp_id("$rcp_id")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
             //request
 
             //check for null/empty
-            if(!check_for_null($rcp_id)){
-                logger(__CLASS__, "E", "Error ! null/empty rcp id");
+            if(!Util::check_for_null($rcp_id)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rcp id");
                 return;
             }
             //check for null/empty
@@ -75,14 +73,14 @@
                 }
                 //get comments for $rcp_id
 
-                logger(__CLASS__, "I", "Total comments fetched : ".sizeof($result_array));
+                LoggerUtil::logger(__CLASS__, "I", "Total comments fetched : ".sizeof($result_array));
 
                 //response
                 echo json_encode($result_array);
                 //response
             }
             catch(Exception $e){
-                logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+                LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
@@ -91,24 +89,24 @@
         
         public static function submitComment($rcp_id, $user_id, $comment){
             //request
-            logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-            logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-            logger(__CLASS__, "I", "REQUEST PARAM : comment(".$comment.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+            LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : comment(".$comment.")");
             //request
 
             //check for null/empty
-            if(!check_for_null($user_id)){
-                logger(__CLASS__, "E", "Error ! null/empty user id");
+            if(!Util::check_for_null($user_id)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty user id");
                 return;
             }
 
-            if(!check_for_null($rcp_id)){
-                logger(__CLASS__, "E", "Error ! null/empty rcp id");
+            if(!Util::check_for_null($rcp_id)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rcp id");
                 return;
             }
 
-            if(!check_for_null($comment)){
-                logger(__CLASS__, "E", "Error ! null/empty comment");
+            if(!Util::check_for_null($comment)){
+                LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty comment");
                 return;
             }
             //check for null/empty
@@ -122,7 +120,7 @@
                 if(mysqli_query($con, $query)){
                     $com_id = mysqli_insert_id($con);
 
-                    logger(__CLASS__, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
+                    LoggerUtil::logger(__CLASS__, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
 
                     echo "SUCCESS";
 
@@ -131,19 +129,19 @@
                     $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
                     $result = mysqli_query($con, $query);
                     if($result_data = $result->fetch_object()){  
-                        register_timeline($con, $user_id, $result_data->USER_ID, COMMENT_RECIPE_ADD, $com_id);
+                        Timeline::addTimeline($con, $user_id, $result_data->USER_ID, COMMENT_RECIPE_ADD, $com_id);
                     }
                     //get user_id of the recipe
                     //register timeline
                 }
                 else{
-                    logger(__CLASS__, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");
+                    LoggerUtil::logger(__CLASS__, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");
                     echo "FAIL";
                 } 
                 //insert comment
             }
             catch(Exception $e){
-                logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+                LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
                 echo "FAIL";
             }
             finally{

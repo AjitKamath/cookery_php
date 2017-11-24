@@ -1,15 +1,13 @@
 <?php
-	include_once("../util/ImportUtil.php");
-
 	class View{
 		public static function fetchRecipeViews($rcp_id){
 			//request
-			logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			//request
 
 			//check for null/empty
-			if(!check_for_null($rcp_id)){
-				logger(__CLASS__, "E", "Error ! null/empty rcp id");
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, "E", "Error ! null/empty rcp id");
 				return;
 			}
 			//check for null/empty
@@ -27,14 +25,14 @@
 				}
 				//get views details for $rcp_id
 
-				logger(__CLASS__, "I", "Total views fetched for rcp_id('.$rcp_id.') : ".sizeof($result_array));
+				LoggerUtil::logger(__CLASS__, "I", "Total views fetched for rcp_id('.$rcp_id.') : ".sizeof($result_array));
 
 				//response
 				echo json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, "E", 'Message: ' .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
