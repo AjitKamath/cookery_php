@@ -4,9 +4,10 @@
 			return self::fetchRecipe(27, 1);
 		}
 		
-		public static function fetchSubmitRecipe($rcp_id, $rcp_nm, $food_csn_nm, $ing_id, $ing_nm, $qty_id, $ing_qty, $rcp_proc, $rcp_steps, $rcp_plating, $rcp_note,
+		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_nm, $ing_id, $ing_nm, $qty_id, $ing_qty, $rcp_proc, $rcp_steps, $rcp_plating, $rcp_note,
 												$tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_nm(".$rcp_nm.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_csn_nm(".$food_csn_nm.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_proc(".$rcp_proc.")");
@@ -16,15 +17,6 @@
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 
 			//arrays
-			//hard code recipe steps
-			$rcp_steps[0] = "Boil half litre water.";
-			$rcp_steps[1] = "Cut all the vegetables into dices.";
-			$rcp_steps[2] = "Heat the oil in frying pan on medium flame.";
-			$rcp_steps[3] = "Soak chicken in the marination.";
-			$rcp_steps[4] = "Cook chicken with medium heat in the oven.";
-			$rcp_steps[5] = "Serve it hot with tabasco sause.";
-			//hard code recipe steps
-
 			for ($i = 0; $i < count($rcp_steps); $i++) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_steps[".$i."](".$rcp_steps[$i].")");
 			}
@@ -299,14 +291,14 @@
 
 					//upload images. if atleast one image is uploaded, warn the user but recipe must be added without rolling back
 					//prepare directories
-					if(!prepare_directories($user_id)){
+					if(!Util::prepare_directories($user_id)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
 						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
 					}
 
 					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
-					if(!create_directory($recipe_images_dir)){
+					if(!Util::create_directory($recipe_images_dir)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to create directory(".$recipe_images_dir.")");
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
 						throw new Exception("Failed to create directory(".$recipe_images_dir.")");
@@ -320,7 +312,7 @@
 
 							//insert into RECIPE_IMG table
 							$query = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`, `CREATE_DTM`) 
-									  VALUES ('$rcp_id' , '".get_relative_path($recipe_image)."', CURRENT_TIMESTAMP)";   
+									  VALUES ('$rcp_id' , '".Util::get_relative_path($recipe_image)."', CURRENT_TIMESTAMP)";   
 							if(mysqli_query($con, $query)){
 								$rcp_img_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$rcp_img_id.") added into RECIPE_IMG table");
@@ -357,7 +349,7 @@
 						$response['err_message'] = "Few of the images could not be uploaded !";
 					}
 					else{
-						$response['err_message'] = "SUCCESS";
+						$response['err_message'] = "Recipe has been updated !";
 					}
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 
@@ -455,14 +447,14 @@
 
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 					//prepare directories
-					if(!prepare_directories($user_id)){
+					if(!Util::prepare_directories($user_id)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
 						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
 					}
 
 					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
-					if(!create_directory($recipe_images_dir)){
+					if(!Util::create_directory($recipe_images_dir)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to create directory(".$recipe_images_dir.")");
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
 						throw new Exception("Failed to create directory(".$recipe_images_dir.")");
@@ -476,7 +468,7 @@
 
 							//insert into RECIPE_IMG table
 							$query = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`, `CREATE_DTM`) 
-									  VALUES ('$rcp_id' , '".get_relative_path($recipe_image)."', CURRENT_TIMESTAMP)";   
+									  VALUES ('$rcp_id' , '".Util::get_relative_path($recipe_image)."', CURRENT_TIMESTAMP)";   
 							if(mysqli_query($con, $query)){
 								$rcp_img_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$rcp_img_id.") added into RECIPE_IMG table");
@@ -513,7 +505,7 @@
 						$response['err_message'] = "Few of the images could not be uploaded !";
 					}
 					else{
-						$response['err_message'] = "SUCCESS";
+						$response['err_message'] = "Recipe submitted successfully !";
 					}
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 

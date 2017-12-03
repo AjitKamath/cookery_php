@@ -39,7 +39,7 @@
     $rcp_id 		= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
 	$user_id 		= isset($_POST['user_id']) ? $_POST['user_id'] : '';
 	$rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
-    $food_csn_nm    = isset($_POST['food_csn_nm']) ? $_POST['food_csn_nm'] : '';
+    $food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
     $ing_id         = isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
     $ing_nm         = isset($_POST['ing_nm']) ? $_POST['ing_nm'] : '';
     $qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
@@ -117,6 +117,10 @@
 	}
 	else if(RECIPE_TRENDING_FETCH == $function_key){
 		echo Recipe::fetchTrendingRecipes($user_id);
+	}
+	else if(RECIPE_SUBMIT == $function_key){
+		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, $rcp_proc, $rcp_steps, $rcp_plating, $rcp_note,
+												$tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	//recipe
 	
