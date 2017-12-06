@@ -77,7 +77,7 @@
 					//if the user has unliked it, like it
 					//if the user has liked it, unlike it
 					else{
-						infoLoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
 
 						$query = "UPDATE LIKES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 

@@ -44,10 +44,7 @@
     $ing_nm         = isset($_POST['ing_nm']) ? $_POST['ing_nm'] : '';
     $qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
     $ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
-    $rcp_proc       = isset($_POST['rcp_proc']) ? $_POST['rcp_proc'] : '';
     $rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
-    $rcp_plating    = isset($_POST['rcp_plating']) ? $_POST['rcp_plating'] : '';
-    $rcp_note       = isset($_POST['rcp_note']) ? $_POST['rcp_note'] : '';
     $tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
     $tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
     $food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
@@ -107,20 +104,23 @@
 		echo Recipe::fetchRecipeReview($rcp_id, $user_id);
 	}
 	else if(RECIPE_FAVORITE_FETCH == $function_key){
-		echo Recipe::fetchFavoriteRecipes($user_id);
+		echo Recipe::fetchFavoriteRecipes($user_id, $index);
 	}
 	else if(RECIPE_USER_FETCH == $function_key){
-		echo Recipe::fetchUsersRecipes($user_id);
+		echo Recipe::fetchUsersRecipes($user_id, $index);
+	}
+	else if(RECIPE_USER_VIEWED_FETCH == $function_key){
+		echo Recipe::fetchUserViewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_USER_REVIEWED_FETCH == $function_key){
-		echo Recipe::fetchUserReviewedRecipes($user_id);
+		echo Recipe::fetchUserReviewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_TRENDING_FETCH == $function_key){
 		echo Recipe::fetchTrendingRecipes($user_id);
 	}
 	else if(RECIPE_SUBMIT == $function_key){
-		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, $rcp_proc, $rcp_steps, $rcp_plating, $rcp_note,
-												$tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
+		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
+								  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	//recipe
 	

@@ -7,7 +7,7 @@
 
             //check for null/empty
             if(!Util::check_for_null($searchQuery)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty search query");
                 return;
             }
 			//check for null/empty

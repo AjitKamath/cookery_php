@@ -58,9 +58,9 @@
 						$files_array = array();
 						while (($file = readdir($dh)) !== false){
 							//if the file modified date is older than LOGS_MAX_HISTORY days
-							if(ends_with($file, ".log") && strtotime(date("Y-m-d", filemtime(LOGS_DIRECTORY.$file))) < strtotime("-".LOGS_MAX_HISTORY."days")){
+							if(Util::ends_with($file, ".log") && strtotime(date("Y-m-d", filemtime(LOGS_DIRECTORY.$file))) < strtotime("-".LOGS_MAX_HISTORY."days")){
 								$new_filename = substr($file,strrpos($file,'/') );
-								//$zip->addFile(LOGS_DIRECTORY.$file, $new_filename);
+								$zip->addFile(LOGS_DIRECTORY.$file, $new_filename);
 								array_push($files_array, $file);
 							}
 						}

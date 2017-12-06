@@ -329,7 +329,10 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//get timeline performed by user or performed on his items
-				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, USER_ID, REF_USER_ID, CREATE_DTM FROM `TIMELINES` WHERE USER_ID = '$user_id' OR REF_USER_ID = '$user_id' LIMIT $index , ".TIMELINES_COUNT;
+				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, USER_ID, REF_USER_ID, CREATE_DTM FROM `TIMELINES` 
+						WHERE USER_ID = '$user_id' OR REF_USER_ID = '$user_id' 
+						ORDER BY CREATE_DTM DESC
+						LIMIT $index , ".TIMELINES_COUNT;
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();

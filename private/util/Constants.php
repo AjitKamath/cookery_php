@@ -11,7 +11,7 @@
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
 
     //logs
-    define("LOGS_MAX_HISTORY", "7");    //in days
+    define("LOGS_MAX_HISTORY", "5");    //in days
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
@@ -24,6 +24,9 @@
     //---------------------timeline---------------------
     //timelines count to load at a time
     define("TIMELINES_COUNT","10");
+
+    //recipes count to load at a time
+    define("RECIPES_COUNT","10");
 
     //user
     define("USER_ADD","USER_ADD");

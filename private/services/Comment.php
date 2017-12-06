@@ -26,21 +26,34 @@
 
                 if(mysqli_query($con,  $query)){
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Comment('$com_id') successfully deleted by the user('$user_id')");
-                    echo "SUCCESS";
-
-                    //register timeline
+                    
+					$result_arr["err_code"]="0";
+					$result_arr["isError"]=false;
+					$result_arr["err_message"]="Comment deleted !";
+				
+					//register timeline
                     Timeline::addTimeline($con, $user_id, $user_id, COMMENT_RECIPE_REMOVE, $com_id);
                     //register timeline
                 }
                 else{
+					$result_arr["err_code"]="1";
+					$result_arr["isError"]=true;
+					$result_arr["err_message"]="Comment delet failed !";
+					
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Comment('$com_id') could not be deleted by the user('$user_id')");
-                    echo "FAIL";
                 } 
+				
+				echo json_encode($result_arr);
                 //delete comment
             }
             catch(Exception $e){
+				$result_arr["err_code"]="0";
+				$result_arr["isError"]=false;
+				$result_arr["err_message"]="Comment deleted !";
+				
+				echo json_encode($result_arr);
+				
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-                echo "FAIL";
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
@@ -65,7 +78,7 @@
                 //get comments for $rcp_id
                 $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM FROM COMMENTS COM 
                           INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID WHERE RCP_ID = '$rcp_id' AND COM.IS_DEL = 'N'";
-                $result = mysqli_query($db,$query);
+                $result = mysqli_query($con ,$query);
 
                 $result_array = array();
                 while($result_data = $result->fetch_object()){
@@ -122,9 +135,11 @@
 
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the recipe('$rcp_id')");
 
-                    echo "SUCCESS";
-
-                    //register timeline
+                    $result_arr["err_code"]="0";
+					$result_arr["isError"]=false;
+					$result_arr["err_message"]="Successfully commented !";
+				
+					//register timeline
                     //get user_id of the recipe
                     $query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
                     $result = mysqli_query($con, $query);
@@ -135,17 +150,27 @@
                     //register timeline
                 }
                 else{
+					$result_arr["err_code"]="1";
+					$result_arr["isError"]=true;
+					$result_arr["err_message"]="Comment failed !";
+					
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the recipe('$rcp_id')");
-                    echo "FAIL";
                 } 
+				
+				echo json_encode($result_arr);
                 //insert comment
             }
             catch(Exception $e){
+				$result_arr["err_code"]="1";
+				$result_arr["isError"]=true;
+				$result_arr["err_message"]="Comment failed !";
+				
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-                echo "FAIL";
+                
+				echo json_encode($result_arr);
             }
             finally{
-                DatabaseUtil::getInstance()->close_connection($con);
+				DatabaseUtil::getInstance()->close_connection($con);
             }
         }
     }

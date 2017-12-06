@@ -4,15 +4,12 @@
 			return self::fetchRecipe(27, 1);
 		}
 		
-		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_nm, $ing_id, $ing_nm, $qty_id, $ing_qty, $rcp_proc, $rcp_steps, $rcp_plating, $rcp_note,
-												$tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
+		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
+											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_nm(".$rcp_nm.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_csn_nm(".$food_csn_nm.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_proc(".$rcp_proc.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_plating(".$rcp_plating.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_note(".$rcp_note.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_csn_nm(".$food_csn_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_typ_id(".$food_typ_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 
@@ -33,8 +30,8 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : qty_id[".$i."](".$qty_id[$i].")");
 			}
 
-			for ($i = 0; $i < count($qty_id); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : qty_id[".$i."](".$qty_id[$i].")");
+			for ($i = 0; $i < count($ing_qty); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_qty[".$i."](".$ing_qty[$i].")");
 			}
 
 			for ($i = 0; $i < count($tst_id); $i++) {
@@ -68,7 +65,7 @@
 				return;
 			}
 
-			if(!Util::check_for_null($food_csn_nm)){
+			if(!Util::check_for_null($food_csn_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food_csn_nm");
 				return;
 			}
@@ -85,11 +82,6 @@
 
 			if(!Util::check_for_null($ing_qty)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_qty");
-				return;
-			}
-
-			if(!Util::check_for_null($rcp_proc)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_proc");
 				return;
 			}
 
@@ -122,14 +114,6 @@
 			if(!Util::check_for_null($ing_nm)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty ing_nm");
 			}
-
-			if(!Util::check_for_null($rcp_plating)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty rcp_plating");
-			}
-
-			if(!Util::check_for_null($rcp_note)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty rcp_note");
-			}
 			//optional
 			//check for null/empty
 
@@ -153,8 +137,8 @@
 
 					//update recipe
 					//update RECIPE table
-					$query = "UPDATE `RECIPE` SET `RCP_NAME` = '".$rcp_nm."', `FOOD_TYP_ID` = '".$food_typ_id."', `FOOD_CSN_ID` = '".$food_csn_nm."', `RCP_PROC` = '".$rcp_proc."', 
-							  `RCP_PLATING` = '".$rcp_plating."', `RCP_NOTE` = '".$rcp_note."', `MOD_DTM` = CURRENT_TIMESTAMP
+					$query = "UPDATE `RECIPE` SET `RCP_NAME` = '".$rcp_nm."', `FOOD_TYP_ID` = '".$food_typ_id."', `FOOD_CSN_ID` = '".$food_csn_id."', `RCP_PROC` = '', 
+							  `RCP_PLATING` = '', `RCP_NOTE` = '', `MOD_DTM` = CURRENT_TIMESTAMP
 							  WHERE RCP_ID = '".$rcp_id."'";
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") updated into RECIPE table by User(".$user_id.")");
@@ -270,7 +254,7 @@
 						//insert tastes into TASTE table
 					}
 					else{
-						throw new Exception("Query failure : ".$dishsql);
+						throw new Exception("Query failure : ".$query);
 					}
 					//update RECIPE table
 
@@ -364,7 +348,7 @@
 					//add recipe
 					//insert into RECIPE table
 					$query = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`,`USER_ID`, `CREATE_DTM`) 
-							  VALUES ('$rcp_nm' , '$food_typ_id' , '$food_csn_nm' , '$rcp_proc' , '$rcp_plating' , '$rcp_note' , '$user_id' , CURRENT_TIMESTAMP)";
+							  VALUES ('$rcp_nm' , '$food_typ_id' , '$food_csn_id' , '' , '' , '' , '$user_id' , CURRENT_TIMESTAMP)";
 					if(mysqli_query($con, $query)){
 						$rcp_id = mysqli_insert_id($con);
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") added into RECIPE table by User(".$user_id.")");
@@ -533,14 +517,20 @@
 			}
 		}
 		
-		public static function fetchUserViewedRecipes($user_id){
+		public static function fetchUserViewedRecipes($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
-		
+			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -556,7 +546,9 @@
 								INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
 								INNER JOIN `VIEWS` AS VW ON VW.USER_ID = RCP.USER_ID AND VW.RCP_ID = RCP.RCP_ID
 								WHERE RCP.USER_ID = '$user_id'
-								AND RCP.IS_DEL = 'N'";
+								AND RCP.IS_DEL = 'N'
+								ORDER BY RCP.MOD_DTM DESC, RCP.CREATE_DTM DESC
+								LIMIT ".$index." , ".RECIPES_COUNT;
 
 				$result = mysqli_query($con, $query);
 
@@ -628,14 +620,20 @@
 			}
 		}
 		
-		public static function fetchUserReviewedRecipes($user_id){
+		public static function fetchUserReviewedRecipes($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -652,7 +650,9 @@
 								INNER JOIN `REVIEWS` AS RW ON RW.USER_ID = RCP.USER_ID AND RW.RCP_ID = RCP.RCP_ID
 								WHERE RCP.USER_ID = '$user_id'
 								AND RW.IS_DEL = 'N'
-								AND RCP.IS_DEL = 'N'";
+								AND RCP.IS_DEL = 'N'
+								ORDER BY RCP.MOD_DTM DESC, RCP.CREATE_DTM DESC
+								LIMIT ".$index." , ".RECIPES_COUNT;
 
 				$result = mysqli_query($con, $query);
 
@@ -724,14 +724,20 @@
 			}
 		}
 		
-		public static function fetchUsersRecipes($user_id){
+		public static function fetchUsersRecipes($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -745,7 +751,9 @@
 								INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
 								INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
 								WHERE RCP.USER_ID = '$user_id'
-								AND RCP.IS_DEL = 'N'";
+								AND RCP.IS_DEL = 'N'
+								ORDER BY RCP.MOD_DTM DESC, RCP.CREATE_DTM DESC
+								LIMIT ".$index." , ".RECIPES_COUNT;
 
 				$result = mysqli_query($con, $query);
 
@@ -816,14 +824,20 @@
 			}
 		}
 		
-		public static function fetchFavoriteRecipes($user_id){
+		public static function fetchFavoriteRecipes($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
-
+			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -841,7 +855,9 @@
 						WHERE RCP.USER_ID = '$user_id'
 						AND LIK.TYPE = 'RECIPE'
 						AND LIK.IS_DEL = 'N'
-						AND RCP.IS_DEL = 'N'";
+						AND RCP.IS_DEL = 'N'
+						ORDER BY RCP.MOD_DTM DESC, RCP.CREATE_DTM DESC
+						LIMIT ".$index." , ".RECIPES_COUNT;
 
 				$result = mysqli_query($con, $query);
 
@@ -1071,7 +1087,7 @@
 					if($user_has_viewed_result_data = $user_has_viewed_result->fetch_object()) {
 						if($user_has_viewed_result_data->VIEWS_COUNT == 0){
 							$register_user_view_query = "INSERT INTO `VIEWS`(`USER_ID`, `RCP_ID`, `CREATE_DTM`) VALUES('$user_id', '$rcp_id', CURRENT_TIMESTAMP)";
-							mysqli_query($db, $register_user_view_query);
+							mysqli_query($con, $register_user_view_query);
 						}
 					}
 					//check if the user has viewed this recipe. if not, register it.

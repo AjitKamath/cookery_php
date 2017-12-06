@@ -33,17 +33,20 @@
 					if($result_data->EMAIL == $email && $result_data->PASSWORD == $password){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Logged in with email id as: ".$email);
 						$data["err_code"]="SUCCESS";
+						$data["isError"]=false;
 						$data["err_message"]="login success";
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Login Failed with email id as: ".$email);
 						$data["err_code"]="FAILURE";
+						$data["isError"]=true;
 						$data["err_message"]="login failed";
 					}
 				}
 				else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "User Login Failed with email id as: ".$email);
 					$data["err_code"]="FAILURE";
+					$data["isError"]=true;
 					$data["err_message"]="login failed";
 				}
 				
@@ -95,19 +98,19 @@
 				
 				if($result_data = $result->fetch_object()){
 					if($result_data->MOBILE == $mobile){
-						$data['err_code']= $MOBILE_EXISTS;
+						$data['err_code']= 0;
+						$data['isError']= true;
 						$data['err_message']="Mobile no already exist";
-						echo json_encode($data);
 					}
 					else if($result_data->EMAIL == $email){
-						$data['err_code']= $EMAIL_EXISTS;
+						$data['err_code']= 0;
+						$data['isError']= true;
 						$data['err_message']="Email id already exist";
-						echo json_encode($data);
 					}
 				}
 				else{
-					$veri_code = generateRandomString(); 
-					$salt = generateSalt(); 
+					$veri_code = Util::generateRandomString(); 
+					$salt = Util::generateSalt(); 
 
 					$password = $password.$salt;
 					$password = base64_encode($password);
@@ -119,11 +122,11 @@
 					
 					if(mysqli_query($con, $query)){
 						$user_id = mysqli_insert_id($con);
-						mailTrigger($email, $veri_code);
+						Util::mailTrigger($email, $veri_code);
 						
-						$data['err_code']= $SUCCESS;
+						$data['err_code']= 1;
+						$data['isError']= false;
 						$data['err_message']="User Registered Successfully";
-						echo json_encode($data);
 						
 						//register timeline
 						Timeline::addTimeline($con, $user_id, $user_id, USER_ADD, $user_id);
