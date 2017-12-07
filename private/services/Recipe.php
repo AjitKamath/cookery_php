@@ -1149,25 +1149,37 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//delete recipe
-				$query = "UPDATE `RECIPE` SET IS_DEL = 'Y' WHERE RCP_ID = '".$com_id."' AND USER_ID = '".$user_id."'";
+				$query = "UPDATE `RECIPE` SET IS_DEL = 'Y' WHERE RCP_ID = '".$rcp_id."' AND USER_ID = '".$user_id."'";
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Recipe('$rcp_id') successfully deleted by the user('$user_id')");
-					echo "SUCCESS";
-
+					
+					$result_arr["err_code"]="0";
+					$result_arr["isError"]=false;
+					$result_arr["err_message"]="Recipe deleted !";
+					
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id);
 					//register timeline
 				}
 				else{
+					$result_arr["err_code"]="1";
+					$result_arr["isError"]=true;
+					$result_arr["err_message"]="Recipe delete failed !";
+					
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Recipe('$rcp_id') could not be deleted by the user('$user_id')");
-					echo "FAIL";
 				} 
+				
+				echo json_encode($result_arr);
 				//delete recipe
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-				echo "FAIL";
+				
+				$result_arr["err_code"]="1";
+				$result_arr["isError"]=true;
+				$result_arr["err_message"]="Recipe delete failed !";
+				echo json_encode($result_arr);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

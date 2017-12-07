@@ -63,21 +63,34 @@
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Review('$rev_id') successfully deleted by the user('$user_id')");
-					echo "SUCCESS";
+					
+					$result_arr["err_code"]="0";
+					$result_arr["isError"]=false;
+					$result_arr["err_message"]="Review deleted !";
 
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id);
 					//register timeline
 				}
 				else{
+					$result_arr["err_code"]="1";
+					$result_arr["isError"]=true;
+					$result_arr["err_message"]="Review delete failed !";
+					
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Review('$rev_id') could not be deleted by the user('$user_id')");
-					echo "FAIL";
 				} 
+				
+				echo json_encode($result_arr);
 				//delete review
 			}
 			catch(Exception $e){
+				$result_arr["err_code"]="1";
+				$result_arr["isError"]=true;
+				$result_arr["err_message"]="Review delete failed !";
+				
+				echo json_encode($result_arr);
+				
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-				echo "FAIL";
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -123,6 +136,8 @@
 
 				//user has already reviewed
 				if($result_data = $result->fetch_object()){
+					$rev_id = $result_data->REV_ID;
+					
 					$query = "UPDATE REVIEWS SET IS_DEL = 'N', REVIEW = '$review', MOD_DTM = CURRENT_TIMESTAMP, RATING = '$rating' WHERE RCP_ID = $rcp_id AND USER_ID = $user_id";
 
 					if(mysqli_query($con, $query)){
@@ -133,7 +148,7 @@
 						$query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
 						$result = mysqli_query($con, $query);
 						if($result_data = $result->fetch_object()){  
-							Timeline::addTimeline($user_id, $result_data->USER_ID, REVIEW_RECIPE_MODIFY, $result->REV_ID);
+							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_MODIFY, $rev_id);
 						}
 						//get user_id of the recipe
 						//register timeline
@@ -238,7 +253,7 @@
 
 					$recipe_array['RCP_ID'] = $result_data->RCP_ID;
 					$recipe_array['RCP_NAME'] = $result_data->RCP_NAME;
-					$recipe_array['FOOD_CSN_NAME'] = $result_data->FOODl_CSN_NAME;
+					$recipe_array['FOOD_CSN_NAME'] = $result_data->FOOD_CSN_NAME;
 					$recipe_array['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
 					$recipe_array['NAME'] = $result_data->NAME;
 
