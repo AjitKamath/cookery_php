@@ -1,0 +1,15 @@
+#This file must be placed in those folders which you want to password protect
+#credentials are managed in secure/.htpasswd file. it can be generated at http://www.htaccesstools.com/htpasswd-generator/
+
+AuthName "Secured path! Admin username/password required."
+AuthType basic
+
+#this must be absolute path. relative path is unsupported.
+AuthUserFile /home/cabox/workspace/secure/.htpasswd
+
+#Require all granted = allows all, Require valid-user = allows only those defined in AuthUserFile
+Require all granted
+
+#this prevents the browser from listing files in the directory. But this allows the files to be accessed inside
+Options -Indexes
+

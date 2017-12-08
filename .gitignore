@@ -1,10 +1,6 @@
 # log files
 logs/*
-*.log
-*.zip
-!logs/.gitkeep 
+!logs/*.zip
 
 # app_data
-app_data/*
-*.jpg
-!app_data/.gitkeep 
+app_data/**/*.jpg
