@@ -3,4 +3,7 @@
 2. Ensure that the absolute path of the .htpassword file is in all the .htaccess file of the directories which we want to be protected.
 3. Ensure that the version is incremented in Constants.php file.
 4. Ensure that the /app_data/users/, /logs directories are present in the root directory.
-5. Check all the directories for public access. Only /app_data/users/* & /public/* must be accessible for public.
+5. Ensure that the writable directories such as /app_data/*, logs/* have read/write permissions(777).
+6. Check all the directories for public access. Only /app_data/users/* & /public/* must be accessible for public.
+7. Ensure that the LOGS_SWITCH is set as ERROR in prod and ALL in dev.
+8. Ensure that the LOGS_MAX_HISTORY is set to atleast 5.

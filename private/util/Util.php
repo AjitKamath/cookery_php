@@ -92,7 +92,7 @@
 
 			if(!file_exists(APP_DATA_USERS_DIRECTORY)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".APP_DATA_USERS_DIRECTORY.") does not exist. Creating it.");
-				if(!create_directory(APP_DATA_USERS_DIRECTORY)){
+				if(!self::create_directory(APP_DATA_USERS_DIRECTORY)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".APP_DATA_USERS_DIRECTORY.") could not be created !");
 					return false;
 				}
@@ -101,7 +101,7 @@
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id;
 			if(!file_exists($directory)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
-				if(!create_directory($directory)){
+				if(!self::create_directory($directory)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}
@@ -110,7 +110,7 @@
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY;
 			if(!file_exists($directory)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
-				if(!create_directory($directory)){
+				if(!self::create_directory($directory)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}

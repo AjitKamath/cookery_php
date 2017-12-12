@@ -11,7 +11,8 @@
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
 
     //logs
-    define("LOGS_MAX_HISTORY", "5");    //in days
+    define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
+    define("LOGS_MAX_HISTORY", "10");    //in days
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
