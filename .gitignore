@@ -3,4 +3,4 @@ logs/*
 !logs/*.zip
 
 # app_data
-app_data/**/*.jpg
+#app_data/**/*.jpg
