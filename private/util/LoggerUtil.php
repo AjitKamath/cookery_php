@@ -39,7 +39,7 @@
 			$now = date('d-m-y H:i:s');
 
 			$file_handle = fopen($file, "a");
-			$file_contents = "[v".APP_VERSION."] : ".$now." : ".$className." : ".$methodName."(".$lineNumber.")"." : ".$type." : ".$message;
+			$file_contents = "[v".APP_VERSION."] : ".$type." : ".$now." : ".$methodName."(".$lineNumber.") : ".$message;
 
 			fwrite($file_handle, $file_contents."\n");
 			fclose($file_handle);

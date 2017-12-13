@@ -1,5 +1,5 @@
 <?php
-    //php version (note : increment it on each code commit)
+    //php code version (note : in prod, increment it on each code commit)
     define("APP_VERSION", "0.1");
 
     //paths
@@ -12,7 +12,7 @@
 
     //logs
     define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
-    define("LOGS_MAX_HISTORY", "10");    //in days
+    define("LOGS_MAX_HISTORY", "7");    //in days
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");

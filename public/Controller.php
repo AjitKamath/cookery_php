@@ -6,18 +6,15 @@
 	//function key
     $function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 
-	LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "");
-    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "-------------".$function_key."-------------");
-    
-    //check for null/empty
+	//check for null/empty
     if(!Util::check_for_null($function_key)){
         LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "E", "Error ! null/empty function_key");
         return;
     }
-    else{
-        LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "REQUEST PARAM : function_key(".$function_key.")");
-    }
-	//check for null/empty
+	else{
+		LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "=====>".$function_key);
+	}
+    //check for null/empty
     //function key
 
     //params
@@ -33,7 +30,7 @@
 	$review 		= isset($_POST['review']) ? $_POST['review'] : '';
 	$rating 		= isset($_POST['rating']) ? $_POST['rating'] : '';
 
-	$index			= isset($_POST['index']) ? $_POST['index'] : '';
+	$index			= isset($_POST['index']) ? $_POST['index'] : '0';
 	$tmln_id		= isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
 
     $rcp_id 		= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
@@ -179,7 +176,8 @@
         echo UNIDENTIFIED_FUNCTION_KEY;    
     }
     
-    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "-------------".$function_key."-------------");
+    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "<=====".$function_key);
+	LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "");
 
 	//this function triggers on every class object creation or static method calls
 	function __autoload($class_name){
