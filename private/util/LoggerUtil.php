@@ -19,14 +19,24 @@
 
 				if(LOGS_SWITCH == 'ALL'){
 					self::registerLog(self::checkFile("all"), $className, $methodName, $lineNumber, $type, $message);
-					self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
-					self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
+					
+					if($type == "I"){
+						self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
+					}
+					
+					if($type == "E"){
+						self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
+					}
 				}
 				else if(LOGS_SWITCH == 'INFO'){
-					self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
+					if($type == "I"){
+						self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
+					}
 				}
 				else if(LOGS_SWITCH == 'ERROR'){
-					self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
+					if($type == "E"){
+						self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
+					}
 				}
 			}
 			catch(Exception $e){
