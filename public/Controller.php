@@ -8,11 +8,11 @@
 
 	//check for null/empty
     if(!Util::check_for_null($function_key)){
-        LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "E", "Error ! null/empty function_key");
+        LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
         return;
     }
 	else{
-		LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "=====>".$function_key);
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 	}
     //check for null/empty
     //function key
@@ -176,8 +176,8 @@
         echo UNIDENTIFIED_FUNCTION_KEY;    
     }
     
-    LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "<=====".$function_key);
-	LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, "I", "");
+    LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "<=====".$function_key);
+	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
 
 	//this function triggers on every class object creation or static method calls
 	function __autoload($class_name){

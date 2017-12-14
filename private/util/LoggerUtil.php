@@ -71,7 +71,7 @@
 				if (fmod(date("d"), LOGS_MAX_HISTORY) == 0 &&  is_dir(LOGS_DIRECTORY)){
 					if ($dh = opendir(LOGS_DIRECTORY)){
 						$today = date("Y-m-d");
-						$yesterday = date('d.m.Y',strtotime("-1 days"));
+						$yesterday = date('Y-m-d',strtotime("-1 days"));
 						
 						$zip = new ZipArchive();
 						$zip->open(LOGS_DIRECTORY.$yesterday.".zip", ZIPARCHIVE::CREATE);

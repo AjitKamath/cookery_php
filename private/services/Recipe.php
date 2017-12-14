@@ -1,7 +1,7 @@
 <?php
 	class Recipe{
 		public static function fetchTrendingRecipes(){
-			return self::fetchRecipe(27, 1);
+			return self::fetchRecipe(103, 1);
 		}
 		
 		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
