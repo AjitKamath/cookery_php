@@ -83,7 +83,7 @@
 		echo Comment::deleteComment($com_id, $user_id);
 	}
 	else if(COMMENT_RECIPE_FETCH_ALL == $function_key){
-		echo Comment::fetchRecipeComments($rcp_id);
+		echo Comment::fetchRecipeComments($rcp_id, $index);
 	}
 	else if(COMMENT_SUBMIT == $function_key){
 		echo Comment::submitComment($rcp_id, $user_id, $comment);
@@ -96,9 +96,6 @@
 	}
 	else if(RECIPE_FETCH == $function_key){
 		echo Recipe::fetchRecipe($rcp_id, $user_id);
-	}
-	else if(RECIPE_REVIEW_FETCH == $function_key){
-		echo Recipe::fetchRecipeReview($rcp_id, $user_id);
 	}
 	else if(RECIPE_FAVORITE_FETCH == $function_key){
 		echo Recipe::fetchFavoriteRecipes($user_id, $index);
@@ -124,6 +121,9 @@
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
 		echo Review::fetchUsersReviews($user_id);
+	}
+	else if(REVIEW_RECIPE_FETCH == $function_key){
+		echo Review::fetchRecipeReviews($user_id, $rcp_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){
 		echo Review::submitReview($rcp_id, $user_id, $review, $rating);

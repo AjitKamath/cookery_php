@@ -60,14 +60,20 @@
             }
         }
         
-        public static function fetchRecipeComments($rcp_id){
+        public static function fetchRecipeComments($rcp_id, $index){
             //request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
             //request
 
             //check for null/empty
             if(!Util::check_for_null($rcp_id)){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
+                return;
+            }
+			
+			if(!Util::check_for_null($index)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
                 return;
             }
             //check for null/empty
@@ -76,8 +82,12 @@
                 $con = DatabaseUtil::getInstance()->open_connection();
 
                 //get comments for $rcp_id
-                $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM FROM COMMENTS COM 
-                          INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID WHERE RCP_ID = '$rcp_id' AND COM.IS_DEL = 'N'";
+                $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM 
+						FROM COMMENTS COM 
+                        INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID 
+						WHERE RCP_ID = '$rcp_id' AND COM.IS_DEL = 'N'
+						LIMIT ".$index." , ".COMMENTS_COUNT;
+				
                 $result = mysqli_query($con ,$query);
 
                 $result_array = array();

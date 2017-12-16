@@ -29,6 +29,12 @@
     //recipes count to load at a time
     define("RECIPES_COUNT","10");
 
+    //comments count to load at a time   
+    define("COMMENTS_COUNT","10");
+
+    //reviews count to load at a time   
+    define("REVIEWS_COUNT","10");
+
     //user
     define("USER_ADD","USER_ADD");
     //user

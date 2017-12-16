@@ -15,7 +15,6 @@
     //recipe
     define("RECIPE_DELETE", "RECIPE_DELETE");                           //Postman completed
     define("RECIPE_FETCH", "RECIPE_FETCH");                             //Postman completed
-    define("RECIPE_REVIEW_FETCH", "RECIPE_REVIEW_FETCH");               //Postman completed
     define("RECIPE_FAVORITE_FETCH", "RECIPE_FAVORITE_FETCH");           //Postman completed
     define("RECIPE_USER_FETCH", "RECIPE_USER_FETCH");                   //Postman completed
     define("RECIPE_USER_VIEWED_FETCH", "RECIPE_USER_VIEWED_FETCH");     //Postman completed
@@ -26,6 +25,7 @@
 
     //review
     define("REVIEW_USER_FETCH", "REVIEW_USER_FETCH");                   //Postman completed
+    define("REVIEW_RECIPE_FETCH", "REVIEW_RECIPE_FETCH");                   //Postman completed
     define("REVIEW_SUBMIT", "REVIEW_SUBMIT");                           //Postman completed
     define("REVIEW_DELETE", "REVIEW_DELETE");                           //Postman completed
     define("REVIEW_RECIPE_AVG_RATING", "REVIEW_RECIPE_AVG_RATING");     //Postman completed
