@@ -25,7 +25,7 @@
 
     //review
     define("REVIEW_USER_FETCH", "REVIEW_USER_FETCH");                   //Postman completed
-    define("REVIEW_RECIPE_FETCH", "REVIEW_RECIPE_FETCH");                   //Postman completed
+    define("REVIEW_RECIPE_FETCH", "REVIEW_RECIPE_FETCH");               //Postman completed
     define("REVIEW_SUBMIT", "REVIEW_SUBMIT");                           //Postman completed
     define("REVIEW_DELETE", "REVIEW_DELETE");                           //Postman completed
     define("REVIEW_RECIPE_AVG_RATING", "REVIEW_RECIPE_AVG_RATING");     //Postman completed

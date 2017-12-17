@@ -60,13 +60,19 @@
             }
         }
         
-        public static function fetchRecipeComments($rcp_id, $index){
+        public static function fetchRecipeComments($user_id, $rcp_id, $index){
             //request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
             //request
 
             //check for null/empty
+			if(!Util::check_for_null($user_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+                return;
+            }
+			
             if(!Util::check_for_null($rcp_id)){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
                 return;
@@ -82,7 +88,7 @@
                 $con = DatabaseUtil::getInstance()->open_connection();
 
                 //get comments for $rcp_id
-                $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM 
+                $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM_ID, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM 
 						FROM COMMENTS COM 
                         INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID 
 						WHERE RCP_ID = '$rcp_id' AND COM.IS_DEL = 'N'
@@ -92,7 +98,27 @@
 
                 $result_array = array();
                 while($result_data = $result->fetch_object()){
-                    array_push($result_array, $result_data);
+					$temp_arr['USER_ID'] = $result_data->USER_ID;
+					$temp_arr['name'] = $result_data->NAME;
+					$temp_arr['userImage'] = $result_data->IMG;
+					$temp_arr['COM_ID'] = $result_data->COM_ID;
+					$temp_arr['COMMENT'] = $result_data->COMMENT;
+					$temp_arr['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_arr['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					//fetch like count for the comment
+					$temp_array['likeCount'] = Like::getLikeCount($con, "COMMENT", $result_data->COM_ID);
+					//fetch like count for the comment
+					
+					//check if user has liked the comment
+					if($temp_array['likeCount'] > 0){
+						if($temp_array::getUserLikeCount($con, $user_id, "COMMENT", $result_data->COM_ID) > 0){
+							$temp_array['userLiked'] = true;
+						}
+					}
+					//check if user has liked the comment
+					
+                    array_push($result_array, $temp_arr);
                 }
                 //get comments for $rcp_id
 
@@ -109,8 +135,8 @@
                 DatabaseUtil::getInstance()->close_connection($con);
             }
         }
-        
-        public static function submitComment($rcp_id, $user_id, $comment){
+		
+		public static function submitComment($rcp_id, $user_id, $comment){
             //request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");

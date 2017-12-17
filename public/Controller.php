@@ -83,7 +83,7 @@
 		echo Comment::deleteComment($com_id, $user_id);
 	}
 	else if(COMMENT_RECIPE_FETCH_ALL == $function_key){
-		echo Comment::fetchRecipeComments($rcp_id, $index);
+		echo Comment::fetchRecipeComments($user_id, $rcp_id, $index);
 	}
 	else if(COMMENT_SUBMIT == $function_key){
 		echo Comment::submitComment($rcp_id, $user_id, $comment);
@@ -120,7 +120,7 @@
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
-		echo Review::fetchUsersReviews($user_id);
+		echo Review::fetchUserRecipeReview($user_id, $rcp_id);
 	}
 	else if(REVIEW_RECIPE_FETCH == $function_key){
 		echo Review::fetchRecipeReviews($user_id, $rcp_id, $index);

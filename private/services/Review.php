@@ -190,10 +190,10 @@
 
 				if($result_data = $result->fetch_object()){
 					if($result_data->REVIEW_COUNT > 0){
-						$result_array['isReviewed'] = true;
+						$temp_array['isReviewed'] = true;
 					}
 					else{
-						$result_array['isReviewed'] = false;
+						$temp_array['isReviewed'] = false;
 					}
 				}
 				//check users review status
@@ -203,10 +203,12 @@
 				$result = mysqli_query($con, $query);
 
 				if($result_data = $result->fetch_object()){
-					$result_array['RATING'] = $result_data->RATING;
+					$temp_array['RATING'] = $result_data->RATING;
 				}
 				//get avg rating of the $rcp_id
 
+				array_push($result_array, $temp_array); 
+				
 				//response
 				echo json_encode($result_array);
 				//response
@@ -216,6 +218,96 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function fetchUserRecipeReview($user_id, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				echo json_encode(self::getUserRecipeReview($con, $user_id, $rcp_id));
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getUserRecipeReview($con, $user_id, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				//get recipe review by the logged in user
+				$query = "SELECT REV_ID, REVIEW, RATING, RVS.CREATE_DTM, RVS.MOD_DTM
+							FROM REVIEWS AS RVS
+							WHERE RVS.RCP_ID = '".$rcp_id."'
+							AND RVS.USER_ID = '".$user_id."'
+							AND RVS.IS_DEL = 'N'";
+
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()){
+					$temp_array['REV_ID'] = $result_data->REV_ID;
+					$temp_array['REVIEW'] = $result_data->REVIEW;
+					$temp_array['RATING'] = $result_data->RATING;
+					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					//fetch like count for the review
+					$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
+					//fetch like count for the review
+					
+					//check if user has liked the review
+					if($temp_array['likeCount'] > 0){
+						if($temp_array::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
+							$temp_array['userLiked'] = true;
+						}
+					}
+					//check if user has liked the review
+					
+					array_push($result_array, $temp_array); 
+					//get recipe review by the logged in user 
+				}
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 		
@@ -273,7 +365,7 @@
 					//check if user has liked the review
 					if($temp_array['likeCount'] > 0){
 						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
-							$temp_array['userLiked'] = $result_count_obj->USER_LIKE_COUNT > 0;
+							$temp_array['userLiked'] = true;
 						}
 					}
 					//check if user has liked the review
@@ -282,95 +374,6 @@
 				}
 				
 				echo json_encode($result_array);
-			}
-			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-			}
-			finally{
-				DatabaseUtil::getInstance()->close_connection($con);
-			}
-		}
-		
-        public static function fetchUsersReviews($user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
-			//check for null/empty
-			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
-				return;
-			}
-			//check for null/empty
-
-			try{
-				$con = DatabaseUtil::getInstance()->open_connection();
-
-				//get all recipes & its reviews for $user_id
-				$query = "SELECT RCP.RCP_ID, RW.REV_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, FDTYP.FOOD_TYP_NAME, USR.NAME
-						FROM `RECIPE` AS RCP 
-						INNER JOIN `USER` USR ON USR.USER_ID = RCP.USER_ID
-						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
-						INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
-						INNER JOIN `REVIEWS` AS RW ON RW.RCP_ID = RCP.RCP_ID
-						WHERE RW.USER_ID = '$user_id'
-						AND RCP.IS_DEL = 'N'
-						AND RW.IS_DEL = 'N'";
-
-				$result = mysqli_query($con, $query);
-
-				$result_array = array();
-				while($result_data = $result->fetch_object()){
-					$recipe_array = array();
-
-					$recipe_array['RCP_ID'] = $result_data->RCP_ID;
-					$recipe_array['RCP_NAME'] = $result_data->RCP_NAME;
-					$recipe_array['FOOD_CSN_NAME'] = $result_data->FOOD_CSN_NAME;
-					$recipe_array['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
-					$recipe_array['NAME'] = $result_data->NAME;
-
-					//fetch review for the particular recipe
-					$query = "SELECT REV_ID, REVIEW, RATING, CREATE_DTM, MOD_DTM FROM `REVIEWS` WHERE REV_ID = '$result_data->REV_ID' AND IS_DEL = 'N'";
-					$review_result = mysqli_query($con, $query);
-
-					$review_result_array = array();
-					if($review_result_data = $review_result->fetch_object()){
-						$temp_array['REV_ID'] = $review_result_data->REV_ID;
-						$temp_array['REVIEW'] = $review_result_data->REVIEW;
-						$temp_array['RATING'] = $review_result_data->RATING;
-						$temp_array['CREATE_DTM'] = $review_result_data->CREATE_DTM;
-						$temp_array['MOD_DTM'] = $review_result_data->MOD_DTM;
-
-						//fetch likes count for this particular review
-						$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $review_result_data->REV_ID);
-						//fetch likes count for this particular review
-
-						array_push($review_result_array, $temp_array); 
-					}
-
-					//fetch images for the recipe
-					$query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$result_data->RCP_ID' LIMIT 1";
-					$img_result = mysqli_query($con, $query);
-
-					$img_result_array = array();
-					if($img_result_data = $img_result->fetch_object()){
-						array_push($img_result_array, $img_result_data->RCP_IMG); 
-					}
-					$recipe_array['RCP_IMGS'] = $img_result_array;
-					//fetch images for the recipe
-
-					$recipe_array['reviews'] = $review_result_array;
-					//fetch review for the particular recipe
-
-					array_push($result_array, $recipe_array); 
-				}
-				//get all recipes & its reviews for $user_id
-
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes Reviews fetched : ".sizeof($result_array));
-
-				//response
-				echo json_encode($result_array);
-				//response
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());

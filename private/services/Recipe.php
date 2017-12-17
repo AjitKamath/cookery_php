@@ -1092,7 +1092,7 @@
 					$avg_rating_result = mysqli_query($con, $avg_rating_query);
 
 					if($avg_rating_result_data = $avg_rating_result->fetch_object()){
-						$result_array['rating'] = $avg_rating_result_data->RATING;
+						$result_array['avgRating'] = $avg_rating_result_data->RATING;
 					}
 					//recipe average rating
 
@@ -1104,24 +1104,16 @@
 						$result_array['isReviewed'] = $user_has_reviewed_result_data->REVIEW_COUNT > 0;
 						
 						//user's recipe review
-						$query = "SELECT REV_ID, RATING, REVIEW, CREATE_DTM, MOD_DTM FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
-						$result = mysqli_query($con, $query);
+						$review_result_array = Review::getUserRecipeReview($con, $user_id, $rcp_id);
+						
+						if(count($review_result_array) > 0){
+							//get review's like count
+							$review_result_array[0]['likeCount'] = Like::getUserLikeCount($con, $user_id, "REVIEW", $review_result_array[0]['REV_ID']);
+							//get review's like count
 
-						$review_result_array = array();
-						if($result_obj = $result->fetch_object()){
-							$review_result_array['REV_ID'] = $result_obj->REV_ID;
-							$review_result_array['RATING'] = $result_obj->RATING;
-							$review_result_array['REVIEW'] = $result_obj->REVIEW;
-							$review_result_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
-							$review_result_array['MOD_DTM'] = $result_obj->MOD_DTM;
-							
-							//get review's like count
-							$review_result_array['likeCount'] = Like::getUserLikeCount($con, $user_id, "REVIEW", $result_obj->REV_ID);
-							//get review's like count
+							$result_array['userReview'] = $review_result_array[0];
 						}
 						//user's recipe review
-						
-						$result_array['userReview'] = $review_result_array;
 					}
 					//check if the user has reviewed this recipe
 					
