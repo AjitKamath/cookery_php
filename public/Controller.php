@@ -131,6 +131,9 @@
 	else if(REVIEW_RECIPE_AVG_RATING == $function_key){
 		echo Review::fetchAverageRecipeRating($rcp_id);
 	}
+	else if(REVIEW_RECIPE_FETCH == $function_key){
+		echo Review::fetchRecipeReviews($user_id, $rcp_id, $index);
+	}
 	//review
 	
 	//ingredient

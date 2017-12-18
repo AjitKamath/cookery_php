@@ -343,6 +343,79 @@
 							FROM REVIEWS AS RVS
 							INNER JOIN USER AS USR ON USR.USER_ID = RVS.USER_ID
 							WHERE RVS.RCP_ID = '".$rcp_id."'
+							AND RVS.USER_ID = '".$user_id."'
+							AND RVS.IS_DEL = 'N'
+							LIMIT ".$index." , ".REVIEWS_COUNT;
+
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()){
+					$temp_array['REV_ID'] = $result_data->REV_ID;
+					$temp_array['REVIEW'] = $result_data->REVIEW;
+					$temp_array['RATING'] = $result_data->RATING;
+					$temp_array['USER_ID'] = $result_data->USER_ID;
+					$temp_array['name'] = $result_data->NAME;
+					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					//fetch like count for the review
+					$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
+					//fetch like count for the review
+					
+					//check if user has liked the review
+					if($temp_array['likeCount'] > 0){
+						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
+							$temp_array['userLiked'] = true;
+						}
+					}
+					//check if user has liked the review
+										
+					array_push($result_array, $temp_array); 
+				}
+				
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function fetchRecipeReviews($user_id, $rcp_id, $index){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				//get all recipes & its reviews for $user_id
+				$query = "SELECT REV_ID, REVIEW, RATING, USR.IMG, USR.USER_ID, USR.NAME, RVS.CREATE_DTM, RVS.MOD_DTM
+							FROM REVIEWS AS RVS
+							INNER JOIN USER AS USR ON USR.USER_ID = RVS.USER_ID
+							WHERE RVS.RCP_ID = '".$rcp_id."'
 							AND RVS.IS_DEL = 'N'
 							LIMIT ".$index." , ".REVIEWS_COUNT;
 
