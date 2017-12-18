@@ -294,7 +294,7 @@
 					
 					//check if user has liked the review
 					if($temp_array['likeCount'] > 0){
-						if($temp_array::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
+						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
 							$temp_array['userLiked'] = true;
 						}
 					}
@@ -311,7 +311,7 @@
 			}
 		}
 		
-		public static function fetchRecipeReviews($user_id, $rcp_id, $index){
+		public static function fetchUsersReviews($user_id, $rcp_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");

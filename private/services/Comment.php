@@ -112,7 +112,7 @@
 					
 					//check if user has liked the comment
 					if($temp_array['likeCount'] > 0){
-						if($temp_array::getUserLikeCount($con, $user_id, "COMMENT", $result_data->COM_ID) > 0){
+						if(Like::getUserLikeCount($con, $user_id, "COMMENT", $result_data->COM_ID) > 0){
 							$temp_array['userLiked'] = true;
 						}
 					}

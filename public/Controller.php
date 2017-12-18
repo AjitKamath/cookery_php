@@ -120,10 +120,7 @@
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
-		echo Review::fetchUserRecipeReview($user_id, $rcp_id);
-	}
-	else if(REVIEW_RECIPE_FETCH == $function_key){
-		echo Review::fetchRecipeReviews($user_id, $rcp_id, $index);
+		echo Review::fetchUsersReviews($user_id, $rcp_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){
 		echo Review::submitReview($rcp_id, $user_id, $review, $rating);
