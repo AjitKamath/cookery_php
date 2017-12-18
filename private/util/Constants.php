@@ -63,8 +63,8 @@
 
     //review
     define("REVIEW_RECIPE_ADD","REVIEW_RECIPE_ADD");
-    define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_ADD");
-    define("REVIEW_RECIPE_MODIFY","REVIEW_RECIPE_ADD");
+    define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_REMOVE");
+    define("REVIEW_RECIPE_MODIFY","REVIEW_RECIPE_MODIFY");
     //review
     //---------------------timeline---------------------
 ?>

@@ -564,18 +564,15 @@
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 					$recipe_array['NAME'] = $result_data->NAME;
 
-					//fetch like count for the recipe
-					$recipe_array['likes'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
-					//fetch like count for the recipe
-					
-					//check if user has liked the recipe
-					if($recipe_array['likes'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "RECIPE", $result_data->RCP_ID) > 0){
-							$recipe_array['isLiked'] = true;
-						}
+					//fetch likes for the recipe
+					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
+					$likes_result = mysqli_query($con, $query);
+
+					if($likes_result_data = $likes_result->fetch_object()){
+						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
 					}
-					//check if user has liked the recipe
-					
+					//fetch likes for the recipe
+
 					//fetch views for the recipe
 					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
 					$views_result = mysqli_query($con, $query);
@@ -671,17 +668,14 @@
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 					$recipe_array['NAME'] = $result_data->NAME;
 
-					//fetch like count for the recipe
-					$recipe_array['likes'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
-					//fetch like count for the recipe
-					
-					//check if user has liked the recipe
-					if($recipe_array['likes'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "RECIPE", $result_data->RCP_ID) > 0){
-							$recipe_array['isLiked'] = true;
-						}
+					//fetch likes for the recipe
+					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
+					$likes_result = mysqli_query($con, $query);
+
+					if($likes_result_data = $likes_result->fetch_object()){
+						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
 					}
-					//check if user has liked the recipe
+					//fetch likes for the recipe
 
 					//fetch views for the recipe
 					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
@@ -774,17 +768,14 @@
 					$recipe_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 
-					//fetch like count for the recipe
-					$recipe_array['likes'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
-					//fetch like count for the recipe
-					
-					//check if user has liked the recipe
-					if($recipe_array['likes'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "RECIPE", $result_data->RCP_ID) > 0){
-							$recipe_array['isLiked'] = true;
-						}
+					//fetch likes for the recipe
+					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
+					$likes_result = mysqli_query($con, $query);
+
+					if($likes_result_data = $likes_result->fetch_object()){
+						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
 					}
-					//check if user has liked the recipe
+					//fetch likes for the recipe
 
 					//fetch views for the recipe
 					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
@@ -882,17 +873,14 @@
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 					$recipe_array['NAME'] = $result_data->NAME;
 
-					//fetch like count for the recipe
-					$recipe_array['likes'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
-					//fetch like count for the recipe
-					
-					//check if user has liked the recipe
-					if($recipe_array['likes'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "RECIPE", $result_data->RCP_ID) > 0){
-							$recipe_array['isLiked'] = true;
-						}
+					//fetch likes for the recipe
+					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
+					$likes_result = mysqli_query($con, $query);
+
+					if($likes_result_data = $likes_result->fetch_object()){
+						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
 					}
-					//check if user has liked the recipe
+					//fetch likes for the recipe
 
 					//fetch views for the recipe
 					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
@@ -941,6 +929,54 @@
 			}	
 		}
 		
+		public static function fetchRecipeReview($rcp_id, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				//get review for $rcp_id & $user_id
+				$query = "SELECT RATING, REVIEW, CREATE_DTM, MOD_DTM FROM REVIEWS WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_data = $result->fetch_object()){
+				  $result_array['RATING'] = $result_data->RATING;
+				  $result_array['REVIEW'] = $result_data->REVIEW;
+				}
+				else{
+				  $result_array['RATING'] = "0";
+				  $result_array['REVIEW'] = "";
+				}
+				//get review for $rcp_id & $user_id
+
+				//response
+				echo json_encode($result_array);
+				//response
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
 		public static function fetchRecipe($rcp_id, $user_id){
 			//params
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
@@ -962,7 +998,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
+				$query = "SELECT USR.IMG, USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
 						FDTYP.FOOD_TYP_NAME, FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID
 						FROM `RECIPE` AS RCP 
 						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
@@ -985,6 +1021,7 @@
 					$result_array['FOOD_CSN_ID'] = $result_data->FOOD_CSN_ID;
 					$result_array['FOOD_TYP_ID'] = $result_data->FOOD_TYP_ID;
 					$result_array['NAME'] = $result_data->NAME;
+					$result_array['userImage'] = $result_data->IMG;
 
 					//recipe images
 					$images_query = "SELECT RCP_IMG_ID, RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$rcp_id'";
@@ -1017,17 +1054,18 @@
 					$result_array['ingredients'] = $ing_result_array;
 					//recipe ingredients
 
-					//fetch like count for the recipe
-					$recipe_array['likes'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
-					//fetch like count for the recipe
-					
-					//check if user has liked the recipe
-					if($recipe_array['likes'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "RECIPE", $result_data->RCP_ID) > 0){
-							$recipe_array['isLiked'] = true;
-						}
+					//recipe likes count
+					$result_array['likes'] = Like::getUserLikeCount($con, $user_id, "RECIPE", $rcp_id);
+					//recipe likes count
+
+					//if the user has liked recipe
+					$user_has_liked_query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
+					$user_has_liked_result = mysqli_query($con, $user_has_liked_query);
+
+					if($user_has_liked_result_data = $user_has_liked_result->fetch_object()){
+						$result_array['isLiked'] = $user_has_liked_result_data->LIKES_COUNT > 0;
 					}
-					//check if user has liked the recipe
+					//if the user has liked recipe
 
 					//recipe views count
 					$views_count_query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id'";
