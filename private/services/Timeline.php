@@ -28,10 +28,10 @@
 				$query = "INSERT INTO `TIMELINES` (`USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$ref_user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Registered a timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.")");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Registered a timeline for the user(".$user_id.") & reference user(".$ref_user_id.") for the type(".$type.") with type id(".$type_id.")");
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The timeline for the user(".$user_id.") for the type(".$type.") with type id(".$type_id.") could not be registered");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The timeline for the user(".$user_id.") & reference user(".$ref_user_id.")for the type(".$type.") with type id(".$type_id.") could not be registered");
 				} 
 				//register the timeline
 			}

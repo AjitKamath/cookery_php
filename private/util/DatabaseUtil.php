@@ -18,11 +18,13 @@
 				die("Failed to connect to MySQL: " . mysqli_error());
 			}
 
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Database connected !");
 			return $conn;
 		}
 
 		public static function close_connection($conn) {
 			mysqli_close($conn);
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Database disconnected !");
 		}
 	}
 ?>
