@@ -517,6 +517,37 @@
 			}
 		}
 		
+		public static function getRecipeSteps($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT RCP_STPS_ID, RCP_STEP
+						FROM `RECIPE_STEPS` 
+						WHERE RCP_ID = '".$rcp_id."'";
+						
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_obj = $result->fetch_object()){
+					array_push($result_array, $result_obj->RCP_STEP); 
+				}
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function fetchUserViewedRecipes($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
@@ -1022,6 +1053,10 @@
 					$result_array['FOOD_TYP_ID'] = $result_data->FOOD_TYP_ID;
 					$result_array['NAME'] = $result_data->NAME;
 					$result_array['userImage'] = $result_data->IMG;
+					
+					//recipe steps
+					$result_array['steps'] = self::getRecipeSteps($con, $rcp_id);
+					//recipe steps
 
 					//recipe images
 					$images_query = "SELECT RCP_IMG_ID, RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$rcp_id'";
