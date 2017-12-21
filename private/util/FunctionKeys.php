@@ -42,6 +42,7 @@
 
     //view
     define("VIEW_RECIPE_FETCH", "VIEW_RECIPE_FETCH");                   //Postman completed
+    define("VIEW_FETCH_USERS", "VIEW_FETCH_USERS");                     git//Postman completed
     //view
 
     //user
@@ -50,6 +51,7 @@
     //user
 
     //like
-    define("LIKE_SUBMIT", "LIKE_SUBMIT");                               //Postman completed                      
+    define("LIKE_SUBMIT", "LIKE_SUBMIT");                               //Postman completed
+    define("LIKE_FETCH_USERS", "LIKE_FETCH_USERS");                     //Postman completed
     //like
 ?>

@@ -1089,8 +1089,8 @@
 					$result_array['ingredients'] = $ing_result_array;
 					//recipe ingredients
 
-					//recipe likes count
-					$result_array['likes'] = Like::getUserLikeCount($con, $user_id, "RECIPE", $rcp_id);
+					//get users who have liked
+					$result_array['likedUsers'] = Like::getLikedUsers($con, "RECIPE", $rcp_id);
 					//recipe likes count
 
 					//if the user has liked recipe
@@ -1102,13 +1102,8 @@
 					}
 					//if the user has liked recipe
 
-					//recipe views count
-					$views_count_query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id'";
-					$views_count_result = mysqli_query($con, $views_count_query);
-
-					if($views_count_result_data = $views_count_result->fetch_object()){
-						$result_array['views'] = $views_count_result_data->VIEWS_COUNT;
-					}
+					//get users who viewed the recipe
+					$result_array['viewedUsers'] = View::getViewedUsers($con, $rcp_id);
 					//recipe views count
 
 					//check if the user has viewed this recipe. if not, register it.

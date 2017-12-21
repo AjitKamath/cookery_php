@@ -1,5 +1,82 @@
 <?php
 	class Like{
+		public static function fetchLikedUsers($type, $type_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($type)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+				return;
+			}
+
+			if(!Util::check_for_null($type_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				$result_array = self::getLikedUsers($con, $type, $type_id);
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getLikedUsers($con, $type, $type_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($type)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+				return;
+			}
+
+			if(!Util::check_for_null($type_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT LIK.USER_ID, LIK.MOD_DTM, LIK.CREATE_DTM, USR.NAME, USR.IMG
+							FROM `LIKES` AS LIK
+							INNER JOIN USER AS USR ON USR.USER_ID = LIK.USER_ID
+							WHERE TYPE = '".$type."' 
+							AND TYPE_ID = '".$type_id."'
+							AND LIK.IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_obj = $result->fetch_object()){
+					$temp_array['USER_ID'] = $result_obj->USER_ID; 
+					$temp_array['MOD_DTM'] = $result_obj->MOD_DTM;
+					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
+					$temp_array['NAME'] = $result_obj->NAME;
+					$temp_array['IMG'] = $result_obj->IMG;
+					
+					array_push($result_array, $temp_array); 
+				}
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function getUserLikeCount($con, $user_id, $type, $type_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");

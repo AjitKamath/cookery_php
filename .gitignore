@@ -1,6 +1,6 @@
 # log files
 logs/*
-!logs/*.zip
+#!logs/*.zip
 
 # app_data
 #app_data/**/*.jpg

@@ -11,10 +11,8 @@
         LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
         return;
     }
-	else{
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
-	}
-    //check for null/empty
+	
+	//check for null/empty
     //function key
 
     //params
@@ -53,6 +51,9 @@
 	$name			= isset($_POST['name']) ? $_POST['name'] : '';
 	$gender			= isset($_POST['gender']) ? $_POST['gender'] : '';
     //params
+
+	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
+	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 
 	//quantity
     if(QUANTITY_FETCH_ALL == $function_key){
@@ -155,6 +156,9 @@
 	else if(VIEW_RECIPE_FETCH == $function_key){
 		echo View::fetchRecipeViews($rcp_id);
 	}
+	else if(VIEW_FETCH_USERS == $function_key){
+		echo View::fetchViewedUsers($rcp_id);
+	}
 	//view
 	
 	//user
@@ -170,6 +174,9 @@
 	else if(LIKE_SUBMIT == $function_key){
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
+	else if(LIKE_FETCH_USERS == $function_key){
+		echo Like::fetchLikedUsers($type, $type_id);
+	}
 	//like
 	
 	else{
@@ -177,8 +184,7 @@
     }
     
     LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "<=====".$function_key);
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
-
+	
 	//this function triggers on every class object creation or static method calls
 	function __autoload($class_name){
         //relative paths to directories to scan for autoload
