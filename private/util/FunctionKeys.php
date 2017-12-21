@@ -42,7 +42,7 @@
 
     //view
     define("VIEW_RECIPE_FETCH", "VIEW_RECIPE_FETCH");                   //Postman completed
-    define("VIEW_FETCH_USERS", "VIEW_FETCH_USERS");                     git//Postman completed
+    define("VIEW_FETCH_USERS", "VIEW_FETCH_USERS");                     //Postman completed
     //view
 
     //user

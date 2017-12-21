@@ -1047,11 +1047,13 @@
 					$result_array['RCP_PROC'] = $result_data->RCP_PROC;
 					$result_array['RCP_PLATING'] = $result_data->RCP_PLATING;
 					$result_array['RCP_NOTE'] = $result_data->RCP_NOTE;
-					$result_array['FOOD_CSN_NAME'] = $result_data->FOOD_CSN_NAME;
-					$result_array['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
-					$result_array['FOOD_CSN_ID'] = $result_data->FOOD_CSN_ID;
 					$result_array['FOOD_TYP_ID'] = $result_data->FOOD_TYP_ID;
-					$result_array['NAME'] = $result_data->NAME;
+					$result_array['FOOD_CSN_ID'] = $result_data->FOOD_CSN_ID;
+					
+					$result_array['foodCuisineName'] = $result_data->FOOD_CSN_NAME;
+					$result_array['foodTypeName'] = $result_data->FOOD_TYP_NAME;
+					
+					$result_array['userName'] = $result_data->NAME;
 					$result_array['userImage'] = $result_data->IMG;
 					
 					//recipe steps
@@ -1066,7 +1068,7 @@
 					while($images_result_data = $images_result->fetch_object()){
 						array_push($images_result_array, $images_result_data->RCP_IMG);  
 					}
-					$result_array['RCP_IMGS'] = $images_result_array;
+					$result_array['images'] = $images_result_array;
 					//recipe images
 
 					//recipe ingredients
@@ -1098,7 +1100,7 @@
 					$user_has_liked_result = mysqli_query($con, $user_has_liked_query);
 
 					if($user_has_liked_result_data = $user_has_liked_result->fetch_object()){
-						$result_array['isLiked'] = $user_has_liked_result_data->LIKES_COUNT > 0;
+						$result_array['userLiked'] = $user_has_liked_result_data->LIKES_COUNT > 0;
 					}
 					//if the user has liked recipe
 
@@ -1132,7 +1134,7 @@
 					$user_has_reviewed_result = mysqli_query($con, $user_has_reviewed_query);
 
 					if($user_has_reviewed_result_data = $user_has_reviewed_result->fetch_object()){
-						$result_array['isReviewed'] = $user_has_reviewed_result_data->REVIEW_COUNT > 0;
+						$result_array['userReviewed'] = $user_has_reviewed_result_data->REVIEW_COUNT > 0;
 						
 						//user's recipe review
 						$review_result_array = Review::getUserRecipeReview($con, $user_id, $rcp_id);
