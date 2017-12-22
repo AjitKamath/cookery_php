@@ -190,10 +190,10 @@
 
 				if($result_data = $result->fetch_object()){
 					if($result_data->REVIEW_COUNT > 0){
-						$temp_array['isReviewed'] = true;
+						$temp_array['userReviewed'] = true;
 					}
 					else{
-						$temp_array['isReviewed'] = false;
+						$temp_array['userReviewed'] = false;
 					}
 				}
 				//check users review status
@@ -427,21 +427,19 @@
 					$temp_array['REVIEW'] = $result_data->REVIEW;
 					$temp_array['RATING'] = $result_data->RATING;
 					$temp_array['USER_ID'] = $result_data->USER_ID;
-					$temp_array['name'] = $result_data->NAME;
 					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
 					
-					//fetch like count for the review
-					$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
-					//fetch like count for the review
+					$temp_array['userName'] = $result_data->NAME;
+					$temp_array['userImage'] = $result_data->IMG;
 					
-					//check if user has liked the review
-					if($temp_array['likeCount'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
-							$temp_array['userLiked'] = true;
-						}
-					}
-					//check if user has liked the review
+					//get users who have liked the review
+					$temp_array['likedUsers'] = Like::getLikedUsers($con, "REVIEW", $result_data->REV_ID);
+					//get users who have liked the review
+					
+					//if the user has liked review
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "REVIEW", $result_data->REV_ID);
+					//if the user has liked review
 										
 					array_push($result_array, $temp_array); 
 				}

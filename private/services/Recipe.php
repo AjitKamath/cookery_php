@@ -1093,15 +1093,10 @@
 
 					//get users who have liked
 					$result_array['likedUsers'] = Like::getLikedUsers($con, "RECIPE", $rcp_id);
-					//recipe likes count
+					//get users who have liked
 
 					//if the user has liked recipe
-					$user_has_liked_query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE = 'RECIPE' AND TYPE_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
-					$user_has_liked_result = mysqli_query($con, $user_has_liked_query);
-
-					if($user_has_liked_result_data = $user_has_liked_result->fetch_object()){
-						$result_array['userLiked'] = $user_has_liked_result_data->LIKES_COUNT > 0;
-					}
+					$result_array['userLiked'] = Like::isUserLiked($con, $user_id, "RECIPE", $rcp_id);
 					//if the user has liked recipe
 
 					//get users who viewed the recipe

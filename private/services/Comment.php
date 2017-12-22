@@ -98,25 +98,22 @@
 
                 $result_array = array();
                 while($result_data = $result->fetch_object()){
-					$temp_arr['USER_ID'] = $result_data->USER_ID;
-					$temp_arr['name'] = $result_data->NAME;
-					$temp_arr['userImage'] = $result_data->IMG;
 					$temp_arr['COM_ID'] = $result_data->COM_ID;
+					$temp_arr['USER_ID'] = $result_data->USER_ID;
 					$temp_arr['COMMENT'] = $result_data->COMMENT;
 					$temp_arr['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$temp_arr['MOD_DTM'] = $result_data->MOD_DTM;
 					
-					//fetch like count for the comment
-					$temp_array['likeCount'] = Like::getLikeCount($con, "COMMENT", $result_data->COM_ID);
-					//fetch like count for the comment
+					$temp_arr['userName'] = $result_data->NAME;
+					$temp_arr['userImage'] = $result_data->IMG;
 					
-					//check if user has liked the comment
-					if($temp_array['likeCount'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "COMMENT", $result_data->COM_ID) > 0){
-							$temp_array['userLiked'] = true;
-						}
-					}
-					//check if user has liked the comment
+					//get users who have liked the comment
+					$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID);
+					//get users who have liked the comment
+					
+					//if the user has liked comment
+					$temp_arr['userLiked'] = Like::isUserLiked($con, $user_id, "COMMENT", $result_data->COM_ID);
+					//if the user has liked comment
 					
                     array_push($result_array, $temp_arr);
                 }

@@ -77,6 +77,50 @@
 			}
 		}
 		
+		public static function isUserLiked($con, $user_id, $type, $type_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($type)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+				return;
+			}
+
+			if(!Util::check_for_null($type_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS LIKES_COUNT 
+							FROM `LIKES` 
+							WHERE TYPE = '".$type."' 
+							AND TYPE_ID = '".$type_id."' 
+							AND USER_ID = '".$user_id."' 
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_data = $result->fetch_object()){
+					return $result_data->LIKES_COUNT > 0;
+				}
+				
+				return false;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function getUserLikeCount($con, $user_id, $type, $type_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
