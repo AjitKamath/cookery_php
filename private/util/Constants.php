@@ -24,16 +24,16 @@
 
     //---------------------timeline---------------------
     //timelines count to load at a time
-    define("TIMELINES_COUNT","10");
+    define("TIMELINES_COUNT","5");
 
     //recipes count to load at a time
-    define("RECIPES_COUNT","10");
+    define("RECIPES_COUNT","5");
 
     //comments count to load at a time   
-    define("COMMENTS_COUNT","10");
+    define("COMMENTS_COUNT","5");
 
     //reviews count to load at a time   
-    define("REVIEWS_COUNT","10");
+    define("REVIEWS_COUNT","5");
 
     //user
     define("USER_ADD","USER_ADD");
@@ -64,7 +64,6 @@
     //review
     define("REVIEW_RECIPE_ADD","REVIEW_RECIPE_ADD");
     define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_REMOVE");
-    define("REVIEW_RECIPE_MODIFY","REVIEW_RECIPE_MODIFY");
     //review
     //---------------------timeline---------------------
 ?>

@@ -144,11 +144,8 @@
 	//ingredient
 	
 	//timeline
-	else if(TIMELINE_USER_FETCH_ALL == $function_key){
-		echo Timeline::fetchUserTimelines($user_id, $index);
-	}
-	else if(TIMELINE_FETCH == $function_key){
-		echo Timeline::fetchUserTimeline($tmln_id);
+	else if(TIMELINE_USER_FETCH == $function_key){
+		echo Timeline::fetchUserTimeline($user_id, $index);
 	}
 	//timeline
 	

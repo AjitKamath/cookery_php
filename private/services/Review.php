@@ -148,7 +148,7 @@
 						$query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
 						$result = mysqli_query($con, $query);
 						if($result_data = $result->fetch_object()){  
-							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_MODIFY, $rev_id);
+							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_ADD, $rev_id);
 						}
 						//get user_id of the recipe
 						//register timeline

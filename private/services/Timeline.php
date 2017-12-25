@@ -40,14 +40,20 @@
 			}
 		}
 		
-		public static function fetchUserTimeline($tmln_id){
+		public static function fetchUserTimeline($user_id, $index){
 			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$tmln_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
-			if(!Util::check_for_null($tmln_id)){
+			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty timeline id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -57,13 +63,16 @@
 
 				//get timeline details for $tmln_id
 				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
-						  FROM `TIMELINES` AS TMLN
-						  INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USER_ID
-						  WHERE TMLN_ID = '$tmln_id'";
+							FROM `TIMELINES` AS TMLN
+							INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USER_ID
+							WHERE TMLN.USER_ID = '$user_id' 
+							OR REF_USER_ID = '$user_id' 
+							ORDER BY TMLN.CREATE_DTM DESC
+							LIMIT $index , ".TIMELINES_COUNT;
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
-				if($result_data = $result->fetch_object()){
+				while($result_data = $result->fetch_object()){
 					$timeline_array = array();
 					$type = $result_data->TYPE;
 
@@ -183,7 +192,7 @@
 					}
 					else if(LIKE_COMMENT_ADD == $type || LIKE_COMMENT_REMOVE == $type){
 						$timeline_query = "SELECT COMMENT, RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME,
-										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
+										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS WHOSE_USER_ID, USR.IMG AS RCP_OWN_IMG
 										   FROM `LIKES` AS LIK
 										   INNER JOIN `COMMENTS` AS COM ON COM.COM_ID = LIK.TYPE_ID
 										   INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = COM.RCP_ID
@@ -218,7 +227,7 @@
 					}
 					else if(LIKE_REVIEW_ADD == $type || LIKE_REVIEW_REMOVE == $type){
 						$timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME,
-										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
+										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS WHOSE_USER_ID, USR.IMG AS RCP_OWN_IMG
 										   FROM `LIKES` AS LIK
 										   INNER JOIN `REVIEWS` AS REV ON REV.REV_ID = LIK.TYPE_ID
 										   INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
@@ -254,13 +263,13 @@
 					}
 					else if(REVIEW_RECIPE_ADD == $type || REVIEW_RECIPE_REMOVE == $type){
 						$timeline_query = "SELECT REVIEW, RATING, RCP.RCP_ID, RCP_NAME, NAME, RCP.USER_ID, USR.IMG, FOOD_TYP_NAME, FOOD_CSN_NAME,
-										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS USR, USR.IMG AS RCP_OWN_IMG
+										   USR.NAME AS WHOSE_NAME, USR.USER_ID AS WHOSE_USER_ID, USR.IMG AS RCP_OWN_IMG
 										   FROM `REVIEWS` AS REV
 										   INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
 										   INNER JOIN `FOOD_TYPE` AS FOOD_TYPE ON FOOD_TYPE.FOOD_TYP_ID = RCP.FOOD_TYP_ID
 										   INNER JOIN `FOOD_CUISINE` AS FOOD_CUISINE ON FOOD_CUISINE.FOOD_CSN_ID = RCP.FOOD_CSN_ID
 										   INNER JOIN `USER` AS USR ON USR.USER_ID = RCP.USER_ID
-										   WHERE LIKE_ID = '$result_data->TYPE_ID'";
+										   WHERE REV_ID = '$result_data->TYPE_ID'";
 						$timeline_result = mysqli_query($con, $timeline_query);
 
 						if($timeline_result_data = $timeline_result->fetch_object()){
@@ -288,67 +297,12 @@
 						}
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! The timeline type('.$result->TYPE.') is not yet implemented.');
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! The timeline type('.$result_data->TYPE.') is not yet implemented.');
 					}
 
 					array_push($result_array, $timeline_array);
 				}
 				//get timeline details for $tmln_id
-
-				//response
-				echo json_encode($result_array);
-				//response
-			}
-			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-			}
-			finally{
-				DatabaseUtil::getInstance()->close_connection($con);
-			}
-		}
-		
-		public static function fetchUserTimelines($user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-
-			//check for null/empty
-			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
-				return;
-			}
-
-			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
-				return;
-			}
-			//check for null/empty
-
-			try{
-				$con = DatabaseUtil::getInstance()->open_connection();
-
-				//get timeline performed by user or performed on his items
-				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, USER_ID, REF_USER_ID, CREATE_DTM FROM `TIMELINES` 
-						WHERE USER_ID = '$user_id' OR REF_USER_ID = '$user_id' 
-						ORDER BY CREATE_DTM DESC
-						LIMIT $index , ".TIMELINES_COUNT;
-				$result = mysqli_query($con, $query);
-
-				$result_array = array();
-				while($result_data = $result->fetch_object()){
-				$timeline_array = array();
-
-				$timeline_array['TMLN_ID'] = $result_data->TMLN_ID;
-				$timeline_array['TYPE'] = $result_data->TYPE;
-				$timeline_array['TYPE_ID'] = $result_data->TYPE_ID;
-				$timeline_array['CREATE_DTM'] = $result_data->CREATE_DTM;
-				$timeline_array['USER_ID'] = $result_data->USER_ID;;
-				$timeline_array['REF_USER_ID'] = $result_data->REF_USER_ID;;
-
-				array_push($result_array, $timeline_array);
-				}
-				//get timeline performed by user or performed on his items
 
 				//response
 				echo json_encode($result_array);

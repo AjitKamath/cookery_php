@@ -36,8 +36,7 @@
     //ingredient
     
     //timeline
-    define("TIMELINE_USER_FETCH_ALL", "TIMELINE_USER_FETCH_ALL");       //Postman completed     
-    define("TIMELINE_FETCH", "TIMELINE_FETCH");                         //Postman completed  
+    define("TIMELINE_USER_FETCH", "TIMELINE_USER_FETCH");               //Postman completed  
     //timeline
 
     //view
