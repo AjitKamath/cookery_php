@@ -27,6 +27,35 @@
 			}
 		}
 		
+		public static function getViewCount($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS VIEWS_COUNT 
+							FROM `VIEWS` 
+							WHERE RCP_ID = '".$rcp_id."'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->VIEWS_COUNT;
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function getViewedUsers($con, $rcp_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");

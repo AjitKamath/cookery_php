@@ -4,6 +4,97 @@
 			return self::fetchRecipe(103, 1);
 		}
 		
+		public static function searchRecipes($searchQuery){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : query(".$searchQuery.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($searchQuery)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty searchQuery");
+				return;
+			}
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				//check if the query matches any recipe with its name or ingredients or the user who submitted it
+				$query = "SELECT DISTINCT RCP.RCP_ID, RCP_NAME, USR.NAME, USR.IMG 
+							FROM RECIPE AS RCP
+							INNER JOIN USER AS USR ON USR.USER_ID = RCP.USER_ID 
+							INNER JOIN DISH AS DSH ON DSH.RCP_ID = RCP.RCP_ID
+							INNER JOIN INGREDIENT AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
+							WHERE (RCP_NAME LIKE '%".$searchQuery."%'
+							OR ING_NAME LIKE '%".$searchQuery."%' 
+							OR USR.NAME LIKE '%".$searchQuery."%')
+							AND RCP.IS_DEL = 'N'
+							LIMIT 10";
+				
+				$result = mysqli_query($con, $query);
+				//check if the query matches any recipe with its name or ingredients or the user who submitted it
+								
+				$result_array = array();
+				while($result_obj = $result->fetch_object()){
+					$temp_array['userName'] = $result_obj->NAME;
+					$temp_array['userImage'] = $result_obj->IMG;
+
+					$temp_array['RCP_ID'] = $result_obj->RCP_ID;
+					$temp_array['RCP_NAME'] = $result_obj->RCP_NAME;
+
+					//fetch primary recipe image
+					$temp_array['images'] = self::getRecipePrimaryImage($con, $result_obj->RCP_ID);
+					//fetch primary recipe image
+
+					//fetch recipe likes count
+					$temp_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $result_obj->RCP_ID);
+					//fetch recipe likes count
+
+					//fetch recipe views count
+					$temp_array['viewsCount'] = View::getViewCount($con, $result_obj->RCP_ID);
+					//fetch recipe views count
+
+					array_push($result_array, $temp_array); 
+				}
+				
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getRecipePrimaryImage($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			try{
+				//fetch primary recipe image
+				$query = "SELECT RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."' LIMIT 1";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_obj = $result->fetch_object()){
+					array_push($result_array, $result_obj->RCP_IMG); 
+				}
+				//fetch primary recipe image
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
 											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
 			//request
