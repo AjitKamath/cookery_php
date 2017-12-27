@@ -1,5 +1,111 @@
 <?php
 	class User{
+		public static function fetchUser($user_id){
+			//request
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+            //request
+
+            //check for null/empty
+            if(!Util::check_for_null($user_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+                return;
+            }
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT EMAIL, MOBILE, IMG, NAME FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp_array['EMAIL'] = $result_data->EMAIL;
+					$temp_array['MOBILE'] = $result_data->MOBILE;
+					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['NAME'] = $result_data->NAME;
+					
+					//get followers count
+					$temp_array['followersCount'] = self::getFollowersCount($con, $user_id);
+					//get followers count
+					
+					//get following count
+					$temp_array['followingCount'] = self::getFollowingCount($con, $user_id);
+					//get following count
+					
+					array_push($result_array, $temp_array);
+				}
+
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getFollowersCount($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS FOLLOWERS_COUNT
+							FROM `USER_RELATIONSHIP` 
+							WHERE FLWR_USER_ID = '".$user_id."'
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->FOLLOWERS_COUNT;
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
+		public static function getFollowingCount($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS FOLLOWING_COUNT
+							FROM `USER_RELATIONSHIP` 
+							WHERE FLWS_USER_ID = '".$user_id."'
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->FOLLOWING_COUNT;
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function login($email, $password){
 			//request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");

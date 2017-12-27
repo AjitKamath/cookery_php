@@ -168,6 +168,9 @@
 	else if(USER_REGISTER == $function_key){
 		echo User::register($email, $mobile, $password, $name, $gender);
 	}
+	else if(USER_FETCH == $function_key){
+		echo User::fetchUser($user_id);
+	}
 	//user
 	
 	//like
