@@ -37,6 +37,8 @@
 
     //user
     define("USER_ADD","USER_ADD");
+    define("USER_FOLLOW","USER_FOLLOW");
+    define("USER_UNFOLLOW","USER_UNFOLLOW");
     //user
 
     //recipe

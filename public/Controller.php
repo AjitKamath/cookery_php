@@ -50,6 +50,9 @@
 	$mobile			= isset($_POST['mobile']) ? $_POST['mobile'] : '';
 	$name			= isset($_POST['name']) ? $_POST['name'] : '';
 	$gender			= isset($_POST['gender']) ? $_POST['gender'] : '';
+
+	$flwr_user_id			= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
+	$flws_user_id			= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
     //params
 
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
@@ -170,6 +173,9 @@
 	}
 	else if(USER_FETCH == $function_key){
 		echo User::fetchUser($user_id);
+	}
+	else if(USER_FOLLOW_SUBMIT == $function_key){
+		echo User::submitFollowUser($flwr_user_id, $flws_user_id);
 	}
 	//user
 	

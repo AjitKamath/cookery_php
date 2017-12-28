@@ -49,6 +49,7 @@
     define("USER_LOGIN", "USER_LOGIN");                                 //Postman completed
     define("USER_REGISTER", "USER_REGISTER");                           //Postman completed
     define("USER_FETCH", "USER_FETCH");                                 //Postman completed
+    define("USER_FOLLOW_SUBMIT", "USER_FOLLOW_SUBMIT");                 //Postman completed
     //user
 
     //like

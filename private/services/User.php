@@ -1,5 +1,100 @@
 <?php
 	class User{
+		public static function submitFollowUser($flwr_user_id, $flws_user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flws_user_id(".$flws_user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($flwr_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+				return;
+			}
+
+			if(!Util::check_for_null($flws_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flws_user_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$result_array = array();
+				
+				//check if the $flwr_user_id follows/followed $flws_user_id
+				$query = "SELECT IS_DEL, RLT_ID 
+							FROM `USER_RELATIONSHIP` 
+							WHERE FLWR_USER_ID = '".$flwr_user_id."' 
+							AND FLWS_USER_ID = '".$flws_user_id."'";
+				
+				$result = mysqli_query($con, $query);
+				//check if the $flwr_user_id follows/followed $flws_user_id
+				
+				//if the $flwr_user_id follows/followed $flws_user_id
+				if($result_data = $result->fetch_object()){
+					$flag = 'N';
+					if('N' == $result_data->IS_DEL){
+						$flag = 'Y';
+					}
+					
+					$query = "UPDATE `USER_RELATIONSHIP`
+								SET IS_DEL = '".$flag."', 
+								MOD_DTM = CURRENT_TIMESTAMP
+								WHERE FLWR_USER_ID = '".$flwr_user_id."' 
+								AND FLWS_USER_ID = '".$flws_user_id."'";
+					
+					if(mysqli_query($con, $query)){
+						$result_array['isFollowing'] = $flag == 'N';
+						
+						//register timeline
+						if($result_array['isFollowing']){
+							Timeline::addTimeline($con, $flwr_user_id, $flws_user_id, USER_FOLLOW, $result_data->RLT_ID);
+						}
+						else{
+							Timeline::addTimeline($con, $flwr_user_id, $flws_user_id, USER_UNFOLLOW, $result_data->RLT_ID);
+						}
+						//register timeline
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! user(".$flwr_user_id.") could not follow/unfollow the user(".$flws_user_id.")");
+						$result_array['isFollowing'] = false;
+					}
+				}
+				//if the $flwr_user_id follows/followed $flws_user_id
+				
+				//if the $flwr_user_id has never followed $flws_user_id
+				else{
+					$query = "INSERT INTO `USER_RELATIONSHIP` (`FLWR_USER_ID`, `FLWS_USER_ID`, `CREATE_DTM`) 
+								VALUES ('$flwr_user_id', '$flws_user_id', CURRENT_TIMESTAMP)";
+					
+					$result_array['isFollowing'] = mysqli_query($con, $query);
+					$rlt_id = mysqli_insert_id($con);
+					
+					//register timeline
+					Timeline::addTimeline($con, $flwr_user_id, $flws_user_id, USER_FOLLOW, $rlt_id);
+					//register timeline
+				}
+				//if the $flwr_user_id has never followed $flws_user_id
+				
+				//get the followers count
+				$result_array['followersCount'] = self::getFollowersCount($con, $flws_user_id);
+				//get the followers count
+				
+				
+				//response
+				echo json_encode($result_array);
+				//response
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
 		public static function fetchUser($user_id){
 			//request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
@@ -61,7 +156,7 @@
 			try{
 				$query = "SELECT COUNT(*) AS FOLLOWERS_COUNT
 							FROM `USER_RELATIONSHIP` 
-							WHERE FLWR_USER_ID = '".$user_id."'
+							WHERE FLWS_USER_ID = '".$user_id."'
 							AND IS_DEL = 'N'";
 				$result = mysqli_query($con, $query);
 

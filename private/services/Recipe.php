@@ -44,7 +44,15 @@
 					//fetch primary recipe image
 					$temp_array['images'] = self::getRecipePrimaryImage($con, $result_obj->RCP_ID);
 					//fetch primary recipe image
+					
+					//fetch recipe ingredients
+					$temp_array['ingredients'] = self::getRecipeIngredients($con, $result_obj->RCP_ID);
+					//fetch recipe ingredients
 
+					//fetch recipe avg rating
+					$temp_array['avgRating'] = self::getRecipeAvgRating($con, $result_obj->RCP_ID);
+					//fetch recipe avg rating
+					
 					//fetch recipe likes count
 					$temp_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $result_obj->RCP_ID);
 					//fetch recipe likes count
@@ -63,6 +71,69 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getRecipeAvgRating($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			try{
+				$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->RATING; 
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
+		public static function getRecipeIngredients($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			try{
+				//fetch primary recipe image
+				$query = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
+								INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
+								INNER JOIN  `INGREDIENT` AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
+								INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
+								WHERE RCP.RCP_ID = '$rcp_id' ";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()){
+					$temparr['ING_ID'] = $result_data->ING_ID;
+					$temparr['ING_NAME'] = $result_data->ING_NAME;
+					$temparr['QTY_NAME'] = $result_data->QTY_NAME;
+					$temparr['ING_QTY'] = $result_data->ING_QTY;
+
+					array_push($result_array, $temparr);  
+				}
+
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 		
@@ -87,6 +158,33 @@
 					array_push($result_array, $result_obj->RCP_IMG); 
 				}
 				//fetch primary recipe image
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
+		public static function getRecipeImages($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			try{
+				$query = "SELECT RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_obj = $result->fetch_object()){
+					array_push($result_array, $result_obj->RCP_IMG); 
+				}
 				
 				return $result_array;
 			}
@@ -1147,52 +1245,29 @@
 					$result_array['userName'] = $result_data->NAME;
 					$result_array['userImage'] = $result_data->IMG;
 					
-					//recipe steps
+					//steps
 					$result_array['steps'] = self::getRecipeSteps($con, $rcp_id);
-					//recipe steps
+					//steps
 
-					//recipe images
-					$images_query = "SELECT RCP_IMG_ID, RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$rcp_id'";
-					$images_result = mysqli_query($con, $images_query);
+					//images
+ 					$result_array['images'] = self::getRecipeImages($con, $rcp_id);
+					//images
 
-					$images_result_array = array();
-					while($images_result_data = $images_result->fetch_object()){
-						array_push($images_result_array, $images_result_data->RCP_IMG);  
-					}
-					$result_array['images'] = $images_result_array;
-					//recipe images
+					//ingredients
+					$result_array['ingredients'] = self::getRecipeIngredients($con, $rcp_id);
+					//ingredients
 
-					//recipe ingredients
-					$ing_query = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
-								INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
-								INNER JOIN  `INGREDIENT` AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
-								INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
-								WHERE RCP.RCP_ID = '$rcp_id' ";
-					$ing_result = mysqli_query($con, $ing_query);
-
-					$ing_result_array = array();
-					while($ing_result_data = $ing_result->fetch_object()){
-						$temparr['ING_ID'] = $ing_result_data->ING_ID;
-						$temparr['ING_NAME'] = $ing_result_data->ING_NAME;
-						$temparr['QTY_NAME'] = $ing_result_data->QTY_NAME;
-						$temparr['ING_QTY'] = $ing_result_data->ING_QTY;
-
-						array_push($ing_result_array, $temparr);  
-					}
-					$result_array['ingredients'] = $ing_result_array;
-					//recipe ingredients
-
-					//get users who have liked
+					//user who liked
 					$result_array['likedUsers'] = Like::getLikedUsers($con, "RECIPE", $rcp_id);
-					//get users who have liked
+					//user who liked
 
 					//if the user has liked recipe
 					$result_array['userLiked'] = Like::isUserLiked($con, $user_id, "RECIPE", $rcp_id);
 					//if the user has liked recipe
 
-					//get users who viewed the recipe
+					//users who viewed the recipe
 					$result_array['viewedUsers'] = View::getViewedUsers($con, $rcp_id);
-					//recipe views count
+					//users who viewed the recipe
 
 					//check if the user has viewed this recipe. if not, register it.
 					$user_has_viewed_query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id'";
@@ -1206,14 +1281,9 @@
 					}
 					//check if the user has viewed this recipe. if not, register it.
 
-					//recipe average rating
-					$avg_rating_query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
-					$avg_rating_result = mysqli_query($con, $avg_rating_query);
-
-					if($avg_rating_result_data = $avg_rating_result->fetch_object()){
-						$result_array['avgRating'] = $avg_rating_result_data->RATING;
-					}
-					//recipe average rating
+					//fetch recipe avg rating
+					$result_array['avgRating'] = self::getRecipeAvgRating($con, $rcp_id);
+					//fetch recipe avg rating
 
 					//check if the user has reviewed this recipe
 					$user_has_reviewed_query = "SELECT COUNT(*) AS REVIEW_COUNT FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
