@@ -56,4 +56,12 @@
     define("LIKE_SUBMIT", "LIKE_SUBMIT");                               //Postman completed
     define("LIKE_FETCH_USERS", "LIKE_FETCH_USERS");                     //Postman completed
     //like
+
+    //MyList
+    define("MYLIST_FETCH","MYLIST_FETCH");
+    define("PHP_FUNCTION_KEY_MYLIST_SUBMIT","PHP_FUNCTION_KEY_MYLIST_SUBMIT");
+    define("PHP_FUNCTION_KEY_MYLIST_VIEW","PHP_FUNCTION_KEY_MYLIST_VIEW");
+    //MyList
+
+
 ?>
