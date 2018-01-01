@@ -36,6 +36,16 @@
 			}
 			return $randomString;
 		}
+		
+		public static function generateRandomNumber($length) {
+			$characters = '0123456789';
+			$charactersLength = strlen($characters);
+			$randomString = '';
+			for ($i = 0; $i < $length; $i++) {
+				$randomString .= $characters[rand(0, $charactersLength - 1)];
+			}
+			return $randomString;
+		}
 
 		public static function generateSalt($length = 5) {
 			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -99,6 +109,24 @@
 			}
 
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id;
+			if(!file_exists($directory)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				if(!self::create_directory($directory)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					return false;
+				}
+			}
+			
+			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY;
+			if(!file_exists($directory)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				if(!self::create_directory($directory)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					return false;
+				}
+			}
+			
+			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY.APP_DATA_PROFILE_IMAGES_DIRECTORY;
 			if(!file_exists($directory)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
 				if(!self::create_directory($directory)){

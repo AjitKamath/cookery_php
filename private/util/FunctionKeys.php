@@ -50,6 +50,12 @@
     define("USER_REGISTER", "USER_REGISTER");                           //Postman completed
     define("USER_FETCH", "USER_FETCH");                                 //Postman completed
     define("USER_FOLLOW_SUBMIT", "USER_FOLLOW_SUBMIT");                 //Postman completed
+    define("USER_UPDATE_NAME", "USER_UPDATE_NAME");                     //Postman completed
+    define("USER_UPDATE_EMAIL", "USER_UPDATE_EMAIL");                   //Postman completed
+    define("USER_UPDATE_PASSWORD", "USER_UPDATE_PASSWORD");             //Postman completed
+    define("USER_UPDATE_PHONE", "USER_UPDATE_PHONE");                   //Postman completed
+    define("USER_UPDATE_GENDER", "USER_UPDATE_GENDER");                 //Postman completed
+    define("USER_UPDATE_IMAGE", "USER_UPDATE_IMAGE");                   //Postman completed
     //user
 
     //like
