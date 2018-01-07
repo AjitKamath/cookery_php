@@ -50,21 +50,17 @@
 	$mobile			= isset($_POST['mobile']) ? $_POST['mobile'] : '';
 	$name			= isset($_POST['name']) ? $_POST['name'] : '';
 	$gender			= isset($_POST['gender']) ? $_POST['gender'] : '';
-<<<<<<< Updated upstream
 
-	$flwr_user_id			= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
-	$flws_user_id			= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
+	$flwr_user_id	= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
+	$flws_user_id	= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
 
-=======
->>>>>>> Stashed changes
-	$list_name			= isset($_POST['list_name']) ? $_POST['list_name'] : '';
+	$list_name		= isset($_POST['list_name']) ? $_POST['list_name'] : '';
 	$type			= isset($_POST['type']) ? $_POST['type'] : '';
-	$list_id = isset($_POST['list_id']) ? $_POST['list_id'] : '';
+	$list_id 		= isset($_POST['list_id']) ? $_POST['list_id'] : '';
 
-<<<<<<< Updated upstream
+	$new_password 	= isset($_POST['new_password']) ? $_POST['new_password'] : '';
 
-=======
->>>>>>> Stashed changes
+	$image			= isset($_FILES['image']) ? $_FILES['image'] : '';
     //params
 
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
@@ -164,22 +160,16 @@
 		echo Ingredient::checkUserLists($user_id);
 	}
 
-else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT == $function_key){
+	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT == $function_key){
 		echo Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
 	}
 
-else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
+	else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
 		echo Ingredient::viewuserIngedrientList($list_id);
 	}
-
-<<<<<<< Updated upstream
-else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
+	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
 		echo Ingredient::updateUserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
 	}
-=======
->>>>>>> Stashed changes
-
-
 	//ingredient
 	
 	//timeline
@@ -202,13 +192,31 @@ else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
 		echo User::login($email, $password);
 	}
 	else if(USER_REGISTER == $function_key){
-		echo User::register($email, $mobile, $password, $name, $gender);
+		echo User::register($email, $password, $name);
 	}
 	else if(USER_FETCH == $function_key){
 		echo User::fetchUser($user_id);
 	}
 	else if(USER_FOLLOW_SUBMIT == $function_key){
 		echo User::submitFollowUser($flwr_user_id, $flws_user_id);
+	}
+	else if(USER_UPDATE_NAME == $function_key){
+		echo User::updateUserName($user_id, $name);
+	}
+	else if(USER_UPDATE_EMAIL == $function_key){
+		echo User::updateUserEmail($user_id, $email);
+	}
+	else if(USER_UPDATE_PASSWORD == $function_key){
+		echo User::updateUserPassword($user_id, $password, $new_password);
+	}
+	else if(USER_UPDATE_PHONE == $function_key){
+		echo User::updateUserPhone($user_id, $mobile);
+	}
+	else if(USER_UPDATE_GENDER == $function_key){
+		echo User::updateUserGender($user_id, $gender);
+	}
+	else if(USER_UPDATE_IMAGE == $function_key){
+		echo User::updateUserImage($user_id, $image);
 	}
 	//user
 	

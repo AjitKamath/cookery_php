@@ -7,12 +7,21 @@
     define("LOGS_DIRECTORY", HOME_DIRECTORY."logs/");
     define("APP_DATA_DIRECTORY", HOME_DIRECTORY."app_data/");
     define("APP_DATA_USERS_DIRECTORY", APP_DATA_DIRECTORY."users/");
+    define("APP_DATA_PROFILE_DIRECTORY", "profile/");
+    define("APP_DATA_PROFILE_IMAGES_DIRECTORY", "images/");
     define("APP_DATA_RECIPES_DIRECTORY", "recipes/");
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
 
     //logs
     define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
     define("LOGS_MAX_HISTORY", "7");    //in days
+
+    //email verification
+    define("VERIFY_EMAIL_VERI_CODE_EXPIRE", "1");   //in days
+    define("VERIFY_EMAIL_INVALID_URL", "VERIFY_EMAIL_INVALID_URL");
+    define("VERIFY_EMAIL_VERICODE_EXPIRED", "VERIFY_EMAIL_VERICODE_EXPIRED");
+    define("VERIFY_EMAIL_VERIFIED", "VERIFY_EMAIL_VERIFIED");
+    define("VERIFY_EMAIL_NOT_VERIFIED", "VERIFY_EMAIL_NOT_VERIFIED");
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
