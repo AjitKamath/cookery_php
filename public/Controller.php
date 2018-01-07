@@ -50,15 +50,21 @@
 	$mobile			= isset($_POST['mobile']) ? $_POST['mobile'] : '';
 	$name			= isset($_POST['name']) ? $_POST['name'] : '';
 	$gender			= isset($_POST['gender']) ? $_POST['gender'] : '';
+<<<<<<< Updated upstream
 
 	$flwr_user_id			= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
 	$flws_user_id			= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
 
+=======
+>>>>>>> Stashed changes
 	$list_name			= isset($_POST['list_name']) ? $_POST['list_name'] : '';
 	$type			= isset($_POST['type']) ? $_POST['type'] : '';
 	$list_id = isset($_POST['list_id']) ? $_POST['list_id'] : '';
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     //params
 
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
@@ -166,9 +172,12 @@ else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
 		echo Ingredient::viewuserIngedrientList($list_id);
 	}
 
+<<<<<<< Updated upstream
 else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
 		echo Ingredient::updateUserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
 	}
+=======
+>>>>>>> Stashed changes
 
 
 	//ingredient
