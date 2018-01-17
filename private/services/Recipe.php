@@ -1,7 +1,36 @@
 <?php
 	class Recipe{
 		public static function fetchTrendingRecipes(){
-			return self::fetchRecipe(103, 1);
+			return self::fetchRecipe(66, 1);
+		}
+		
+		public static function getRecipesCount($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			
+			try{
+				$query = "SELECT COUNT(*) AS COUNT 
+							FROM `RECIPE` 
+							WHERE USER_ID = '$user_id'
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->COUNT; 
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
 		}
 		
 		public static function searchRecipes($searchQuery){
@@ -1218,7 +1247,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT USR.IMG, USR.NAME, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
+				$query = "SELECT USR.IMG, USR.NAME, RCP.USER_ID, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
 						FDTYP.FOOD_TYP_NAME, FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID
 						FROM `RECIPE` AS RCP 
 						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
@@ -1244,6 +1273,7 @@
 					
 					$result_array['userName'] = $result_data->NAME;
 					$result_array['userImage'] = $result_data->IMG;
+					$result_array['USER_ID'] = $result_data->USER_ID;
 					
 					//steps
 					$result_array['steps'] = self::getRecipeSteps($con, $rcp_id);

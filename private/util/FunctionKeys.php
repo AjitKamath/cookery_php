@@ -1,4 +1,6 @@
 <?php
+    define("UNIDENTIFIED_FUNCTION_KEY", "UNIDENTIFIED_FUNCTION_KEY");
+
     //master
     define("QUANTITY_FETCH_ALL", "QUANTITY_FETCH_ALL");                 //Postman completed
     define("FOOD_CUISINE_FETCH_ALL", "FOOD_CUISINE_FETCH_ALL");         //Postman completed
@@ -38,6 +40,9 @@
     
     //timeline
     define("TIMELINE_USER_FETCH", "TIMELINE_USER_FETCH");               //Postman completed  
+    define("TIMELINE_USER_FOLLOWS_FETCH", "TIMELINE_USER_FOLLOWS_FETCH");    //Postman completed 
+    define("TIMELINE_SCOPE_MODIFY", "TIMELINE_SCOPE_MODIFY");           //Postman completed 
+    define("TIMELINE_DELETE", "TIMELINE_DELETE");           //Postman completed 
     //timeline
 
     //view
@@ -48,8 +53,11 @@
     //user
     define("USER_LOGIN", "USER_LOGIN");                                 //Postman completed
     define("USER_REGISTER", "USER_REGISTER");                           //Postman completed
-    define("USER_FETCH", "USER_FETCH");                                 //Postman completed
+    define("USER_FETCH_PUBLIC", "USER_FETCH_PUBLIC");                   //Postman completed
+    define("USER_FETCH_SELF", "USER_FETCH_SELF");                       //Postman completed
     define("USER_FOLLOW_SUBMIT", "USER_FOLLOW_SUBMIT");                 //Postman completed
+    define("USER_FOLLOWERS_FETCH", "USER_FOLLOWERS_FETCH");             //Postman completed
+    define("USER_FOLLOWINGS_FETCH", "USER_FOLLOWINGS_FETCH");           //Postman completed
     define("USER_UPDATE_NAME", "USER_UPDATE_NAME");                     //Postman completed
     define("USER_UPDATE_EMAIL", "USER_UPDATE_EMAIL");                   //Postman completed
     define("USER_UPDATE_PASSWORD", "USER_UPDATE_PASSWORD");             //Postman completed
