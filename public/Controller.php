@@ -171,7 +171,9 @@
 	else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
 		echo Ingredient::viewuserIngedrientList($list_id);
 	}
-
+	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
+		echo Ingredient::updateUserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
+	}
 	//ingredient
 	
 	//timeline
