@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jan 17, 2018 at 07:02 PM
+-- Generation Time: Jan 20, 2018 at 08:46 PM
 -- Server version: 8.0.3-rc-log
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -389,6 +389,36 @@ INSERT INTO `QTY` (`QTY_ID`, `QTY_NAME`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALU
 (3, 'TABLE SPOON', '', '2017-09-09 00:00:00', NULL),
 (4, 'BOWL', '', '2017-09-09 00:00:00', NULL),
 (5, 'GLASS', '', '2017-09-09 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RANK`
+--
+
+CREATE TABLE `RANK` (
+  `RANK_ID` int(11) NOT NULL,
+  `RANK_NAME` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `RANK_RULE` text COLLATE utf8mb4_unicode_ci,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `RANK`
+--
+
+INSERT INTO `RANK` (`RANK_ID`, `RANK_NAME`, `RANK_RULE`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'FOODIE', 'Initial Rank', '2018-01-18 00:00:00', NULL),
+(2, 'KITCHEN HAND', '(5 Recipes & 100 Likes) or 50 Shares or 50 Reviews', '2018-01-18 00:00:00', NULL),
+(3, 'COMMIS CHEF', '(20 Recipes & 500 Likes) or 200 Shares or 200 Reviews', '2018-01-18 00:00:00', NULL),
+(4, 'CHEF DE PARTIE', '(25 Recipes & 1000 likes) or 400 Shares or 400 Reviews', '2018-01-18 00:00:00', NULL),
+(5, 'SOUS CHEF', '(25 Recipes & 2000 Likes) or 500 Shares or 500 Reviews', '2018-01-18 00:00:00', NULL),
+(6, 'HEAD CHEF', '(25 Recipes & 5000 Likes) or 1000 Shares or 1000 Reviews', '2018-01-18 00:00:00', NULL),
+(7, 'EXECUTIVE CHEF', '(25 Recipes & 10000 Likes) or 5000 Shares or 5000 Reviews', '2018-01-18 00:00:00', NULL),
+(8, 'SUPER CHEF', '(50 Recipes & 20000 Likes) or 10000 Shares or 10000 Reviews', '2018-01-18 00:00:00', NULL),
+(9, 'MASTER CHEF', '(75 Recipes & 30000 Likes) or 20000 Shares or 20000 Reviews', '2018-01-18 00:00:00', NULL),
+(10, 'GODS COOK', '(100 Recipes & 50000 Likes) or 30000 Shares or 30000 Reviews', '2018-01-18 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1125,13 +1155,14 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (588, 1, 1, 'COMMENT_RECIPE_ADD', 64, 1, 'N', '2018-01-16 00:56:08', NULL),
 (589, 1, 1, 'COMMENT_RECIPE_ADD', 65, 1, 'N', '2018-01-16 00:56:09', NULL),
 (590, 1, 1, 'LIKE_COMMENT_REMOVE', 18, 1, 'N', '2018-01-16 00:56:10', NULL),
-(591, 1, 1, 'LIKE_COMMENT_ADD', 18, 1, 'N', '2018-01-16 00:56:12', NULL),
+(591, 1, 1, 'LIKE_COMMENT_ADD', 18, 2, 'N', '2018-01-16 00:56:12', NULL),
 (592, 1, 1, 'LIKE_RECIPE_ADD', 7, 1, 'Y', '2018-01-16 00:56:13', NULL),
 (593, 1, 1, 'LIKE_RECIPE_REMOVE', 7, 1, 'Y', '2018-01-16 23:46:14', NULL),
 (594, 1, 1, 'COMMENT_RECIPE_ADD', 66, 2, 'Y', '2018-01-16 23:46:26', NULL),
 (595, 1, 1, 'COMMENT_RECIPE_ADD', 67, 3, 'Y', '2018-01-16 23:46:26', NULL),
 (596, 1, 1, 'COMMENT_RECIPE_ADD', 68, 3, 'Y', '2018-01-16 23:46:42', NULL),
-(597, 1, 1, 'COMMENT_RECIPE_ADD', 69, 1, 'Y', '2018-01-16 23:46:44', NULL);
+(597, 1, 1, 'COMMENT_RECIPE_ADD', 69, 1, 'Y', '2018-01-16 23:46:44', NULL),
+(598, 66, 66, 'USER_ADD', 66, 1, 'N', '2018-01-18 14:23:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -1141,6 +1172,7 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 
 CREATE TABLE `USER` (
   `USER_ID` int(11) NOT NULL,
+  `RANK_ID` int(11) NOT NULL DEFAULT '1',
   `EMAIL` varchar(50) NOT NULL,
   `EMAIL_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
   `VERI_CODE` int(8) NOT NULL,
@@ -1162,72 +1194,73 @@ CREATE TABLE `USER` (
 -- Dumping data for table `USER`
 --
 
-INSERT INTO `USER` (`USER_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`, `VERI_CODE_DTM`, `IMG`, `MOBILE`, `MOBILE_SCOPE_ID`, `PASSWORD`, `NAME`, `GENDER`, `GENDER_SCOPE_ID`, `SSID`, `SALT`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'R7l9OSkXFb@gmail.com', 1, 54383981, '2018-01-15 12:05:33', 'app_data/users/1/profile/images/5a5a5aaa23d33.jpg', '9291059922', 1, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  68', 'F', 1, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-01-15 12:07:44'),
-(2, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'ABCD', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
-(3, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'testuser1', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
-(4, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '8124627522', 1, 'cm9jazJaUEtw', 'Vishal', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
-(5, 'testuser@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1234567890', 1, 'MTIzNDU2NzgxNjhjUg==', 'Test User', 'M', 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-05 09:28:53', NULL),
-(6, 'yOIW8uBUPh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8202377734', 1, 'MTIzNDU2Nzh6YUlrYw==', 'Test User', 'M', 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-06 10:09:03', NULL),
-(7, 'BuaMX1inFJ@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1434819247', 1, 'MTIzNDU2NzgzeGtreA==', 'Test User', 'M', 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-06 10:17:52', NULL),
-(8, 'mbTVNucEYo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4048666965', 1, 'MTIzNDU2NzhqWW9RRA==', 'Test User', 'M', 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-06 10:18:40', NULL),
-(9, 'mKZ3tT6mDV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2463154465', 1, 'MTIzNDU2NzhuV1hOVA==', 'Test User', 'M', 1, '79D6gkz9YL', 'bldYTlQ=', '2017-12-06 10:19:12', NULL),
-(10, 'yotGl72BQP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4706108967', 1, 'MTIzNDU2Nzhna05KRw==', 'Test User', 'M', 1, '10bR1Dhl1v', 'Z2tOSkc=', '2017-12-06 10:25:31', NULL),
-(11, 'p7gerTEFcK@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3224967902', 1, 'MTIzNDU2NzhNZHhsWA==', 'Test User', 'M', 1, 'Aa0qpd0dRi', 'TWR4bFg=', '2017-12-06 10:26:31', NULL),
-(12, '2hdwLAh3Qf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1122780923', 1, 'MTIzNDU2NzhhU1VXMQ==', 'Test User', 'M', 1, 'kZQae7t6VP', 'YVNVVzE=', '2017-12-06 10:32:19', NULL),
-(13, '1ur6aieyL4@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7568342541', 1, 'UkZ3azZVRGJRNlE2SXpx', 'Test User', 'M', 1, 'efESK2GWwx', 'UTZJenE=', '2017-12-06 10:36:54', NULL),
-(14, 'DyBbMIg3hW@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6397083418', 1, 'MzZnMUR2dnFJODhmclFj', 'Test User', 'M', 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-06 10:38:49', NULL),
-(15, 'Ch0C1oJCgP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1236028204', 1, 'bTh5RTNEY203Y0d3ODBR', 'Test User', 'M', 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-06 10:42:08', NULL),
-(16, 'ZfhzXsEz5X@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0328880787', 1, 'T0ZMSUpkYm1sTTBsRDJi', 'Test User', 'M', 1, 'XVLEHSZm7U', 'MGxEMmI=', '2017-12-06 10:43:00', NULL),
-(17, 'RX631Oc74f@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1925274231', 1, 'ZFVURk1SM1Z6ek9sckpo', 'Test User', 'M', 1, 'FkQwv4DZaz', 'T2xySmg=', '2017-12-06 15:20:07', NULL),
-(18, 'Nq2ieecBym@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9071819562', 1, 'WGdETmlpdjRHQnMxNGVD', 'Test User', 'M', 1, 'lO8HfQ826L', 'czE0ZUM=', '2017-12-06 21:06:19', NULL),
-(19, 'jj5eAEXfU9@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4282843437', 1, 'M3VEOVJDaHFWV056OUxu', 'Test User', 'M', 1, 'hmMUs3e1cd', 'Tno5TG4=', '2017-12-06 21:19:07', NULL),
-(20, '29LcdlnLKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4345019328', 1, 'SmdQc29VUlREVFVSYk1B', 'Test User', 'M', 1, 'oCThqOWUsW', 'VVJiTUE=', '2017-12-06 21:19:07', NULL),
-(21, 'gUl84sC85i@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7493439821', 1, 'NjZBeVM5OVpQRjZGTHZ3', 'Test User', 'M', 1, 'V5RuFN3DlM', 'NkZMdnc=', '2017-12-06 21:19:07', NULL),
-(22, 'hOpulyUcvN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2551728778', 1, 'YlpsYWo2QUNkazhsQWlq', 'Test User', 'M', 1, 'I3icXGGgbT', 'OGxBaWo=', '2017-12-06 21:19:08', NULL),
-(23, 'bMfjcgsHmB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8788910625', 1, 'ZjdVQjNWbjhZQkdSTlBT', 'Test User', 'M', 1, 'sLtY3DO5bg', 'R1JOUFM=', '2017-12-06 21:19:08', NULL),
-(24, 'gzzvd5mHzV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2459219942', 1, 'd1ZDSmpndk1uMHJkZWZY', 'Test User', 'M', 1, '3NAeFBSWWU', 'cmRlZlg=', '2017-12-06 21:19:08', NULL),
-(25, 'CFAXHpPwUd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7921299722', 1, 'YzVhdnpDVDlmZ05PV1pB', 'Test User', 'M', 1, 'UDzOV0DRU5', 'Tk9XWkE=', '2017-12-07 11:32:54', NULL),
-(26, 'eEfVEJrxIX@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3499450811', 1, 'bXRKSUxSNzROdFI1N1Ay', 'Test User', 'M', 1, 'w50UEdmk58', 'UjU3UDI=', '2017-12-07 11:54:15', NULL),
-(27, '4OjqajUs9g@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1150903063', 1, 'TXFidlN1czNlYTVyVWpI', 'Test User', 'M', 1, 'x3o7h3JaZG', 'NXJVakg=', '2017-12-07 12:05:22', NULL),
-(28, 'lpZngIZUKY@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7172558694', 1, 'Q1I5dXJ2TXFLb1FqSXlU', 'Test User', 'M', 1, 'oKM3Cw6itC', 'UWpJeVQ=', '2017-12-07 12:22:14', NULL),
-(29, 'Qanx1xZlef@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6077018106', 1, 'QzZTdDVNNWdiR2FVU3Fx', 'Test User', 'M', 1, 'LuHOy11sWR', 'YVVTcXE=', '2017-12-07 12:22:14', NULL),
-(30, 'PE5XKyFRTO@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6856612574', 1, 'RW5vWmRMZmVhM0lXYU5h', 'Test User', 'M', 1, '37bbOr2Xt8', 'SVdhTmE=', '2017-12-07 12:22:14', NULL),
-(31, 'rQnpbdgL71@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9396035651', 1, 'cndnV1hWOWlVck5UV2ZL', 'Test User', 'M', 1, 'WBoqMdPcLG', 'TlRXZks=', '2017-12-07 12:22:14', NULL),
-(32, 'ztfSEk6B3C@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7311704009', 1, 'dWs3UklOeXM4S1BuUEFT', 'Test User', 'M', 1, '9uY0ZDN2g9', 'UG5QQVM=', '2017-12-07 12:22:15', NULL),
-(33, 'lYoRhb8ZBf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8451165685', 1, 'b0YxZG1GckhES2R3M0Zn', 'Test User', 'M', 1, 'Dudt0IxEHI', 'ZHczRmc=', '2017-12-07 12:22:15', NULL),
-(34, '3H5vt92ouL@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8549161982', 1, 'T2w2TUhiMHBSamxNWFQ3', 'Test User', 'M', 1, 'DCmE3MR3ZJ', 'bE1YVDc=', '2017-12-07 15:01:26', NULL),
-(35, '4T1Z4vzjCH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2209997550', 1, 'dG81cVdlWkhmMVBncmJU', 'Test User', 'M', 1, 'lSnjYx9Yr3', 'UGdyYlQ=', '2017-12-07 15:01:39', NULL),
-(36, '5M7QIvAVFd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2978043429', 1, 'bGs2cjFLdnhEa2JSd1pH', 'Test User', 'M', 1, 'k81O74sVaE', 'YlJ3Wkc=', '2017-12-07 15:01:46', NULL),
-(37, 'gyhxa6lCeN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1449887458', 1, 'RE9jMUR2SEZ5S2w0eXBK', 'Test User', 'M', 1, 'oCaB5bkDQ1', 'bDR5cEo=', '2017-12-07 15:02:15', NULL),
-(38, 'JcEK2zoeFr@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5028518859', 1, 'c2NrelhQc25XYkthRmx0', 'Test User', 'M', 1, '8XOraL8Q2k', 'S2FGbHQ=', '2017-12-07 15:02:21', NULL),
-(39, 'kTWUUMdona@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6701341132', 1, 'ZTMyZDVxcWo3U0xWYUlV', 'Test User', 'M', 1, 'Relr2grF7m', 'TFZhSVU=', '2017-12-07 15:12:20', NULL),
-(40, 'G5tTSHpBzo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9785956975', 1, 'dzFCWWxQeEdLUkJibTVl', 'Test User', 'M', 1, 'eGAnNJuj2Z', 'QmJtNWU=', '2017-12-09 02:31:36', NULL),
-(41, 'szP8OEFT2Y@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8418273261', 1, 'VjlrM0VHSFhxQmJic3JS', 'Test User', 'M', 1, 'fGjcdciQF7', 'YmJzclI=', '2017-12-09 02:31:36', NULL),
-(42, 'iUOPvHMUHU@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3981859004', 1, 'Y2RZTFhXSTFPdDU5Yzk1', 'Test User', 'M', 1, 'yvbV3rhwBp', 'NTljOTU=', '2017-12-09 02:31:37', NULL),
-(43, 'm83W2E74ml@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8988125485', 1, 'dHZxVWVBTDNRQ2xWR0hp', 'Test User', 'M', 1, 'nokluy1nr8', 'bFZHSGk=', '2017-12-09 02:31:37', NULL),
-(44, 'u5dK9mDKc3@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9466253586', 1, 'M1IzamhwSXdXeWIwVGVF', 'Test User', 'M', 1, 's1VUX7txJV', 'YjBUZUU=', '2017-12-09 02:31:38', NULL),
-(45, 'AJ3uHtwFi5@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5933337509', 1, 'S3d2NUVKbTg4Q2oyM0c3', 'Test User', 'M', 1, 'wsk7P8QkrS', 'ajIzRzc=', '2017-12-09 03:04:14', NULL),
-(46, '2D3knF59UH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8031776077', 1, 'V25yVFhjekVLZWhkRnVj', 'Test User', 'M', 1, 'XQSDDW2AUH', 'aGRGdWM=', '2017-12-12 15:30:27', NULL),
-(47, 'bxy59Uozgv@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3311571135', 1, 'czBURzFjd2JMVEo0ZTFP', 'Test User', 'M', 1, 'zervzzZPzM', 'SjRlMU8=', '2017-12-13 15:38:42', NULL),
-(48, 'BnjETSM2Ce@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7804938640', 1, 'T2VDaVkzTEFwOThEZWZv', 'Test User', 'M', 1, '9grxmxpmhZ', 'OERlZm8=', '2017-12-14 11:01:33', NULL),
-(49, 'mqTJxCGpka@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1202368274', 1, 'bHdOdUpDMDJacEVtYzVt', 'Test User', 'M', 1, 'atlgH3L0ph', 'RW1jNW0=', '2017-12-15 15:02:05', NULL),
-(50, 'xOUqRp2oZN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0402232131', 1, 'S1FsSHNoVXpmN3Y3dHRR', 'Test User', 'M', 1, 'CrZF7envK9', 'djd0dFE=', '2017-12-16 22:48:35', NULL),
-(51, 'ndjriWzSBw@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7597298013', 1, 'a1JIVmZLZnhCSWduRHBH', 'Test User', 'M', 1, 'STYGY8xzwl', 'Z25EcEc=', '2017-12-17 14:22:14', NULL),
-(52, 'zCIHqiEg2k@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9176520834', 1, 'ODRiRWhtSjRzVlJ3c292', 'Test User', 'M', 1, '1EoMyTgiDT', 'Undzb3Y=', '2017-12-17 19:39:15', NULL),
-(53, 'e0vTB20CNI@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7795599808', 1, 'Q1dNN3JDbGd5b0F6M2RU', 'Test User', 'M', 1, 'rr3qhhYTGl', 'QXozZFQ=', '2017-12-18 09:53:36', NULL),
-(54, 'cGHi8zJir7@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1344784955', 1, 'YW5NOXlvYnVINDJ1U3dY', 'Test User', 'M', 1, 'MQlMvt0SZK', 'MnVTd1g=', '2017-12-18 10:10:43', NULL),
-(55, '1eitY1tUdB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3091295174', 1, 'dGVOcm9CZVhCc0ZjbGRx', 'Test User', 'M', 1, 'jXGYOyuPYb', 'RmNsZHE=', '2017-12-18 15:54:48', NULL),
-(56, 'iG3S1XhetD@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1376574609', 1, 'SVJzZW14ZlU1TTE3N1l0', 'Test User', 'M', 1, 'w7Wtdm6Hnt', 'MTc3WXQ=', '2017-12-19 19:58:01', NULL),
-(57, 'u1STMAbyKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0182983869', 1, 'dTNOS1ZPdWpLNEl5djZ6', 'Test User', 'M', 1, 'jHia9CKnAj', 'SXl2Nno=', '2017-12-21 09:26:46', NULL),
-(58, 'bIOX9zJiqh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0494893380', 1, 'YVBSY0ljTDdpZWtkd2FY', 'Test User', 'M', 1, 'buW2OLC4kD', 'a2R3YVg=', '2017-12-28 09:23:09', NULL),
-(59, 'tmnJJQY6NW@gmail.com', 1, 0, '2017-12-29 07:14:50', NULL, '6176779264', 1, 'M0xFSWpCSjVjOGUxaksz', 'Test User', 'M', 1, 'FwBucTafMt', 'ZTFqSzM=', '2017-12-29 07:14:50', NULL),
-(60, '83JuYpN2mR@gmail.com', 1, 0, '2017-12-29 07:38:05', NULL, '7301820168', 1, 'bmZ3cG15d0FjTTBhRVlW', 'Test User', 'M', 1, 'OK50R4fzFj', 'MGFFWVY=', '2017-12-29 07:38:05', NULL),
-(61, 'Am8gZZWHa3@gmail.com', 1, 0, '2017-12-29 08:30:55', NULL, '8114166397', 1, 'TmpiMjNTd3NyRjRwV0Nw', 'Test User', 'M', 1, 'osaJRbEWK5', 'NHBXQ3A=', '2017-12-29 08:30:55', NULL),
-(62, 'w9ZiyCBczv@gmail.com', 1, 38158294, '2017-12-29 16:52:50', NULL, '3575891040', 1, 'Z1d3Z2o4MnBXUnNlZHB0', 'Test User', 'M', 1, '9ElEB5ILF0', 'c2VkcHQ=', '2017-12-29 16:52:50', NULL),
-(63, 'mEmve9D2D6@gmail.com', 1, 14708985, '2017-12-30 09:53:23', NULL, NULL, 1, 'NDUzNDY0ODQ5NHNFQjI0', 'COOKERY', NULL, 1, '4YfRLcdJ2J', 'c0VCMjQ=', '2017-12-30 09:53:23', NULL),
-(64, 'DkuyWf4vOz@gmail.com', 1, 88859188, '2017-12-30 09:55:20', NULL, NULL, 1, 'Q09PS0VSWVJzSGlv', 'Test User -  08', NULL, 1, '0rqwzKv526', 'UnNIaW8=', '2017-12-30 09:55:20', NULL),
-(65, '2usvcVlzb6@gmail.com', 1, 55039142, '2018-01-01 11:23:18', NULL, NULL, 1, 'Q09PS0VSWVR2SzNK', 'Test User -  08', '', 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', NULL);
+INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`, `VERI_CODE_DTM`, `IMG`, `MOBILE`, `MOBILE_SCOPE_ID`, `PASSWORD`, `NAME`, `GENDER`, `GENDER_SCOPE_ID`, `SSID`, `SALT`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'cookery21@cookery.com', 2, 648153, '2018-01-20 20:23:49', 'app_data/users/1/profile/images/5a5a5aaa23d33.jpg', '1234', 2, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  68', 'F', 2, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-01-20 20:36:24'),
+(2, 1, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'ABCD', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
+(3, 1, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'testuser1', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
+(4, 1, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '8124627522', 1, 'cm9jazJaUEtw', 'Vishal', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
+(5, 1, 'testuser@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1234567890', 1, 'MTIzNDU2NzgxNjhjUg==', 'Test User', 'M', 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-05 09:28:53', NULL),
+(6, 1, 'yOIW8uBUPh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8202377734', 1, 'MTIzNDU2Nzh6YUlrYw==', 'Test User', 'M', 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-06 10:09:03', NULL),
+(7, 1, 'BuaMX1inFJ@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1434819247', 1, 'MTIzNDU2NzgzeGtreA==', 'Test User', 'M', 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-06 10:17:52', NULL),
+(8, 1, 'mbTVNucEYo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4048666965', 1, 'MTIzNDU2NzhqWW9RRA==', 'Test User', 'M', 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-06 10:18:40', NULL),
+(9, 1, 'mKZ3tT6mDV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2463154465', 1, 'MTIzNDU2NzhuV1hOVA==', 'Test User', 'M', 1, '79D6gkz9YL', 'bldYTlQ=', '2017-12-06 10:19:12', NULL),
+(10, 1, 'yotGl72BQP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4706108967', 1, 'MTIzNDU2Nzhna05KRw==', 'Test User', 'M', 1, '10bR1Dhl1v', 'Z2tOSkc=', '2017-12-06 10:25:31', NULL),
+(11, 1, 'p7gerTEFcK@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3224967902', 1, 'MTIzNDU2NzhNZHhsWA==', 'Test User', 'M', 1, 'Aa0qpd0dRi', 'TWR4bFg=', '2017-12-06 10:26:31', NULL),
+(12, 1, '2hdwLAh3Qf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1122780923', 1, 'MTIzNDU2NzhhU1VXMQ==', 'Test User', 'M', 1, 'kZQae7t6VP', 'YVNVVzE=', '2017-12-06 10:32:19', NULL),
+(13, 1, '1ur6aieyL4@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7568342541', 1, 'UkZ3azZVRGJRNlE2SXpx', 'Test User', 'M', 1, 'efESK2GWwx', 'UTZJenE=', '2017-12-06 10:36:54', NULL),
+(14, 1, 'DyBbMIg3hW@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6397083418', 1, 'MzZnMUR2dnFJODhmclFj', 'Test User', 'M', 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-06 10:38:49', NULL),
+(15, 1, 'Ch0C1oJCgP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1236028204', 1, 'bTh5RTNEY203Y0d3ODBR', 'Test User', 'M', 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-06 10:42:08', NULL),
+(16, 1, 'ZfhzXsEz5X@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0328880787', 1, 'T0ZMSUpkYm1sTTBsRDJi', 'Test User', 'M', 1, 'XVLEHSZm7U', 'MGxEMmI=', '2017-12-06 10:43:00', NULL),
+(17, 1, 'RX631Oc74f@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1925274231', 1, 'ZFVURk1SM1Z6ek9sckpo', 'Test User', 'M', 1, 'FkQwv4DZaz', 'T2xySmg=', '2017-12-06 15:20:07', NULL),
+(18, 1, 'Nq2ieecBym@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9071819562', 1, 'WGdETmlpdjRHQnMxNGVD', 'Test User', 'M', 1, 'lO8HfQ826L', 'czE0ZUM=', '2017-12-06 21:06:19', NULL),
+(19, 1, 'jj5eAEXfU9@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4282843437', 1, 'M3VEOVJDaHFWV056OUxu', 'Test User', 'M', 1, 'hmMUs3e1cd', 'Tno5TG4=', '2017-12-06 21:19:07', NULL),
+(20, 1, '29LcdlnLKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4345019328', 1, 'SmdQc29VUlREVFVSYk1B', 'Test User', 'M', 1, 'oCThqOWUsW', 'VVJiTUE=', '2017-12-06 21:19:07', NULL),
+(21, 1, 'gUl84sC85i@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7493439821', 1, 'NjZBeVM5OVpQRjZGTHZ3', 'Test User', 'M', 1, 'V5RuFN3DlM', 'NkZMdnc=', '2017-12-06 21:19:07', NULL),
+(22, 1, 'hOpulyUcvN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2551728778', 1, 'YlpsYWo2QUNkazhsQWlq', 'Test User', 'M', 1, 'I3icXGGgbT', 'OGxBaWo=', '2017-12-06 21:19:08', NULL),
+(23, 1, 'bMfjcgsHmB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8788910625', 1, 'ZjdVQjNWbjhZQkdSTlBT', 'Test User', 'M', 1, 'sLtY3DO5bg', 'R1JOUFM=', '2017-12-06 21:19:08', NULL),
+(24, 1, 'gzzvd5mHzV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2459219942', 1, 'd1ZDSmpndk1uMHJkZWZY', 'Test User', 'M', 1, '3NAeFBSWWU', 'cmRlZlg=', '2017-12-06 21:19:08', NULL),
+(25, 1, 'CFAXHpPwUd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7921299722', 1, 'YzVhdnpDVDlmZ05PV1pB', 'Test User', 'M', 1, 'UDzOV0DRU5', 'Tk9XWkE=', '2017-12-07 11:32:54', NULL),
+(26, 1, 'eEfVEJrxIX@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3499450811', 1, 'bXRKSUxSNzROdFI1N1Ay', 'Test User', 'M', 1, 'w50UEdmk58', 'UjU3UDI=', '2017-12-07 11:54:15', NULL),
+(27, 1, '4OjqajUs9g@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1150903063', 1, 'TXFidlN1czNlYTVyVWpI', 'Test User', 'M', 1, 'x3o7h3JaZG', 'NXJVakg=', '2017-12-07 12:05:22', NULL),
+(28, 1, 'lpZngIZUKY@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7172558694', 1, 'Q1I5dXJ2TXFLb1FqSXlU', 'Test User', 'M', 1, 'oKM3Cw6itC', 'UWpJeVQ=', '2017-12-07 12:22:14', NULL),
+(29, 1, 'Qanx1xZlef@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6077018106', 1, 'QzZTdDVNNWdiR2FVU3Fx', 'Test User', 'M', 1, 'LuHOy11sWR', 'YVVTcXE=', '2017-12-07 12:22:14', NULL),
+(30, 1, 'PE5XKyFRTO@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6856612574', 1, 'RW5vWmRMZmVhM0lXYU5h', 'Test User', 'M', 1, '37bbOr2Xt8', 'SVdhTmE=', '2017-12-07 12:22:14', NULL),
+(31, 1, 'rQnpbdgL71@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9396035651', 1, 'cndnV1hWOWlVck5UV2ZL', 'Test User', 'M', 1, 'WBoqMdPcLG', 'TlRXZks=', '2017-12-07 12:22:14', NULL),
+(32, 1, 'ztfSEk6B3C@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7311704009', 1, 'dWs3UklOeXM4S1BuUEFT', 'Test User', 'M', 1, '9uY0ZDN2g9', 'UG5QQVM=', '2017-12-07 12:22:15', NULL),
+(33, 1, 'lYoRhb8ZBf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8451165685', 1, 'b0YxZG1GckhES2R3M0Zn', 'Test User', 'M', 1, 'Dudt0IxEHI', 'ZHczRmc=', '2017-12-07 12:22:15', NULL),
+(34, 1, '3H5vt92ouL@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8549161982', 1, 'T2w2TUhiMHBSamxNWFQ3', 'Test User', 'M', 1, 'DCmE3MR3ZJ', 'bE1YVDc=', '2017-12-07 15:01:26', NULL),
+(35, 1, '4T1Z4vzjCH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2209997550', 1, 'dG81cVdlWkhmMVBncmJU', 'Test User', 'M', 1, 'lSnjYx9Yr3', 'UGdyYlQ=', '2017-12-07 15:01:39', NULL),
+(36, 1, '5M7QIvAVFd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2978043429', 1, 'bGs2cjFLdnhEa2JSd1pH', 'Test User', 'M', 1, 'k81O74sVaE', 'YlJ3Wkc=', '2017-12-07 15:01:46', NULL),
+(37, 1, 'gyhxa6lCeN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1449887458', 1, 'RE9jMUR2SEZ5S2w0eXBK', 'Test User', 'M', 1, 'oCaB5bkDQ1', 'bDR5cEo=', '2017-12-07 15:02:15', NULL),
+(38, 1, 'JcEK2zoeFr@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5028518859', 1, 'c2NrelhQc25XYkthRmx0', 'Test User', 'M', 1, '8XOraL8Q2k', 'S2FGbHQ=', '2017-12-07 15:02:21', NULL),
+(39, 1, 'kTWUUMdona@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6701341132', 1, 'ZTMyZDVxcWo3U0xWYUlV', 'Test User', 'M', 1, 'Relr2grF7m', 'TFZhSVU=', '2017-12-07 15:12:20', NULL),
+(40, 1, 'G5tTSHpBzo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9785956975', 1, 'dzFCWWxQeEdLUkJibTVl', 'Test User', 'M', 1, 'eGAnNJuj2Z', 'QmJtNWU=', '2017-12-09 02:31:36', NULL),
+(41, 1, 'szP8OEFT2Y@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8418273261', 1, 'VjlrM0VHSFhxQmJic3JS', 'Test User', 'M', 1, 'fGjcdciQF7', 'YmJzclI=', '2017-12-09 02:31:36', NULL),
+(42, 1, 'iUOPvHMUHU@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3981859004', 1, 'Y2RZTFhXSTFPdDU5Yzk1', 'Test User', 'M', 1, 'yvbV3rhwBp', 'NTljOTU=', '2017-12-09 02:31:37', NULL),
+(43, 1, 'm83W2E74ml@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8988125485', 1, 'dHZxVWVBTDNRQ2xWR0hp', 'Test User', 'M', 1, 'nokluy1nr8', 'bFZHSGk=', '2017-12-09 02:31:37', NULL),
+(44, 1, 'u5dK9mDKc3@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9466253586', 1, 'M1IzamhwSXdXeWIwVGVF', 'Test User', 'M', 1, 's1VUX7txJV', 'YjBUZUU=', '2017-12-09 02:31:38', NULL),
+(45, 1, 'AJ3uHtwFi5@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5933337509', 1, 'S3d2NUVKbTg4Q2oyM0c3', 'Test User', 'M', 1, 'wsk7P8QkrS', 'ajIzRzc=', '2017-12-09 03:04:14', NULL),
+(46, 1, '2D3knF59UH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8031776077', 1, 'V25yVFhjekVLZWhkRnVj', 'Test User', 'M', 1, 'XQSDDW2AUH', 'aGRGdWM=', '2017-12-12 15:30:27', NULL),
+(47, 1, 'bxy59Uozgv@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3311571135', 1, 'czBURzFjd2JMVEo0ZTFP', 'Test User', 'M', 1, 'zervzzZPzM', 'SjRlMU8=', '2017-12-13 15:38:42', NULL),
+(48, 1, 'BnjETSM2Ce@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7804938640', 1, 'T2VDaVkzTEFwOThEZWZv', 'Test User', 'M', 1, '9grxmxpmhZ', 'OERlZm8=', '2017-12-14 11:01:33', NULL),
+(49, 1, 'mqTJxCGpka@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1202368274', 1, 'bHdOdUpDMDJacEVtYzVt', 'Test User', 'M', 1, 'atlgH3L0ph', 'RW1jNW0=', '2017-12-15 15:02:05', NULL),
+(50, 1, 'xOUqRp2oZN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0402232131', 1, 'S1FsSHNoVXpmN3Y3dHRR', 'Test User', 'M', 1, 'CrZF7envK9', 'djd0dFE=', '2017-12-16 22:48:35', NULL),
+(51, 1, 'ndjriWzSBw@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7597298013', 1, 'a1JIVmZLZnhCSWduRHBH', 'Test User', 'M', 1, 'STYGY8xzwl', 'Z25EcEc=', '2017-12-17 14:22:14', NULL),
+(52, 1, 'zCIHqiEg2k@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9176520834', 1, 'ODRiRWhtSjRzVlJ3c292', 'Test User', 'M', 1, '1EoMyTgiDT', 'Undzb3Y=', '2017-12-17 19:39:15', NULL),
+(53, 1, 'e0vTB20CNI@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7795599808', 1, 'Q1dNN3JDbGd5b0F6M2RU', 'Test User', 'M', 1, 'rr3qhhYTGl', 'QXozZFQ=', '2017-12-18 09:53:36', NULL),
+(54, 1, 'cGHi8zJir7@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1344784955', 1, 'YW5NOXlvYnVINDJ1U3dY', 'Test User', 'M', 1, 'MQlMvt0SZK', 'MnVTd1g=', '2017-12-18 10:10:43', NULL),
+(55, 1, '1eitY1tUdB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3091295174', 1, 'dGVOcm9CZVhCc0ZjbGRx', 'Test User', 'M', 1, 'jXGYOyuPYb', 'RmNsZHE=', '2017-12-18 15:54:48', NULL),
+(56, 1, 'iG3S1XhetD@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1376574609', 1, 'SVJzZW14ZlU1TTE3N1l0', 'Test User', 'M', 1, 'w7Wtdm6Hnt', 'MTc3WXQ=', '2017-12-19 19:58:01', NULL),
+(57, 1, 'u1STMAbyKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0182983869', 1, 'dTNOS1ZPdWpLNEl5djZ6', 'Test User', 'M', 1, 'jHia9CKnAj', 'SXl2Nno=', '2017-12-21 09:26:46', NULL),
+(58, 1, 'bIOX9zJiqh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0494893380', 1, 'YVBSY0ljTDdpZWtkd2FY', 'Test User', 'M', 1, 'buW2OLC4kD', 'a2R3YVg=', '2017-12-28 09:23:09', NULL),
+(59, 1, 'tmnJJQY6NW@gmail.com', 1, 0, '2017-12-29 07:14:50', NULL, '6176779264', 1, 'M0xFSWpCSjVjOGUxaksz', 'Test User', 'M', 1, 'FwBucTafMt', 'ZTFqSzM=', '2017-12-29 07:14:50', NULL),
+(60, 1, '83JuYpN2mR@gmail.com', 1, 0, '2017-12-29 07:38:05', NULL, '7301820168', 1, 'bmZ3cG15d0FjTTBhRVlW', 'Test User', 'M', 1, 'OK50R4fzFj', 'MGFFWVY=', '2017-12-29 07:38:05', NULL),
+(61, 1, 'Am8gZZWHa3@gmail.com', 1, 0, '2017-12-29 08:30:55', NULL, '8114166397', 1, 'TmpiMjNTd3NyRjRwV0Nw', 'Test User', 'M', 1, 'osaJRbEWK5', 'NHBXQ3A=', '2017-12-29 08:30:55', NULL),
+(62, 1, 'w9ZiyCBczv@gmail.com', 1, 38158294, '2017-12-29 16:52:50', NULL, '3575891040', 1, 'Z1d3Z2o4MnBXUnNlZHB0', 'Test User', 'M', 1, '9ElEB5ILF0', 'c2VkcHQ=', '2017-12-29 16:52:50', NULL),
+(63, 1, 'mEmve9D2D6@gmail.com', 1, 14708985, '2017-12-30 09:53:23', NULL, NULL, 1, 'NDUzNDY0ODQ5NHNFQjI0', 'COOKERY', NULL, 1, '4YfRLcdJ2J', 'c0VCMjQ=', '2017-12-30 09:53:23', NULL),
+(64, 1, 'DkuyWf4vOz@gmail.com', 1, 88859188, '2017-12-30 09:55:20', NULL, NULL, 1, 'Q09PS0VSWVJzSGlv', 'Test User -  08', NULL, 1, '0rqwzKv526', 'UnNIaW8=', '2017-12-30 09:55:20', NULL),
+(65, 1, '2usvcVlzb6@gmail.com', 1, 55039142, '2018-01-01 11:23:18', NULL, NULL, 1, 'Q09PS0VSWVR2SzNK', 'Test User -  08', '', 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', NULL),
+(66, 1, 'aMJUvZ4CM5@gmail.com', 1, 49645219, '2018-01-18 14:23:33', NULL, NULL, 1, 'Q09PS0VSWU9QOXlG', 'Test User -  00', '', 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -1435,6 +1468,12 @@ ALTER TABLE `QTY`
   ADD PRIMARY KEY (`QTY_ID`);
 
 --
+-- Indexes for table `RANK`
+--
+ALTER TABLE `RANK`
+  ADD PRIMARY KEY (`RANK_ID`);
+
+--
 -- Indexes for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
@@ -1502,7 +1541,8 @@ ALTER TABLE `USER`
   ADD PRIMARY KEY (`USER_ID`),
   ADD KEY `USER_FK1` (`EMAIL_SCOPE_ID`),
   ADD KEY `USER_FK3` (`MOBILE_SCOPE_ID`),
-  ADD KEY `USER_FK2` (`GENDER_SCOPE_ID`);
+  ADD KEY `USER_FK2` (`GENDER_SCOPE_ID`),
+  ADD KEY `USER_FK4` (`RANK_ID`);
 
 --
 -- Indexes for table `USER_ING_LIST`
@@ -1596,6 +1636,12 @@ ALTER TABLE `QTY`
   MODIFY `QTY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `RANK`
+--
+ALTER TABLE `RANK`
+  MODIFY `RANK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
@@ -1647,13 +1693,13 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=598;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
 
 --
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `USER_ING_LIST`
@@ -1747,7 +1793,8 @@ ALTER TABLE `TIMELINES`
 ALTER TABLE `USER`
   ADD CONSTRAINT `USER_FK1` FOREIGN KEY (`EMAIL_SCOPE_ID`) REFERENCES `SCOPE` (`scope_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `USER_FK2` FOREIGN KEY (`GENDER_SCOPE_ID`) REFERENCES `SCOPE` (`scope_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `USER_FK3` FOREIGN KEY (`MOBILE_SCOPE_ID`) REFERENCES `SCOPE` (`scope_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `USER_FK3` FOREIGN KEY (`MOBILE_SCOPE_ID`) REFERENCES `SCOPE` (`scope_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `USER_FK4` FOREIGN KEY (`RANK_ID`) REFERENCES `RANK` (`rank_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `USER_ING_LIST`

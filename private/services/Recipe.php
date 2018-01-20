@@ -1385,7 +1385,7 @@
 					$result_arr["err_message"]="Recipe deleted !";
 					
 					//register timeline
-					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id);
+					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id, DEFAULT_SCOPE_ID);
 					//register timeline
 				}
 				else{

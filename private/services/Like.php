@@ -266,7 +266,7 @@
 
 							$result_temp = mysqli_query($con, $query);
 							if($result_temp_data = $result_temp->fetch_object()){  
-								Timeline::addTimeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID);
+								Timeline::addTimeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID, DEFAULT_SCOPE_ID);
 							}
 							//get user_id of the type
 							//register timeline
@@ -308,7 +308,7 @@
 
 							$result_temp = mysqli_query($con, $query);
 							if($result_temp_data = $result_temp->fetch_object()){  
-								Timeline::addTimeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID);
+								Timeline::addTimeline($con, $user_id, $result_temp_data->USER_ID, $timeline_type, $result_data->LIKE_ID, DEFAULT_SCOPE_ID);
 							}
 							//get user_id of the type
 							//register timeline
@@ -353,7 +353,7 @@
 
 						$result = mysqli_query($con, $query);
 						if($result_data = $result->fetch_object()){  
-							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, $timeline_type, $like_id);
+							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, $timeline_type, $like_id, DEFAULT_SCOPE_ID);
 						}
 						//get user_id of the type
 						//register timeline

@@ -83,4 +83,5 @@
     //review
     //---------------------timeline---------------------
 
+    define("DEFAULT_SCOPE_ID","1");
 ?>

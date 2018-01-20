@@ -69,7 +69,7 @@
 					$result_arr["err_message"]="Review deleted !";
 
 					//register timeline
-					Timeline::addTimeline($con, $user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id);
+					Timeline::addTimeline($con, $user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id, DEFAULT_SCOPE_ID);
 					//register timeline
 				}
 				else{
@@ -148,7 +148,7 @@
 						$query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
 						$result = mysqli_query($con, $query);
 						if($result_data = $result->fetch_object()){  
-							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_ADD, $rev_id);
+							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_ADD, $rev_id, DEFAULT_SCOPE_ID);
 						}
 						//get user_id of the recipe
 						//register timeline
@@ -171,7 +171,7 @@
 						$query = "SELECT USER_ID FROM `RECIPE` WHERE RCP_ID = '$rcp_id'";
 						$result = mysqli_query($con, $query);
 						if($result_data = $result->fetch_object()){  
-							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_ADD, $rev_id);
+							Timeline::addTimeline($con, $user_id, $result_data->USER_ID, REVIEW_RECIPE_ADD, $rev_id, DEFAULT_SCOPE_ID);
 						}
 						//get user_id of the recipe
 						//register timeline

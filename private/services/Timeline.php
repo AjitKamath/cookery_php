@@ -28,12 +28,7 @@
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Timeline(".$tmln_id.") scope has been updated to '".$scope_id."'");
 					
 					//fetch scope name
-					$query = "SELECT SCOPE_NAME FROM `SCOPE` WHERE SCOPE_ID = '".$scope_id."'";
-					$result = mysqli_query($con, $query);
-
-					if($result_data = $result->fetch_object()){
-							$scopeName = $result_data->SCOPE_NAME;
-					}
+					$scopeName = User::getScopeName($con, $scope_id);
 					//fetch scope name
 					
 					echo "[{\"TMLN_ID\":\"$tmln_id\",\"scopeId\":\"$scope_id\",\"scopeName\":\"$scopeName\"}]"; 
@@ -150,7 +145,7 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//get timeline details for $tmln_id
-				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, SCP.SCOPE_NAME, TMLN.REF_USER_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
+				$query = "SELECT TMLN_ID, TYPE, TYPE_ID, SCP.SCOPE_NAME, SCP.SCOPE_ID, TMLN.REF_USER_ID, TMLN.CREATE_DTM, USR.USER_ID, USR.NAME, USR.IMG 
 							FROM `TIMELINES` AS TMLN
 							INNER JOIN `USER` AS USR ON USR.USER_ID = TMLN.USER_ID
 							INNER JOIN `SCOPE` AS SCP ON SCP.SCOPE_ID = TMLN.SCOPE_ID
@@ -174,6 +169,7 @@
 					$timeline_array['whoUserImage'] = $result_data->IMG;
 					$timeline_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$timeline_array['scopeName'] = $result_data->SCOPE_NAME;
+					$timeline_array['scopeId'] = $result_data->SCOPE_ID;
 					
 					if(USER_ADD == $type || USER_PHOTO_MODIFY == $type){
 						$timeline_query = "SELECT CREATE_DTM, MOD_DTM FROM `USER` WHERE USER_ID = '$result_data->TYPE_ID'";

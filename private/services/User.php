@@ -120,21 +120,21 @@
 		
 		public static function fetchUser($user_id, $flwr_user_id, $forWhom){
 			//request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+      LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : forWhom(".$forWhom.")");
-            //request
+			//request
 
-            //check for null/empty
-            if(!Util::check_for_null($user_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
-                return;
-            }
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					return;
+			}
 			
 			if(!Util::check_for_null($forWhom)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty forWhom");
-                return;
-            }
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty forWhom");
+					return;
+			}
 			//check for null/empty
 			
 			try{
@@ -149,12 +149,16 @@
 					$temp_array['IMG'] = $result_data->IMG;
 					$temp_array['NAME'] = $result_data->NAME;
 					
+					$temp_array['EMAIL_SCOPE_ID'] = $result_data->EMAIL_SCOPE_ID;
+					$temp_array['MOBILE_SCOPE_ID'] = $result_data->MOBILE_SCOPE_ID;
+					$temp_array['GENDER_SCOPE_ID'] = $result_data->GENDER_SCOPE_ID;
+					
+					$temp_array['emailScopeName'] = User::getScopeName($con, $result_data->EMAIL_SCOPE_ID);
+					$temp_array['genderScopeName'] = User::getScopeName($con, $result_data->MOBILE_SCOPE_ID);
+					$temp_array['mobileScopeName'] = User::getScopeName($con, $result_data->GENDER_SCOPE_ID);
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
-						$temp_array['EMAIL_SCOPE_ID'] = $result_data->EMAIL_SCOPE_ID;
-						$temp_array['MOBILE_SCOPE_ID'] = $result_data->MOBILE_SCOPE_ID;
-						$temp_array['GENDER_SCOPE_ID'] = $result_data->GENDER_SCOPE_ID;
-						
 						if('1' == $result_data->EMAIL_SCOPE_ID){
 							$temp_array['EMAIL'] = $result_data->EMAIL;
 						}
@@ -203,6 +207,33 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getScopeName($con, $scope_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : scope_id(".$scope_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($scope_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty scope_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				//fetch scope name
+				$query = "SELECT SCOPE_NAME FROM `SCOPE` WHERE SCOPE_ID = '".$scope_id."'";
+				$result = mysqli_query($con, $query);
+
+				if($result_data = $result->fetch_object()){
+						return $result_data->SCOPE_NAME;
+				}
+				//fetch scope name
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 		
@@ -340,18 +371,45 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$query = "UPDATE `USER`
+				//get old gender
+				$query = "SELECT GENDER FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+				
+				if($result_obj = $result->fetch_object()){
+					$old_gender = $result_obj->GENDER;
+				}
+				//get old gender
+				
+				//if old and new gender are not same
+				if($old_gender != $gender){
+					$query = "UPDATE `USER`
 							SET GENDER = '".$gender."',
 							GENDER_SCOPE_ID = '".$gender_scope_id."',
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'";
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender updated !");
-					echo "{'err_code':0,'isError':false,'err_message':'Your gender & its privacy has been updated !'}";
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender & scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your gender & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender !'}";
+					}
 				}
+				//if old and new gender are same
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender !'}";
+					$query = "UPDATE `USER`
+							SET GENDER_SCOPE_ID = '".$gender_scope_id."',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your gender privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender privacy !'}";
+					}
 				}
 			}
 			catch(Exception $e){
@@ -389,22 +447,49 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$query = "UPDATE `USER`
+				//get old phone
+				$query = "SELECT MOBILE FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+				
+				if($result_obj = $result->fetch_object()){
+					$old_mobile = $result_obj->MOBILE;
+				}
+				//get old phone
+				
+				//if old mobile and new mobile are not same
+				if($old_mobile != $mobile){
+					$query = "UPDATE `USER`
 							SET MOBILE = '".$mobile."',
 							MOBILE_SCOPE_ID = '".$mobile_scope_id."',
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'";
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number updated !");
-					
-					//TODO: mechanism to store OTP, OTP_DTM in database and send the same OTP for verifying the phone number to the new phone number.
-					//this must be done only if the user has modified the phone number which can be verified by comparing before and after the mobile number update
-					
-					echo "{'err_code':0,'isError':false,'err_message':'Your phone number & its privacy has been updated !'}";
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number updated !");
+
+						//TODO: mechanism to store OTP, OTP_DTM in database and send the same OTP for verifying the phone number to the new phone number.
+						//this must be done only if the user has modified the phone number which can be verified by comparing before and after the mobile number update
+
+						echo "{'err_code':0,'isError':false,'err_message':'Your phone number & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number !'}";
+					}
 				}
+				//if old and new mobile are not same
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number !'}";
+					$query = "UPDATE `USER`
+							SET MOBILE_SCOPE_ID = '".$mobile_scope_id."',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'";
+				
+						if(mysqli_query($con, $query)){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number scope updated !");
+							echo "{'err_code':0,'isError':false,'err_message':'Your phone number privacy has been updated !'}";
+						}
+						else{
+							echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number privacy !'}";
+						}
 				}
 			}
 			catch(Exception $e){
@@ -556,27 +641,56 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				//update with new veri code
-				$veri_code = Util::generateRandomNumber(8);
-				$query = "UPDATE `USER`
-							SET EMAIL = '".$email."',
-							EMAIL_SCOPE_ID = '".$email_scope_id."',
-							VERI_CODE = '".$veri_code."',
-							VERI_CODE_DTM = CURRENT_TIMESTAMP,
-							MOD_DTM = CURRENT_TIMESTAMP
-							WHERE USER_ID = '".$user_id."'";
+				//get old email
+				$query = "SELECT EMAIL FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email updated !");
-					
-					//TODO: verification email with veri_code has to be sent here only if the email has been changed(check the email before and after the update)
-					
-					echo "{'err_code':0,'isError':false,'err_message':'Your email & its privacy has been updated !'}";
+				if($result_obj = $result->fetch_object()){
+					$old_email = $result_obj->EMAIL;
 				}
+				//get old email
+				
+				//if the email was changed
+				if($old_email != $email){
+					//update with new veri code
+					$veri_code = Util::generateRandomNumber(8);
+					$query = "UPDATE `USER`
+								SET EMAIL = '".$email."',
+								EMAIL_SCOPE_ID = '".$email_scope_id."',
+								VERI_CODE = '".$veri_code."',
+								VERI_CODE_DTM = CURRENT_TIMESTAMP,
+								MOD_DTM = CURRENT_TIMESTAMP
+								WHERE USER_ID = '".$user_id."'";
+
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email updated !");
+
+						//TODO: verification email with veri_code has to be sent here only if the email has been changed(check the email before and after the update)
+
+						echo "{'err_code':0,'isError':false,'err_message':'Your email & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your email'}";
+					}
+					//update with new veri code
+				}
+				//if email is not changed but scope of email is changed
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your email'}";
+					$query = "UPDATE `USER`
+								SET EMAIL_SCOPE_ID = '".$email_scope_id."',
+								MOD_DTM = CURRENT_TIMESTAMP
+								WHERE USER_ID = '".$user_id."'";
+
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your email privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your email privacy !'}";
+					}
+					//update with new veri code
 				}
-				//update with new veri code
+				
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
