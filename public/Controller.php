@@ -168,7 +168,10 @@
 		echo Ingredient::viewuserIngedrientList($list_id);
 	}
 	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
-		echo Ingredient::updateUserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
+		echo Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_id , $ing_nm);
+	}
+	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT_FROM_RECIPE == $function_key){
+		echo Ingredient::updateUserIngedrientListFromRecipe($list_id, $ing_id );
 	}
 	//ingredient
 	

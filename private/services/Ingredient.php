@@ -125,7 +125,7 @@
 			}
 	}
 		
-	public static function updateUserIngedrientList($list_id, $userid, $listofingredients, $nameofingredients)
+	public static function updateUserIngedrientList($list_id, $list_name, $user_id, $listofingredients, $nameofingredients)
 	{
 			//request start
 		LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : listid(".$list_id.") for list_id(".$list_id.")");
@@ -144,6 +144,18 @@
 		if(!Util::check_for_null($list_id))
 			 {
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty list_id");
+					return;
+			 }
+		
+				if(!Util::check_for_null($list_name))
+			 {
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty list_name");
+					return;
+			 }
+		
+				if(!Util::check_for_null($user_id))
+			 {
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
 					return;
 			 }
 			
@@ -167,11 +179,22 @@
 				//transaction begins here
 				mysqli_begin_transaction($con, MYSQLI_TRANS_START_READ_WRITE);
 				mysqli_autocommit($con, FALSE);
-			
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Transaction begin for List ID(".$list_id.") in USER_ING_LIST_ITEM table");
 					$query = "DELETE FROM USER_ING_LIST_ITEM WHERE USER_ING_LIST_ID = '$list_id'";
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "List ID(".$list_id.") deleted from USER_ING_LIST_ITEM table");
 					$result = mysqli_query($con, $query);
 					if($result)
 					{
+						$subquery = "UPDATE `USER_ING_LIST` SET `ING_LIST_NAME` = '$list_name' WHERE `USER_ING_LIST_ID` = '$list_id' ";
+						if(mysqli_query($con, $subquery))
+						{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "List(".$list_id.") updated list name as (".$list_name.") into USER_ING_LIST_ID table");
+						}
+						else
+						{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "List(".$list_id.") failed to update list name as (".$list_name.") into USER_ING_LIST_ID table");
+						}
+						
 					for($i = 0; $i< count($listofingredients); $i++)
 							{
 								if($listofingredients[$i] == 0)
@@ -187,7 +210,7 @@
 												CREATE_DTM, MOD_DTM) VALUES ('$listofingredients[$i]', '$list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
 								if(mysqli_query($con, $subquery))
 								{
-												LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "List(".$list_id.") added into USER_ING_LIST_ITEM table");
+												LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "List(".$list_id.") updated into USER_ING_LIST_ITEM table");
 								}
 								else
 								{
@@ -201,10 +224,70 @@
 					}
 								mysqli_commit($con);
 					//transaction ends here
-				
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Transaction completed for List ID(".$list_id.") in USER_ING_LIST_ITEM table");
 					$response = array();
 					
 					$response['err_message'] = "List updated successfully !";
+					$response['isError'] = false;
+				echo json_encode($response);
+				//response
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Transaction failed for List ID(".$list_id.") in USER_ING_LIST_ITEM table");
+				$response['err_message'] = "Something went wrong !";
+				$response['isError'] = true;
+				mysqli_rollback($con);				
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Rolling Back..");
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+	}
+		public static function updateUserIngedrientListFromRecipe($list_id, $ing_id)
+		{
+			//request start
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : listid(".$list_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ingredientid(".$ing_id.")");
+			
+			//request ends
+			
+			//check for null/empty starts
+			if(!Util::check_for_null($list_id))
+			 {
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty list_id");
+					return;
+			 }
+			
+			 if(!Util::check_for_null($ing_id))
+			 {
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_id");
+					return;
+			 }
+			
+			 //check for null/empty ends
+			
+			try
+			{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				
+					$query = "INSERT INTO `USER_ING_LIST_ITEM` (ING_ID, USER_ING_LIST_ID, IS_CHECKED,
+												CREATE_DTM, MOD_DTM) VALUES ('$ing_id', '$list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
+					if(mysqli_query($con, $query))
+					{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$ing_id.") in List(".$list_id.") added into USER_ING_LIST_ITEM table");
+					}
+					else
+					{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
+						throw new Exception("Failed to insert into USER_ING_LIST_ITEM table");
+					}
+						
+					$response = array();
+					
+					$response['err_message'] = "Ingedient added successfully in your List!";
 					$response['isError'] = false;
 				echo json_encode($response);
 				//response
@@ -218,9 +301,10 @@
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
 			}
-	}
+		}
 		
-	public static function saveuserIngedrientList($list_name, $user_id, $listofingredients, $nameofingredients)
+			
+		public static function saveuserIngedrientList($list_name, $user_id, $listofingredients, $nameofingredients)
 		{
 			//request start
 			for($i = 0; $i< count($listofingredients); $i++)
