@@ -1,5 +1,279 @@
 <?php
 	class User{
+		public static function fetchUserFollowers($user_id, $logged_in_user_id, $index){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($logged_in_user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($index)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					return;
+			}
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT USR.USER_ID, USR.IMG, USR.NAME, USR_RLT.CREATE_DTM, USR_RLT.MOD_DTM
+							FROM `USER` AS USR
+							INNER JOIN `USER_RELATIONSHIP` USR_RLT ON USR.USER_ID = USR_RLT.FLWR_USER_ID
+							WHERE USR_RLT.FLWS_USER_ID = '".$user_id."'
+							AND USR_RLT.IS_DEL = 'N'
+							LIMIT ".$index." , ".USERS_COUNT;
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp_array['USER_ID'] = $result_data->USER_ID;
+					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['NAME'] = $result_data->NAME;
+					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					//check if the logged in user is following $result_data->USER_ID
+					$temp_array['following'] = self::getIsUserFollowing($con, $logged_in_user_id, $result_data->USER_ID);
+					
+					array_push($result_array, $temp_array);
+				}
+
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function fetchUserFollowings($user_id, $logged_in_user_id, $index){
+			//request
+      LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($logged_in_user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($index)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					return;
+			}
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT USR.USER_ID, USR.IMG, USR.NAME, USR_RLT.CREATE_DTM, USR_RLT.MOD_DTM
+							FROM `USER` AS USR
+							INNER JOIN `USER_RELATIONSHIP` USR_RLT ON USR.USER_ID = USR_RLT.FLWS_USER_ID
+							WHERE USR_RLT.FLWR_USER_ID = '".$user_id."'
+							AND USR_RLT.IS_DEL = 'N'
+							LIMIT ".$index." , ".USERS_COUNT;
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp_array['USER_ID'] = $result_data->USER_ID;
+					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['NAME'] = $result_data->NAME;
+					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					//check if the logged in user is following $result_data->USER_ID
+					$temp_array['following'] = self::getIsUserFollowing($con, $logged_in_user_id, $result_data->USER_ID);
+					
+					array_push($result_array, $temp_array);
+				}
+
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function fetchUser($user_id, $flwr_user_id, $forWhom){
+			//request
+      LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : forWhom(".$forWhom.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($forWhom)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty forWhom");
+					return;
+			}
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT USER_ID, EMAIL_SCOPE_ID, EMAIL, MOBILE_SCOPE_ID, MOBILE, IMG, NAME, GENDER_SCOPE_ID, GENDER FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp_array['USER_ID'] = $result_data->USER_ID;
+					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['NAME'] = $result_data->NAME;
+					
+					$temp_array['EMAIL_SCOPE_ID'] = $result_data->EMAIL_SCOPE_ID;
+					$temp_array['MOBILE_SCOPE_ID'] = $result_data->MOBILE_SCOPE_ID;
+					$temp_array['GENDER_SCOPE_ID'] = $result_data->GENDER_SCOPE_ID;
+					
+					$temp_array['emailScopeName'] = User::getScopeName($con, $result_data->EMAIL_SCOPE_ID);
+					$temp_array['genderScopeName'] = User::getScopeName($con, $result_data->MOBILE_SCOPE_ID);
+					$temp_array['mobileScopeName'] = User::getScopeName($con, $result_data->GENDER_SCOPE_ID);
+					
+					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
+					if(USER_FETCH_PUBLIC == $forWhom){
+						if('1' == $result_data->EMAIL_SCOPE_ID){
+							$temp_array['EMAIL'] = $result_data->EMAIL;
+						}
+
+						if('1' == $result_data->MOBILE_SCOPE_ID){
+							$temp_array['MOBILE'] = $result_data->MOBILE;
+						}
+
+						if('1' == $result_data->GENDER_SCOPE_ID){
+							$temp_array['GENDER'] = $result_data->GENDER;
+						}
+						
+						//fetch no. of recipes posted by the user
+						$temp_array['recipesCount'] = Recipe::getRecipesCount($con, $user_id);
+						
+						//check if logged in user is following the user
+						if(!Util::check_for_null($flwr_user_id)){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+							return;
+						}
+						
+						$temp_array['following'] = self::getIsUserFollowing($con, $flwr_user_id, $user_id);
+						//check if logged in user is following the user
+					}
+					else if(USER_FETCH_SELF == $forWhom){
+						$temp_array['EMAIL'] = $result_data->EMAIL;
+						$temp_array['MOBILE'] = $result_data->MOBILE;
+						$temp_array['GENDER'] = $result_data->GENDER;
+					}
+					
+					//get followers count
+					$temp_array['followersCount'] = self::getFollowersCount($con, $user_id);
+					//get followers count
+					
+					//get following count
+					$temp_array['followingCount'] = self::getFollowingCount($con, $user_id);
+					//get following count
+					
+					array_push($result_array, $temp_array);
+				}
+
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getScopeName($con, $scope_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : scope_id(".$scope_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($scope_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty scope_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				//fetch scope name
+				$query = "SELECT SCOPE_NAME FROM `SCOPE` WHERE SCOPE_ID = '".$scope_id."'";
+				$result = mysqli_query($con, $query);
+
+				if($result_data = $result->fetch_object()){
+						return $result_data->SCOPE_NAME;
+				}
+				//fetch scope name
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
+		public static function getIsUserFollowing($con, $flwr_user_id, $flws_user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flws_user_id(".$flws_user_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($flwr_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($flws_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flws_user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$query = "SELECT COUNT(*) AS COUNT 
+							FROM `USER_RELATIONSHIP` 
+							WHERE FLWR_USER_ID = '$flwr_user_id'
+							AND FLWS_USER_ID = '$flws_user_id'
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->COUNT > 0; 
+				}
+				
+				return false;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function updateUserImage($user_id, $image){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
@@ -50,6 +324,11 @@
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Profile Image updated !");
+					
+					//register timeline
+					Timeline::addTimeline($con, $user_id, $user_id, USER_PHOTO_MODIFY, $user_id);
+					//register timeline
+					
 					echo "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
 				}
 				else{
@@ -65,10 +344,11 @@
 			}
 		}
 		
-		public static function updateUserGender($user_id, $gender){
+		public static function updateUserGender($user_id, $gender, $gender_scope_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : gender(".$gender.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : gender_scope_id(".$gender_scope_id.")");
 			//request
 
 			//check for null/empty
@@ -81,22 +361,55 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty gender");
 				return;
 			}
+			
+			if(!Util::check_for_null($gender_scope_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty gender_scope_id");
+				return;
+			}
 			//check for null/empty
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$query = "UPDATE `USER`
+				//get old gender
+				$query = "SELECT GENDER FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+				
+				if($result_obj = $result->fetch_object()){
+					$old_gender = $result_obj->GENDER;
+				}
+				//get old gender
+				
+				//if old and new gender are not same
+				if($old_gender != $gender){
+					$query = "UPDATE `USER`
 							SET GENDER = '".$gender."',
+							GENDER_SCOPE_ID = '".$gender_scope_id."',
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'";
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender updated !");
-					echo "{'err_code':0,'isError':false,'err_message':'Your gender has been updated !'}";
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender & scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your gender & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender !'}";
+					}
 				}
+				//if old and new gender are same
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender !'}";
+					$query = "UPDATE `USER`
+							SET GENDER_SCOPE_ID = '".$gender_scope_id."',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Gender scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your gender privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your gender privacy !'}";
+					}
 				}
 			}
 			catch(Exception $e){
@@ -107,10 +420,11 @@
 			}
 		}
 		
-		public static function updateUserPhone($user_id, $mobile){
+		public static function updateUserPhone($user_id, $mobile, $mobile_scope_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile(".$mobile.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile_scope_id(".$mobile_scope_id.")");
 			//request
 
 			//check for null/empty
@@ -123,25 +437,59 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty mobile");
 				return;
 			}
+			
+			if(!Util::check_for_null($mobile_scope_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty mobile_scope_id");
+				return;
+			}
 			//check for null/empty
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$query = "UPDATE `USER`
+				//get old phone
+				$query = "SELECT MOBILE FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+				
+				if($result_obj = $result->fetch_object()){
+					$old_mobile = $result_obj->MOBILE;
+				}
+				//get old phone
+				
+				//if old mobile and new mobile are not same
+				if($old_mobile != $mobile){
+					$query = "UPDATE `USER`
 							SET MOBILE = '".$mobile."',
+							MOBILE_SCOPE_ID = '".$mobile_scope_id."',
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'";
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number updated !");
-					
-					//TODO: mechanism to store OTP, OTP_DTM in database and send the same OTP for verifying the phone number to the new phone number.
-					
-					echo "{'err_code':0,'isError':false,'err_message':'Your phone number has been updated !'}";
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number updated !");
+
+						//TODO: mechanism to store OTP, OTP_DTM in database and send the same OTP for verifying the phone number to the new phone number.
+						//this must be done only if the user has modified the phone number which can be verified by comparing before and after the mobile number update
+
+						echo "{'err_code':0,'isError':false,'err_message':'Your phone number & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number !'}";
+					}
 				}
+				//if old and new mobile are not same
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number !'}";
+					$query = "UPDATE `USER`
+							SET MOBILE_SCOPE_ID = '".$mobile_scope_id."',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'";
+				
+						if(mysqli_query($con, $query)){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Phone Number scope updated !");
+							echo "{'err_code':0,'isError':false,'err_message':'Your phone number privacy has been updated !'}";
+						}
+						else{
+							echo "{'err_code':1,'isError':true,'err_message':'Could not update your phone number privacy !'}";
+						}
 				}
 			}
 			catch(Exception $e){
@@ -266,10 +614,11 @@
 			}
 		}
 		
-		public static function updateUserEmail($user_id, $email){
+		public static function updateUserEmail($user_id, $email, $email_scope_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email_scope_id(".$email_scope_id.")");
 			//request
 
 			//check for null/empty
@@ -282,31 +631,66 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
 				return;
 			}
+			
+			if(!Util::check_for_null($email_scope_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email_scope_id");
+				return;
+			}
 			//check for null/empty
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				//update with new veri code
-				$veri_code = Util::generateRandomNumber(8);
-				$query = "UPDATE `USER`
-							SET EMAIL = '".$email."',
-							VERI_CODE = '".$veri_code."',
-							VERI_CODE_DTM = CURRENT_TIMESTAMP,
-							MOD_DTM = CURRENT_TIMESTAMP
-							WHERE USER_ID = '".$user_id."'";
+				//get old email
+				$query = "SELECT EMAIL FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
 				
-				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email updated !");
-					
-					//TODO: verification email with veri_code has to be sent here
-					
-					echo "{'err_code':0,'isError':false,'err_message':'Your email has been updated !'}";
+				if($result_obj = $result->fetch_object()){
+					$old_email = $result_obj->EMAIL;
 				}
+				//get old email
+				
+				//if the email was changed
+				if($old_email != $email){
+					//update with new veri code
+					$veri_code = Util::generateRandomNumber(8);
+					$query = "UPDATE `USER`
+								SET EMAIL = '".$email."',
+								EMAIL_SCOPE_ID = '".$email_scope_id."',
+								VERI_CODE = '".$veri_code."',
+								VERI_CODE_DTM = CURRENT_TIMESTAMP,
+								MOD_DTM = CURRENT_TIMESTAMP
+								WHERE USER_ID = '".$user_id."'";
+
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email updated !");
+
+						//TODO: verification email with veri_code has to be sent here only if the email has been changed(check the email before and after the update)
+
+						echo "{'err_code':0,'isError':false,'err_message':'Your email & its privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your email'}";
+					}
+					//update with new veri code
+				}
+				//if email is not changed but scope of email is changed
 				else{
-					echo "{'err_code':1,'isError':true,'err_message':'Could not update your email'}";
+					$query = "UPDATE `USER`
+								SET EMAIL_SCOPE_ID = '".$email_scope_id."',
+								MOD_DTM = CURRENT_TIMESTAMP
+								WHERE USER_ID = '".$user_id."'";
+
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email scope updated !");
+						echo "{'err_code':0,'isError':false,'err_message':'Your email privacy has been updated !'}";
+					}
+					else{
+						echo "{'err_code':1,'isError':true,'err_message':'Could not update your email privacy !'}";
+					}
+					//update with new veri code
 				}
-				//update with new veri code
+				
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
@@ -387,6 +771,7 @@
 			}
 		}
 		
+		
 		public static function submitFollowUser($flwr_user_id, $flws_user_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
@@ -433,10 +818,10 @@
 								AND FLWS_USER_ID = '".$flws_user_id."'";
 					
 					if(mysqli_query($con, $query)){
-						$result_array['isFollowing'] = $flag == 'N';
+						$result_array['following'] = $flag == 'N';
 						
 						//register timeline
-						if($result_array['isFollowing']){
+						if($result_array['following']){
 							Timeline::addTimeline($con, $flwr_user_id, $flws_user_id, USER_FOLLOW, $result_data->RLT_ID);
 						}
 						else{
@@ -446,7 +831,7 @@
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! user(".$flwr_user_id.") could not follow/unfollow the user(".$flws_user_id.")");
-						$result_array['isFollowing'] = false;
+						$result_array['following'] = false;
 					}
 				}
 				//if the $flwr_user_id follows/followed $flws_user_id
@@ -456,7 +841,7 @@
 					$query = "INSERT INTO `USER_RELATIONSHIP` (`FLWR_USER_ID`, `FLWS_USER_ID`, `CREATE_DTM`) 
 								VALUES ('$flwr_user_id', '$flws_user_id', CURRENT_TIMESTAMP)";
 					
-					$result_array['isFollowing'] = mysqli_query($con, $query);
+					$result_array['following'] = mysqli_query($con, $query);
 					$rlt_id = mysqli_insert_id($con);
 					
 					//register timeline
@@ -469,58 +854,12 @@
 				$result_array['followersCount'] = self::getFollowersCount($con, $flws_user_id);
 				//get the followers count
 				
+				$temp_array = array();
+				array_push($temp_array, $result_array);
 				
 				//response
-				echo json_encode($result_array);
+				echo json_encode($temp_array);
 				//response
-			}
-			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-			}
-			finally{
-				DatabaseUtil::getInstance()->close_connection($con);
-			}
-		}
-		
-		public static function fetchUser($user_id){
-			//request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-            //request
-
-            //check for null/empty
-            if(!Util::check_for_null($user_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
-                return;
-            }
-			//check for null/empty
-			
-			try{
-				$con = DatabaseUtil::getInstance()->open_connection();
-
-				$query = "SELECT USER_ID, EMAIL, MOBILE, IMG, NAME, GENDER FROM `USER` WHERE USER_ID = '".$user_id."'";
-				$result = mysqli_query($con, $query);
-
-				$result_array = array();
-				while($result_data = $result->fetch_object()) {
-					$temp_array['USER_ID'] = $result_data->USER_ID;
-					$temp_array['EMAIL'] = $result_data->EMAIL;
-					$temp_array['MOBILE'] = $result_data->MOBILE;
-					$temp_array['IMG'] = $result_data->IMG;
-					$temp_array['NAME'] = $result_data->NAME;
-					$temp_array['GENDER'] = $result_data->GENDER;
-					
-					//get followers count
-					$temp_array['followersCount'] = self::getFollowersCount($con, $user_id);
-					//get followers count
-					
-					//get following count
-					$temp_array['followingCount'] = self::getFollowingCount($con, $user_id);
-					//get following count
-					
-					array_push($result_array, $temp_array);
-				}
-
-				echo json_encode($result_array);
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
@@ -575,7 +914,7 @@
 			try{
 				$query = "SELECT COUNT(*) AS FOLLOWING_COUNT
 							FROM `USER_RELATIONSHIP` 
-							WHERE FLWS_USER_ID = '".$user_id."'
+							WHERE FLWR_USER_ID = '".$user_id."'
 							AND IS_DEL = 'N'";
 				$result = mysqli_query($con, $query);
 

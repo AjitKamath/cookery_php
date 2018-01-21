@@ -4,18 +4,18 @@
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
 	//function key
-    $function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
+	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 
 	//check for null/empty
-    if(!Util::check_for_null($function_key)){
-        LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
-        return;
-    }
+	if(!Util::check_for_null($function_key)){
+			LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
+			return;
+	}
 	
 	//check for null/empty
-    //function key
+	//function key
 
-    //params
+	//params
 	$searchQuery 	= isset($_POST['search_query']) ? $_POST['search_query'] : '';
 	
 	$com_id 		= isset($_POST['com_id']) ? $_POST['com_id'] : '';
@@ -31,19 +31,19 @@
 	$index			= isset($_POST['index']) ? $_POST['index'] : '0';
 	$tmln_id		= isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
 
-    $rcp_id 		= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
+	$rcp_id 		= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
 	$user_id 		= isset($_POST['user_id']) ? $_POST['user_id'] : '';
 	$rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
-    $food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
-    $ing_id         = isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
-    $ing_nm         = isset($_POST['ing_nm']) ? $_POST['ing_nm'] : '';
-    $qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
-    $ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
-    $rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
-    $tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
-    $tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
-    $food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
-    $rcp_images     = isset($_FILES['images']) ? $_FILES['images'] : '';
+	$food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
+	$ing_id         = isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
+	$ing_nm         = isset($_POST['ing_nm']) ? $_POST['ing_nm'] : '';
+	$qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
+	$ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
+	$rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
+	$tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
+	$tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
+	$food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
+	$rcp_images     = isset($_FILES['images']) ? $_FILES['images'] : '';
 
 	$email			= isset($_POST['email']) ? $_POST['email'] : '';
 	$password		= isset($_POST['password']) ? $_POST['password'] : '';
@@ -61,15 +61,19 @@
 	$new_password 	= isset($_POST['new_password']) ? $_POST['new_password'] : '';
 
 	$image			= isset($_FILES['image']) ? $_FILES['image'] : '';
-    //params
+
+	$logged_in_user_id 		= isset($_POST['logged_in_user_id']) ? $_POST['logged_in_user_id'] : '';
+
+	$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
+	//params
 
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 
 	//quantity
-    if(QUANTITY_FETCH_ALL == $function_key){
-        echo Quantity::fetchAllQuantities();
-    }
+	if(QUANTITY_FETCH_ALL == $function_key){
+			echo Quantity::fetchAllQuantities();
+	}
 	//quantity
 	
 	//food cuisine
@@ -167,6 +171,7 @@
 	else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
 		echo Ingredient::viewuserIngedrientList($list_id);
 	}
+
 	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
 		echo Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_id , $ing_nm);
 	}
@@ -178,6 +183,15 @@
 	//timeline
 	else if(TIMELINE_USER_FETCH == $function_key){
 		echo Timeline::fetchUserTimeline($user_id, $index);
+	}
+	else if(TIMELINE_USER_FOLLOWS_FETCH == $function_key){
+		echo Timeline::fetchUserFollowsTimeline($user_id, $index);
+	}
+	else if(TIMELINE_SCOPE_MODIFY == $function_key){
+		echo Timeline::modifyTimelineScope($tmln_id, $scope_id);
+	}
+	else if(TIMELINE_DELETE == $function_key){
+		echo Timeline::deleteTimeline($tmln_id);
 	}
 	//timeline
 	
@@ -197,26 +211,32 @@
 	else if(USER_REGISTER == $function_key){
 		echo User::register($email, $password, $name);
 	}
-	else if(USER_FETCH == $function_key){
-		echo User::fetchUser($user_id);
+	else if(USER_FETCH_PUBLIC == $function_key || USER_FETCH_SELF == $function_key){
+		echo User::fetchUser($user_id, $logged_in_user_id, $function_key);
 	}
 	else if(USER_FOLLOW_SUBMIT == $function_key){
 		echo User::submitFollowUser($flwr_user_id, $flws_user_id);
+	}
+	else if(USER_FOLLOWERS_FETCH == $function_key){
+		echo User::fetchUserFollowers($user_id, $logged_in_user_id, $index);
+	}
+	else if(USER_FOLLOWINGS_FETCH == $function_key){
+		echo User::fetchUserFollowings($user_id, $logged_in_user_id, $index);
 	}
 	else if(USER_UPDATE_NAME == $function_key){
 		echo User::updateUserName($user_id, $name);
 	}
 	else if(USER_UPDATE_EMAIL == $function_key){
-		echo User::updateUserEmail($user_id, $email);
+		echo User::updateUserEmail($user_id, $email, $scope_id);
 	}
 	else if(USER_UPDATE_PASSWORD == $function_key){
 		echo User::updateUserPassword($user_id, $password, $new_password);
 	}
 	else if(USER_UPDATE_PHONE == $function_key){
-		echo User::updateUserPhone($user_id, $mobile);
+		echo User::updateUserPhone($user_id, $mobile, $scope_id);
 	}
 	else if(USER_UPDATE_GENDER == $function_key){
-		echo User::updateUserGender($user_id, $gender);
+		echo User::updateUserGender($user_id, $gender, $scope_id);
 	}
 	else if(USER_UPDATE_IMAGE == $function_key){
 		echo User::updateUserImage($user_id, $image);

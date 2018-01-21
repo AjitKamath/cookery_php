@@ -1,0 +1,1602 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"owner": "833319",
+			"lastUpdatedBy": "833319",
+			"lastRevision": 2939305361,
+			"team": null,
+			"id": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+			"name": "Cookery Health Check - MANUAL",
+			"description": "",
+			"variables": null,
+			"auth": null,
+			"events": null,
+			"remote_id": "0",
+			"remoteLink": "",
+			"folders_order": [
+				"01c1fc0e-6790-566d-52ad-e65605124859",
+				"cd0d701b-52de-ccfc-c084-b4fe08c8e073"
+			],
+			"order": [],
+			"shared": false,
+			"write": true,
+			"createdAt": "2017-12-07T10:36:26.000Z",
+			"updatedAt": "2018-01-08T15:36:25.000Z",
+			"folders": [
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2757650033,
+					"collection": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+					"folder": null,
+					"id": "01c1fc0e-6790-566d-52ad-e65605124859",
+					"name": "Recipe",
+					"description": "",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [
+						"8fd4554a-9377-7cc2-1d6a-2e70f819a06c",
+						"04493831-f3e5-3049-749d-ed9a8639bff7"
+					],
+					"folders_order": [],
+					"createdAt": "2017-12-07T10:36:27.000Z",
+					"updatedAt": "2017-12-07T10:55:16.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2939306561,
+					"collection": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+					"folder": null,
+					"id": "cd0d701b-52de-ccfc-c084-b4fe08c8e073",
+					"name": "User",
+					"description": "",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [
+						"f84f5f6f-3a49-a97d-012d-ad590d07fc50"
+					],
+					"folders_order": [],
+					"createdAt": "2018-01-08T13:07:40.000Z",
+					"updatedAt": "2018-01-08T13:07:49.000Z"
+				}
+			],
+			"favorite": false,
+			"subscribed": false,
+			"sharedWithTeam": false,
+			"hasRequests": true,
+			"synced": true,
+			"published": false,
+			"requests": [
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2867831983,
+					"folder": "01c1fc0e-6790-566d-52ad-e65605124859",
+					"collection": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+					"id": "04493831-f3e5-3049-749d-ed9a8639bff7",
+					"name": "RECIPE_SUBMIT(UPDATE)",
+					"dataMode": "params",
+					"data": [
+						{
+							"key": "function_key",
+							"value": "RECIPE_SUBMIT",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_nm",
+							"value": "TEST_RECIPE_NAME - {{id}}",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "food_csn_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "food_typ_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "user_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_steps[]",
+							"value": "This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. ",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_steps[]",
+							"value": "This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. \n",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_steps[]",
+							"value": "This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. ",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_nm[]",
+							"value": "TEST INGREDIENT 1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_nm[]",
+							"value": "TEST INGREDIENT 2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "qty_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "qty_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_qty[]",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_qty[]",
+							"value": "6",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "images[]",
+							"value": {
+								"0": {
+									"name": "Screenshot from 2017-12-02 20-31-10.png",
+									"path": "/home/ajit/Pictures/Screenshot from 2017-12-02 20-31-10.png",
+									"lastModified": 1512226871333,
+									"lastModifiedDate": "2017-12-02T15:01:11.333Z",
+									"webkitRelativePath": "",
+									"size": 240270,
+									"type": "image/png"
+								},
+								"length": 1
+							},
+							"type": "file",
+							"enabled": true
+						},
+						{
+							"key": "images[]",
+							"value": {
+								"0": {
+									"name": "Screenshot from 2017-12-15 23-12-31.png",
+									"path": "/home/ajit/Pictures/Screenshot from 2017-12-15 23-12-31.png",
+									"lastModified": 1513359752465,
+									"lastModifiedDate": "2017-12-15T17:42:32.465Z",
+									"webkitRelativePath": "",
+									"size": 3047683,
+									"type": "image/png"
+								},
+								"length": 1
+							},
+							"type": "file",
+							"enabled": true
+						},
+						{
+							"key": "rcp_id",
+							"value": "{{rcp_id}}",
+							"type": "text",
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"id\", randomNumber(2));\r",
+									"\r",
+									"\r",
+									"function randomNumber(length) {\r",
+									"  var text = \"\";\r",
+									"  var possible = \"0123456789\";\r",
+									"\r",
+									"  for (var i = 0; i < length; i++)\r",
+									"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+									"\r",
+									"  return text;\r",
+									"}\r",
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));",
+									"var RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_LONG\"));",
+									"var STRING = \"err_message\";",
+									"",
+									"tests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;",
+									"",
+									"tests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;",
+									"",
+									"tests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);",
+									"",
+									"tests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);",
+									"",
+									"function isJson(str) {",
+									"    try {",
+									"        JSON.parse(str);",
+									"    } catch (e) {",
+									"        return false;",
+									"    }",
+									"    return true;",
+									"}",
+									"",
+									"if(isJson(responseBody)){",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    tests[\"Response has error : expected=false & recieved=\"+jsonData.isError] = jsonData.isError === false;",
+									"}"
+								]
+							}
+						}
+					],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": null,
+					"variables": null,
+					"headers": "",
+					"method": "POST",
+					"pathVariables": {},
+					"url": "{{URL}}public/Controller.php",
+					"preRequestScript": "postman.setEnvironmentVariable(\"id\", randomNumber(2));\r\n\r\n\r\nfunction randomNumber(length) {\r\n  var text = \"\";\r\n  var possible = \"0123456789\";\r\n\r\n  for (var i = 0; i < length; i++)\r\n    text += possible.charAt(Math.floor(Math.random() * possible.length));\r\n\r\n  return text;\r\n}\r\n",
+					"tests": "var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));\nvar RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_LONG\"));\nvar STRING = \"err_message\";\n\ntests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;\n\ntests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;\n\ntests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);\n\ntests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);\n\nfunction isJson(str) {\n    try {\n        JSON.parse(str);\n    } catch (e) {\n        return false;\n    }\n    return true;\n}\n\nif(isJson(responseBody)){\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Response has error : expected=false & recieved=\"+jsonData.isError] = jsonData.isError === false;\n}",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"queryParams": [],
+					"headerData": [],
+					"pathVariableData": [],
+					"createdAt": "2017-12-07T10:36:27.000Z",
+					"updatedAt": "2017-12-24T15:00:24.000Z",
+					"responses": [],
+					"collectionId": "c97db7cd-59c4-7fde-1062-52bcd198bd12"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2867830869,
+					"folder": "01c1fc0e-6790-566d-52ad-e65605124859",
+					"collection": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+					"id": "8fd4554a-9377-7cc2-1d6a-2e70f819a06c",
+					"name": "RECIPE_SUBMIT(ADD)",
+					"dataMode": "params",
+					"data": [
+						{
+							"key": "function_key",
+							"value": "RECIPE_SUBMIT",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_nm",
+							"value": "TEST_RECIPE_NAME - {{id}}",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "food_csn_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "food_typ_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "user_id",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_steps[]",
+							"value": "TEST STEP !",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "rcp_steps[]",
+							"value": "TEST STEP 2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_nm[]",
+							"value": "TEST INGREDIENT 1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_nm[]",
+							"value": "TEST INGREDIENT 2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "qty_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "qty_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_qty[]",
+							"value": "5",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "ing_qty[]",
+							"value": "6",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_id[]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "4",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "3",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "tst_qty[]",
+							"value": "2",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "images[]",
+							"value": null,
+							"type": "file",
+							"enabled": true
+						},
+						{
+							"key": "images[]",
+							"value": null,
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"id\", randomNumber(2));\r",
+									"\r",
+									"\r",
+									"function randomNumber(length) {\r",
+									"  var text = \"\";\r",
+									"  var possible = \"0123456789\";\r",
+									"\r",
+									"  for (var i = 0; i < length; i++)\r",
+									"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+									"\r",
+									"  return text;\r",
+									"}\r",
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));",
+									"var RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_LONG\"));",
+									"var STRING = \"err_message\";",
+									"",
+									"tests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;",
+									"",
+									"tests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;",
+									"",
+									"tests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);",
+									"",
+									"tests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);",
+									"",
+									"function isJson(str) {",
+									"    try {",
+									"        JSON.parse(str);",
+									"    } catch (e) {",
+									"        return false;",
+									"    }",
+									"    return true;",
+									"}",
+									"",
+									"if(isJson(responseBody)){",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    tests[\"Response has error : expected=false & recieved=\"+jsonData.isError] = jsonData.isError === false;",
+									"}"
+								]
+							}
+						}
+					],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": null,
+					"variables": null,
+					"headers": "",
+					"method": "POST",
+					"pathVariables": {},
+					"url": "{{URL}}public/Controller.php",
+					"preRequestScript": "postman.setEnvironmentVariable(\"id\", randomNumber(2));\r\n\r\n\r\nfunction randomNumber(length) {\r\n  var text = \"\";\r\n  var possible = \"0123456789\";\r\n\r\n  for (var i = 0; i < length; i++)\r\n    text += possible.charAt(Math.floor(Math.random() * possible.length));\r\n\r\n  return text;\r\n}\r\n",
+					"tests": "var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));\nvar RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_LONG\"));\nvar STRING = \"err_message\";\n\ntests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;\n\ntests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;\n\ntests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);\n\ntests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);\n\nfunction isJson(str) {\n    try {\n        JSON.parse(str);\n    } catch (e) {\n        return false;\n    }\n    return true;\n}\n\nif(isJson(responseBody)){\n    var jsonData = JSON.parse(responseBody);\n    tests[\"Response has error : expected=false & recieved=\"+jsonData.isError] = jsonData.isError === false;\n}",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"queryParams": [],
+					"headerData": [],
+					"pathVariableData": [],
+					"createdAt": "2017-12-07T10:36:27.000Z",
+					"updatedAt": "2017-12-24T14:59:39.000Z",
+					"responses": [],
+					"collectionId": "c97db7cd-59c4-7fde-1062-52bcd198bd12"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2940435378,
+					"folder": "cd0d701b-52de-ccfc-c084-b4fe08c8e073",
+					"collection": "c97db7cd-59c4-7fde-1062-52bcd198bd12",
+					"id": "f84f5f6f-3a49-a97d-012d-ad590d07fc50",
+					"name": "USER_UPDATE_IMAGE",
+					"dataMode": "params",
+					"data": [
+						{
+							"key": "function_key",
+							"value": "USER_UPDATE_IMAGE",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "user_id",
+							"value": "{{user_id}}",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "image[]",
+							"value": {
+								"0": {
+									"name": "IMG_20160909_194518745.jpg",
+									"lastModified": 1473431151000,
+									"lastModifiedDate": "2016-09-09T14:25:51.000Z",
+									"webkitRelativePath": "",
+									"size": 1326110,
+									"type": "image/jpeg"
+								},
+								"length": 1
+							},
+							"description": "",
+							"type": "file",
+							"enabled": true
+						}
+					],
+					"auth": null,
+					"events": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"phone\", randomNumber(10));\r",
+									"\r",
+									"function randomNumber(length) {\r",
+									"  var text = \"\";\r",
+									"  var possible = \"0123456789\";\r",
+									"\r",
+									"  for (var i = 0; i < length; i++)\r",
+									"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+									"\r",
+									"  return text;\r",
+									"}"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));",
+									"var RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_MEDIUM\"));",
+									"var STRING = \"err_code\";",
+									"",
+									"tests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;",
+									"",
+									"tests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;",
+									"",
+									"tests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);",
+									"",
+									"tests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);",
+									"",
+									"function isJson(str) {",
+									"    try {",
+									"        JSON.parse(str);",
+									"    } catch (e) {",
+									"        return false;",
+									"    }",
+									"    return true;",
+									"}"
+								]
+							}
+						}
+					],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": null,
+					"variables": null,
+					"headers": "",
+					"method": "POST",
+					"pathVariables": {},
+					"url": "{{URL}}public/Controller.php",
+					"preRequestScript": "postman.setEnvironmentVariable(\"phone\", randomNumber(10));\r\n\r\nfunction randomNumber(length) {\r\n  var text = \"\";\r\n  var possible = \"0123456789\";\r\n\r\n  for (var i = 0; i < length; i++)\r\n    text += possible.charAt(Math.floor(Math.random() * possible.length));\r\n\r\n  return text;\r\n}",
+					"tests": "var STATUS_CODE = parseInt(postman.getEnvironmentVariable(\"STATUS_CODE\"));\nvar RESPONSE_TIME = parseInt(postman.getEnvironmentVariable(\"RESPONSE_TIME_MEDIUM\"));\nvar STRING = \"err_code\";\n\ntests[\"Status Code : expected=\"+STATUS_CODE+\" & recieved=\"+responseCode.code] = responseCode.code === STATUS_CODE;\n\ntests[\"Response Time : expected<\"+RESPONSE_TIME+\" & recieved=\"+responseTime] = responseTime < RESPONSE_TIME;\n\ntests[\"Response in JSON : expected=true & recieved=\"+isJson(responseBody)] = isJson(responseBody);\n\ntests[\"Response has String(\"+STRING+\") : expected=true & recieved=\"+responseBody.has(STRING)] = responseBody.has(STRING);\n\nfunction isJson(str) {\n    try {\n        JSON.parse(str);\n    } catch (e) {\n        return false;\n    }\n    return true;\n}",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"queryParams": [],
+					"headerData": [],
+					"pathVariableData": [],
+					"createdAt": "2018-01-08T13:07:49.000Z",
+					"updatedAt": "2018-01-08T15:36:25.000Z",
+					"responses": [],
+					"collectionId": "c97db7cd-59c4-7fde-1062-52bcd198bd12"
+				}
+			]
+		},
+		{
+			"owner": "833319",
+			"lastUpdatedBy": "833319",
+			"lastRevision": 2875894881,
+			"team": null,
+			"id": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+			"name": "Postman Echo",
+			"description": "Postman Echo is service you can use to test your REST clients and make sample API calls. It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility endpoints.\n\nThe documentation for the endpoints as well as example responses can be found at [https://postman-echo.com](https://postman-echo.com/?source=echo-collection-app-onboarding)",
+			"variables": null,
+			"auth": null,
+			"events": null,
+			"remote_id": "0",
+			"remoteLink": "",
+			"folders_order": [
+				"09ddd67c-13fe-4626-8dd4-fc64f1fc27b7",
+				"df815c41-a76b-4b5b-7129-ea59275f254b",
+				"37368024-f6a8-0f70-85fc-7e876cde9e33",
+				"5d3595b3-5e8e-9e33-05ed-855c77298e4e",
+				"9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+				"930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+				"74a8adf0-4f3f-068a-7c35-9745aa7b57d1",
+				"084b21bd-d250-180b-5ed8-94cfaca39fdd"
+			],
+			"order": [],
+			"shared": false,
+			"write": true,
+			"createdAt": "2017-12-26T14:57:55.000Z",
+			"updatedAt": "2017-12-26T14:57:56.000Z",
+			"folders": [
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894842,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "084b21bd-d250-180b-5ed8-94cfaca39fdd",
+					"name": "Utilities / Postman Collection",
+					"description": "",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894833,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "09ddd67c-13fe-4626-8dd4-fc64f1fc27b7",
+					"name": "Auth: Digest",
+					"description": "Digest authentication protects an endpoint with a username and password without actually transmitting the password over network.\nOne has to apply a hash function (like MD5, etc) to the username and password before sending them over the network.\n\n> Username: `postman`\n>\n> Password: `password`\n\nUnlike Basic-Auth, authentication happens using two consecutive requests where the first request returns `401 Unauthorised` along with `WWW-Authenticate` header containing information that needs to be used to authenticate subsequent calls.\n\nTo know more about digest authentication, refer to the [Digest Access Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication) wikipedia article.\nThe article on [authentication helpers](https://www.getpostman.com/docs/helpers#digest-auth) elaborates how to use the same within the Postman app.",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894835,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "37368024-f6a8-0f70-85fc-7e876cde9e33",
+					"name": "Cookies",
+					"description": "The cookie related endpoints allow one to get, set and delete simple cookies.\n\nCookies are small snippets of information that is stored in the browser and sent back to the server with every subsequent requests in order to store useful information between requests.\nIf you want to know more about cookies, read the [HTTP Cookie](https://en.wikipedia.org/wiki/HTTP_cookie) article on wikipedia.",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894836,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "5d3595b3-5e8e-9e33-05ed-855c77298e4e",
+					"name": "Headers",
+					"description": "The following set of endpoints allow one to see the headers being sent as part of a request and to get a custom set of headers as part of response.\n\nHTTP header fields provide required information about the request or response, or about the object sent in the message body. Both request headers and response headers can be controlled using these endpoints.",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894841,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "74a8adf0-4f3f-068a-7c35-9745aa7b57d1",
+					"name": "Utilities / Date and Time",
+					"description": "A set of `/time/*` mounted requests to perform date-time manipulations, among other operations.\n",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894838,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+					"name": "Utilities",
+					"description": "",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894837,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"name": "Request Methods",
+					"description": "HTTP has multiple request \"verbs\", such as `GET`, `PUT`, `POST`, `DELETE`,\n`PATCH`, `HEAD`, etc. \n\nAn HTTP Method (verb) defines how a request should be interpreted by a server. \nThe endpoints in this section demonstrate various HTTP Verbs. Postman supports \nall the HTTP Verbs, including some rarely used ones, such as `PROPFIND`, `UNLINK`, \netc.\n\nFor details about HTTP Verbs, refer to [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9)\n",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				},
+				{
+					"owner": "833319",
+					"lastUpdatedBy": "833319",
+					"lastRevision": 2875894834,
+					"collection": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"folder": null,
+					"id": "df815c41-a76b-4b5b-7129-ea59275f254b",
+					"name": "Auth: Others",
+					"description": "",
+					"variables": null,
+					"auth": null,
+					"events": null,
+					"order": [],
+					"folders_order": [],
+					"createdAt": "2017-12-26T14:57:55.000Z",
+					"updatedAt": "2017-12-26T14:57:56.000Z"
+				}
+			],
+			"favorite": false,
+			"subscribed": false,
+			"sharedWithTeam": false,
+			"hasRequests": true,
+			"synced": true,
+			"published": false,
+			"requests": [
+				{
+					"folder": "930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+					"id": "0189572f-509e-efe0-686d-eed4b3d2f1f0",
+					"name": "Delay Response",
+					"dataMode": "params",
+					"data": [],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "Using this endpoint one can configure how long it takes for the server to come back with a response. Appending a number to the URL defines the time (in seconds) the server will wait before responding.\n\nNote that a maximum delay of 10 seconds is accepted by the server.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/delay/3",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests[\"response body has key delay\"] = 'delay' in responseJSON;\n}\ncatch (e) { }\ntests[\"response code is 200\"] = responseCode.code === 200;\n",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [
+						{
+							"owner": 0,
+							"lastUpdatedBy": "631643",
+							"lastRevision": 897325347,
+							"request": "0189572f-509e-efe0-686d-eed4b3d2f1f0",
+							"id": "64f3f9f5-e3ca-9cdd-590c-88820be2f442",
+							"name": "success-response",
+							"status": "",
+							"responseCode": {
+								"code": 200,
+								"name": "OK",
+								"fromServer": true
+							},
+							"time": "4769",
+							"headers": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"name": "Access-Control-Expose-Headers",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "13",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 02 Jan 2017 09:19:03 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d-t/L/D5c0SDl+MoXtKdSVOg\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.10.1",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding",
+									"name": "Vary",
+									"description": ""
+								}
+							],
+							"cookies": [
+								{
+									"url": "https://echo.getpostman.com/delay/3",
+									"name": "sails.sid",
+									"value": "s%3AYjUiFBtGiJVL2a-qzZQZ1DFlAMhgXN9O.WaAjRUV0OteZxwmhbNibuB7VKse068JJIh6PwLQUKmQ",
+									"domain": "echo.getpostman.com",
+									"secure": false,
+									"httpOnly": true,
+									"expirationDate": 2147463847,
+									"path": "/"
+								}
+							],
+							"mime": "",
+							"text": "{\"delay\":\"3\"}",
+							"language": "json",
+							"rawDataType": null,
+							"state": {
+								"size": "normal"
+							},
+							"previewType": "text",
+							"searchResultScrolledTo": "-1",
+							"version": null,
+							"requestObject": "{\"url\":\"https://echo.getpostman.com/delay/3\",\"headers\":[],\"data\":[],\"method\":\"GET\",\"dataMode\":\"params\"}",
+							"createdAt": "2017-01-02T09:19:23.000Z",
+							"updatedAt": "2017-01-02T09:19:23.000Z"
+						}
+					],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"id": "078883ea-ac9e-842e-8f41-784b59a33722",
+					"name": "GET Request",
+					"dataMode": "params",
+					"data": [],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/get?test=123",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\n\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests['response is valid JSON'] = true;\n}\ncatch (e) { \n    responseJSON = {}; \n    tests['response is valid JSON'] = false;\n}\n\ntests['response json contains headers'] = _.has(responseJSON, 'headers');\ntests['response json contains args'] = _.has(responseJSON, 'args');\ntests['response json contains url'] = _.has(responseJSON, 'url');\n\ntests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);\ntests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === \"123\");",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"id": "083e46e7-53ea-87b1-8104-f8917ce58a17",
+					"name": "POST Form Data",
+					"dataMode": "urlencoded",
+					"data": [
+						{
+							"key": "strange",
+							"value": "boom",
+							"type": "text",
+							"enabled": true
+						}
+					],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested when data is sent as a form parameter.",
+					"headers": "Content-Type: application/x-www-form-urlencoded\n",
+					"method": "POST",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/post",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\n\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests['response is valid JSON'] = true;\n}\ncatch (e) { \n    responseJSON = {}; \n    tests['response is valid JSON'] = false;\n}\n\n\ntests['response has post data'] = _.has(responseJSON, 'form');\ntests['response matches the data posted'] = (responseJSON.form && responseJSON.form.strange === 'boom');",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"id": "12c51acc-50d2-2d9b-10d6-cc80e3a10d70",
+					"name": "PUT Request",
+					"dataMode": "raw",
+					"data": "Etiam mi lacus, cursus vitae felis et, blandit pellentesque neque. Vestibulum eget nisi a tortor commodo dignissim.\nQuisque ipsum ligula, faucibus a felis a, commodo elementum nisl. Mauris vulputate sapien et tincidunt viverra. Donec vitae velit nec metus.",
+					"rawModeData": "Etiam mi lacus, cursus vitae felis et, blandit pellentesque neque. Vestibulum eget nisi a tortor commodo dignissim.\nQuisque ipsum ligula, faucibus a felis a, commodo elementum nisl. Mauris vulputate sapien et tincidunt viverra. Donec vitae velit nec metus.",
+					"descriptionFormat": null,
+					"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n",
+					"headers": "",
+					"method": "PUT",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/put",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\n\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests['response is valid JSON'] = true;\n}\ncatch (e) { \n    responseJSON = {}; \n    tests['response is valid JSON'] = false;\n}\n\n\ntests['response has PUT data'] = _.has(responseJSON, 'data');\ntests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+					"id": "154510d1-65a8-a2d0-f157-aa2c694d7be7",
+					"name": "Get UTF8 Encoded Response",
+					"dataMode": "params",
+					"data": [],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "If a response of an endpoint requires to send data beyond the basic English / ASCII character set, the `charset` parameter in the `Content-Type` response header defines the character encoding policy.\n\nThis endpoint returns an `UTF8` character encoded response body with text in various languages such as Greek, Latin, East Asian, etc. Postman can interpret the character encoding and use appropriate methods to display the character set in responses.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/encoding/utf8",
+					"preRequestScript": "",
+					"tests": "tests[\"response code is 200\"] = responseCode.code === 200;",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+					"id": "159a89e2-110d-0785-9dd7-9e73b2d6878b",
+					"name": "Streamed Response",
+					"dataMode": "params",
+					"data": [],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "This endpoint allows one to recieve streaming http response using [chunked transfer encoding](https://en.wikipedia.org/wiki/Chunked_transfer_encoding) of a configurable length.\n\nA streaming response does not wait for the entire response to be generated on server before flushing it out. This implies that for a fairly large response, parts of it can be streamed to the requestee as and when it is generated on server. The client can then take actions of processing this partially received data.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/stream/10",
+					"preRequestScript": "",
+					"tests": "tests[\"response code is 200\"] = responseCode.code === 200;\ntests[\"response is sent in chunks\"] = (postman.getResponseHeader('Transfer-Encoding') === 'chunked')\n",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"id": "1eb1cf9d-2be7-4060-f554-73cd13940174",
+					"name": "POST Raw Text",
+					"dataMode": "raw",
+					"data": "Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium. Praesent neque quam, tincidunt nec leo eget, rutrum vehicula magna.\nMaecenas consequat elementum elit, id semper sem tristique et. Integer pulvinar enim quis consectetur interdum volutpat.",
+					"rawModeData": "Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium. Praesent neque quam, tincidunt nec leo eget, rutrum vehicula magna.\nMaecenas consequat elementum elit, id semper sem tristique et. Integer pulvinar enim quis consectetur interdum volutpat.",
+					"descriptionFormat": null,
+					"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested.",
+					"headers": "Content-Type: text/plain\n",
+					"method": "POST",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/post",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\n\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests['response is valid JSON'] = true;\n}\ncatch (e) { \n    responseJSON = {}; \n    tests['response is valid JSON'] = false;\n}\n\n\ntests['response has post data'] = _.has(responseJSON, 'data');\ntests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);\n\ntests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "74a8adf0-4f3f-068a-7c35-9745aa7b57d1",
+					"id": "1ef02347-9a4d-5d6a-1b75-144dd6de641f",
+					"name": "Leap year check",
+					"dataMode": "params",
+					"data": null,
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "A simple `GET` request to `/time/leap` to check if the provided/current timestamp belongs to a leap year.\n\nThis endpoint also accepts `timestamp`, `locale`, `format`, `strict`, and `target` query parameters to construct the date time instance to check against.\n\nResponses are provided in JSON format, with a `leap` key to indicate the result. The response code is `200` for valid query parameters, and `400` otherwise.\n\n```\n{\n  leap: true/false\n}\n```",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/time/leap?timestamp=2016-10-10",
+					"preRequestScript": null,
+					"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Comparsion was correct\"] = JSON.parse(responseBody).leap === true;",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "9a4c3bce-30f7-a496-c9ec-78afecbf1545",
+					"id": "1f0fad16-6bff-5130-2056-7f4af6b18912",
+					"name": "DELETE Request",
+					"dataMode": "raw",
+					"data": "Donec fermentum, nisi sed cursus eleifend, nulla tortor ultricies tellus, ut vehicula orci arcu ut velit. In volutpat egestas dapibus.\nMorbi condimentum vestibulum sapien. Etiam dignissim diam quis eros lobortis gravida vel lobortis est. Etiam gravida sed.",
+					"rawModeData": "Donec fermentum, nisi sed cursus eleifend, nulla tortor ultricies tellus, ut vehicula orci arcu ut velit. In volutpat egestas dapibus.\nMorbi condimentum vestibulum sapien. Etiam dignissim diam quis eros lobortis gravida vel lobortis est. Etiam gravida sed.",
+					"descriptionFormat": null,
+					"description": "The HTTP `DELETE` method is used to delete resources on a server. The exact\nuse of `DELETE` requests depends on the server implementation. In general, \n`DELETE` requests support both, Query String parameters as well as a Request \nBody.\n\nThis endpoint accepts an HTTP `DELETE` request and provides debug information\nsuch as the HTTP headers, Query String arguments, and the Request Body.",
+					"headers": "",
+					"method": "DELETE",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/delete",
+					"preRequestScript": "",
+					"tests": "var responseJSON;\n\ntry { \n    responseJSON = JSON.parse(responseBody); \n    tests['response is valid JSON'] = true;\n}\ncatch (e) { \n    responseJSON = {}; \n    tests['response is valid JSON'] = false;\n}\n\n\ntests['response has PUT data'] = _.has(responseJSON, 'data');\ntests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "74a8adf0-4f3f-068a-7c35-9745aa7b57d1",
+					"id": "2881587c-bd9f-0ed1-7c31-525e4ed5306c",
+					"name": "Current UTC time",
+					"dataMode": "params",
+					"data": null,
+					"rawModeData": null,
+					"descriptionFormat": "html",
+					"description": "A simple `GET` request to `/time/now` to return the current timestamp as a UTC string.\n\n```\nFri, 04 Nov 2016 09:00:46 GMT\n```",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/time/now",
+					"preRequestScript": null,
+					"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Time is in a valid format\"] = responseBody === postman.getResponseHeader(\"date\");\n",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [
+						{
+							"owner": 0,
+							"lastUpdatedBy": "631643",
+							"lastRevision": 928403298,
+							"request": "2881587c-bd9f-0ed1-7c31-525e4ed5306c",
+							"id": "f3f2053b-e446-a8b1-aee2-124618275f94",
+							"name": "time as text",
+							"status": "",
+							"responseCode": {
+								"code": 200,
+								"name": "OK",
+								"fromServer": true
+							},
+							"time": "749",
+							"headers": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"name": "Access-Control-Allow-Credentials",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "",
+									"name": "Access-Control-Allow-Headers",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "",
+									"name": "Access-Control-Allow-Methods",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "",
+									"name": "Access-Control-Allow-Origin",
+									"description": ""
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"name": "Access-Control-Expose-Headers",
+									"description": ""
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive",
+									"name": "Connection",
+									"description": ""
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip",
+									"name": "Content-Encoding",
+									"description": ""
+								},
+								{
+									"key": "Content-Length",
+									"value": "49",
+									"name": "Content-Length",
+									"description": ""
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8",
+									"name": "Content-Type",
+									"description": ""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 11 Jan 2017 10:27:12 GMT",
+									"name": "Date",
+									"description": ""
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-2jJhkzratfVX9VZ0+raHbw\"",
+									"name": "ETag",
+									"description": ""
+								},
+								{
+									"key": "Server",
+									"value": "nginx/1.10.1",
+									"name": "Server",
+									"description": ""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding",
+									"name": "Vary",
+									"description": ""
+								},
+								{
+									"key": "set-cookie",
+									"value": "sails.sid=s%3A2lT3TO7qS1tadeSAp4axl-NcXG9CV6Rf.HGqLY%2FlKEKY4fgCLePaAZs3tCHp%2Bglf7ZOJYlonGeig; Path=/; HttpOnly",
+									"name": "set-cookie",
+									"description": ""
+								}
+							],
+							"cookies": [
+								{
+									"url": "https://postman-echo.com/time/now",
+									"name": "sails.sid",
+									"value": "s%3A2lT3TO7qS1tadeSAp4axl-NcXG9CV6Rf.HGqLY%2FlKEKY4fgCLePaAZs3tCHp%2Bglf7ZOJYlonGeig",
+									"domain": "postman-echo.com",
+									"secure": false,
+									"httpOnly": true,
+									"expirationDate": 2147463847,
+									"path": "/"
+								}
+							],
+							"mime": "",
+							"text": "Wed, 11 Jan 2017 10:27:12 GMT",
+							"language": "html",
+							"rawDataType": null,
+							"state": {
+								"size": "normal"
+							},
+							"previewType": "text",
+							"searchResultScrolledTo": "-1",
+							"version": null,
+							"requestObject": "{\"url\":\"https://postman-echo.com/time/now\",\"headers\":[],\"data\":null,\"method\":\"GET\",\"dataMode\":\"params\"}",
+							"createdAt": "2017-01-11T10:27:27.000Z",
+							"updatedAt": "2017-01-11T10:27:27.000Z"
+						}
+					],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "df815c41-a76b-4b5b-7129-ea59275f254b",
+					"id": "2f79ab5b-9029-56c2-7b05-52047790d670",
+					"name": "OAuth1.0 Verify Signature",
+					"dataMode": "params",
+					"data": [
+						{
+							"key": "code",
+							"value": "xWnkliVQJURqB2x1",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.getpostman.com/oauth2/callback",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "client_id",
+							"value": "abc123",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "ssh-secret",
+							"type": "text",
+							"enabled": true
+						}
+					],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "OAuth1.0a is a specification that defines a protocol that can be used by one\nservice to access \"protected\" resources (endpoints) on another service. A\nmajor part of OAuth1.0 is HTTP Request Signing. This endpoint allows you to \ncheck whether the request calculation works properly in the client. \n\nThe endpoint supports the HTTP ``Authorization`` header. In case the signature\nverification fails, the endpoint provides the four debug values,\n\n* ``base_uri``\n* ``normalized_param_string``\n* ``base_string``\n* ``signing_key``\n\nFor more details about these parameters, check the [OAuth1.0a Specification](http://oauth.net/core/1.0a/)\n\nIn order to use this endpoint, you can set the following values:\n\n> Consumer Key: ``RKCGzna7bv9YD57c``\n>\n> Consumer Secret: ``D+EdQ-gs$-%@2Nu7``\n\nIf you are using Postman, also check the \"Add params to header\" and \n\"Auto add parameters\" boxes.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/oauth1",
+					"preRequestScript": "",
+					"tests": "tests[\"response code is 200\"] = responseCode.code === 200;\nvar body = JSON.parse(responseBody);\ntests[\"Body contains status pass\"] = body[\"status\"] == \"pass\"",
+					"currentHelper": "oAuth1",
+					"helperAttributes": "{\"id\":\"oAuth1\",\"consumerKey\":\"RKCGzna7bv9YD57c\",\"consumerSecret\":\"D+EdQ-gs$-%@2Nu7\",\"token\":\"\",\"tokenSecret\":\"\",\"signatureMethod\":\"HMAC-SHA1\",\"timestamp\":1472121255,\"nonce\":\"e5VR16\",\"version\":\"1.0\",\"realm\":\"\",\"encodeSignature\":false,\"header\":true,\"includeEmpty\":false,\"saveToRequest\":true}",
+					"responses": [
+						{
+							"owner": 0,
+							"lastUpdatedBy": "631643",
+							"lastRevision": 505395018,
+							"request": "2f79ab5b-9029-56c2-7b05-52047790d670",
+							"id": "d234f0e3-683c-1705-d4b1-c94f6c27fa52",
+							"name": "200",
+							"status": "",
+							"responseCode": {
+								"code": 200,
+								"name": "OK"
+							},
+							"time": "2057",
+							"headers": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "keep-alive",
+									"description": ""
+								},
+								{
+									"name": "Content-Encoding",
+									"key": "Content-Encoding",
+									"value": "gzip",
+									"description": ""
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "95",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Thu, 25 Aug 2016 10:34:23 GMT",
+									"description": ""
+								},
+								{
+									"name": "ETag",
+									"key": "ETag",
+									"value": "W/\"4e-Cq3UhvpVSyl6R6204lPVIA\"",
+									"description": ""
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "nginx/1.8.1",
+									"description": ""
+								},
+								{
+									"name": "Vary",
+									"key": "Vary",
+									"value": "Accept-Encoding",
+									"description": ""
+								}
+							],
+							"cookies": [],
+							"mime": "",
+							"text": "{\"status\":\"pass\",\"message\":\"OAuth-1.0a signature verification was successful\"}",
+							"language": "javascript",
+							"rawDataType": "text",
+							"state": {
+								"size": "normal"
+							},
+							"previewType": "html",
+							"searchResultScrolledTo": "-1",
+							"version": null,
+							"requestObject": "{\"url\":\"https://echo.getpostman.com/oauth1\",\"headers\":[{\"key\":\"Authorization\",\"name\":\"Authorization\",\"value\":\"OAuth oauth_consumer_key=\\\"RKCGzna7bv9YD57c\\\",oauth_signature_method=\\\"HMAC-SHA1\\\",oauth_timestamp=\\\"1472121261\\\",oauth_nonce=\\\"ki0RQW\\\",oauth_version=\\\"1.0\\\",oauth_signature=\\\"s0rK92Myxx7ceUBVzlMaxiiXU00%3D\\\"\"}],\"data\":[{\"key\":\"code\",\"value\":\"xWnkliVQJURqB2x1\",\"type\":\"text\",\"enabled\":true},{\"key\":\"grant_type\",\"value\":\"authorization_code\",\"type\":\"text\",\"enabled\":true},{\"key\":\"redirect_uri\",\"value\":\"https://www.getpostman.com/oauth2/callback\",\"type\":\"text\",\"enabled\":true},{\"key\":\"client_id\",\"value\":\"abc123\",\"type\":\"text\",\"enabled\":true},{\"key\":\"client_secret\",\"value\":\"ssh-secret\",\"type\":\"text\",\"enabled\":true}],\"method\":\"GET\",\"dataMode\":\"params\"}",
+							"createdAt": "2016-08-25T10:34:27.000Z",
+							"updatedAt": "2016-08-25T10:34:28.000Z"
+						},
+						{
+							"owner": 0,
+							"lastUpdatedBy": "631643",
+							"lastRevision": 505396712,
+							"request": "2f79ab5b-9029-56c2-7b05-52047790d670",
+							"id": "d536f1d6-ad89-2a2d-94b3-8aa11f28f197",
+							"name": "401",
+							"status": "",
+							"responseCode": {
+								"code": 401,
+								"name": "Unauthorized"
+							},
+							"time": "322",
+							"headers": [
+								{
+									"name": "Access-Control-Allow-Credentials",
+									"key": "Access-Control-Allow-Credentials",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Access-Control-Expose-Headers",
+									"key": "Access-Control-Expose-Headers",
+									"value": "",
+									"description": ""
+								},
+								{
+									"name": "Connection",
+									"key": "Connection",
+									"value": "keep-alive",
+									"description": ""
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "536",
+									"description": ""
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"description": ""
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Thu, 25 Aug 2016 10:34:55 GMT",
+									"description": ""
+								},
+								{
+									"name": "ETag",
+									"key": "ETag",
+									"value": "W/\"218-SGnurnTsu5qV5cCYWxsJlg\"",
+									"description": ""
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "nginx/1.8.1",
+									"description": ""
+								},
+								{
+									"name": "Vary",
+									"key": "Vary",
+									"value": "Accept-Encoding",
+									"description": ""
+								}
+							],
+							"cookies": [],
+							"mime": "",
+							"text": "{\"status\":\"fail\",\"message\":\"HMAC-SHA1 verification failed\",\"base_uri\":\"https://echo.getpostman.com/oauth1\",\"normalized_param_string\":\"oauth_consumer_key=RKCGzna7bv9YD57c_wrong&oauth_nonce=8LTsU2&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1472121295&oauth_version=1.0\",\"base_string\":\"GET&https%3A%2F%2Fecho.getpostman.com%2Foauth1&oauth_consumer_key%3DRKCGzna7bv9YD57c_wrong%26oauth_nonce%3D8LTsU2%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1472121295%26oauth_version%3D1.0\",\"signing_key\":\"D%2BEdQ-gs%24-%25%402Nu7&\"}",
+							"language": "javascript",
+							"rawDataType": "text",
+							"state": {
+								"size": "normal"
+							},
+							"previewType": "html",
+							"searchResultScrolledTo": "-1",
+							"version": null,
+							"requestObject": "{\"url\":\"https://echo.getpostman.com/oauth1\",\"headers\":[{\"key\":\"Authorization\",\"type\":\"text\",\"name\":\"Authorization\",\"value\":\"OAuth oauth_consumer_key=\\\"RKCGzna7bv9YD57c_wrong\\\",oauth_signature_method=\\\"HMAC-SHA1\\\",oauth_timestamp=\\\"1472121295\\\",oauth_nonce=\\\"8LTsU2\\\",oauth_version=\\\"1.0\\\",oauth_signature=\\\"tSUexpY%2B7EhSY7cFXiFN5EMx2zw%3D\\\"\"}],\"data\":[{\"key\":\"code\",\"value\":\"xWnkliVQJURqB2x1\",\"type\":\"text\",\"enabled\":true},{\"key\":\"grant_type\",\"value\":\"authorization_code\",\"type\":\"text\",\"enabled\":true},{\"key\":\"redirect_uri\",\"value\":\"https://www.getpostman.com/oauth2/callback\",\"type\":\"text\",\"enabled\":true},{\"key\":\"client_id\",\"value\":\"abc123\",\"type\":\"text\",\"enabled\":true},{\"key\":\"client_secret\",\"value\":\"ssh-secret\",\"type\":\"text\",\"enabled\":true}],\"method\":\"GET\",\"dataMode\":\"params\"}",
+							"createdAt": "2016-08-25T10:34:59.000Z",
+							"updatedAt": "2016-08-25T10:34:59.000Z"
+						}
+					],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "930f54b4-c5cd-2363-7cf5-b9022d3c0aae",
+					"id": "39a204d5-944a-59d3-2dfe-90fd378cc3da",
+					"name": "IP address in JSON format",
+					"dataMode": "params",
+					"data": null,
+					"rawModeData": null,
+					"descriptionFormat": "html",
+					"description": "A simple `GET` request to return the IP address of the source request in the following `JSON` format:\n\n```json\n{\n  ip: \"request-ip-address\"\n}\n```",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/ip",
+					"preRequestScript": null,
+					"tests": "var body = JSON.parse(responseBody);\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Valid response structure\"] = /^[a-fA-F:\\.0-9]+$/.test(body.ip);",
+					"currentHelper": "normal",
+					"helperAttributes": "{}",
+					"responses": [],
+					"collectionId": "f695cab7-6878-eb55-7943-ad88e1ccfd65",
+					"owner": 0
+				},
+				{
+					"folder": "37368024-f6a8-0f70-85fc-7e876cde9e33",
+					"id": "3de3b135-b3cc-3a68-ba27-b6d373e03c8c",
+					"name": "Set Cookies",
+					"dataMode": "params",
+					"data": [],
+					"rawModeData": null,
+					"descriptionFormat": null,
+					"description": "The cookie setter endpoint accepts a list of cookies and their values as part of URL parameters of a `GET` request. These cookies are saved and can be subsequently retrieved or deleted. The response of this request returns a JSON with all cookies listed.\n\nTo set your own set of cookies, simply replace the URL parameters \"foo1=bar1&foo2=bar2\" with your own set of key-value pairs.",
+					"headers": "",
+					"method": "GET",
+					"pathVariables": [],
+					"url": "https://postman-echo.com/cookies/set?foo1=bar1&foo2=bar2",
+					"preRequestScript": "",
+					"tests": "// handle case where it is 304\n\nif (responseCode.code === 200) {\n    tests[\"Status code is 302 or 200\"] = true;\n    tests[\"Body contains cookies\"] = responseBody.has(\"cookies\");\n    \n    var body = JSON.parse(responseBody);\n    tests[\"Body contains cookie foo1\"] = 'foo1' in body.cookies;\n    tests[\"Body contains cookie foo2\"] = 'foo2' in body.cookies;\n\n}\nelse if (responseCode.code === 302) {\n    tests[\"Status code is 302 or 200\"] = true;\n    tests[\"Body has redirection message\"] = responseBody.has(\"F

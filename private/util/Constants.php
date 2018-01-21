@@ -25,6 +25,7 @@
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
+        
     define("DATABASE_USER", "cookeryuser");
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
@@ -44,8 +45,12 @@
     //reviews count to load at a time   
     define("REVIEWS_COUNT","5");
 
+    //users to load at a time
+    define("USERS_COUNT","5");
+
     //user
     define("USER_ADD","USER_ADD");
+    define("USER_PHOTO_MODIFY","USER_PHOTO_MODIFY");
     define("USER_FOLLOW","USER_FOLLOW");
     define("USER_UNFOLLOW","USER_UNFOLLOW");
     //user
@@ -78,4 +83,5 @@
     //review
     //---------------------timeline---------------------
 
+    define("DEFAULT_SCOPE_ID","1");
 ?>
