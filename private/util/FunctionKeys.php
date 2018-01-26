@@ -12,6 +12,7 @@
     define("COMMENT_DELETE", "COMMENT_DELETE");                         //Postman completed
     define("COMMENT_RECIPE_FETCH_ALL", "COMMENT_RECIPE_FETCH_ALL");     //Postman completed
     define("COMMENT_SUBMIT", "COMMENT_SUBMIT");                         //Postman completed
+    define("COMMENT_FETCH", "COMMENT_FETCH");                           //Postman completed
     //comment
 
     //recipe

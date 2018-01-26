@@ -61,7 +61,7 @@
 		
 		public static function fetchUserFollowings($user_id, $logged_in_user_id, $index){
 			//request
-      LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+      		LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
@@ -120,7 +120,7 @@
 		
 		public static function fetchUser($user_id, $flwr_user_id, $forWhom){
 			//request
-      LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+      		LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : forWhom(".$forWhom.")");
 			//request
@@ -140,14 +140,19 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT USER_ID, EMAIL_SCOPE_ID, EMAIL, MOBILE_SCOPE_ID, MOBILE, IMG, NAME, GENDER_SCOPE_ID, GENDER FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$query = "SELECT USER_ID, USR.RANK_ID, RANK_NAME, EMAIL_SCOPE_ID, EMAIL, MOBILE_SCOPE_ID, MOBILE, 
+							IMG, NAME, GENDER_SCOPE_ID, GENDER, USR.CREATE_DTM 
+							FROM `USER` AS USR
+							INNER JOIN `RANK` AS RNK ON RNK.RANK_ID = USR.RANK_ID
+							WHERE USER_ID = '".$user_id."'";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
-				while($result_data = $result->fetch_object()) {
+				if($result_data = $result->fetch_object()) {
 					$temp_array['USER_ID'] = $result_data->USER_ID;
 					$temp_array['IMG'] = $result_data->IMG;
 					$temp_array['NAME'] = $result_data->NAME;
+					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					
 					$temp_array['EMAIL_SCOPE_ID'] = $result_data->EMAIL_SCOPE_ID;
 					$temp_array['MOBILE_SCOPE_ID'] = $result_data->MOBILE_SCOPE_ID;
@@ -187,6 +192,16 @@
 						$temp_array['EMAIL'] = $result_data->EMAIL;
 						$temp_array['MOBILE'] = $result_data->MOBILE;
 						$temp_array['GENDER'] = $result_data->GENDER;
+						
+						$temp_array['currentRank'] = $result_data->RANK_NAME;
+						
+						//fetch current achieved rank & milestone
+						$temp_array['currentRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID, $user_id);	
+						//fetch current achieved rank & milestone
+						
+						//fetch next rank & milestone
+						$temp_array['nextRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID+1, null);	
+						//fetch next rank & milestone
 					}
 					
 					//get followers count

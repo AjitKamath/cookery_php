@@ -25,7 +25,6 @@
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
-        
     define("DATABASE_USER", "cookeryuser");
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
