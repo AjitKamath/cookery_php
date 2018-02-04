@@ -1,5 +1,36 @@
 <?php
 	class Review{
+		public static function getReviewsCount($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS REVIEWS_COUNT 
+							FROM `REVIEWS` AS REV
+							INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = REV.RCP_ID
+							WHERE RCP.USER_ID = '".$user_id."'
+							AND REV.IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->REVIEWS_COUNT;
+				}
+				
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function fetchAverageRecipeRating($rcp_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");

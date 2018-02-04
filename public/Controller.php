@@ -104,6 +104,9 @@
 	else if(COMMENT_SUBMIT == $function_key){
 		echo Comment::submitComment($rcp_id, $user_id, $comment);
 	}
+	else if(COMMENT_FETCH == $function_key){
+		echo Comment::fetchComment($com_id);
+	}
 	//comment
 	
 	//recipe

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jan 20, 2018 at 08:46 PM
--- Server version: 8.0.3-rc-log
+-- Generation Time: Feb 04, 2018 at 10:04 AM
+-- Server version: 8.0.4-rc-log
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -219,6 +219,28 @@ INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_OR_AKA_ID`, `QTY_ID`, `ING_QTY`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `FAVOURITES`
+--
+
+CREATE TABLE `FAVOURITES` (
+  `FAV_ID` int(11) NOT NULL,
+  `RCP_ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
+  `IS_DEL` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `FAVOURITES`
+--
+
+INSERT INTO `FAVOURITES` (`FAV_ID`, `RCP_ID`, `USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(4, 66, 1, 'N', '2018-02-04 02:40:53', '2018-02-04 03:31:57');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `FOOD_CUISINE`
 --
 
@@ -362,8 +384,35 @@ INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_
 (14, 1, 'COMMENT', 50, 'N', '2017-12-22 17:51:32', NULL),
 (15, 1, 'COMMENT', 53, 'N', '2017-12-22 20:17:26', NULL),
 (16, 1, 'COMMENT', 55, 'N', '2017-12-22 20:17:30', '2017-12-22 20:17:36'),
-(17, 1, 'RECIPE', 66, 'N', '2018-01-12 20:41:14', NULL),
+(17, 1, 'RECIPE', 66, 'Y', '2018-01-12 20:41:14', '2018-02-03 20:41:16'),
 (18, 1, 'COMMENT', 54, 'N', '2018-01-16 00:56:05', '2018-01-16 00:56:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `MILESTONE`
+--
+
+CREATE TABLE `MILESTONE` (
+  `MLT_ID` int(11) NOT NULL,
+  `RANK_ID` int(11) NOT NULL,
+  `TYPE` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NUMBER` int(11) NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `MILESTONE`
+--
+
+INSERT INTO `MILESTONE` (`MLT_ID`, `RANK_ID`, `TYPE`, `NUMBER`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'LIKE', 0, '2018-01-15 00:00:00', NULL),
+(2, 1, 'REVIEW', 0, '2018-01-18 00:00:00', NULL),
+(3, 1, 'RECIPE', 0, '2018-01-25 00:00:00', NULL),
+(8, 2, 'LIKE', 100, '2018-01-15 00:00:00', NULL),
+(9, 2, 'RECIPE', 5, '2018-01-18 00:00:00', NULL),
+(10, 2, 'REVIEW', 25, '2018-01-25 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -410,7 +459,7 @@ CREATE TABLE `RANK` (
 
 INSERT INTO `RANK` (`RANK_ID`, `RANK_NAME`, `RANK_RULE`, `CREATE_DTM`, `MOD_DTM`) VALUES
 (1, 'FOODIE', 'Initial Rank', '2018-01-18 00:00:00', NULL),
-(2, 'KITCHEN HAND', '(5 Recipes & 100 Likes) or 50 Shares or 50 Reviews', '2018-01-18 00:00:00', NULL),
+(2, 'KITCHEN HAND', '(5 Recipes & 100 Likes) or 25 Reviews', '2018-01-18 00:00:00', NULL),
 (3, 'COMMIS CHEF', '(20 Recipes & 500 Likes) or 200 Shares or 200 Reviews', '2018-01-18 00:00:00', NULL),
 (4, 'CHEF DE PARTIE', '(25 Recipes & 1000 likes) or 400 Shares or 400 Reviews', '2018-01-18 00:00:00', NULL),
 (5, 'SOUS CHEF', '(25 Recipes & 2000 Likes) or 500 Shares or 500 Reviews', '2018-01-18 00:00:00', NULL),
@@ -455,12 +504,12 @@ INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `RCP_P
 (79, 'abcd', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:31:16', NULL),
 (80, 'abcd', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:34:45', NULL),
 (81, 'act', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:36:13', NULL),
-(87, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:15:43', NULL),
-(88, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:16:58', NULL),
-(89, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:17:53', NULL),
-(90, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:20:48', NULL),
-(91, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:23:47', NULL),
-(103, 'TEST_RECIPE_NAME', 1, 1, '', '', '', 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19');
+(87, 'TEST_RECIPE_NAME 1', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:15:43', NULL),
+(88, 'TEST_RECIPE_NAME 2', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:16:58', NULL),
+(89, 'TEST_RECIPE_NAME 3', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:17:53', NULL),
+(90, 'TEST_RECIPE_NAME 4', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:20:48', NULL),
+(91, 'TEST_RECIPE_NAME 5', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:23:47', NULL),
+(103, 'TEST_RECIPE_NAME 6', 1, 1, '', '', '', 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19');
 
 -- --------------------------------------------------------
 
@@ -818,7 +867,7 @@ CREATE TABLE `REVIEWS` (
 --
 
 INSERT INTO `REVIEWS` (`REV_ID`, `RCP_ID`, `USER_ID`, `REVIEW`, `RATING`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(9, 3, 1, 'TEST REVIEW', 4, 'Y', '2017-10-17 15:13:23', '2017-12-15 15:02:40'),
+(9, 3, 1, 'TEST REVIEW', 4, 'N', '2017-10-17 15:13:23', '2017-12-15 15:02:40'),
 (10, 103, 1, 'TEST REVIEW - 98', 3, 'N', '2017-12-16 11:11:28', '2017-12-30 08:57:26'),
 (11, 103, 2, 'This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review. This is a test review.', 3, 'N', '2017-12-16 20:44:15', NULL);
 
@@ -1162,7 +1211,25 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (595, 1, 1, 'COMMENT_RECIPE_ADD', 67, 3, 'Y', '2018-01-16 23:46:26', NULL),
 (596, 1, 1, 'COMMENT_RECIPE_ADD', 68, 3, 'Y', '2018-01-16 23:46:42', NULL),
 (597, 1, 1, 'COMMENT_RECIPE_ADD', 69, 1, 'Y', '2018-01-16 23:46:44', NULL),
-(598, 66, 66, 'USER_ADD', 66, 1, 'N', '2018-01-18 14:23:33', NULL);
+(598, 66, 66, 'USER_ADD', 66, 1, 'N', '2018-01-18 14:23:33', NULL),
+(599, 67, 67, 'USER_ADD', 67, 1, 'N', '2018-01-29 23:34:52', NULL),
+(600, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 14:18:43', NULL),
+(601, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 14:18:44', NULL),
+(602, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 14:18:47', NULL),
+(603, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 14:25:29', NULL),
+(604, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 14:25:30', NULL),
+(605, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 14:25:33', NULL),
+(606, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 14:25:37', NULL),
+(607, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 20:40:47', NULL),
+(608, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 20:40:49', NULL),
+(609, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 20:40:49', NULL),
+(610, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 20:40:57', NULL),
+(611, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 20:40:58', NULL),
+(612, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 20:41:02', NULL),
+(613, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 20:41:04', NULL),
+(614, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 20:41:11', NULL),
+(615, 1, 2, 'LIKE_RECIPE_ADD', 17, 1, 'N', '2018-02-03 20:41:13', NULL),
+(616, 1, 2, 'LIKE_RECIPE_REMOVE', 17, 1, 'N', '2018-02-03 20:41:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -1195,21 +1262,21 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`, `VERI_CODE_DTM`, `IMG`, `MOBILE`, `MOBILE_SCOPE_ID`, `PASSWORD`, `NAME`, `GENDER`, `GENDER_SCOPE_ID`, `SSID`, `SALT`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'cookery21@cookery.com', 2, 648153, '2018-01-20 20:23:49', 'app_data/users/1/profile/images/5a5a5aaa23d33.jpg', '1234', 2, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  68', 'F', 2, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-01-20 20:36:24'),
-(2, 1, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'ABCD', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
-(3, 1, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'testuser1', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
-(4, 1, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '8124627522', 1, 'cm9jazJaUEtw', 'Vishal', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
-(5, 1, 'testuser@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1234567890', 1, 'MTIzNDU2NzgxNjhjUg==', 'Test User', 'M', 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-05 09:28:53', NULL),
-(6, 1, 'yOIW8uBUPh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8202377734', 1, 'MTIzNDU2Nzh6YUlrYw==', 'Test User', 'M', 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-06 10:09:03', NULL),
-(7, 1, 'BuaMX1inFJ@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1434819247', 1, 'MTIzNDU2NzgzeGtreA==', 'Test User', 'M', 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-06 10:17:52', NULL),
-(8, 1, 'mbTVNucEYo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4048666965', 1, 'MTIzNDU2NzhqWW9RRA==', 'Test User', 'M', 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-06 10:18:40', NULL),
+(1, 1, 'cookery@cookery.com', 2, 648153, '2018-01-20 20:23:49', 'app_data/users/1/profile/images/5a5a5aaa23d33.jpg', '1234', 2, 'Q09PS0VSWXNOS1dJ', 'USER - 1', 'F', 2, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-01-20 20:36:24'),
+(2, 1, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'USER - 2', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
+(3, 1, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'USER - 3', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
+(4, 1, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '8124627522', 1, 'cm9jazJaUEtw', 'USER - 4', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
+(5, 1, 'testuser@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1234567890', 1, 'MTIzNDU2NzgxNjhjUg==', 'USER - 5', 'M', 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-05 09:28:53', NULL),
+(6, 1, 'yOIW8uBUPh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8202377734', 1, 'MTIzNDU2Nzh6YUlrYw==', 'USER - 6', 'M', 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-06 10:09:03', NULL),
+(7, 1, 'BuaMX1inFJ@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1434819247', 1, 'MTIzNDU2NzgzeGtreA==', 'USER - 7', 'M', 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-06 10:17:52', NULL),
+(8, 1, 'mbTVNucEYo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4048666965', 1, 'MTIzNDU2NzhqWW9RRA==', 'USER - 8', 'M', 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-06 10:18:40', NULL),
 (9, 1, 'mKZ3tT6mDV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2463154465', 1, 'MTIzNDU2NzhuV1hOVA==', 'Test User', 'M', 1, '79D6gkz9YL', 'bldYTlQ=', '2017-12-06 10:19:12', NULL),
 (10, 1, 'yotGl72BQP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4706108967', 1, 'MTIzNDU2Nzhna05KRw==', 'Test User', 'M', 1, '10bR1Dhl1v', 'Z2tOSkc=', '2017-12-06 10:25:31', NULL),
 (11, 1, 'p7gerTEFcK@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3224967902', 1, 'MTIzNDU2NzhNZHhsWA==', 'Test User', 'M', 1, 'Aa0qpd0dRi', 'TWR4bFg=', '2017-12-06 10:26:31', NULL),
 (12, 1, '2hdwLAh3Qf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1122780923', 1, 'MTIzNDU2NzhhU1VXMQ==', 'Test User', 'M', 1, 'kZQae7t6VP', 'YVNVVzE=', '2017-12-06 10:32:19', NULL),
 (13, 1, '1ur6aieyL4@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7568342541', 1, 'UkZ3azZVRGJRNlE2SXpx', 'Test User', 'M', 1, 'efESK2GWwx', 'UTZJenE=', '2017-12-06 10:36:54', NULL),
-(14, 1, 'DyBbMIg3hW@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6397083418', 1, 'MzZnMUR2dnFJODhmclFj', 'Test User', 'M', 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-06 10:38:49', NULL),
-(15, 1, 'Ch0C1oJCgP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1236028204', 1, 'bTh5RTNEY203Y0d3ODBR', 'Test User', 'M', 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-06 10:42:08', NULL),
+(14, 1, 'DyBbMIg3hW@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6397083418', 1, 'MzZnMUR2dnFJODhmclFj', 'USER - 14', 'M', 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-06 10:38:49', NULL),
+(15, 1, 'Ch0C1oJCgP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1236028204', 1, 'bTh5RTNEY203Y0d3ODBR', 'USER - 15', 'M', 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-06 10:42:08', NULL),
 (16, 1, 'ZfhzXsEz5X@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0328880787', 1, 'T0ZMSUpkYm1sTTBsRDJi', 'Test User', 'M', 1, 'XVLEHSZm7U', 'MGxEMmI=', '2017-12-06 10:43:00', NULL),
 (17, 1, 'RX631Oc74f@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1925274231', 1, 'ZFVURk1SM1Z6ek9sckpo', 'Test User', 'M', 1, 'FkQwv4DZaz', 'T2xySmg=', '2017-12-06 15:20:07', NULL),
 (18, 1, 'Nq2ieecBym@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9071819562', 1, 'WGdETmlpdjRHQnMxNGVD', 'Test User', 'M', 1, 'lO8HfQ826L', 'czE0ZUM=', '2017-12-06 21:06:19', NULL),
@@ -1260,7 +1327,8 @@ INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`
 (63, 1, 'mEmve9D2D6@gmail.com', 1, 14708985, '2017-12-30 09:53:23', NULL, NULL, 1, 'NDUzNDY0ODQ5NHNFQjI0', 'COOKERY', NULL, 1, '4YfRLcdJ2J', 'c0VCMjQ=', '2017-12-30 09:53:23', NULL),
 (64, 1, 'DkuyWf4vOz@gmail.com', 1, 88859188, '2017-12-30 09:55:20', NULL, NULL, 1, 'Q09PS0VSWVJzSGlv', 'Test User -  08', NULL, 1, '0rqwzKv526', 'UnNIaW8=', '2017-12-30 09:55:20', NULL),
 (65, 1, '2usvcVlzb6@gmail.com', 1, 55039142, '2018-01-01 11:23:18', NULL, NULL, 1, 'Q09PS0VSWVR2SzNK', 'Test User -  08', '', 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', NULL),
-(66, 1, 'aMJUvZ4CM5@gmail.com', 1, 49645219, '2018-01-18 14:23:33', NULL, NULL, 1, 'Q09PS0VSWU9QOXlG', 'Test User -  00', '', 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', NULL);
+(66, 1, 'aMJUvZ4CM5@gmail.com', 1, 49645219, '2018-01-18 14:23:33', NULL, NULL, 1, 'Q09PS0VSWU9QOXlG', 'Test User -  00', '', 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', NULL),
+(67, 1, 'rock@cookery.com', 1, 64728213, '2018-01-29 23:34:52', NULL, NULL, 1, 'cm9ja21uYkhY', 'Vishal', '', 1, '5pX9Gn9wlB', 'bW5iSFg=', '2018-01-29 23:34:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -1343,7 +1411,8 @@ INSERT INTO `USER_ING_LIST_ITEM` (`USER_ING_LIST_ITEM_ID`, `ING_ID`, `USER_ING_L
 (88, 10, 32, 'N', '2018-01-12 23:54:48', '2018-01-12 23:54:48'),
 (89, 15, 32, 'N', '2018-01-12 23:54:48', '2018-01-12 23:54:48'),
 (90, 17, 32, 'N', '2018-01-12 23:54:48', '2018-01-12 23:54:48'),
-(91, 19, 33, 'N', '2018-01-14 00:23:12', '2018-01-14 00:23:12');
+(91, 19, 33, 'N', '2018-01-14 00:23:12', '2018-01-14 00:23:12'),
+(92, 2, 31, 'N', '2018-02-03 14:32:09', '2018-02-03 14:32:09');
 
 -- --------------------------------------------------------
 
@@ -1430,6 +1499,14 @@ ALTER TABLE `DISH`
   ADD KEY `DISH_FK1` (`QTY_ID`);
 
 --
+-- Indexes for table `FAVOURITES`
+--
+ALTER TABLE `FAVOURITES`
+  ADD PRIMARY KEY (`FAV_ID`),
+  ADD KEY `USER_FAV_FK` (`USER_ID`),
+  ADD KEY `RCP_FAV_FK` (`RCP_ID`);
+
+--
 -- Indexes for table `FOOD_CUISINE`
 --
 ALTER TABLE `FOOD_CUISINE`
@@ -1460,6 +1537,13 @@ ALTER TABLE `ING_AKA`
 ALTER TABLE `LIKES`
   ADD PRIMARY KEY (`LIKE_ID`),
   ADD KEY `USER_ID` (`USER_ID`);
+
+--
+-- Indexes for table `MILESTONE`
+--
+ALTER TABLE `MILESTONE`
+  ADD PRIMARY KEY (`MLT_ID`),
+  ADD KEY `MILESTON_FK1` (`RANK_ID`);
 
 --
 -- Indexes for table `QTY`
@@ -1600,6 +1684,12 @@ ALTER TABLE `DISH`
   MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
+-- AUTO_INCREMENT for table `FAVOURITES`
+--
+ALTER TABLE `FAVOURITES`
+  MODIFY `FAV_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `FOOD_CUISINE`
 --
 ALTER TABLE `FOOD_CUISINE`
@@ -1628,6 +1718,12 @@ ALTER TABLE `ING_AKA`
 --
 ALTER TABLE `LIKES`
   MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `MILESTONE`
+--
+ALTER TABLE `MILESTONE`
+  MODIFY `MLT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `QTY`
@@ -1693,13 +1789,13 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=617;
 
 --
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `USER_ING_LIST`
@@ -1711,7 +1807,7 @@ ALTER TABLE `USER_ING_LIST`
 -- AUTO_INCREMENT for table `USER_ING_LIST_ITEM`
 --
 ALTER TABLE `USER_ING_LIST_ITEM`
-  MODIFY `USER_ING_LIST_ITEM_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `USER_ING_LIST_ITEM_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `USER_RELATIONSHIP`
@@ -1749,6 +1845,13 @@ ALTER TABLE `DISH`
   ADD CONSTRAINT `DISH_FK1` FOREIGN KEY (`QTY_ID`) REFERENCES `QTY` (`qty_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `FAVOURITES`
+--
+ALTER TABLE `FAVOURITES`
+  ADD CONSTRAINT `RCP_FAV_FK` FOREIGN KEY (`RCP_ID`) REFERENCES `RECIPE` (`rcp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `USER_FAV_FK` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `ING_AKA`
 --
 ALTER TABLE `ING_AKA`
@@ -1759,6 +1862,12 @@ ALTER TABLE `ING_AKA`
 --
 ALTER TABLE `LIKES`
   ADD CONSTRAINT `FK_USER_LIKES` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `MILESTONE`
+--
+ALTER TABLE `MILESTONE`
+  ADD CONSTRAINT `MILESTON_FK1` FOREIGN KEY (`RANK_ID`) REFERENCES `RANK` (`rank_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `RECIPE_CONTAINS`

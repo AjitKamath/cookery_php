@@ -25,7 +25,6 @@
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
-        
     define("DATABASE_USER", "cookeryuser");
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
@@ -46,7 +45,7 @@
     define("REVIEWS_COUNT","5");
 
     //users to load at a time
-    define("USERS_COUNT","5");
+    define("USERS_COUNT","10");
 
     //user
     define("USER_ADD","USER_ADD");
