@@ -1,7 +1,7 @@
 <?php
 	class Recipe{
 		public static function fetchTrendingRecipes(){
-			return self::fetchRecipe(66, 1);
+			return self::fetchRecipe(103, 1);
 		}
 		
 		public static function getRecipesCount($con, $user_id){
