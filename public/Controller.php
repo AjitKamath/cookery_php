@@ -251,7 +251,12 @@
 		echo Like::fetchLikedUsers($type, $type_id);
 	}
 	//like
-	
+
+	//favourite
+	else if(FAV_SUBMIT == $function_key){
+		echo Favourites::submitFavourite($user_id, $rcp_id);
+	}
+	//favourite
 	else{
         echo UNIDENTIFIED_FUNCTION_KEY;    
     }

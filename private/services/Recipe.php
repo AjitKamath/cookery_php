@@ -1101,10 +1101,12 @@
 						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
 						INNER JOIN `FOOD_TYPE` AS FDTYP ON RCP.FOOD_TYP_ID = FDTYP.FOOD_TYP_ID
 						INNER JOIN `LIKES` AS LIK ON LIK.USER_ID = RCP.USER_ID AND LIK.TYPE_ID = RCP.RCP_ID
+						INNER JOIN `FAVOURITES` AS FAV ON FAV.USER_ID = RCP.USER_ID
 						WHERE RCP.USER_ID = '$user_id'
 						AND LIK.TYPE = 'RECIPE'
 						AND LIK.IS_DEL = 'N'
 						AND RCP.IS_DEL = 'N'
+						AND FAV.IS_DEL = 'N'
 						ORDER BY RCP.MOD_DTM DESC, RCP.CREATE_DTM DESC
 						LIMIT ".$index." , ".RECIPES_COUNT;
 
@@ -1298,6 +1300,10 @@
 					//users who viewed the recipe
 					$result_array['viewedUsers'] = View::getViewedUsers($con, $rcp_id);
 					//users who viewed the recipe
+					
+					//If the recipe is marked as Favourite for the logged in user
+					$result_array['userFavorite'] = Favourites::getFavouriteStatus($con, $rcp_id, $user_id);
+					//If the recipe is marked as Favourite for the logged in user
 
 					//check if the user has viewed this recipe. if not, register it.
 					$user_has_viewed_query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id'";
