@@ -162,6 +162,8 @@
 					$temp_array['genderScopeName'] = User::getScopeName($con, $result_data->MOBILE_SCOPE_ID);
 					$temp_array['mobileScopeName'] = User::getScopeName($con, $result_data->GENDER_SCOPE_ID);
 					
+					$temp_array['currentRank'] = $result_data->RANK_NAME;
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
 						if('1' == $result_data->EMAIL_SCOPE_ID){
@@ -192,8 +194,6 @@
 						$temp_array['EMAIL'] = $result_data->EMAIL;
 						$temp_array['MOBILE'] = $result_data->MOBILE;
 						$temp_array['GENDER'] = $result_data->GENDER;
-						
-						$temp_array['currentRank'] = $result_data->RANK_NAME;
 						
 						//fetch current achieved rank & milestone
 						$temp_array['currentRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID, $user_id);	
