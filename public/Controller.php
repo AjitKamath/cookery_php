@@ -244,6 +244,9 @@
 	else if(USER_UPDATE_IMAGE == $function_key){
 		echo User::updateUserImage($user_id, $image);
 	}
+	else if(USER_SEARCH == $function_key){
+		echo User::searchUsers($searchQuery, $logged_in_user_id, $index);
+	}
 	//user
 	
 	//like
@@ -260,8 +263,19 @@
 		echo Favourites::submitFavourite($user_id, $rcp_id);
 	}
 	//favourite
+
 	else{
-        echo UNIDENTIFIED_FUNCTION_KEY;    
+		$msg1 = UNIDENTIFIED_FUNCTION_KEY;  
+		$msg2 = "1. Check if '".$function_key."' is defined in FunctionKeys.php";
+		$msg3 = "2. Check if '".$function_key."' is handled in Controller.php";
+		
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg1);
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg2);
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg3);
+		
+        echo "\n".$msg1;  
+		echo "\n".$msg2;
+		echo "\n".$msg3;
     }
     
     LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "<=====".$function_key);
