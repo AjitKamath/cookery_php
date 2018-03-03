@@ -1,9 +1,10 @@
 <?php
 	class Like{
-		public static function fetchLikedUsers($type, $type_id){
+		public static function fetchLikedUsers($type, $type_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
@@ -16,12 +17,17 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
 				return;
 			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				return;
+			}
 			//check for null/empty
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$result_array = self::getLikedUsers($con, $type, $type_id);
+				$result_array = self::getLikedUsers($con, $type, $type_id, $index);
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
@@ -32,10 +38,11 @@
 			}
 		}
 		
-		public static function getLikedUsers($con, $type, $type_id){
+		public static function getLikedUsers($con, $type, $type_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
@@ -48,6 +55,11 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
 				return;
 			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				return;
+			}
 			//check for null/empty
 
 			try{
@@ -56,7 +68,8 @@
 							INNER JOIN USER AS USR ON USR.USER_ID = LIK.USER_ID
 							WHERE TYPE = '".$type."' 
 							AND TYPE_ID = '".$type_id."'
-							AND LIK.IS_DEL = 'N'";
+							AND LIK.IS_DEL = 'N'
+							LIMIT ".$index." , ".USERS_COUNT;
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();

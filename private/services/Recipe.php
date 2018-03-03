@@ -1289,16 +1289,28 @@
 					$result_array['ingredients'] = self::getRecipeIngredients($con, $rcp_id);
 					//ingredients
 
+					//like count
+					$result_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $rcp_id);
+					//like count
+					
+					//views count
+					$result_array['viewsCount'] = View::getViewCount($con, $rcp_id);
+					//views count
+					
 					//user who liked
-					$result_array['likedUsers'] = Like::getLikedUsers($con, "RECIPE", $rcp_id);
+					//$result_array['likedUsers'] = Like::getLikedUsers($con, "RECIPE", $rcp_id);
 					//user who liked
 
 					//if the user has liked recipe
 					$result_array['userLiked'] = Like::isUserLiked($con, $user_id, "RECIPE", $rcp_id);
 					//if the user has liked recipe
+					
+					//if the user has reviewed recipe
+					$result_array['userReviewed'] = Review::isUserReviewed($con, $user_id, $rcp_id);
+					//if the user has reviewed recipe
 
 					//users who viewed the recipe
-					$result_array['viewedUsers'] = View::getViewedUsers($con, $rcp_id);
+					//$result_array['viewedUsers'] = View::getViewedUsers($con, $rcp_id);
 					//users who viewed the recipe
 					
 					//If the recipe is marked as Favourite for the logged in user
@@ -1322,24 +1334,24 @@
 					//fetch recipe avg rating
 
 					//check if the user has reviewed this recipe
-					$user_has_reviewed_query = "SELECT COUNT(*) AS REVIEW_COUNT FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
-					$user_has_reviewed_result = mysqli_query($con, $user_has_reviewed_query);
+// 					$user_has_reviewed_query = "SELECT COUNT(*) AS REVIEW_COUNT FROM `REVIEWS` WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
+// 					$user_has_reviewed_result = mysqli_query($con, $user_has_reviewed_query);
 
-					if($user_has_reviewed_result_data = $user_has_reviewed_result->fetch_object()){
-						$result_array['userReviewed'] = $user_has_reviewed_result_data->REVIEW_COUNT > 0;
+// 					if($user_has_reviewed_result_data = $user_has_reviewed_result->fetch_object()){
+// 						$result_array['userReviewed'] = $user_has_reviewed_result_data->REVIEW_COUNT > 0;
 						
-						//user's recipe review
-						$review_result_array = Review::getUserRecipeReview($con, $user_id, $rcp_id);
+// 						//user's recipe review
+// 						$review_result_array = Review::getUserRecipeReview($con, $user_id, $rcp_id);
 						
-						if(count($review_result_array) > 0){
-							//get review's like count
-							$review_result_array[0]['likeCount'] = Like::getUserLikeCount($con, $user_id, "REVIEW", $review_result_array[0]['REV_ID']);
-							//get review's like count
+// 						if(count($review_result_array) > 0){
+// 							//get review's like count
+// 							$review_result_array[0]['likeCount'] = Like::getUserLikeCount($con, $user_id, "REVIEW", $review_result_array[0]['REV_ID']);
+// 							//get review's like count
 
-							$result_array['userReview'] = $review_result_array[0];
-						}
-						//user's recipe review
-					}
+// 							$result_array['userReview'] = $review_result_array[0];
+// 						}
+// 						//user's recipe review
+// 					}
 					//check if the user has reviewed this recipe
 					
 					$response_array = array();

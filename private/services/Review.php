@@ -1,5 +1,42 @@
 <?php
 	class Review{
+		public static function isUserReviewed($con, $user_id, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT COUNT(*) AS REVIEW_COUNT 
+							FROM `REVIEWS` 
+							WHERE RCP_ID = '".$rcp_id."' 
+							AND USER_ID = '".$user_id."' 
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_data = $result->fetch_object()){
+					return $result_data->REVIEW_COUNT == 1;
+				}
+				
+				return false;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function getReviewsCount($con, $user_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
@@ -47,13 +84,8 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//get average rating for $rcp_id
-				$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
-				$result = mysqli_query($con, $query);
-
 				$result_array = array();
-				if($result_data = $result->fetch_object()){
-					$result_array['RATING'] = $result_data->RATING;
-				}
+				$result_array['RATING'] = self::getAverageRecipeRating($con, $rcp_id);
 				//get average rating for $rcp_id
 
 				//response
@@ -65,6 +97,35 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getAverageRecipeRating($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				//get average rating for $rcp_id
+				$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id'";
+				$result = mysqli_query($con, $query);
+
+				if($result_data = $result->fetch_object()){
+					return $result_data->RATING;
+				}
+				//get average rating for $rcp_id
+
+				return 0;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 		
@@ -215,27 +276,12 @@
 
 				$result_array = array();
 
-				//check users review status
-				$query = "SELECT COUNT(*) AS REVIEW_COUNT FROM REVIEWS WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
-				$result = mysqli_query($con, $query);
-
-				if($result_data = $result->fetch_object()){
-					if($result_data->REVIEW_COUNT > 0){
-						$temp_array['userReviewed'] = true;
-					}
-					else{
-						$temp_array['userReviewed'] = false;
-					}
-				}
-				//check users review status
+				//if user reviewed tje recipe
+				$temp_array['userReviewed'] = self::isUserReviewed($con, $user_id, $rcp_id);
+				//if user reviewed tje recipe
 
 				//get avg rating of the $rcp_id
-				$query = "SELECT ROUND(AVG(RATING), 1) AS RATING FROM REVIEWS WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id' AND IS_DEL = 'N'";
-				$result = mysqli_query($con, $query);
-
-				if($result_data = $result->fetch_object()){
-					$temp_array['RATING'] = $result_data->RATING;
-				}
+				$temp_array['RATING'] = self::getAverageRecipeRating($con, $rcp_id);
 				//get avg rating of the $rcp_id
 
 				array_push($result_array, $temp_array); 
@@ -320,16 +366,12 @@
 					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
 					
 					//fetch like count for the review
-					$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
+					$temp_array['likesCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
 					//fetch like count for the review
 					
-					//check if user has liked the review
-					if($temp_array['likeCount'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
-							$temp_array['userLiked'] = true;
-						}
-					}
-					//check if user has liked the review
+					//if user liked the review
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "REVIEW", $result_data->REV_ID);
+					//if user liked the review
 					
 					array_push($result_array, $temp_array); 
 					//get recipe review by the logged in user 
@@ -391,16 +433,12 @@
 					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
 					
 					//fetch like count for the review
-					$temp_array['likeCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
+					$temp_array['likesCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
 					//fetch like count for the review
 					
-					//check if user has liked the review
-					if($temp_array['likeCount'] > 0){
-						if(Like::getUserLikeCount($con, $user_id, "REVIEW", $result_data->REV_ID) > 0){
-							$temp_array['userLiked'] = true;
-						}
-					}
-					//check if user has liked the review
+					//if user liked the review
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "REVIEW", $result_data->REV_ID);
+					//if user liked the review
 										
 					array_push($result_array, $temp_array); 
 				}
@@ -465,8 +503,12 @@
 					$temp_array['userImage'] = $result_data->IMG;
 					
 					//get users who have liked the review
-					$temp_array['likedUsers'] = Like::getLikedUsers($con, "REVIEW", $result_data->REV_ID);
+					//$temp_array['likes'] = Like::getLikedUsers($con, "REVIEW", $result_data->REV_ID);
 					//get users who have liked the review
+					
+					//likes count
+					$temp_array['likesCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
+					//likes count
 					
 					//if the user has liked review
 					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "REVIEW", $result_data->REV_ID);

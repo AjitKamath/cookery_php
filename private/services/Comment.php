@@ -32,7 +32,7 @@
 					$temp_arr['userImage'] = $result_data->IMG;
 					
 					//get users who have liked the comment
-					$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID);
+					$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID, 0);
 					//get users who have liked the comment
 					
 					//if the user has liked comment
@@ -164,8 +164,12 @@
 					$temp_arr['userImage'] = $result_data->IMG;
 					
 					//get users who have liked the comment
-					$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID);
+					//$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID, 0);
 					//get users who have liked the comment
+					
+					//likes count
+					$temp_arr['likesCount'] = Like::getLikeCount($con, "COMMENT", $result_data->COM_ID);
+					//likes count
 					
 					//if the user has liked comment
 					$temp_arr['userLiked'] = Like::isUserLiked($con, $user_id, "COMMENT", $result_data->COM_ID);

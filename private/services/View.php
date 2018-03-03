@@ -1,9 +1,10 @@
 <?php
 	class View{
 		
-		public static function fetchViewedUsers($rcp_id){
+		public static function fetchViewedUsers($rcp_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
@@ -11,12 +12,17 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
 				return;
 			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				return;
+			}
 			//check for null/empty
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$result_array = self::getViewedUsers($con, $rcp_id);
+				$result_array = self::getViewedUsers($con, $rcp_id, $index);
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
@@ -56,14 +62,20 @@
 			}
 		}
 		
-		public static function getViewedUsers($con, $rcp_id){
+		public static function getViewedUsers($con, $rcp_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($index)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
 				return;
 			}
 			//check for null/empty
@@ -72,7 +84,8 @@
 				$query = "SELECT VIW.USER_ID, VIW.MOD_DTM, VIW.CREATE_DTM, USR.NAME, USR.IMG
 							FROM `VIEWS` AS VIW
 							INNER JOIN USER AS USR ON USR.USER_ID = VIW.USER_ID
-							WHERE RCP_ID = '".$rcp_id."'";
+							WHERE RCP_ID = '".$rcp_id."'
+							LIMIT ".$index." , ".USERS_COUNT;
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();

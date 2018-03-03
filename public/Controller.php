@@ -203,7 +203,7 @@
 		echo View::fetchRecipeViews($rcp_id);
 	}
 	else if(VIEW_FETCH_USERS == $function_key){
-		echo View::fetchViewedUsers($rcp_id);
+		echo View::fetchViewedUsers($rcp_id, $index);
 	}
 	//view
 	
@@ -254,7 +254,7 @@
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::fetchLikedUsers($type, $type_id);
+		echo Like::fetchLikedUsers($type, $type_id, $index);
 	}
 	//like
 
