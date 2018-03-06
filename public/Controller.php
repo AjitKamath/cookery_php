@@ -72,7 +72,7 @@
 
 	//quantity
 	if(QUANTITY_FETCH_ALL == $function_key){
-			echo Quantity::fetchAllQuantities();
+		echo Quantity::fetchAllQuantities();
 	}
 	//quantity
 	
@@ -142,7 +142,7 @@
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
-		echo Review::fetchUsersReviews($user_id, $rcp_id, $index);
+		echo Review::fetchUsersReviews($user_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){
 		echo Review::submitReview($rcp_id, $user_id, $review, $rating);
@@ -254,7 +254,7 @@
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::fetchLikedUsers($type, $type_id, $index);
+		echo Like::git ($type, $type_id, $index);
 	}
 	//like
 

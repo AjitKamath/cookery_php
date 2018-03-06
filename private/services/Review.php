@@ -384,21 +384,15 @@
 			}
 		}
 		
-		public static function fetchUsersReviews($user_id, $rcp_id, $index){
+		public static function fetchUsersReviews($user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
-				return;
-			}
-			
-			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
 				return;
 			}
 			
@@ -412,12 +406,15 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//get all recipes & its reviews for $user_id
-				$query = "SELECT REV_ID, REVIEW, RATING, USR.IMG, USR.USER_ID, USR.NAME, RVS.CREATE_DTM, RVS.MOD_DTM
-							FROM REVIEWS AS RVS
-							INNER JOIN USER AS USR ON USR.USER_ID = RVS.USER_ID
-							WHERE RVS.RCP_ID = '".$rcp_id."'
-							AND RVS.USER_ID = '".$user_id."'
+				$query = "SELECT REV_ID, RCP.RCP_ID, RCP_NAME, FOOD_TYP_NAME, FOOD_CSN_NAME, REVIEW, RATING, USR.IMG, USR.USER_ID, USR.NAME, RVS.CREATE_DTM, RVS.MOD_DTM
+							FROM `REVIEWS` AS RVS
+							INNER JOIN `USER` AS USR ON USR.USER_ID = RVS.USER_ID 
+							INNER JOIN `RECIPE` AS RCP ON RCP.RCP_ID = RVS.RCP_ID
+							INNER JOIN `FOOD_TYPE` AS FOOD_TYP ON FOOD_TYP.FOOD_TYP_ID = RCP.FOOD_TYP_ID
+							INNER JOIN `FOOD_CUISINE` AS FOOD_CSN ON FOOD_CSN.FOOD_CSN_ID = RCP.FOOD_CSN_ID
+							WHERE RVS.USER_ID = '".$user_id."'
 							AND RVS.IS_DEL = 'N'
+							AND RCP.IS_DEL = 'N'
 							LIMIT ".$index." , ".REVIEWS_COUNT;
 
 				$result = mysqli_query($con, $query);
@@ -425,12 +422,17 @@
 				$result_array = array();
 				while($result_data = $result->fetch_object()){
 					$temp_array['REV_ID'] = $result_data->REV_ID;
+					$temp_array['RCP_ID'] = $result_data->RCP_ID;
 					$temp_array['REVIEW'] = $result_data->REVIEW;
 					$temp_array['RATING'] = $result_data->RATING;
 					$temp_array['USER_ID'] = $result_data->USER_ID;
-					$temp_array['name'] = $result_data->NAME;
 					$temp_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$temp_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					$temp_array['recipeName'] = $result_data->RCP_NAME;
+					$temp_array['foodTypeName'] = $result_data->FOOD_TYP_NAME;
+					$temp_array['foodCuisineName'] = $result_data->FOOD_CSN_NAME;
+					$temp_array['recipeOwnerName'] = $result_data->NAME;
 					
 					//fetch like count for the review
 					$temp_array['likesCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
@@ -439,6 +441,10 @@
 					//if user liked the review
 					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "REVIEW", $result_data->REV_ID);
 					//if user liked the review
+					
+					//fetch primary image for the recipe
+					$temp_array['recipeImages'] = Recipe::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					//fetch primary image for the recipe
 										
 					array_push($result_array, $temp_array); 
 				}

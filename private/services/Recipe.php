@@ -1017,43 +1017,37 @@
 					$recipe_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 
-					//fetch likes for the recipe
-					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
-					$likes_result = mysqli_query($con, $query);
+					//like count
+					$recipe_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
+					//like count
+					
+					//views count
+					$recipe_array['viewsCount'] = View::getViewCount($con, $result_data->RCP_ID);
+					//views count
+					
+					//comments count
+					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, $result_data->RCP_ID);	
+					//comments count
+					
+					//if the user has liked recipe
+					$recipe_array['userLiked'] = Like::isUserLiked($con, $user_id, "RECIPE", $result_data->RCP_ID);
+					//if the user has liked recipe
+					
+					//if the user has reviewed recipe
+					$recipe_array['userReviewed'] = Review::isUserReviewed($con, $user_id, $result_data->RCP_ID);
+					//if the user has reviewed recipe
 
-					if($likes_result_data = $likes_result->fetch_object()){
-						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
-					}
-					//fetch likes for the recipe
+					//If the recipe is marked as Favourite for the logged in user
+					$recipe_array['userFavorite'] = Favourites::getFavouriteStatus($con, $result_data->RCP_ID, $user_id);
+					//If the recipe is marked as Favourite for the logged in user
+					
+					//fetch recipe avg rating
+					$recipe_array['avgRating'] = self::getRecipeAvgRating($con, $result_data->RCP_ID);
+					//fetch recipe avg rating
 
-					//fetch views for the recipe
-					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
-					$views_result = mysqli_query($con, $query);
-
-					if($views_result_data = $views_result->fetch_object()){
-						$recipe_array['views'] = $views_result_data->VIEWS_COUNT;
-					}
-					//fetch views for the recipe
-
-					//fetch avg rating for the recipe
-					$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$result_data->RCP_ID'";
-					$review_result = mysqli_query($con, $query);
-
-					if($review_result_data = $review_result->fetch_object()){
-						$recipe_array['rating'] = $review_result_data->RATING;
-					}
-					//fetch avg rating for the recipe
-
-					//fetch images for the recipe
-					$query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$result_data->RCP_ID' LIMIT 1";
-					$img_result = mysqli_query($con, $query);
-
-					$img_result_array = array();
-					if($img_result_data = $img_result->fetch_object()){
-						array_push($img_result_array, $img_result_data->RCP_IMG); 
-					}
-					$recipe_array['RCP_IMGS'] = $img_result_array;
-					//fetch images for the recipe
+					//fetch primary image for the recipe
+					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					//fetch primary image for the recipe
 
 					array_push($result_array, $recipe_array); 
 				}
@@ -1124,43 +1118,37 @@
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
 					$recipe_array['NAME'] = $result_data->NAME;
 
-					//fetch likes for the recipe
-					$query = "SELECT COUNT(*) AS LIKES_COUNT FROM `LIKES` WHERE TYPE_ID = '$result_data->RCP_ID' AND TYPE = 'RECIPE' AND IS_DEL = 'N'";
-					$likes_result = mysqli_query($con, $query);
+					//like count
+					$recipe_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
+					//like count
+					
+					//views count
+					$recipe_array['viewsCount'] = View::getViewCount($con, $result_data->RCP_ID);
+					//views count
+					
+					//comments count
+					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, $result_data->RCP_ID);	
+					//comments count
+					
+					//if the user has liked recipe
+					$recipe_array['userLiked'] = Like::isUserLiked($con, $user_id, "RECIPE", $result_data->RCP_ID);
+					//if the user has liked recipe
+					
+					//if the user has reviewed recipe
+					$recipe_array['userReviewed'] = Review::isUserReviewed($con, $user_id, $result_data->RCP_ID);
+					//if the user has reviewed recipe
 
-					if($likes_result_data = $likes_result->fetch_object()){
-						$recipe_array['likes'] = $likes_result_data->LIKES_COUNT;
-					}
-					//fetch likes for the recipe
+					//If the recipe is marked as Favourite for the logged in user
+					$recipe_array['userFavorite'] = Favourites::getFavouriteStatus($con, $result_data->RCP_ID, $user_id);
+					//If the recipe is marked as Favourite for the logged in user
+					
+					//fetch recipe avg rating
+					$recipe_array['avgRating'] = self::getRecipeAvgRating($con, $result_data->RCP_ID);
+					//fetch recipe avg rating
 
-					//fetch views for the recipe
-					$query = "SELECT COUNT(*) AS VIEWS_COUNT FROM `VIEWS` WHERE RCP_ID = '$result_data->RCP_ID'";
-					$views_result = mysqli_query($con, $query);
-
-					if($views_result_data = $views_result->fetch_object()){
-						$recipe_array['views'] = $views_result_data->VIEWS_COUNT;
-					}
-					//fetch views for the recipe
-
-					//fetch avg rating for the recipe
-					$query = "SELECT IFNULL(ROUND(AVG(RATING), 1), 0) AS RATING FROM REVIEWS WHERE RCP_ID = '$result_data->RCP_ID'";
-					$review_result = mysqli_query($con, $query);
-
-					if($review_result_data = $review_result->fetch_object()){
-						$recipe_array['rating'] = $review_result_data->RATING;
-					}
-					//fetch avg rating for the recipe
-
-					//fetch images for the recipe
-					$query = "SELECT RCP_IMG FROM `RECIPE_IMG` WHERE RCP_ID = '$result_data->RCP_ID' LIMIT 1";
-					$img_result = mysqli_query($con, $query);
-
-					$img_result_array = array();
-					if($img_result_data = $img_result->fetch_object()){
-						array_push($img_result_array, $img_result_data->RCP_IMG); 
-					}
-					$recipe_array['RCP_IMGS'] = $img_result_array;
-					//fetch images for the recipe
+					//fetch primary image for the recipe
+					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					//fetch primary image for the recipe
 
 					array_push($result_array, $recipe_array); 
 				}
