@@ -247,7 +247,7 @@
 	else if(USER_SEARCH == $function_key){
 		echo User::searchUsers($searchQuery, $logged_in_user_id, $index);
 	}
-	//user
+	//usergit 
 	
 	//like
 	else if(LIKE_SUBMIT == $function_key){

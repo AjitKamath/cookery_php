@@ -119,7 +119,7 @@
 				$result = mysqli_query($con, $query);
 
 				if($result_obj = $result->fetch_object()){
-					return $result_obj->RATING; 
+					return Util::getSmartDecimal($result_obj->RATING); 
 				}
 				
 				return 0;
@@ -1008,14 +1008,13 @@
 
 				$result_array = array();
 				while($result_data = $result->fetch_object()){
-					$recipe_array = array();
-
 					$recipe_array['RCP_ID'] = $result_data->RCP_ID;
 					$recipe_array['RCP_NAME'] = $result_data->RCP_NAME;
-					$recipe_array['FOOD_CSN_NAME'] = $result_data->FOOD_CSN_NAME;
-					$recipe_array['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
 					$recipe_array['CREATE_DTM'] = $result_data->CREATE_DTM;
 					$recipe_array['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					$recipe_array['foodCuisineName'] = $result_data->FOOD_CSN_NAME;
+					$recipe_array['foodTypeName'] = $result_data->FOOD_TYP_NAME;
 
 					//like count
 					$recipe_array['likesCount'] = Like::getLikeCount($con, "RECIPE", $result_data->RCP_ID);
