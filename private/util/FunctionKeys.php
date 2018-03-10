@@ -41,7 +41,7 @@
     
     //timeline
     define("TIMELINE_USER_FETCH", "TIMELINE_USER_FETCH");               //Postman completed  
-    define("TIMELINE_USER_FOLLOWS_FETCH", "TIMELINE_USER_FOLLOWS_FETCH");    //Postman completed 
+    define("STORY_USER_FETCH", "STORY_USER_FETCH");                     //Postman completed 
     define("TIMELINE_SCOPE_MODIFY", "TIMELINE_SCOPE_MODIFY");           //Postman completed 
     define("TIMELINE_DELETE", "TIMELINE_DELETE");           //Postman completed 
     //timeline

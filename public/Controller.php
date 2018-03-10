@@ -187,8 +187,8 @@
 	else if(TIMELINE_USER_FETCH == $function_key){
 		echo Timeline::fetchUserTimeline($user_id, $index);
 	}
-	else if(TIMELINE_USER_FOLLOWS_FETCH == $function_key){
-		echo Timeline::fetchUserFollowsTimeline($user_id, $index);
+	else if(STORY_USER_FETCH == $function_key){
+		echo Timeline::fetchUserStories($user_id, $index);
 	}
 	else if(TIMELINE_SCOPE_MODIFY == $function_key){
 		echo Timeline::modifyTimelineScope($tmln_id, $scope_id);
