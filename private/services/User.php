@@ -1000,6 +1000,44 @@
 			}
 		}
 		
+		public static function userRegisterCheck($email){
+		//request
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
+			//request
+
+            //check for null/empty
+            if(!Util::check_for_null($email)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+                return;
+            }
+			//check for null/empty
+				try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT USER_ID,EMAIL FROM `USER` WHERE EMAIL = '$email'";
+				$result = mysqli_query($con, $query);
+				$result_array = array();
+				if($result_data = $result->fetch_object()){
+					if($result_data->EMAIL == $email){
+						$data['USER_ID']= $result_data->USER_ID;
+						array_push($result_array, $data);
+					}
+				}
+					else{
+						$data['EMAIL']= $email;
+						array_push($result_array, $data);
+					}
+					echo json_encode($result_array);
+				}
+				catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		
+		}
+		
 		public static function register($email, $password, $name){
 			//request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
@@ -1022,13 +1060,14 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT EMAIL FROM `USER` WHERE EMAIL = '$email'";
+				$query = "SELECT USER_ID,EMAIL FROM `USER` WHERE EMAIL = '$email'";
 				$result = mysqli_query($con, $query);
 				
 				if($result_data = $result->fetch_object()){
 					if($result_data->EMAIL == $email){
 						$data['err_code']= 0;
 						$data['isError']= true;
+						$data['user_id']= $result_data->USER_ID;
 						$data['err_message']="Email id already exist";
 					}
 				}
@@ -1036,6 +1075,9 @@
 					$ssid = Util::generateRandomString(); 		//TODO: this must be php session id and not a random string
 					$salt = Util::generateSalt(); 
 
+					if($password == "DEFAULT_SOCIAL_PASSWORD"){
+						$password = "cookery";
+					}
 					$password = $password.$salt;
 					$password = base64_encode($password);
 
@@ -1051,6 +1093,7 @@
 						
 						$data['err_code']= 1;
 						$data['isError']= false;
+						$data['user_id']= $user_id;
 						$data['err_message']="User Registered Successfully";
 						
 						//register timeline

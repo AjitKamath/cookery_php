@@ -244,6 +244,9 @@
 	else if(USER_UPDATE_IMAGE == $function_key){
 		echo User::updateUserImage($user_id, $image);
 	}
+	else if(USER_REGISTER_CHECK == $function_key){
+		echo User::userRegisterCheck($email);
+	}
 	//user
 	
 	//like

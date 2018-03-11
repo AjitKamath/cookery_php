@@ -65,6 +65,7 @@
     define("USER_UPDATE_PHONE", "USER_UPDATE_PHONE");                   //Postman completed
     define("USER_UPDATE_GENDER", "USER_UPDATE_GENDER");                 //Postman completed
     define("USER_UPDATE_IMAGE", "USER_UPDATE_IMAGE");                   //Postman completed
+    define("USER_REGISTER_CHECK", "USER_REGISTER_CHECK");                   
     //user
 
     //like
