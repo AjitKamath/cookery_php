@@ -1642,4 +1642,4 @@
 					"pathVariables": [],
 					"url": "https://postman-echo.com/ip",
 					"preRequestScript": null,
-					"tests": "var body = JSON.parse(responseBody);\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Valid respo
+					"tests": "var body = JSON.parse(responseBody);\n\ntests[\"Status code is 200\"] = responseCode.code === 200;\ntests[\"Valid respogit 

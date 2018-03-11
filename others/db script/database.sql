@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 07, 2018 at 07:01 PM
+-- Generation Time: Mar 11, 2018 at 04:13 PM
 -- Server version: 8.0.4-rc-log
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -238,7 +238,8 @@ CREATE TABLE `FAVOURITES` (
 --
 
 INSERT INTO `FAVOURITES` (`FAV_ID`, `RCP_ID`, `USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(4, 66, 1, 'N', '2018-02-04 02:40:53', '2018-02-04 03:31:57');
+(4, 66, 1, 'N', '2018-02-04 02:40:53', '2018-02-04 03:31:57'),
+(5, 103, 1, 'N', '2018-03-07 23:12:34', '2018-03-07 23:13:05');
 
 -- --------------------------------------------------------
 
@@ -1317,7 +1318,28 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (645, 1, 1, 'LIKE_RECIPE_REMOVE', 7, 1, 'N', '2018-03-01 22:11:33', NULL),
 (646, 1, 1, 'LIKE_RECIPE_REMOVE', 1, 1, 'N', '2018-03-03 09:00:49', NULL),
 (647, 1, 1, 'LIKE_RECIPE_ADD', 1, 1, 'N', '2018-03-03 09:00:52', NULL),
-(648, 1, 1, 'COMMENT_RECIPE_ADD', 71, 1, 'N', '2018-03-03 13:10:59', NULL);
+(648, 1, 1, 'COMMENT_RECIPE_ADD', 71, 1, 'N', '2018-03-03 13:10:59', NULL),
+(649, 69, 69, 'USER_ADD', 69, 1, 'N', '2018-03-10 22:10:58', NULL),
+(650, 70, 70, 'USER_ADD', 70, 1, 'N', '2018-03-10 22:12:33', NULL),
+(654, 74, 74, 'USER_ADD', 74, 1, 'N', '2018-03-11 00:29:18', NULL),
+(655, 75, 75, 'USER_ADD', 75, 1, 'N', '2018-03-11 01:01:30', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TRENDS`
+--
+
+CREATE TABLE `TRENDS` (
+  `TRND_ID` int(11) NOT NULL,
+  `TRND_KEY` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TRND_MSG` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TRND_TYPE` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TRND_TYPE_ID` int(15) NOT NULL,
+  `IS_ACTIVE` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1417,7 +1439,11 @@ INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`
 (65, 1, '2usvcVlzb6@gmail.com', 1, 55039142, '2018-01-01 11:23:18', NULL, NULL, 1, 'Q09PS0VSWVR2SzNK', 'Test User -  08', '', 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', NULL),
 (66, 1, 'aMJUvZ4CM5@gmail.com', 1, 49645219, '2018-01-18 14:23:33', NULL, NULL, 1, 'Q09PS0VSWU9QOXlG', 'Test User -  00', '', 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', NULL),
 (67, 1, 'rock@cookery.com', 1, 64728213, '2018-01-29 23:34:52', NULL, NULL, 1, 'cm9ja21uYkhY', 'Vishal', '', 1, '5pX9Gn9wlB', 'bW5iSFg=', '2018-01-29 23:34:52', NULL),
-(68, 1, 'LVcQblpRQe@gmail.com', 1, 61232494, '2018-02-15 10:44:56', NULL, NULL, 1, 'Q09PS0VSWUVjQVQw', 'Test User -  82', '', 1, 'jXPnTiVFMf', 'RWNBVDA=', '2018-02-15 10:44:56', NULL);
+(68, 1, 'LVcQblpRQe@gmail.com', 1, 61232494, '2018-02-15 10:44:56', NULL, NULL, 1, 'Q09PS0VSWUVjQVQw', 'Test User -  82', '', 1, 'jXPnTiVFMf', 'RWNBVDA=', '2018-02-15 10:44:56', NULL),
+(69, 1, 'hgvj@gmail.com', 1, 69125900, '2018-03-10 22:10:58', NULL, NULL, 1, 'Z2d2a3Z2RVE3b0E=', 'Agv', '', 1, 'uJvTObPp7A', 'RVE3b0E=', '2018-03-10 22:10:58', NULL),
+(70, 1, 'fug@gmail.com', 1, 9425499, '2018-03-10 22:12:33', NULL, NULL, 1, 'ZnVqZ2d5ZnhlSjJpQQ==', 'Tfgg jgffyh', '', 1, 'Vrvva2vx91', 'ZUoyaUE=', '2018-03-10 22:12:33', NULL),
+(74, 1, 'dial2vishal@gmail.com', 1, 47012927, '2018-03-11 00:29:17', NULL, NULL, 1, 'Y29va2VyeTd5V1JM', 'vishal varshney', 'M', 1, 'rdWkqIxJbV', 'N3lXUkw=', '2018-03-11 00:29:17', '2018-03-11 00:57:53'),
+(75, 1, 'mywayanadtrip2017@gmail.com', 1, 1927904, '2018-03-11 01:01:30', NULL, NULL, 1, 'Y29va2VyeWd2bVoy', 'Vishal Varshney', '', 1, 'WXRIvJHkbV', 'Z3ZtWjI=', '2018-03-11 01:01:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -1704,6 +1730,12 @@ ALTER TABLE `TIMELINES`
   ADD KEY `TIMELINES_FK3` (`SCOPE_ID`);
 
 --
+-- Indexes for table `TRENDS`
+--
+ALTER TABLE `TRENDS`
+  ADD PRIMARY KEY (`TRND_ID`);
+
+--
 -- Indexes for table `USER`
 --
 ALTER TABLE `USER`
@@ -1772,7 +1804,7 @@ ALTER TABLE `DISH`
 -- AUTO_INCREMENT for table `FAVOURITES`
 --
 ALTER TABLE `FAVOURITES`
-  MODIFY `FAV_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `FAV_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `FOOD_CUISINE`
@@ -1874,13 +1906,19 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=649;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=656;
+
+--
+-- AUTO_INCREMENT for table `TRENDS`
+--
+ALTER TABLE `TRENDS`
+  MODIFY `TRND_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `USER_ING_LIST`
