@@ -41,7 +41,7 @@
     
     //timeline
     define("TIMELINE_USER_FETCH", "TIMELINE_USER_FETCH");               //Postman completed  
-    define("TIMELINE_USER_FOLLOWS_FETCH", "TIMELINE_USER_FOLLOWS_FETCH");    //Postman completed 
+    define("STORY_USER_FETCH", "STORY_USER_FETCH");                     //Postman completed 
     define("TIMELINE_SCOPE_MODIFY", "TIMELINE_SCOPE_MODIFY");           //Postman completed 
     define("TIMELINE_DELETE", "TIMELINE_DELETE");           //Postman completed 
     //timeline
@@ -65,7 +65,8 @@
     define("USER_UPDATE_PHONE", "USER_UPDATE_PHONE");                   //Postman completed
     define("USER_UPDATE_GENDER", "USER_UPDATE_GENDER");                 //Postman completed
     define("USER_UPDATE_IMAGE", "USER_UPDATE_IMAGE");                   //Postman completed
-    define("USER_REGISTER_CHECK", "USER_REGISTER_CHECK");                   
+    define("USER_REGISTER_CHECK", "USER_REGISTER_CHECK");     
+    define("USER_SEARCH", "USER_SEARCH");                               //Postman completed
     //user
 
     //like

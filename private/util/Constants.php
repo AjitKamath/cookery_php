@@ -47,6 +47,9 @@
     //users to load at a time
     define("USERS_COUNT","10");
 
+    //--------------------TIMELINE/STORY Keys Starts here-----------------
+    //Note: Addition/modification/deletion of timeline/story keys should be followed with careful updation of query in Timeline::fetchUserStories function 'NOT IN' part
+
     //user
     define("USER_ADD","USER_ADD");
     define("USER_PHOTO_MODIFY","USER_PHOTO_MODIFY");
@@ -80,6 +83,7 @@
     define("REVIEW_RECIPE_ADD","REVIEW_RECIPE_ADD");
     define("REVIEW_RECIPE_REMOVE","REVIEW_RECIPE_REMOVE");
     //review
+    //--------------------TIMELINE/STORY Keys ends here-----------------
     //---------------------timeline---------------------
 
     define("DEFAULT_SCOPE_ID","1");

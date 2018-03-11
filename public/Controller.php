@@ -72,7 +72,7 @@
 
 	//quantity
 	if(QUANTITY_FETCH_ALL == $function_key){
-			echo Quantity::fetchAllQuantities();
+		echo Quantity::fetchAllQuantities();
 	}
 	//quantity
 	
@@ -142,7 +142,7 @@
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
-		echo Review::fetchUsersReviews($user_id, $rcp_id, $index);
+		echo Review::fetchUsersReviews($user_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){
 		echo Review::submitReview($rcp_id, $user_id, $review, $rating);
@@ -187,8 +187,8 @@
 	else if(TIMELINE_USER_FETCH == $function_key){
 		echo Timeline::fetchUserTimeline($user_id, $index);
 	}
-	else if(TIMELINE_USER_FOLLOWS_FETCH == $function_key){
-		echo Timeline::fetchUserFollowsTimeline($user_id, $index);
+	else if(STORY_USER_FETCH == $function_key){
+		echo Timeline::fetchUserStories($user_id, $index);
 	}
 	else if(TIMELINE_SCOPE_MODIFY == $function_key){
 		echo Timeline::modifyTimelineScope($tmln_id, $scope_id);
@@ -203,7 +203,7 @@
 		echo View::fetchRecipeViews($rcp_id);
 	}
 	else if(VIEW_FETCH_USERS == $function_key){
-		echo View::fetchViewedUsers($rcp_id);
+		echo View::fetchViewedUsers($rcp_id, $index);
 	}
 	//view
 	
@@ -247,14 +247,17 @@
 	else if(USER_REGISTER_CHECK == $function_key){
 		echo User::userRegisterCheck($email);
 	}
+	else if(USER_SEARCH == $function_key){
+		echo User::searchUsers($searchQuery, $logged_in_user_id, $index);
+	}
 	//user
-	
+
 	//like
 	else if(LIKE_SUBMIT == $function_key){
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::fetchLikedUsers($type, $type_id);
+		echo Like::git ($type, $type_id, $index);
 	}
 	//like
 
@@ -263,8 +266,19 @@
 		echo Favourites::submitFavourite($user_id, $rcp_id);
 	}
 	//favourite
+
 	else{
-        echo UNIDENTIFIED_FUNCTION_KEY;    
+		$msg1 = UNIDENTIFIED_FUNCTION_KEY;  
+		$msg2 = "1. Check if '".$function_key."' is defined in FunctionKeys.php";
+		$msg3 = "2. Check if '".$function_key."' is handled in Controller.php";
+		
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg1);
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg2);
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg3);
+		
+        echo "\n".$msg1;  
+		echo "\n".$msg2;
+		echo "\n".$msg3;
     }
     
     LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "<=====".$function_key);

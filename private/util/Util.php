@@ -150,5 +150,20 @@
 		public static function get_relative_path($absolute_path){
 			return str_replace(HOME_DIRECTORY,"",$absolute_path);
 		}
+		
+		public static function getSmartDecimal($decimal){
+			if($decimal == 0 || $decimal == "0.0"){
+				return 0;
+			}
+			else if(self::endsWith($decimal, ".0")){
+				return str_replace(".0", "", $decimal);
+			}
+			
+			return $decimal;
+		}
+		
+		public static function endsWith($haystack, $needle){
+		   return !($needle[strlen($needle) - 1] === $haystack);
+		}
 	}
 ?>

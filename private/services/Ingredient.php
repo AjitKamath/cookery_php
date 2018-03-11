@@ -15,12 +15,19 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT * from `INGREDIENT` WHERE ING_NAME LIKE '%$searchQuery%'";
+				$query = "SELECT ING_ID, ING_NAME, IMG 
+							FROM `INGREDIENT` 
+							WHERE ING_NAME LIKE '%$searchQuery%'
+							AND IS_REG = 'Y'";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
 				while($result_data = $result->fetch_object()) {
-					array_push($result_array, $result_data);
+					$temp_array['ING_ID'] = $result_data->ING_ID;
+					$temp_array['ING_NAME'] = $result_data->ING_NAME;
+					$temp_array['IMG'] = $result_data->IMG;
+					
+					array_push($result_array, $temp_array);
 				}
 
 				echo json_encode($result_array);

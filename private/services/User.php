@@ -1,5 +1,69 @@
 <?php
 	class User{
+		public static function searchUsers($search_query, $logged_in_user_id, $index){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$search_query.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($search_query)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty search_query");
+					return;
+			}
+			
+			if(!Util::check_for_null($logged_in_user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($index)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					return;
+			}
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				$query = "SELECT USR.USER_ID, USR.IMG, USR.NAME, USR.EMAIL, SCP.SCOPE_NAME AS EMAIL_SCOPE_NAME
+							FROM `USER` AS USR
+							INNER JOIN `SCOPE` AS SCP ON SCP.SCOPE_Id = USR.EMAIL_SCOPE_ID
+							WHERE USR.NAME LIKE '%".$search_query."%'
+							OR (USR.EMAIL LIKE '%".$search_query."%' AND SCOPE_NAME = 'PUBLIC')
+							OR (USR.EMAIL LIKE '%".$search_query."%' AND SCOPE_NAME = 'FOLLOWERS' 
+							AND (SELECT COUNT(*) 
+							FROM `USER_RELATIONSHIP` 
+							WHERE FLWR_USER_ID = '".$logged_in_user_id."' 
+							AND FLWS_USER_ID = USR.USER_ID 
+							AND IS_DEL = 'N') = 1)
+							LIMIT ".$index." , ".USERS_COUNT;
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp_array['USER_ID'] = $result_data->USER_ID;
+					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['NAME'] = $result_data->NAME;
+					$temp_array['EMAIL'] = $result_data->EMAIL;
+					
+					//check if the logged in user is following $result_data->USER_ID
+					$temp_array['following'] = self::getIsUserFollowing($con, $logged_in_user_id, $result_data->USER_ID);
+					
+					array_push($result_array, $temp_array);
+				}
+
+				echo json_encode($result_array);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
 		public static function fetchUserFollowers($user_id, $logged_in_user_id, $index){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
@@ -162,6 +226,8 @@
 					$temp_array['genderScopeName'] = User::getScopeName($con, $result_data->MOBILE_SCOPE_ID);
 					$temp_array['mobileScopeName'] = User::getScopeName($con, $result_data->GENDER_SCOPE_ID);
 					
+					$temp_array['currentRank'] = $result_data->RANK_NAME;
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
 						if('1' == $result_data->EMAIL_SCOPE_ID){
@@ -192,8 +258,6 @@
 						$temp_array['EMAIL'] = $result_data->EMAIL;
 						$temp_array['MOBILE'] = $result_data->MOBILE;
 						$temp_array['GENDER'] = $result_data->GENDER;
-						
-						$temp_array['currentRank'] = $result_data->RANK_NAME;
 						
 						//fetch current achieved rank & milestone
 						$temp_array['currentRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID, $user_id);	
