@@ -31,6 +31,12 @@
     define("DATABASE_PORT", "3307");
     //---------------------database config---------------------
 
+    //---------------------------API----------------------------
+    define("API_KEY_IDENTFIER", "x-api-key");
+    define("API_KEY_ANDROID", "AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo");
+    define("API_KEY_WEB", "AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0");
+    //---------------------------API----------------------------
+
     //---------------------timeline---------------------
     //timelines count to load at a time
     define("TIMELINES_COUNT","5");
@@ -71,12 +77,17 @@
     //like
     define("LIKE_RECIPE_ADD","LIKE_RECIPE_ADD");
     define("LIKE_RECIPE_REMOVE","LIKE_RECIPE_REMOVE");
-
+    define("LIKE_RECIPE_IMG_ADD","LIKE_RECIPE_IMG_ADD");
+    define("LIKE_RECIPE_IMG_REMOVE","LIKE_RECIPE_IMG_REMOVE");
+    
     define("LIKE_COMMENT_ADD","LIKE_COMMENT_ADD");
     define("LIKE_COMMENT_REMOVE","LIKE_COMMENT_REMOVE");
 
     define("LIKE_REVIEW_ADD","LIKE_REVIEW_ADD");
     define("LIKE_REVIEW_REMOVE","LIKE_REVIEW_REMOVE");
+
+    define("LIKE_USER_ADD","LIKE_USER_ADD");
+    define("LIKE_USER_REMOVE","LIKE_USER_REMOVE");
     //like
 
     //review
@@ -85,6 +96,12 @@
     //review
     //--------------------TIMELINE/STORY Keys ends here-----------------
     //---------------------timeline---------------------
+
+    //----------------------TRENDS--------------------------------------
+    define("RECIPES_OF_THE_MONTH","RECIPES_OF_THE_MONTH");
+    define("USER_OF_THE_WEEK","USER_OF_THE_WEEK");
+    define("RECIPE_OF_THE_DAY","RECIPE_OF_THE_DAY");
+    //----------------------TRENDS--------------------------------------
 
     define("DEFAULT_SCOPE_ID","1");
 ?>

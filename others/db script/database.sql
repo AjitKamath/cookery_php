@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 11, 2018 at 04:13 PM
+-- Generation Time: Mar 13, 2018 at 07:27 PM
 -- Server version: 8.0.4-rc-log
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -13,6 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookery`
 --
+CREATE DATABASE IF NOT EXISTS `cookery` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `cookery`;
 
 -- --------------------------------------------------------
 
@@ -238,7 +240,6 @@ CREATE TABLE `FAVOURITES` (
 --
 
 INSERT INTO `FAVOURITES` (`FAV_ID`, `RCP_ID`, `USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(4, 66, 1, 'N', '2018-02-04 02:40:53', '2018-02-04 03:31:57'),
 (5, 103, 1, 'N', '2018-03-07 23:12:34', '2018-03-07 23:13:05');
 
 -- --------------------------------------------------------
@@ -425,13 +426,13 @@ CREATE TABLE `LIKES` (
 --
 
 INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-03 09:00:52'),
+(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-13 18:51:02'),
 (2, 2, 'RECIPE', 103, 'N', '2017-10-15 12:49:50', '2017-11-07 12:00:57'),
 (3, 3, 'RECIPE', 103, 'N', '2017-11-07 15:14:53', NULL),
 (4, 4, 'RECIPE', 103, 'N', '2017-12-06 18:15:07', '2017-12-15 15:02:26'),
 (5, 1, 'COMMENT', 1, 'N', '2017-12-06 18:18:04', '2017-12-18 15:51:20'),
-(6, 1, 'REVIEW', 9, 'Y', '2017-12-06 18:19:18', '2018-02-15 10:45:45'),
-(8, 1, 'COMMENT', 9, 'N', '2017-12-18 15:53:32', '2018-02-15 10:45:44'),
+(6, 1, 'REVIEW', 9, 'N', '2017-12-06 18:19:18', '2018-03-13 18:51:53'),
+(8, 1, 'COMMENT', 9, 'N', '2017-12-18 15:53:32', '2018-03-13 18:51:34'),
 (9, 1, 'REVIEW', 10, 'N', '2017-12-22 14:30:53', '2017-12-22 20:05:42'),
 (10, 1, 'REVIEW', 11, 'N', '2017-12-22 14:47:53', '2018-02-09 20:43:07'),
 (11, 1, 'COMMENT', 48, 'N', '2017-12-22 15:31:35', NULL),
@@ -442,7 +443,13 @@ INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_
 (16, 1, 'COMMENT', 55, 'N', '2017-12-22 20:17:30', '2018-03-01 22:10:28'),
 (17, 1, 'RECIPE', 66, 'Y', '2018-01-12 20:41:14', '2018-02-03 20:41:16'),
 (18, 1, 'COMMENT', 54, 'Y', '2018-01-16 00:56:05', '2018-03-01 22:10:11'),
-(19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL);
+(19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL),
+(21, 1, 'RECIPE_IMG', 1, 'N', '2018-03-13 13:24:57', NULL),
+(22, 1, 'RECIPE_IMG', 96, 'N', '2018-03-13 13:27:35', '2018-03-13 18:51:09'),
+(23, 1, 'USER', 1, 'N', '2018-03-13 18:01:10', '2018-03-13 18:51:16'),
+(24, 1, 'USER', 2, 'N', '2018-03-13 18:03:36', NULL),
+(25, 1, 'USER', 3, 'N', '2018-03-13 18:07:08', NULL),
+(26, 1, 'USER', 4, 'Y', '2018-03-13 18:10:16', '2018-03-13 18:10:18');
 
 -- --------------------------------------------------------
 
@@ -537,9 +544,6 @@ CREATE TABLE `RECIPE` (
   `RCP_NAME` varchar(25) NOT NULL,
   `FOOD_TYP_ID` int(11) NOT NULL,
   `FOOD_CSN_ID` int(11) NOT NULL,
-  `RCP_PROC` text NOT NULL,
-  `RCP_PLATING` text,
-  `RCP_NOTE` text,
   `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
   `USER_ID` int(11) NOT NULL,
   `CREATE_DTM` datetime NOT NULL,
@@ -550,23 +554,20 @@ CREATE TABLE `RECIPE` (
 -- Dumping data for table `RECIPE`
 --
 
-INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `RCP_PROC`, `RCP_PLATING`, `RCP_NOTE`, `IS_DEL`, `USER_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(3, 'TEST_RECIPE_NAME 7', 1, 1, '', '', '', 'Y', 1, '2017-09-15 14:04:57', '2017-12-08 06:30:00'),
-(66, 'Chicken Dum Biriyani 1', 3, 1, 'Kill Chicken. Fry it. Eat it.', 'null', 'null', 'N', 2, '2017-11-11 11:25:57', NULL),
-(71, 'Chicken Dum Biriyani 2', 3, 1, 'Kill Chicken. Fry it. Eat it.', 'null', 'null', 'N', 1, '2017-11-11 11:35:16', NULL),
-(73, 'Chicken Dum Biriyani 3', 3, 1, 'Kill Chicken. Fry it. Eat it.', 'null', 'null', 'Y', 1, '2017-11-11 11:37:58', NULL),
-(76, 'bhindi masala 1', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:17:31', NULL),
-(77, 'bhindi masala 2', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:17:42', NULL),
-(78, 'test recipe', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:23:26', NULL),
-(79, 'abcd 1', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:31:16', NULL),
-(80, 'abcd 2', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:34:45', NULL),
-(81, 'act', 3, 1, 'null', 'null', 'null', 'N', 1, '2017-12-03 11:36:13', NULL),
-(87, 'TEST_RECIPE_NAME 1', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:15:43', NULL),
-(88, 'TEST_RECIPE_NAME 2', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:16:58', NULL),
-(89, 'TEST_RECIPE_NAME 3', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:17:53', NULL),
-(90, 'TEST_RECIPE_NAME 4', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:20:48', NULL),
-(91, 'TEST_RECIPE_NAME 5', 1, 1, '', '', '', 'N', 1, '2017-12-06 15:23:47', NULL),
-(103, 'TEST_RECIPE_NAME 6', 1, 1, '', '', '', 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19');
+INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DEL`, `USER_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(3, 'TEST_RECIPE_NAME 7', 1, 1, 'Y', 1, '2017-09-15 14:04:57', '2017-12-08 06:30:00'),
+(76, 'bhindi masala 1', 3, 1, 'N', 1, '2017-12-03 11:17:31', NULL),
+(77, 'bhindi masala 2', 3, 1, 'N', 1, '2017-12-03 11:17:42', NULL),
+(78, 'test recipe', 3, 1, 'N', 1, '2017-12-03 11:23:26', NULL),
+(79, 'abcd 1', 3, 1, 'N', 1, '2017-12-03 11:31:16', NULL),
+(80, 'abcd 2', 3, 1, 'N', 1, '2017-12-03 11:34:45', NULL),
+(81, 'act', 3, 1, 'N', 1, '2017-12-03 11:36:13', NULL),
+(87, 'TEST_RECIPE_NAME 1', 1, 1, 'N', 1, '2017-12-06 15:15:43', NULL),
+(88, 'TEST_RECIPE_NAME 2', 1, 1, 'N', 1, '2017-12-06 15:16:58', NULL),
+(89, 'TEST_RECIPE_NAME 3', 1, 1, 'N', 1, '2017-12-06 15:17:53', NULL),
+(90, 'TEST_RECIPE_NAME 4', 1, 1, 'N', 1, '2017-12-06 15:20:48', NULL),
+(91, 'TEST_RECIPE_NAME 5', 1, 1, 'N', 1, '2017-12-06 15:23:47', NULL),
+(103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19');
 
 -- --------------------------------------------------------
 
@@ -1322,7 +1323,31 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (649, 69, 69, 'USER_ADD', 69, 1, 'N', '2018-03-10 22:10:58', NULL),
 (650, 70, 70, 'USER_ADD', 70, 1, 'N', '2018-03-10 22:12:33', NULL),
 (654, 74, 74, 'USER_ADD', 74, 1, 'N', '2018-03-11 00:29:18', NULL),
-(655, 75, 75, 'USER_ADD', 75, 1, 'N', '2018-03-11 01:01:30', NULL);
+(655, 75, 75, 'USER_ADD', 75, 1, 'N', '2018-03-11 01:01:30', NULL),
+(656, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-13 13:45:01', NULL),
+(657, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 22, 1, 'N', '2018-03-13 13:45:04', NULL),
+(658, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-13 13:45:07', NULL),
+(659, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-13 18:02:14', NULL),
+(660, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-13 18:03:22', NULL),
+(661, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-13 18:03:25', NULL),
+(662, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-13 18:03:28', NULL),
+(663, 1, 4, 'LIKE_USER_ADD', 26, 1, 'N', '2018-03-13 18:10:16', NULL),
+(664, 1, 4, 'LIKE_USER_REMOVE', 26, 1, 'N', '2018-03-13 18:10:19', NULL),
+(665, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-13 18:10:28', NULL),
+(666, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-13 18:10:31', NULL),
+(667, 1, 1, 'LIKE_RECIPE_REMOVE', 1, 1, 'N', '2018-03-13 18:50:54', NULL),
+(668, 1, 1, 'LIKE_RECIPE_ADD', 1, 1, 'N', '2018-03-13 18:50:57', NULL),
+(669, 1, 1, 'LIKE_RECIPE_REMOVE', 1, 1, 'N', '2018-03-13 18:50:59', NULL),
+(670, 1, 1, 'LIKE_RECIPE_ADD', 1, 1, 'N', '2018-03-13 18:51:02', NULL),
+(671, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 22, 1, 'N', '2018-03-13 18:51:07', NULL),
+(672, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-13 18:51:09', NULL),
+(673, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-13 18:51:14', NULL),
+(674, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-13 18:51:16', NULL),
+(675, 1, 1, 'LIKE_COMMENT_REMOVE', 8, 1, 'N', '2018-03-13 18:51:32', NULL),
+(676, 1, 1, 'LIKE_COMMENT_ADD', 8, 1, 'N', '2018-03-13 18:51:35', NULL),
+(677, 1, 1, 'LIKE_REVIEW_ADD', 6, 1, 'N', '2018-03-13 18:51:48', NULL),
+(678, 1, 1, 'LIKE_REVIEW_REMOVE', 6, 1, 'N', '2018-03-13 18:51:51', NULL),
+(679, 1, 1, 'LIKE_REVIEW_ADD', 6, 1, 'N', '2018-03-13 18:51:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -1334,12 +1359,46 @@ CREATE TABLE `TRENDS` (
   `TRND_ID` int(11) NOT NULL,
   `TRND_KEY` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `TRND_MSG` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TRND_TYPE` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TRND_TYPE_ID` int(15) NOT NULL,
   `IS_ACTIVE` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `TRENDS`
+--
+
+INSERT INTO `TRENDS` (`TRND_ID`, `TRND_KEY`, `TRND_MSG`, `IS_ACTIVE`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'RECIPES_OF_THE_MONTH', 'RECIPES OF THE MONTH', 'Y', '2018-03-12 00:00:00', NULL),
+(2, 'USER_OF_THE_WEEK', 'CHEF OF THE WEEK', 'Y', '2018-03-12 00:00:00', NULL),
+(3, 'RECIPE_OF_THE_DAY', 'RECIPE OF THE DAY', 'Y', '2018-03-12 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TRENDS_ITEM`
+--
+
+CREATE TABLE `TRENDS_ITEM` (
+  `TRND_ITEM_ID` int(11) NOT NULL,
+  `TRND_ID` int(10) NOT NULL,
+  `TRND_ITEM_TYPE` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TRND_ITEM_TYPE_ID` int(10) NOT NULL,
+  `IS_ACTIVE` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `TRENDS_ITEM`
+--
+
+INSERT INTO `TRENDS_ITEM` (`TRND_ITEM_ID`, `TRND_ID`, `TRND_ITEM_TYPE`, `TRND_ITEM_TYPE_ID`, `IS_ACTIVE`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'RECIPE', 76, 'Y', '2018-03-12 00:00:00', NULL),
+(2, 1, 'RECIPE', 77, 'Y', '2018-03-12 00:00:00', NULL),
+(3, 1, 'RECIPE', 78, 'Y', '2018-03-12 00:00:00', NULL),
+(4, 2, 'USER', 3, 'Y', '2018-03-12 00:00:00', NULL),
+(5, 3, 'RECIPE', 103, 'Y', '2018-03-12 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1579,7 +1638,6 @@ CREATE TABLE `VIEWS` (
 INSERT INTO `VIEWS` (`VIEW_ID`, `USER_ID`, `RCP_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
 (8, 3, 78, '2017-12-05 18:40:07', NULL),
 (9, 1, 3, '2017-12-06 16:01:57', NULL),
-(10, 1, 66, '2017-12-13 18:12:02', NULL),
 (11, 1, 103, '2017-12-13 18:13:18', NULL);
 
 --
@@ -1736,6 +1794,13 @@ ALTER TABLE `TRENDS`
   ADD PRIMARY KEY (`TRND_ID`);
 
 --
+-- Indexes for table `TRENDS_ITEM`
+--
+ALTER TABLE `TRENDS_ITEM`
+  ADD PRIMARY KEY (`TRND_ITEM_ID`),
+  ADD KEY `TRENDS_ITEM_FK1` (`TRND_ID`);
+
+--
 -- Indexes for table `USER`
 --
 ALTER TABLE `USER`
@@ -1834,7 +1899,7 @@ ALTER TABLE `ING_AKA`
 -- AUTO_INCREMENT for table `LIKES`
 --
 ALTER TABLE `LIKES`
-  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `MILESTONE`
@@ -1906,13 +1971,19 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=656;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=680;
 
 --
 -- AUTO_INCREMENT for table `TRENDS`
 --
 ALTER TABLE `TRENDS`
-  MODIFY `TRND_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `TRND_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `TRENDS_ITEM`
+--
+ALTER TABLE `TRENDS_ITEM`
+  MODIFY `TRND_ITEM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `USER`
@@ -2018,6 +2089,12 @@ ALTER TABLE `TIMELINES`
   ADD CONSTRAINT `TIMELINES_FK1` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `TIMELINES_FK2` FOREIGN KEY (`REF_USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `TIMELINES_FK3` FOREIGN KEY (`SCOPE_ID`) REFERENCES `SCOPE` (`scope_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `TRENDS_ITEM`
+--
+ALTER TABLE `TRENDS_ITEM`
+  ADD CONSTRAINT `TRENDS_ITEM_FK1` FOREIGN KEY (`TRND_ID`) REFERENCES `TRENDS` (`trnd_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `USER`

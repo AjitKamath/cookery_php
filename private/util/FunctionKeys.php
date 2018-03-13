@@ -86,4 +86,8 @@
     define("FAV_SUBMIT","FAV_SUBMIT");
     //Favourites
 
+    //Trends
+    define("TREND_FETCH", "TREND_FETCH");                               //Postman completed
+    //Trends
+
 ?>

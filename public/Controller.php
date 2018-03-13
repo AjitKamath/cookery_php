@@ -3,6 +3,10 @@
 
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
+	if(!Security::authenticateAPI(apache_request_headers())){
+		return;
+	}
+
 	//function key
 	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 
@@ -67,7 +71,6 @@
 	$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
 	//params
 
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 
 	//quantity
@@ -257,7 +260,7 @@
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::git ($type, $type_id, $index);
+		echo Like::fetchLikedUsers ($type, $type_id, $index);
 	}
 	//like
 
@@ -266,6 +269,12 @@
 		echo Favourites::submitFavourite($user_id, $rcp_id);
 	}
 	//favourite
+
+	//trends
+	else if(TREND_FETCH == $function_key){
+		echo Trend::fetchActiveTrends($user_id);
+	}
+	//trends
 
 	else{
 		$msg1 = UNIDENTIFIED_FUNCTION_KEY;  

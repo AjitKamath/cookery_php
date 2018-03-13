@@ -355,9 +355,10 @@
 
 					//update recipe
 					//update RECIPE table
-					$query = "UPDATE `RECIPE` SET `RCP_NAME` = '".$rcp_nm."', `FOOD_TYP_ID` = '".$food_typ_id."', `FOOD_CSN_ID` = '".$food_csn_id."', `RCP_PROC` = '', 
-							  `RCP_PLATING` = '', `RCP_NOTE` = '', `MOD_DTM` = CURRENT_TIMESTAMP
-							  WHERE RCP_ID = '".$rcp_id."'";
+					$query = "UPDATE `RECIPE` 
+								SET `RCP_NAME` = '".$rcp_nm."', `FOOD_TYP_ID` = '".$food_typ_id."', `FOOD_CSN_ID` = '".$food_csn_id."', 
+								`MOD_DTM` = CURRENT_TIMESTAMP
+							  	WHERE RCP_ID = '".$rcp_id."'";
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") updated into RECIPE table by User(".$user_id.")");
 
@@ -565,8 +566,8 @@
 
 					//add recipe
 					//insert into RECIPE table
-					$query = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `RCP_PROC` , `RCP_PLATING` , `RCP_NOTE`,`USER_ID`, `CREATE_DTM`) 
-							  VALUES ('$rcp_nm' , '$food_typ_id' , '$food_csn_id' , '' , '' , '' , '$user_id' , CURRENT_TIMESTAMP)";
+					$query = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `USER_ID`, `CREATE_DTM`) 
+							  VALUES ('$rcp_nm' , '$food_typ_id' , '$food_csn_id' , '$user_id' , CURRENT_TIMESTAMP)";
 					if(mysqli_query($con, $query)){
 						$rcp_id = mysqli_insert_id($con);
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") added into RECIPE table by User(".$user_id.")");
@@ -1236,7 +1237,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT USR.IMG, USR.NAME, RCP.USER_ID, RCP.RCP_ID, RCP.RCP_NAME, RCP.RCP_PROC, RCP.RCP_PLATING, RCP.RCP_NOTE, FDCSN.FOOD_CSN_NAME, 
+				$query = "SELECT USR.IMG, USR.NAME, RCP.USER_ID, RCP.RCP_ID, RCP.RCP_NAME, FDCSN.FOOD_CSN_NAME, 
 						FDTYP.FOOD_TYP_NAME, FDCSN.FOOD_CSN_ID, FDTYP.FOOD_TYP_ID
 						FROM `RECIPE` AS RCP 
 						INNER JOIN `FOOD_CUISINE` AS FDCSN ON RCP.FOOD_CSN_ID = FDCSN.FOOD_CSN_ID
@@ -1251,9 +1252,6 @@
 				if($result_data = $result->fetch_object()){
 					$result_array['RCP_ID'] = $result_data->RCP_ID;
 					$result_array['RCP_NAME'] = $result_data->RCP_NAME;
-					$result_array['RCP_PROC'] = $result_data->RCP_PROC;
-					$result_array['RCP_PLATING'] = $result_data->RCP_PLATING;
-					$result_array['RCP_NOTE'] = $result_data->RCP_NOTE;
 					$result_array['FOOD_TYP_ID'] = $result_data->FOOD_TYP_ID;
 					$result_array['FOOD_CSN_ID'] = $result_data->FOOD_CSN_ID;
 					
