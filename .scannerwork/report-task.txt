@@ -1,0 +1,7 @@
+organization=cookery
+projectKey=cookery_php_dev_key
+serverUrl=https://sonarcloud.io
+serverVersion=7.1.0.37735
+dashboardUrl=https://sonarcloud.io/dashboard/index/cookery_php_dev_key
+ceTaskId=AWIqoVtAi0ZusgP9FOeG
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWIqoVtAi0ZusgP9FOeG
