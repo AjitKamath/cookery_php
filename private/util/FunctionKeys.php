@@ -23,7 +23,6 @@
     define("RECIPE_USER_VIEWED_FETCH", "RECIPE_USER_VIEWED_FETCH");     //Postman completed
     define("RECIPE_USER_REVIEWED_FETCH", "RECIPE_USER_REVIEWED_FETCH"); //Postman completed
     define("RECIPE_SUBMIT", "RECIPE_SUBMIT");                           //Postman completed
-    define("RECIPE_TRENDING_FETCH", "RECIPE_TRENDING_FETCH");           //Postman completed
     define("RECIPE_SEARCH", "RECIPE_SEARCH");                           //Postman completed
     //recipe
 

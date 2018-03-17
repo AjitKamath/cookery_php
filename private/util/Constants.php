@@ -11,10 +11,14 @@
     define("APP_DATA_PROFILE_IMAGES_DIRECTORY", "images/");
     define("APP_DATA_RECIPES_DIRECTORY", "recipes/");
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
+    define("STATS_DIRECTORY", HOME_DIRECTORY."private/stats/");
+    define("STATS_DATABASE_FILE", "database_stats.ini");
 
     //logs
     define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
     define("LOGS_MAX_HISTORY", "7");    //in days
+    define("LOGS_TIMEZONE", "Asia/Kolkata");  
+    define("LOGS_TIMESTAMP_FORMAT", "d-m-y H:i:s");  
 
     //email verification
     define("VERIFY_EMAIL_VERI_CODE_EXPIRE", "1");   //in days
@@ -29,6 +33,9 @@
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
     define("DATABASE_PORT", "3307");
+
+    define("DATABASE_CONNECTION_COUNTER", "database.connection.counter");
+    define("DATABASE_CONNECTION_LEAK_TIMESTAMP", "database.connection.leak.timestamp");
     //---------------------database config---------------------
 
     //---------------------------API----------------------------
@@ -36,6 +43,12 @@
     define("API_KEY_ANDROID", "AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo");
     define("API_KEY_WEB", "AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0");
     //---------------------------API----------------------------
+
+    //---------------------------SONAR CLOUD----------------------------
+    define("SONAR_PROJECT_KEY_IDENTFIER", "X-SonarQube-Project");
+    define("SONAR_PROJECT_KE_ANDROID", "Cookery_Android_DEV_Key");
+    define("SONAR_PROJECT_KE_PHP", "");
+    //---------------------------SONAR CLOUD----------------------------
 
     //---------------------timeline---------------------
     //timelines count to load at a time

@@ -45,8 +45,8 @@
 		}
 		
 		private static function registerLog($file, $className, $methodName, $lineNumber, $type, $message){
-			date_default_timezone_set('Asia/Kolkata');
-			$now = date('d-m-y H:i:s');
+			date_default_timezone_set(LOGS_TIMEZONE);
+			$now = date(LOGS_TIMESTAMP_FORMAT);
 
 			$file_handle = fopen($file, "a");
 			$file_contents = "[v".APP_VERSION."] : ".$type." : ".$now." : ".$methodName."(".$lineNumber.") : ".$message;

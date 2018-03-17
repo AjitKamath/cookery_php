@@ -107,6 +107,10 @@
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begins
+				mysqli_begin_transaction($con, MYSQLI_TRANS_START_READ_WRITE);
+				mysqli_autocommit($con, FALSE);
+				
                 //delete comment
                 $query = "UPDATE `COMMENTS` SET IS_DEL = 'Y' WHERE COM_ID = '".$com_id."' AND USER_ID = '".$user_id."'";
 
@@ -127,10 +131,16 @@
 					$result_arr["err_message"]="Comment delet failed !";
 					
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Comment('$com_id') could not be deleted by the user('$user_id')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+					throw new Exception("Failed to update into COMMENTS table");
                 } 
 				
 				echo json_encode($result_arr);
-                //delete comment
+				//delete comment
+				
+				mysqli_commit($con);
+				//transaction ends
             }
             catch(Exception $e){
 				$result_arr["err_code"]="0";
@@ -139,7 +149,11 @@
 				
 				echo json_encode($result_arr);
 				
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+				throw new Exception("Something went wrong !");
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);

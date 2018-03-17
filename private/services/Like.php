@@ -401,34 +401,14 @@
 				Timeline::addTimeline($con, $user_id, $ref_user_id, $timeline_type, $like_id, DEFAULT_SCOPE_ID);
 				//register timeline
 
-				$result_array = array();
-
+				$result_array['TYPE_ID'] = $type_id;
+				
 				//check the status (liked/unliked)
-				$query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
-				$result = mysqli_query($con, $query);
-
-				if($result_data = $result->fetch_object()){
-					if($result_data->LIKES_COUNT != 0){
-						$result_array['isLiked'] = true;
-					}
-					else{
-						$result_array['isLiked'] = false;
-					}
-
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "The user(".$user_id.") for the type(".$type.") with type id(".$type_id.") has liked ? ".$result_array['isLiked']);
-				}
-				//check the status (liked/unliked)
-
+				$result_array['isUserLiked'] = self::isUserLiked($con, $user_id, $type, $type_id);
+				
 				//get total likes for the $type & $type_id
-				$query = "SELECT COUNT(*) AS LIKES_COUNT FROM LIKES WHERE TYPE = '$type' AND TYPE_ID = '$type_id' AND IS_DEL = 'N'";
-				$result = mysqli_query($con, $query);
+				$result_array['likesCount'] = self::getLikeCount($con, $type, $type_id);
 
-				if($result_data = $result->fetch_object()){
-					$result_array['likes'] = $result_data->LIKES_COUNT;
-
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "The type(".$type.") with type id(".$type_id.") has been liked ".$result_array['likes']." times");
-				}
-				//get total likes for the $type & $type_id
 
 				//response
 				echo json_encode($result_array);

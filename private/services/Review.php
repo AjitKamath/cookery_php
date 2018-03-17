@@ -443,7 +443,7 @@
 					//if user liked the review
 					
 					//fetch primary image for the recipe
-					$temp_array['recipeImages'] = Recipe::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					$temp_array['recipeImages'] = Recipe::getRecipePrimaryImage($con, $user_id, $result_data->RCP_ID);
 					//fetch primary image for the recipe
 										
 					array_push($result_array, $temp_array); 

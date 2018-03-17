@@ -131,15 +131,12 @@
 	else if(RECIPE_USER_REVIEWED_FETCH == $function_key){
 		echo Recipe::fetchUserReviewedRecipes($user_id, $index);
 	}
-	else if(RECIPE_TRENDING_FETCH == $function_key){
-		echo Recipe::fetchTrendingRecipes($user_id);
-	}
 	else if(RECIPE_SUBMIT == $function_key){
 		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
 								  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	else if(RECIPE_SEARCH == $function_key){
-		echo Recipe::searchRecipes($searchQuery);
+		echo Recipe::searchRecipes($user_id, $searchQuery);
 	}
 	//recipe
 	

@@ -45,11 +45,12 @@
 							$recipe_temp = array();
 							$recipe_temp['RCP_ID'] = $recipe_obj->RCP_ID;
 							$recipe_temp['RCP_NAME'] = $recipe_obj->RCP_NAME;
-							$recipe_temp['NAME'] = $recipe_obj->NAME;
 							
 							$recipe_temp['foodCuisineName'] = $recipe_obj->FOOD_CSN_NAME;
 							$recipe_temp['foodTypeName'] = $recipe_obj->FOOD_TYP_NAME;
 
+							$recipe_temp['userName'] = $recipe_obj->NAME;
+							
 							//like count
 							$recipe_temp['likesCount'] = Like::getLikeCount($con, "RECIPE", $recipe_obj->RCP_ID);
 							//like count
@@ -79,7 +80,7 @@
 							//fetch recipe avg rating
 
 							//fetch primary image for the recipe
-							$recipe_temp['RCP_IMGS'] = Recipe::getRecipePrimaryImage($con, $recipe_obj->RCP_ID);
+							$recipe_temp['images'] = Recipe::getRecipePrimaryImage($con, $user_id, $recipe_obj->RCP_ID);
 							//fetch primary image for the recipe
 							
 							array_push($recipes_array, $recipe_temp); 

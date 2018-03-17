@@ -228,6 +228,17 @@
 					
 					$temp_array['currentRank'] = $result_data->RANK_NAME;
 					
+					//get followers count
+					$temp_array['followersCount'] = self::getFollowersCount($con, $user_id);
+					//get followers count
+					
+					//get following count
+					$temp_array['followingCount'] = self::getFollowingCount($con, $user_id);
+					//get following count
+					
+					//likes count
+					$temp_array['likesCount'] = Like::getLikeCount($con, "USER", $user_id);
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
 						if('1' == $result_data->EMAIL_SCOPE_ID){
@@ -253,6 +264,9 @@
 						
 						$temp_array['following'] = self::getIsUserFollowing($con, $flwr_user_id, $user_id);
 						//check if logged in user is following the user
+						
+						//if the user has liked recipe
+						$temp_array['userLiked'] = Like::isUserLiked($con, $flwr_user_id, "USER", $user_id);
 					}
 					else if(USER_FETCH_SELF == $forWhom){
 						$temp_array['EMAIL'] = $result_data->EMAIL;
@@ -266,15 +280,10 @@
 						//fetch next rank & milestone
 						$temp_array['nextRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID+1, null);	
 						//fetch next rank & milestone
+						
+						//if the user has liked recipe
+						$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, "USER", $user_id);
 					}
-					
-					//get followers count
-					$temp_array['followersCount'] = self::getFollowersCount($con, $user_id);
-					//get followers count
-					
-					//get following count
-					$temp_array['followingCount'] = self::getFollowingCount($con, $user_id);
-					//get following count
 					
 					array_push($result_array, $temp_array);
 				}
@@ -407,6 +416,20 @@
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, USER_PHOTO_MODIFY, $user_id);
 					//register timeline
+					
+					//update IS_DEL as 'Y' of all the entries in LIKES table whose TYPE is 'USER' & TYPE_ID is $user_id
+					$query = "UPDATE `LIKES`
+						SET IS_DEL = 'Y',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE TYPE = 'USER'
+						AND TYPE_ID = '".$user_id."'";
+					
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Removed all the likes for USER(".$user_id.") in LIKES table");
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to remove all the likes for USER(".$user_id.") in LIKES table");
+					}
 					
 					echo "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
 				}

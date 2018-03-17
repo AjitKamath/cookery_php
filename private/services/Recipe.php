@@ -1,9 +1,5 @@
 <?php
 	class Recipe{
-		public static function fetchTrendingRecipes(){
-			return self::fetchRecipe(103, 1);
-		}
-		
 		public static function getRecipesCount($con, $user_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
@@ -33,16 +29,23 @@
 			}
 		}
 		
-		public static function searchRecipes($searchQuery){
+		public static function searchRecipes($user_id, $searchQuery){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : query(".$searchQuery.")");
 			//request
 			
 			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				return;
+			}
+			
 			if(!Util::check_for_null($searchQuery)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty searchQuery");
 				return;
 			}
+			//check for null/empty
 			
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
@@ -71,7 +74,7 @@
 					$temp_array['RCP_NAME'] = $result_obj->RCP_NAME;
 
 					//fetch primary recipe image
-					$temp_array['images'] = self::getRecipePrimaryImage($con, $result_obj->RCP_ID);
+					$temp_array['images'] = self::getRecipePrimaryImage($con, $user_id, $result_obj->RCP_ID);
 					//fetch primary recipe image
 					
 					//fetch recipe ingredients
@@ -166,7 +169,7 @@
 			}
 		}
 		
-		public static function getRecipePrimaryImage($con, $rcp_id){
+		public static function getRecipePrimaryImage($con, $user_id, $rcp_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			//request
@@ -179,12 +182,18 @@
 			
 			try{
 				//fetch primary recipe image
-				$query = "SELECT RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."' LIMIT 1";
+				$query = "SELECT RCP_IMG_ID, RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."' LIMIT 1";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
 				if($result_obj = $result->fetch_object()){
-					array_push($result_array, $result_obj->RCP_IMG); 
+					$temp_array['RCP_IMG_ID'] = $result_obj->RCP_IMG_ID;
+					$temp_array['RCP_IMG'] = $result_obj->RCP_IMG;
+					
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					$temp_array['likesCount'] = Like::getLikeCount($con, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					
+					array_push($result_array, $temp_array); 
 				}
 				//fetch primary recipe image
 				
@@ -195,7 +204,7 @@
 			}
 		}
 		
-		public static function getRecipeImages($con, $rcp_id){
+		public static function getRecipeImages($con, $user_id, $rcp_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			//request
@@ -207,12 +216,18 @@
 			}
 			
 			try{
-				$query = "SELECT RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."'";
+				$query = "SELECT RCP_IMG_ID, RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."'";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
 				while($result_obj = $result->fetch_object()){
-					array_push($result_array, $result_obj->RCP_IMG); 
+					$temp_array['RCP_IMG_ID'] = $result_obj->RCP_IMG_ID;
+					$temp_array['RCP_IMG'] = $result_obj->RCP_IMG;
+					
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					$temp_array['likesCount'] = Like::getLikeCount($con, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					
+					array_push($result_array, $temp_array); 
 				}
 				
 				return $result_array;
@@ -1046,7 +1061,7 @@
 					//fetch recipe avg rating
 
 					//fetch primary image for the recipe
-					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $user_id, $result_data->RCP_ID);
 					//fetch primary image for the recipe
 
 					array_push($result_array, $recipe_array); 
@@ -1147,7 +1162,7 @@
 					//fetch recipe avg rating
 
 					//fetch primary image for the recipe
-					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $result_data->RCP_ID);
+					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $user_id, $result_data->RCP_ID);
 					//fetch primary image for the recipe
 
 					array_push($result_array, $recipe_array); 
@@ -1267,7 +1282,7 @@
 					//steps
 
 					//images
- 					$result_array['images'] = self::getRecipeImages($con, $rcp_id);
+ 					$result_array['images'] = self::getRecipeImages($con, $user_id, $rcp_id);
 					//images
 
 					//ingredients
