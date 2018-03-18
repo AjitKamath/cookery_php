@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 17, 2018 at 07:55 PM
+-- Generation Time: Mar 18, 2018 at 03:12 PM
 -- Server version: 8.0.4-rc-log
 -- PHP Version: 7.0.25-0ubuntu0.16.04.1
 
@@ -216,7 +216,16 @@ INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_OR_AKA_ID`, `QTY_ID`, `ING_QTY`, `
 (149, 3, 1, 1, 5, '2017-12-08 06:30:00', NULL),
 (150, 3, 2, 2, 6, '2017-12-08 06:30:00', NULL),
 (151, 103, 1, 1, 5, '2017-12-19 19:45:19', NULL),
-(152, 103, 2, 2, 6, '2017-12-19 19:45:19', NULL);
+(152, 103, 2, 2, 6, '2017-12-19 19:45:19', NULL),
+(153, 104, 1, 1, 5, '2018-03-18 10:04:17', NULL),
+(154, 104, 2, 2, 6, '2018-03-18 10:04:17', NULL),
+(155, 105, 28, 1, 4, '2018-03-18 11:14:27', NULL),
+(156, 105, 3, 3, 1, '2018-03-18 11:14:27', NULL),
+(157, 105, 20, 3, 5, '2018-03-18 11:14:27', NULL),
+(158, 105, 27, 3, 2, '2018-03-18 11:14:27', NULL),
+(159, 105, 26, 7, 10, '2018-03-18 11:14:27', NULL),
+(160, 105, 25, 1, 1, '2018-03-18 11:14:27', NULL),
+(161, 105, 24, 6, 1, '2018-03-18 11:14:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +369,7 @@ INSERT INTO `FOOD_TYPE` (`FOOD_TYP_ID`, `FOOD_TYP_NAME`, `IS_DEF`, `IMG`, `CREAT
 CREATE TABLE `INGREDIENT` (
   `ING_ID` int(11) NOT NULL,
   `ING_NAME` varchar(25) NOT NULL,
-  `IMG` varchar(50) NOT NULL DEFAULT 'images/cake.jpg',
+  `IMG` varchar(50) NOT NULL DEFAULT 'app_data/master_data/ingredients/vegetable.jpg',
   `IS_REG` varchar(1) NOT NULL DEFAULT 'N',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
@@ -387,7 +396,13 @@ INSERT INTO `INGREDIENT` (`ING_ID`, `ING_NAME`, `IMG`, `IS_REG`, `CREATE_DTM`, `
 (18, 'PUDINA', 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-01-12 23:30:52', NULL),
 (19, 'MILK', 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-01-14 00:23:12', NULL),
 (20, 'PEPPER', 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-03-06 00:00:00', NULL),
-(23, 'TOMATO', 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-03-06 00:00:00', NULL);
+(23, 'TOMATO', 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-03-06 00:00:00', NULL),
+(24, 'BHINDI', 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-03-18 08:50:56', NULL),
+(25, 'MUSTARD SEEDS', 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
+(26, 'POSTO SEEDS', 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
+(27, 'HALDI', 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-03-18 00:00:00', NULL),
+(28, 'GREEN CHILLLY', 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-03-18 00:00:00', NULL),
+(29, 'CORIANDER', 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-03-18 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -502,7 +517,11 @@ INSERT INTO `QTY` (`QTY_ID`, `QTY_NAME`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALU
 (2, 'PINCH', 'Y', '2017-09-09 00:00:00', NULL),
 (3, 'TABLE SPOON', '', '2017-09-09 00:00:00', NULL),
 (4, 'BOWL', '', '2017-09-09 00:00:00', NULL),
-(5, 'GLASS', '', '2017-09-09 00:00:00', NULL);
+(5, 'GLASS', '', '2017-09-09 00:00:00', NULL),
+(6, 'KILO GRAMS', 'N', '2018-03-18 00:00:00', NULL),
+(7, 'GRAMS', 'N', '2018-03-18 00:00:00', NULL),
+(10, 'LITRES', 'N', '2018-03-18 00:00:00', NULL),
+(11, 'MILLI LITRES', 'N', '2018-03-18 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -542,7 +561,7 @@ INSERT INTO `RANK` (`RANK_ID`, `RANK_NAME`, `RANK_RULE`, `CREATE_DTM`, `MOD_DTM`
 
 CREATE TABLE `RECIPE` (
   `RCP_ID` int(11) NOT NULL,
-  `RCP_NAME` varchar(25) NOT NULL,
+  `RCP_NAME` varchar(50) NOT NULL,
   `FOOD_TYP_ID` int(11) NOT NULL,
   `FOOD_CSN_ID` int(11) NOT NULL,
   `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
@@ -568,7 +587,9 @@ INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DE
 (89, 'TEST_RECIPE_NAME 3', 1, 1, 'N', 1, '2017-12-06 15:17:53', NULL),
 (90, 'TEST_RECIPE_NAME 4', 1, 1, 'N', 1, '2017-12-06 15:20:48', NULL),
 (91, 'TEST_RECIPE_NAME 5', 1, 1, 'N', 1, '2017-12-06 15:23:47', NULL),
-(103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19');
+(103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19'),
+(104, 'TEST_RECIPE_NAME - 65', 1, 1, 'N', 1, '2018-03-18 10:04:17', NULL),
+(105, 'Bhindi in Sarson and Posto Sauce', 2, 1, 'N', 1, '2018-03-18 11:14:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -632,7 +653,14 @@ INSERT INTO `RECIPE_IMG` (`RCP_IMG_ID`, `RCP_ID`, `RCP_IMG`, `CREATE_DTM`, `MOD_
 (94, 3, 'app_data/users/1/recipes/3/images/5a2a23591c823.jpg', '2017-12-08 06:30:01', NULL),
 (95, 3, 'app_data/users/1/recipes/3/images/5a2a235935e57.jpg', '2017-12-08 06:30:01', NULL),
 (96, 103, 'app_data/users/1/recipes/103/images/5a395e41862d8.jpg', '2017-12-19 19:45:21', NULL),
-(97, 103, 'app_data/users/1/recipes/103/images/5a2a22f92838d.jpg', '2017-12-19 19:45:21', NULL);
+(97, 103, 'app_data/users/1/recipes/103/images/5a2a22f92838d.jpg', '2017-12-19 19:45:21', NULL),
+(98, 104, 'app_data/users/1/recipes/104/images/5aae2b9248dfc.jpg', '2018-03-18 10:04:18', NULL),
+(99, 104, 'app_data/users/1/recipes/104/images/5aae2b926ffa1.jpg', '2018-03-18 10:04:18', NULL),
+(100, 105, 'app_data/users/1/recipes/105/images/5aae3c05cb800.jpg', '2018-03-18 11:14:29', NULL),
+(101, 105, 'app_data/users/1/recipes/105/images/5aae3c05f29dc.jpg', '2018-03-18 11:14:30', NULL),
+(102, 105, 'app_data/users/1/recipes/105/images/5aae3c06257ec.jpg', '2018-03-18 11:14:30', NULL),
+(103, 105, 'app_data/users/1/recipes/105/images/5aae3c064c9b5.jpg', '2018-03-18 11:14:30', NULL),
+(104, 105, 'app_data/users/1/recipes/105/images/5aae3c06739cd.jpg', '2018-03-18 11:14:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -677,7 +705,17 @@ INSERT INTO `RECIPE_STEPS` (`RCP_STPS_ID`, `RCP_ID`, `RCP_STEP`, `CREATE_DTM`, `
 (77, 3, 'TEST STEP 2', '2017-12-08 06:30:00', NULL),
 (78, 103, 'This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. ', '2017-12-19 19:45:20', NULL),
 (79, 103, 'This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. \n', '2017-12-19 19:45:20', NULL),
-(80, 103, 'This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. ', '2017-12-19 19:45:20', NULL);
+(80, 103, 'This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. ', '2017-12-19 19:45:20', NULL),
+(81, 104, 'TEST STEP !', '2018-03-18 10:04:17', NULL),
+(82, 104, 'TEST STEP 2', '2018-03-18 10:04:17', NULL),
+(83, 105, 'First wash the bhindi and cut into small pieces.', '2018-03-18 11:14:28', NULL),
+(84, 105, 'Make a paste of the mustard and posto seeds and keep aside for a few minutes.', '2018-03-18 11:14:28', NULL),
+(85, 105, 'Heat the oil in a pan. Add the green chillies and the bhindi and let it cook for a few minutes.', '2018-03-18 11:14:28', NULL),
+(86, 105, 'Then add the haldi and salt.', '2018-03-18 11:14:28', NULL),
+(87, 105, 'Add the paste and a bit of water and cover the pan for 10 minutes.', '2018-03-18 11:14:28', NULL),
+(88, 105, 'Check to see if the bhindi is soft and then remove from the gas.', '2018-03-18 11:14:28', NULL),
+(89, 105, 'Garnish with coriander. Sprinkle some pepper.', '2018-03-18 11:14:29', NULL),
+(90, 105, 'Serve it hot & enjoy your meal !', '2018-03-18 11:14:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -902,7 +940,13 @@ INSERT INTO `RECIPE_TASTE` (`RCP_TST_ID`, `RCP_ID`, `TST_ID`, `TST_QTY`, `CREATE
 (313, 3, 3, 2, '2017-12-08 06:30:00', NULL),
 (314, 103, 1, 4, '2017-12-19 19:45:20', NULL),
 (315, 103, 2, 3, '2017-12-19 19:45:21', NULL),
-(316, 103, 3, 2, '2017-12-19 19:45:21', NULL);
+(316, 103, 3, 2, '2017-12-19 19:45:21', NULL),
+(317, 104, 1, 4, '2018-03-18 10:04:17', NULL),
+(318, 104, 2, 3, '2018-03-18 10:04:18', NULL),
+(319, 104, 3, 2, '2018-03-18 10:04:18', NULL),
+(320, 105, 1, 4, '2018-03-18 11:14:29', NULL),
+(321, 105, 2, 1, '2018-03-18 11:14:29', NULL),
+(322, 105, 3, 0, '2018-03-18 11:14:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -1434,11 +1478,11 @@ CREATE TABLE `TRENDS_ITEM` (
 --
 
 INSERT INTO `TRENDS_ITEM` (`TRND_ITEM_ID`, `TRND_ID`, `TRND_ITEM_TYPE`, `TRND_ITEM_TYPE_ID`, `IS_ACTIVE`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'RECIPE', 3, 'Y', '2018-03-12 00:00:00', NULL),
+(1, 1, 'RECIPE', 105, 'Y', '2018-03-12 00:00:00', NULL),
 (2, 1, 'RECIPE', 103, 'Y', '2018-03-12 00:00:00', NULL),
-(3, 1, 'RECIPE', 78, 'Y', '2018-03-12 00:00:00', NULL),
+(3, 1, 'RECIPE', 3, 'Y', '2018-03-12 00:00:00', NULL),
 (4, 2, 'USER', 1, 'Y', '2018-03-12 00:00:00', NULL),
-(5, 3, 'RECIPE', 103, 'Y', '2018-03-12 00:00:00', NULL);
+(5, 3, 'RECIPE', 105, 'Y', '2018-03-12 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -1903,7 +1947,7 @@ ALTER TABLE `CONTAINS`
 -- AUTO_INCREMENT for table `DISH`
 --
 ALTER TABLE `DISH`
-  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `FAVOURITES`
@@ -1927,7 +1971,7 @@ ALTER TABLE `FOOD_TYPE`
 -- AUTO_INCREMENT for table `INGREDIENT`
 --
 ALTER TABLE `INGREDIENT`
-  MODIFY `ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `ING_AKA`
@@ -1951,7 +1995,7 @@ ALTER TABLE `MILESTONE`
 -- AUTO_INCREMENT for table `QTY`
 --
 ALTER TABLE `QTY`
-  MODIFY `QTY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `QTY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `RANK`
@@ -1963,7 +2007,7 @@ ALTER TABLE `RANK`
 -- AUTO_INCREMENT for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
-  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_CONTAINS`
@@ -1975,19 +2019,19 @@ ALTER TABLE `RECIPE_CONTAINS`
 -- AUTO_INCREMENT for table `RECIPE_IMG`
 --
 ALTER TABLE `RECIPE_IMG`
-  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_STEPS`
 --
 ALTER TABLE `RECIPE_STEPS`
-  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_TASTE`
 --
 ALTER TABLE `RECIPE_TASTE`
-  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=317;
+  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
 
 --
 -- AUTO_INCREMENT for table `REVIEWS`

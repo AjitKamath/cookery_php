@@ -659,7 +659,7 @@
 						//insert tastes into TASTE table
 					}
 					else{
-						throw new Exception("Query failure : ".$dishsql);
+						throw new Exception("Query failure : ".$query);
 					}
 					//insert into RECIPE table
 
@@ -723,6 +723,7 @@
 						$response['err_message'] = "Few of the images could not be uploaded !";
 					}
 					else{
+						Timeline::addTimeline($con, $user_id, $user_id, RECIPE_ADD, $rcp_id, DEFAULT_SCOPE_ID);
 						$response['err_message'] = "Recipe submitted successfully !";
 					}
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
