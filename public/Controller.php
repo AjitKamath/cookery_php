@@ -12,8 +12,8 @@
 
 	//check for null/empty
 	if(!Util::check_for_null($function_key)){
-			LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
-			return;
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
+		return;
 	}
 	
 	//check for null/empty
@@ -73,8 +73,14 @@
 
 	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 
+	//master data
+	if(MASTER_DATA_FETCH_ALL == $function_key){
+		echo MasterData::fetchAllMasterData();
+	}
+	//master data
+
 	//quantity
-	if(QUANTITY_FETCH_ALL == $function_key){
+	else if(QUANTITY_FETCH_ALL == $function_key){
 		echo Quantity::fetchAllQuantities();
 	}
 	//quantity
@@ -101,11 +107,11 @@
 	else if(COMMENT_DELETE == $function_key){
 		echo Comment::deleteComment($com_id, $user_id);
 	}
-	else if(COMMENT_RECIPE_FETCH_ALL == $function_key){
-		echo Comment::fetchRecipeComments($user_id, $rcp_id, $index);
+	else if(COMMENT_FETCH_ALL == $function_key){
+		echo Comment::fetchComments($user_id, $type, $type_id, $index);
 	}
 	else if(COMMENT_SUBMIT == $function_key){
-		echo Comment::submitComment($rcp_id, $user_id, $comment);
+		echo Comment::submitComment($user_id, $type, $type_id, $comment);
 	}
 	else if(COMMENT_FETCH == $function_key){
 		echo Comment::fetchComment($com_id);
@@ -142,6 +148,9 @@
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
+		echo Review::fetchUserRecipeReview($user_id, $rcp_id);
+	}
+	else if(REVIEW_USER_FETCH_ALL == $function_key){
 		echo Review::fetchUsersReviews($user_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){

@@ -1,5 +1,27 @@
 <?php
 	class FoodType{
+		public static function fetchAllFoodTypes1($con){
+			try{
+				$query = "SELECT FOOD_TYP_ID, FOOD_TYP_NAME, IS_DEF, IMG FROM `FOOD_TYPE`";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					$temp['FOOD_TYP_ID'] = $result_data->FOOD_TYP_ID;
+					$temp['FOOD_TYP_NAME'] = $result_data->FOOD_TYP_NAME;
+					$temp['IS_DEF'] = $result_data->IS_DEF;
+					$temp['IMG'] = $result_data->IMG;
+					
+					array_push($result_array, $temp);
+				}
+
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function fetchAllFoodTypes(){
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();

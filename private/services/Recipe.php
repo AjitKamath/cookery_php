@@ -680,6 +680,7 @@
 					//prepare directories
 
 					$upload_failed = false;
+					$primaryRecipeImage = "";
 					for($i = 0; $i< count($rcp_images['tmp_name']); $i++){
 						try{
 							$recipe_image = $recipe_images_dir.uniqid().".jpg";
@@ -704,6 +705,11 @@
 								move_uploaded_file($tmpFilePath, $recipe_image);
 								$atleast_one_uploaded = true;
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$recipe_image.") uploaded");
+								
+								if(!Util::check_for_null($primaryRecipeImage)){
+									$primaryRecipeImage = FILE_SERVER_PATH.Util::get_relative_path($recipe_image);
+								}  
+								
 							}
 						}
 						catch(Exception $e){
@@ -723,19 +729,21 @@
 						$response['err_message'] = "Few of the images could not be uploaded !";
 					}
 					else{
-						Timeline::addTimeline($con, $user_id, $user_id, RECIPE_ADD, $rcp_id, DEFAULT_SCOPE_ID);
 						$response['err_message'] = "Recipe submitted successfully !";
 					}
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 
 					$response['isError'] = false;
 					//add recipe
+					
+					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_ADD, $rcp_id, DEFAULT_SCOPE_ID);
+					MailUtil::recipeEmail(RECIPE_SUBMIT, User::getEmail($con, $user_id), User::getUsername($con, $user_id), "Your Recipe is Posted", $primaryRecipeImage, $rcp_nm);
 				}
 				//if the $rcp_id is null/empty, user is adding a new recipe
 
 				mysqli_commit($con);
 				//submit recipe transaction ends here
-
+				
 				//response
 				echo json_encode($response);
 				//response
@@ -1042,7 +1050,7 @@
 					//views count
 					
 					//comments count
-					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, $result_data->RCP_ID);	
+					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, "RECIPE", $result_data->RCP_ID);	
 					//comments count
 					
 					//if the user has liked recipe
@@ -1062,7 +1070,7 @@
 					//fetch recipe avg rating
 
 					//fetch primary image for the recipe
-					$recipe_array['RCP_IMGS'] = self::getRecipePrimaryImage($con, $user_id, $result_data->RCP_ID);
+					$recipe_array['images'] = self::getRecipePrimaryImage($con, $user_id, $result_data->RCP_ID);
 					//fetch primary image for the recipe
 
 					array_push($result_array, $recipe_array); 
@@ -1143,7 +1151,7 @@
 					//views count
 					
 					//comments count
-					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, $result_data->RCP_ID);	
+					$recipe_array['commentsCount'] = Comment::getCommentsCount($con, "RECIPE", $result_data->RCP_ID);	
 					//comments count
 					
 					//if the user has liked recipe
@@ -1299,7 +1307,7 @@
 					//views count
 					
 					//comments count
-					$result_array['commentsCount'] = Comment::getCommentsCount($con, $rcp_id);	
+					$result_array['commentsCount'] = Comment::getCommentsCount($con, "RECIPE", $rcp_id);	
 					//comments count
 					
 					//if the user has liked recipe

@@ -279,9 +279,9 @@
 				//if user reviewed tje recipe
 				$temp_array['userReviewed'] = self::isUserReviewed($con, $user_id, $rcp_id);
 				//if user reviewed tje recipe
-
+				
 				//get avg rating of the $rcp_id
-				$temp_array['RATING'] = self::getAverageRecipeRating($con, $rcp_id);
+				$temp_array['avgRating'] = self::getAverageRecipeRating($con, $rcp_id);
 				//get avg rating of the $rcp_id
 
 				array_push($result_array, $temp_array); 

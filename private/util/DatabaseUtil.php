@@ -15,7 +15,7 @@
 			if(! $conn) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to connect to MySQL: " . mysqli_connect_error());
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-				die("Failed to connect to MySQL: " . mysqli_error());
+				die("Failed to connect to MySQL: " . mysqli_error());		
 			}
 			else{
 				$config = parse_ini_file(STATS_DIRECTORY.STATS_DATABASE_FILE, true);
@@ -23,12 +23,18 @@
 					$config[DATABASE_CONNECTION_COUNTER] = 0;	
 					$config[DATABASE_CONNECTION_LEAK_TIMESTAMP] = 0;
 				}	
-				else if($config[DATABASE_CONNECTION_COUNTER] > 0 && $config[DATABASE_CONNECTION_LEAK_TIMESTAMP] == 0){
+				
+				if($config[DATABASE_CONNECTION_COUNTER] == 1 && $config[DATABASE_CONNECTION_LEAK_TIMESTAMP] == 0){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Suspected database connection leak !");
 					
 					date_default_timezone_set(LOGS_TIMEZONE);
 					$now = date(LOGS_TIMESTAMP_FORMAT);
-					$config[DATABASE_CONNECTION_LEAK_TIMESTAMP] == $now;
+					$config[DATABASE_CONNECTION_LEAK_TIMESTAMP] = $now;
+					
+					if($config[DATABASE_CONNECTION_COUNTER] == 1){
+						//email
+						MailUtil::databaseEmail(DATABASE_CONNECTION_LEAK);
+					}
 				}
 
 				$config[DATABASE_CONNECTION_COUNTER] = $config[DATABASE_CONNECTION_COUNTER] + 1;
@@ -43,7 +49,7 @@
 		public static function close_connection($conn) {
 			mysqli_close($conn);
 			
-			$config = parse_ini_file(STATS_DIRECTORY.STATS_DATABASE_FILE, true);
+			$config = parse_ini_file(STATS_DIRECTORY.STATS_DATABASE_FILE);
 			if(count($config) == 0){
 				$config[DATABASE_CONNECTION_COUNTER] = 0;	
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Expecting atleast 1 database connection to be alive here but found (".$config[DATABASE_CONNECTION_COUNTER]."). Premature connection closed ?");
@@ -52,7 +58,7 @@
 			$config[DATABASE_CONNECTION_COUNTER] = $config[DATABASE_CONNECTION_COUNTER] - 1;
 			DatabaseUtil::put_ini_file($config, STATS_DIRECTORY.STATS_DATABASE_FILE);
 			
-			$config = parse_ini_file(STATS_DIRECTORY.STATS_DATABASE_FILE, true);
+			$config = parse_ini_file(STATS_DIRECTORY.STATS_DATABASE_FILE);
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Database disconnected [connections alive-".$config[DATABASE_CONNECTION_COUNTER]."]");
 		}
 		

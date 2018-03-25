@@ -70,8 +70,8 @@
 				//get the list of log files in logs folder
 				if (fmod(date("d"), LOGS_MAX_HISTORY) == 0 &&  is_dir(LOGS_DIRECTORY)){
 					if ($dh = opendir(LOGS_DIRECTORY)){
-						$today = date("Y-m-d");
-						$yesterday = date('Y-m-d',strtotime("-1 days"));
+						$today = date(LOGS_FILE_FORMAT);
+						$yesterday = date(LOGS_FILE_FORMAT,strtotime("-1 days"));
 						
 						$zip = new ZipArchive();
 						$zip->open(LOGS_DIRECTORY.$yesterday.".zip", ZIPARCHIVE::CREATE);
@@ -102,8 +102,8 @@
 			//zip log files whic are loder than LOGS_MAX_HISTORY on every LOGS_MAX_HISTORY day of the month
 		}
 
-		private static function checkFile($logType){
-			$today = date("Y-m-d");
+		public static function checkFile($logType){
+			$today = date(LOGS_FILE_FORMAT);
 			$fileName = LOGS_DIRECTORY.$today."_".$logType.".log";
 			
 			if(!file_exists($fileName)){

@@ -402,6 +402,7 @@
 				//register timeline
 
 				$result_array['TYPE_ID'] = $type_id;
+				$result_array['TYPE'] = $type;
 				
 				//check the status (liked/unliked)
 				$result_array['isUserLiked'] = self::isUserLiked($con, $user_id, $type, $type_id);

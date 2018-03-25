@@ -2,6 +2,7 @@
     define("UNIDENTIFIED_FUNCTION_KEY", "UNIDENTIFIED_FUNCTION_KEY");
 
     //master
+    define("MASTER_DATA_FETCH_ALL", "MASTER_DATA_FETCH_ALL");           //Postman completed
     define("QUANTITY_FETCH_ALL", "QUANTITY_FETCH_ALL");                 //Postman completed
     define("FOOD_CUISINE_FETCH_ALL", "FOOD_CUISINE_FETCH_ALL");         //Postman completed
     define("FOOD_TYPE_FETCH_ALL", "FOOD_TYPE_FETCH_ALL");               //Postman completed
@@ -10,7 +11,7 @@
     
     //comment
     define("COMMENT_DELETE", "COMMENT_DELETE");                         //Postman completed
-    define("COMMENT_RECIPE_FETCH_ALL", "COMMENT_RECIPE_FETCH_ALL");     //Postman completed
+    define("COMMENT_FETCH_ALL", "COMMENT_FETCH_ALL");                   //Postman completed     
     define("COMMENT_SUBMIT", "COMMENT_SUBMIT");                         //Postman completed
     define("COMMENT_FETCH", "COMMENT_FETCH");                           //Postman completed
     //comment
@@ -28,6 +29,7 @@
 
     //review
     define("REVIEW_USER_FETCH", "REVIEW_USER_FETCH");                   //Postman completed
+    define("REVIEW_USER_FETCH_ALL", "REVIEW_USER_FETCH_ALL");           //Postman completed
     define("REVIEW_RECIPE_FETCH", "REVIEW_RECIPE_FETCH");               //Postman completed
     define("REVIEW_SUBMIT", "REVIEW_SUBMIT");                           //Postman completed
     define("REVIEW_DELETE", "REVIEW_DELETE");                           //Postman completed
@@ -89,4 +91,8 @@
     define("TREND_FETCH", "TREND_FETCH");                               //Postman completed
     //Trends
 
+    //Email
+    define("SEND_EMAIL", "SEND_EMAIL");                               //Postman completed
+    define("DATABASE_CONNECTION_LEAK", "DATABASE_CONNECTION_LEAK");                               
+    //Email
 ?>

@@ -3,13 +3,22 @@
 
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 	
-	$purpose = isset($_GET['purpose']) ? $_GET['purpose'] : '';
+	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
+	$from = isset($_POST['from']) ? $_POST['from'] : '';
+	$recipientEmails = isset($_POST['recipient_emails']) ? $_POST['recipient_emails'] : '';
+	$recipientNames = isset($_POST['recipient_names']) ? $_POST['recipient_names'] : '';
+	$subject = isset($_POST['subject']) ? $_POST['subject'] : '';
+	$bodies = isset($_POST['bodies']) ? $_POST['bodies'] : '';
+	$attachments = isset($_POST['attachments']) ? $_POST['attachments'] : '';
+	
+ 	$purpose = isset($_GET['purpose']) ? $_GET['purpose'] : '';
 	$email = isset($_GET['email']) ? $_GET['email'] : '';
 	$veri_code = isset($_GET['veri_code']) ? $_GET['veri_code'] : '';
 
 	//check for null/empty
-    if(!Util::check_for_null($purpose)){
-        LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty purpose");
+    if(!Util::check_for_null($function_key) && !Util::check_for_null($purpose)){
+        LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "E", "Error ! null/empty purpose");
+		LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "E", "Error ! null/empty function_key");
         return;
     }
 	//check for null/empty
@@ -17,7 +26,10 @@
 	LoggerUtil::logger(__FILE__, "Email", __LINE__, "I", "");
 	LoggerUtil::logger(__FILE__, "Email", __LINE__, "I", "=====>".$purpose);
 
-	if($purpose == USER_VERIFY_EMAIL){
+	if($function_key == SEND_EMAIL){
+		echo MailUtil::sendMailFrom($from, $recipientEmails, $recipientNames, $subject, $bodies, $attachments); 
+	}
+	else if($purpose == USER_VERIFY_EMAIL){
 		$response = User::verifyEmail($email, $veri_code);
 		
 		if(VERIFY_EMAIL_INVALID_URL == $response){
@@ -49,10 +61,10 @@
 		}
 	}
 	else{
-		LoggerUtil::logger(__FILE__, "EmailManager", __LINE__, "E", "Error ! Unknown purpose - ".$purpose);
+		LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "E", "Error ! Unknown purpose - ".$purpose);
 	}
 
-	LoggerUtil::logger(__FILE__, "Email", __LINE__, "I", "<=====".$purpose);
+	LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "I", "<=====".$purpose);
 
 	//this function triggers on every class object creation or static method calls
 	function __autoload($class_name){

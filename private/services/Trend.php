@@ -60,7 +60,7 @@
 							//views count
 
 							//comments count
-							$recipe_temp['commentsCount'] = Comment::getCommentsCount($con, $recipe_obj->RCP_ID);	
+							$recipe_temp['commentsCount'] = Comment::getCommentsCount($con, "RECIPE", $recipe_obj->RCP_ID);	
 							//comments count
 
 							//if the user has liked recipe

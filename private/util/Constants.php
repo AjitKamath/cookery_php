@@ -1,6 +1,7 @@
 <?php
     //php code version (note : in prod, increment it on each code commit)
     define("APP_VERSION", "0.1");
+    define("APP_NAME", "Cookery");
 
     //paths
     define("HOME_DIRECTORY", $_SERVER['DOCUMENT_ROOT']."/");
@@ -13,19 +14,56 @@
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
     define("STATS_DIRECTORY", HOME_DIRECTORY."private/stats/");
     define("STATS_DATABASE_FILE", "database_stats.ini");
+    define("WEB_DIRECTORY", HOME_DIRECTORY."private/web/");
+    define("MAIL_TEMPLATES_DIRECTORY", WEB_DIRECTORY."templates/");
+    define("MAIL_TEMPLATES_EMAILS_DIRECTORY", MAIL_TEMPLATES_DIRECTORY."emails/");
+    define("FILE_SERVER_PATH", "www.finappl.com/");
 
     //logs
     define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
     define("LOGS_MAX_HISTORY", "7");    //in days
     define("LOGS_TIMEZONE", "Asia/Kolkata");  
-    define("LOGS_TIMESTAMP_FORMAT", "d-m-y H:i:s");  
+    define("LOGS_TIMESTAMP_FORMAT", "d-m-y H:i:s"); 
+    define("LOGS_FILE_FORMAT", "Y-m-d"); 
 
-    //email verification
+    //email
     define("VERIFY_EMAIL_VERI_CODE_EXPIRE", "1");   //in days
     define("VERIFY_EMAIL_INVALID_URL", "VERIFY_EMAIL_INVALID_URL");
     define("VERIFY_EMAIL_VERICODE_EXPIRED", "VERIFY_EMAIL_VERICODE_EXPIRED");
     define("VERIFY_EMAIL_VERIFIED", "VERIFY_EMAIL_VERIFIED");
     define("VERIFY_EMAIL_NOT_VERIFIED", "VERIFY_EMAIL_NOT_VERIFIED");
+    define("MAIL_FROM_TEAM_COOKERY", "MAIL_FROM_TEAM_COOKERY");
+    
+    //admins
+    define("MAIL_RECEPIENT_ADMIN_EMAIL_1", "ajitkamathk@gmail.com");
+    define("MAIL_RECEPIENT_ADMIN_NAME_1", "Ajit");
+
+    //---------------------mail templates---------------------
+    define("MAIL_TEMPLATE_ERROR_CRITICAL_CONTENT", "error_critical.html");
+    define("MAIL_TEMPLATE_ERROR_CRITICAL_SUBJECT", "Critical Error Alert !");
+
+    define("MAIL_TEMPLATE_ERROR_MODERATE_CONTENT", "error_moderate.html");
+    define("MAIL_TEMPLATE_ERROR_MODERATE_SUBJECT", "Moderate Error Alert !");
+
+    define("MAIL_TEMPLATE_RECIPE_CONTENT", "recipe.html");
+    define("MAIL_TEMPLATE_USER_CONTENT", "user.html");
+    //---------------------mail templates---------------------
+    
+    //---------------------mail server config---------------------
+    define("MAIL_USERNAME", "teamcookery@gmail.com");
+    define("MAIL_PASSWORD", "cookery@3912");
+
+    define("MAIL_FROM_INFO_EMAIL", "info@cookery.com");
+    define("MAIL_FROM_INFO_NAME", "Team Cookery");
+    
+    define("MAIL_REPLY_EMAIL", "support@cookery.com");
+    define("MAIL_REPLY_NAME", "Support Team Cookery");
+    
+    define("MAIL_ENCRYPTION", "tls"); 
+    define("MAIL_HOST", "smtp.gmail.com");
+    define("MAIL_PORT", "587");
+    define("MAIL_DEBUG", "0");          //0-prod, 1-client messages, 2-client and server messages
+    //---------------------mail server config---------------------
 
     //---------------------database config---------------------
     define("DATABASE_HOSTNAME", "db4free.net");
@@ -85,6 +123,10 @@
     //comment
     define("COMMENT_RECIPE_ADD","COMMENT_RECIPE_ADD");
     define("COMMENT_RECIPE_REMOVE","COMMENT_RECIPE_REMOVE");
+    define("COMMENT_RECIPE_IMG_ADD","COMMENT_RECIPE_IMG_ADD");
+    define("COMMENT_RECIPE_IMG_REMOVE","COMMENT_RECIPE_IMG_REMOVE");
+    define("COMMENT_USER_ADD","COMMENT_USER_ADD");
+    define("COMMENT_USER_REMOVE","COMMENT_USER_REMOVE");
     //comment
 
     //like

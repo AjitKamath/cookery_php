@@ -11,3 +11,5 @@
 10. Ensure that the SONAR_PROJECT_KEY in Constants.php is same as the Project Key in https://sonarcloud.io
 11. Ensure that the WebHook URL in https://sonarcloud.io is correct(It must point to the <URL>/SonarCloudController.php)
 12. Configure GitHub WebHooks
+13. Set MAIL_DEBUG to 0 in prod.
+14. Set FILE_SERVER_PATH as the url where the file server is hosted.

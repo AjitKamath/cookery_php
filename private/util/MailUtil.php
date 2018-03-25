@@ -1,44 +1,328 @@
 <?php
-	class MailUtil{
-		public static function sendUserRegistrationEmail($email, $veri_code){
-			$file = $path.$filename;
-			$content = file_get_contents( $file);
-			$content = chunk_split(base64_encode($content));
-			$uid = md5(uniqid(time()));
-			$name = basename($file);
+	//reference : https://github.com/PHPMailer/
 
-			// header
-			$header = "From: ".$from_name." <".$from_mail.">\r\n";
-			$header .= "Reply-To: ".$replyto."\r\n";
-			$header .= "MIME-Version: 1.0\r\n";
-			$header .= "Content-Type: multipart/mixed; boundary=\"".$uid."\"\r\n\r\n";
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
-			// message & attachment
-			$nmessage = "--".$uid."\r\n";
-			$nmessage .= "Content-type:text/plain; charset=iso-8859-1\r\n";
-			$nmessage .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-			$nmessage .= $message."\r\n\r\n";
-			$nmessage .= "--".$uid."\r\n";
-			$nmessage .= "Content-Type: application/octet-stream; name=\"".$filename."\"\r\n";
-			$nmessage .= "Content-Transfer-Encoding: base64\r\n";
-			$nmessage .= "Content-Disposition: attachment; filename=\"".$filename."\"\r\n\r\n";
-			$nmessage .= $content."\r\n\r\n";
-			$nmessage .= "--".$uid."--";
+    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/SMTP.php';
 
-			return mail($mailto, $subject, $nmessage, $header);
+	//SMTP needs accurate times, and the PHP time zone MUST be set
+	//This should be done in your php.ini, but this is how to do it if you don't have access to that
+	date_default_timezone_set('Etc/UTC');
+
+	//TODO: This class must be equipped to handle the misusing of this service as a spam gateway
+	//https://github.com/PHPMailer/PHPMailer/blob/master/examples/simple_contact_form.phps
+    class MailUtil{
+		public static function userEmail($type, $recipientMail, $recipientName, $subject){
+			if(USER_REGISTER == $type){
+				//emails
+				$recepientEmails = array();
+				$recepientEmails[count($recepientEmails)] = $recipientMail;
+
+				//names
+				$recepientNames = array();
+				$recepientNames[count($recepientNames)] = $recipientName;
+
+				//bodies
+				$bodies = array();
+				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_USER_CONTENT);
+				for ($i = 0; $i < count($recepientEmails); $i++) {
+					$body = $temp;
+					$body = str_replace("[APP_NAME]", APP_NAME, $body);
+					$body = str_replace("[USER_NAME]", $recipientName, $body);
+					$body = str_replace("[SUPPORT_EMAIL]", MAIL_REPLY_EMAIL, $body);
+					$bodies[$i] = $body;
+				}
+
+				self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, $subject, $bodies, null);
+				//emails
+			}
+			else{
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+			}
 		}
 		
-		public static function sendEmail($email, $subject, $message){
-			try{
-				$header = "From:abc@somedomain.com \r\n";
-				$header .= "MIME-Version: 1.0\r\n";
-				$header .= "Content-type: text/html\r\n";
+		public static function recipeEmail($type, $recipientMail, $recipientName, $subject, $recipeImage, $recipeName){
+			if(RECIPE_SUBMIT == $type){
+				//emails
+				$recepientEmails = array();
+				$recepientEmails[count($recepientEmails)] = $recipientMail;
 
-				return mail ($email, $subject, $message, $header);
+				//names
+				$recepientNames = array();
+				$recepientNames[count($recepientNames)] = $recipientName;
+
+				//bodies
+				$bodies = array();
+				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_RECIPE_CONTENT);
+				for ($i = 0; $i < count($recepientEmails); $i++) {
+					$body = $temp;
+					$body = str_replace("[APP_NAME]", APP_NAME, $body);
+					$body = str_replace("[TITLE]", "Woohoo ! We got your Recipe.<br/>Yes, we are excited too ! Lets roll !", $body);
+					$body = str_replace("[RECIPE_IMAGE]", $recipeImage, $body);
+					$body = str_replace("[RECIPE_NAME]", $recipeName, $body);
+					$body = str_replace("[SUPPORT_EMAIL]", MAIL_REPLY_EMAIL, $body);
+					$bodies[$i] = $body;
+				}
+
+				self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, $subject, $bodies, null);
+				//emails
 			}
-			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			else{
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
 			}
 		}
-	}
+		
+		public static function databaseEmail($type){
+			if(DATABASE_CONNECTION_LEAK == $type){
+				//emails
+				$recepientEmails = array();
+				$recepientEmails[count($recepientEmails)] = MAIL_RECEPIENT_ADMIN_EMAIL_1;
+
+				//names
+				$recepientNames = array();
+				$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
+
+				//attachments
+				date_default_timezone_set(LOGS_TIMEZONE);
+				$today = date(LOGS_FILE_FORMAT);
+				$now = date(LOGS_TIMESTAMP_FORMAT);
+
+				$attachments = array();
+
+				LoggerUtil::checkFile("info");
+				$file = LOGS_DIRECTORY.$today."_info.log";
+				$attachments[count($attachments)] = $file;
+
+				LoggerUtil::checkFile("error");
+				$file = LOGS_DIRECTORY.$today."_error.log";
+				$attachments[count($attachments)] = $file;
+
+				LoggerUtil::checkFile("all");
+				$file = LOGS_DIRECTORY.$today."_all.log";
+				$attachments[count($attachments)] = $file;
+				//attachments
+
+				//bodies
+				$bodies = array();
+				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_ERROR_MODERATE_CONTENT);
+				for ($i = 0; $i < count($recepientEmails); $i++) {
+					$body = $temp;
+					$body = str_replace("[USERNAME]", $recepientNames[$i], $body);
+					$body = str_replace("[PRIMARY_CONTENT_ERROR_CRITICAL]", "<font style=\"color: red\">There seems to be a moderate error. It may need your attention.</font>", $body);
+					$body = str_replace("[SECONDARY_CONTENT_ERROR_CRITICAL]", "<br/>
+					<b>What happened ? </b>
+					<br/>
+					Database connection was leaked. Found multiple connections being open.
+					<br/>
+					<br/>
+					<b>Why it happened ? </b>
+					<br/>
+					This generally happens if the connection was not closed after opening it. 
+					Ensure that there are no more than one connection opened per service request & connection is closed in the finally block of each service request. 
+					See attached log files to identify the crime scene.
+					<br/><br/>
+					<b>When it happened ? </b><br/>This happened at ".$now, $body);
+					$body = str_replace("[TERTIARY_CONTENT_ERROR_CRITICAL]", "", $body);
+					$bodies[$i] = $body;
+				}
+
+				self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, MAIL_TEMPLATE_ERROR_MODERATE_SUBJECT, $bodies, $attachments);
+				//emails
+			}
+			else{
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+			}
+		}
+		
+		public static function sendMailFrom($from, $recipientEmails, $recipientNames, $subject, $bodies, $attachments){
+			//request
+            for ($i = 0; $i < count($recipientEmails); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : recipientEmails[".$i."](".$recipientEmails[$i].")");
+			}
+            for ($i = 0; $i < count($recipientNames); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : recipientNames[".$i."](".$recipientNames[$i].")");
+			}
+			for ($i = 0; $i < count($attachments); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : attachments[".$i."](".$attachments[$i].")");
+			}
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : subject(".$subject.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : from(".$from.")");
+            //request
+            
+            //check for null/empty
+			if(!Util::check_for_null($from)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty from");
+				return;
+			}
+			
+            if(count($recipientEmails) == 0){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty recipientEmails");
+				return;
+			}
+            if(count($recipientNames) == 0){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty recipientNames");
+				return;
+			}
+			if(Util::check_for_null($attachments)){
+				if(count($attachments) == 0){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty attachments");
+				}
+			}
+            if(!Util::check_for_null($subject)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty subject");
+				return;
+			}
+            if(!Util::check_for_null($bodies)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty body");
+				return;
+			}
+            
+            if(count($recipientEmails) != count($recipientNames)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count :"+count($recipientEmails));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Names count :"+count($recipientNames));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count & Recipient Names count should match");
+				return;
+            }
+			
+			if(count($recipientEmails) != count($bodies)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count :"+count($recipientEmails));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Bodies count :"+count($bodies));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count & Recipient Names count should match");
+				return;
+			}
+            //check for null/empty
+			
+			if(MAIL_FROM_TEAM_COOKERY == $from){
+				if(self::sendMails(MAIL_FROM_INFO_EMAIL, MAIL_FROM_INFO_NAME, $recipientEmails, $recipientNames, $subject, $bodies, $attachments)){
+					$temp['err_code'] = 0;
+					$temp['isError'] = false;
+					$temp['err_message'] = $subject;
+				}
+				else{
+					$temp['err_code'] = 1;
+					$temp['isError'] = true;
+					$temp['err_message'] = $subject;
+				}
+				
+				return json_encode($temp);
+			}
+			else{
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify from whom the email has to be sent : ".$from);
+			}
+		}
+		
+        private static function sendMails($fromEmail, $fromName, $recipientEmails, $recipientNames, $subject, $bodies, $attachments) {
+           	// Passing `true` enables exceptions
+            $mail = new PHPMailer(true);                              
+            try {
+                //Server settings
+				$mail->SMTPDebug = MAIL_DEBUG;
+                $mail->isSMTP();        
+				$mail->SMTPAuth = true;
+                $mail->Host = MAIL_HOST;	// can specify main and backup SMTP servers
+                $mail->Port = MAIL_PORT;
+				$mail->SMTPSecure = MAIL_ENCRYPTION; 
+				$mail->Username = MAIL_USERNAME;                 
+				$mail->Password = MAIL_PASSWORD;  
+				//Server settings
+				
+                $mail->setFrom($fromEmail, $fromName);
+                $mail->addReplyTo(MAIL_REPLY_EMAIL, MAIL_REPLY_NAME);
+                                
+                //Recipients
+                for($i = 0; $i < count($recipientEmails); $i++){
+                    $mail->addAddress($recipientEmails[$i], $recipientNames[$i]);     // Optional name
+					
+					//Attachments
+					for($j = 0; $j < count($attachments); $j++){
+						if(file_exists($attachments[$j])){
+							$mail->addAttachment($attachments[$j], basename($attachments[$j]));
+						} else {
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! File does not exist " . $attachments[$j]);
+						}
+					}
+					//Attachments
+
+					//Content
+					$mail->isHTML(true);                                  // Set email format to HTML
+					$mail->Subject = $subject;
+					//Content
+
+					//body
+					$mail->Body = $bodies[$i];
+					$mail->send();
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
+					//body
+				}
+				//Recipients
+                
+                return true;
+            } catch (Exception $e) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", $mail->ErrorInfo);
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+            }
+			
+			return false;
+        }
+		
+		 private static function sendMail($fromEmail, $fromName, $recipientEmail, $recipientName, $subject, $body, $attachments) {
+           	// Passing `true` enables exceptions
+            $mail = new PHPMailer(true);                              
+            try {
+                //Server settings
+				$mail->SMTPDebug = MAIL_DEBUG;
+                $mail->isSMTP();        
+				$mail->SMTPAuth = true;
+                $mail->Host = MAIL_HOST;	// can specify main and backup SMTP servers
+                $mail->Port = MAIL_PORT;
+				$mail->SMTPSecure = MAIL_ENCRYPTION; 
+				$mail->Username = MAIL_USERNAME;                 
+				$mail->Password = MAIL_PASSWORD;  
+				//Server settings
+				
+                $mail->setFrom($fromEmail, $fromName);
+                $mail->addReplyTo(MAIL_REPLY_EMAIL, MAIL_REPLY_NAME);
+                                
+                //Recipient
+                $mail->addAddress($recipientEmail, $recipientName);     // Optional name
+				//Recipient
+                
+                //Attachments
+				if(Util::check_for_null($attachments)){
+					for($i = 0; $i < count($attachments['tmp_name']); $i++){
+						$uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $attachments['name'][$i]));
+						$filename = $attachments['name'][$i];
+						if (move_uploaded_file($attachments['tmp_name'][$i], $uploadfile)) {
+							$mail->addAttachment($uploadfile, $filename);
+						} else {
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to attach file to email by moving file to " . $uploadfile);
+						}
+						
+						//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
+					}
+				}
+				//Attachments
+                
+                //Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = $subject;
+                $mail->Body    = $body;
+                //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+				//Content
+
+                $mail->send();
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email(s) sent with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+                return true;
+            } catch (Exception $e) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", $mail->ErrorInfo);
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+            }
+			
+			return false;
+        }
+    }
 ?>
+

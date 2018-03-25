@@ -1187,7 +1187,8 @@
 						Timeline::addTimeline($con, $user_id, $user_id, USER_ADD, $user_id);
 						//register timeline
 						
-						//TODO: email verification link has to be sent
+						//email
+						MailUtil::userEmail(USER_REGISTER, $email, "There", "Welcome Aboard");
 					}
 				}
 				
@@ -1198,6 +1199,62 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getUsername($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT NAME FROM 	`USER` WHERE USER_ID = '".$user_id."'";
+				
+				$result = mysqli_query($con, $query);
+				if($result_data = $result->fetch_object()){
+					return $result_data->NAME;
+				}
+				else{
+					return "USER";
+				}
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
+		public static function getEmail($con, $user_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
+			//request
+
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				return;
+			}
+			//check for null/empty
+
+			try{
+				$query = "SELECT EMAIL FROM `USER` WHERE USER_ID = '".$user_id."'";
+				$result = mysqli_query($con, $query);
+				
+				if($result_data = $result->fetch_object()){
+					return $result_data->EMAIL;
+				}
+				else{
+					return "";
+				}
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 			}
 		}
 	}
