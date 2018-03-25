@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 18, 2018 at 03:12 PM
+-- Generation Time: Mar 25, 2018 at 09:19 PM
 -- Server version: 8.0.4-rc-log
--- PHP Version: 7.0.25-0ubuntu0.16.04.1
+-- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,14 +17,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ABOUT_US`
+--
+
+CREATE TABLE `ABOUT_US` (
+  `ABOUT_US_ID` int(11) NOT NULL,
+  `ABOUT_US_DESC` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ABOUT_US`
+--
+
+INSERT INTO `ABOUT_US` (`ABOUT_US_ID`, `ABOUT_US_DESC`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'Test for About us super heros', '2018-03-18 15:32:56', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `COMMENTS`
 --
 
 CREATE TABLE `COMMENTS` (
   `COM_ID` int(11) NOT NULL,
-  `RCP_ID` int(11) NOT NULL,
   `USER_ID` int(11) NOT NULL,
   `COMMENT` text NOT NULL,
+  `TYPE` varchar(15) NOT NULL,
+  `TYPE_ID` int(11) NOT NULL,
   `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
@@ -34,70 +55,86 @@ CREATE TABLE `COMMENTS` (
 -- Dumping data for table `COMMENTS`
 --
 
-INSERT INTO `COMMENTS` (`COM_ID`, `RCP_ID`, `USER_ID`, `COMMENT`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(9, 3, 1, 'TEST COMMENT', 'Y', '2017-12-06 18:32:20', NULL),
-(10, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:36:44', NULL),
-(11, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:37:27', NULL),
-(12, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:37:32', NULL),
-(13, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:37:43', NULL),
-(14, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:38:21', NULL),
-(15, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 18:39:02', NULL),
-(16, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:06:47', NULL),
-(17, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:48', NULL),
-(18, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:50', NULL),
-(19, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:52', NULL),
-(20, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:54', NULL),
-(21, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:55', NULL),
-(22, 3, 1, 'TEST COMMENT', 'N', '2017-12-06 21:19:57', NULL),
-(23, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 11:33:16', NULL),
-(24, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 11:54:36', NULL),
-(25, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:05:45', NULL),
-(26, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:23:59', NULL),
-(27, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:24:00', NULL),
-(28, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:24:00', NULL),
-(29, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:24:02', NULL),
-(30, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:24:02', NULL),
-(31, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 12:24:02', NULL),
-(32, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:03:11', NULL),
-(33, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:03:26', NULL),
-(34, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:03:30', NULL),
-(35, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:04:01', NULL),
-(36, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:04:07', NULL),
-(37, 3, 1, 'TEST COMMENT', 'N', '2017-12-07 15:14:05', NULL),
-(38, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 02:33:20', NULL),
-(39, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 02:33:21', NULL),
-(40, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 02:33:23', NULL),
-(41, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 02:33:24', NULL),
-(42, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 02:33:24', NULL),
-(43, 3, 1, 'TEST COMMENT', 'N', '2017-12-09 03:05:58', NULL),
-(44, 3, 1, 'TEST COMMENT', 'N', '2017-12-12 15:30:57', NULL),
-(45, 3, 1, 'TEST COMMENT', 'N', '2017-12-13 15:39:10', NULL),
-(46, 3, 1, 'TEST COMMENT', 'N', '2017-12-14 11:02:00', NULL),
-(47, 3, 1, 'TEST COMMENT', 'N', '2017-12-15 15:02:35', NULL),
-(48, 103, 1, 'TEST COMMENT', 'Y', '2017-12-15 20:19:16', NULL),
-(49, 103, 1, 'TEST COMMENT', 'Y', '2017-12-16 22:49:06', NULL),
-(50, 103, 1, 'TEST COMMENT', 'N', '2017-12-17 14:22:44', NULL),
-(51, 103, 1, '123456789', 'Y', '2017-12-17 19:33:36', NULL),
-(52, 103, 1, 'TEST COMMENT', 'N', '2017-12-17 19:39:46', NULL),
-(53, 103, 1, 'TEST COMMENT', 'N', '2017-12-18 09:54:07', NULL),
-(54, 103, 1, 'TEST COMMENT', 'N', '2017-12-18 10:11:13', NULL),
-(55, 103, 1, 'TEST COMMENT-62', 'N', '2017-12-18 15:31:25', NULL),
-(56, 103, 1, 'TEST COMMENT-01', 'N', '2017-12-19 19:58:35', NULL),
-(57, 103, 1, 'TEST COMMENT-15', 'N', '2017-12-21 09:27:24', NULL),
-(58, 103, 1, 'I follow this user from past 1 year. His cooking skills are beyond this world. I personally like his Italian sweet dishes. Waiting for his next dishes eagerly.', 'N', '2017-12-22 17:45:08', NULL),
-(59, 103, 1, 'Hello test', 'N', '2017-12-22 17:51:00', NULL),
-(60, 103, 1, 'test 1234567', 'N', '2017-12-22 17:51:42', NULL),
-(61, 103, 1, 'test 12345', 'N', '2017-12-22 17:59:17', NULL),
-(62, 103, 1, 'TEST COMMENT-26', 'N', '2017-12-28 09:23:50', NULL),
-(63, 103, 1, 'TEST COMMENT-22', 'N', '2017-12-30 08:57:05', NULL),
-(64, 103, 1, 'Hii', 'N', '2018-01-16 00:56:08', NULL),
-(65, 103, 1, 'Hi', 'N', '2018-01-16 00:56:09', NULL),
-(66, 103, 1, 'Ndnd', 'N', '2018-01-16 23:46:25', NULL),
-(67, 103, 1, 'Ndnd', 'N', '2018-01-16 23:46:26', NULL),
-(68, 103, 1, 'Jdnd', 'N', '2018-01-16 23:46:42', NULL),
-(69, 103, 1, 'Jdnd', 'N', '2018-01-16 23:46:43', NULL),
-(70, 103, 1, 'TEST COMMENT-65', 'N', '2018-02-15 10:45:56', NULL),
-(71, 103, 1, 'humpty Dumpty sat on a wall', 'N', '2018-03-03 13:10:58', NULL);
+INSERT INTO `COMMENTS` (`COM_ID`, `USER_ID`, `COMMENT`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(9, 1, 'TEST COMMENT', 'RECIPE', 3, 'Y', '2017-12-06 18:32:20', NULL),
+(10, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:36:44', NULL),
+(11, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:37:27', NULL),
+(12, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:37:32', NULL),
+(13, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:37:43', NULL),
+(14, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:38:21', NULL),
+(15, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 18:39:02', NULL),
+(16, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:06:47', NULL),
+(17, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:48', NULL),
+(18, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:50', NULL),
+(19, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:52', NULL),
+(20, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:54', NULL),
+(21, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:55', NULL),
+(22, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-06 21:19:57', NULL),
+(23, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 11:33:16', NULL),
+(24, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 11:54:36', NULL),
+(25, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:05:45', NULL),
+(26, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:23:59', NULL),
+(27, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:24:00', NULL),
+(28, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:24:00', NULL),
+(29, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:24:02', NULL),
+(30, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:24:02', NULL),
+(31, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 12:24:02', NULL),
+(32, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:03:11', NULL),
+(33, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:03:26', NULL),
+(34, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:03:30', NULL),
+(35, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:04:01', NULL),
+(36, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:04:07', NULL),
+(37, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-07 15:14:05', NULL),
+(38, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 02:33:20', NULL),
+(39, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 02:33:21', NULL),
+(40, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 02:33:23', NULL),
+(41, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 02:33:24', NULL),
+(42, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 02:33:24', NULL),
+(43, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-09 03:05:58', NULL),
+(44, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-12 15:30:57', NULL),
+(45, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-13 15:39:10', NULL),
+(46, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-14 11:02:00', NULL),
+(47, 1, 'TEST COMMENT', 'RECIPE', 3, 'N', '2017-12-15 15:02:35', NULL),
+(48, 1, 'TEST COMMENT', 'RECIPE', 103, 'Y', '2017-12-15 20:19:16', NULL),
+(49, 1, 'TEST COMMENT', 'RECIPE', 103, 'Y', '2017-12-16 22:49:06', NULL),
+(50, 1, 'TEST COMMENT', 'RECIPE', 103, 'N', '2017-12-17 14:22:44', NULL),
+(51, 1, '123456789', 'RECIPE', 103, 'Y', '2017-12-17 19:33:36', NULL),
+(52, 1, 'TEST COMMENT', 'RECIPE', 103, 'N', '2017-12-17 19:39:46', NULL),
+(53, 1, 'TEST COMMENT', 'RECIPE', 103, 'N', '2017-12-18 09:54:07', NULL),
+(54, 1, 'TEST COMMENT', 'RECIPE', 103, 'N', '2017-12-18 10:11:13', NULL),
+(55, 1, 'TEST COMMENT-62', 'RECIPE', 103, 'N', '2017-12-18 15:31:25', NULL),
+(56, 1, 'TEST COMMENT-01', 'RECIPE', 103, 'N', '2017-12-19 19:58:35', NULL),
+(57, 1, 'TEST COMMENT-15', 'RECIPE', 103, 'N', '2017-12-21 09:27:24', NULL),
+(58, 1, 'I follow this user from past 1 year. His cooking skills are beyond this world. I personally like his Italian sweet dishes. Waiting for his next dishes eagerly.', 'RECIPE', 103, 'N', '2017-12-22 17:45:08', NULL),
+(59, 1, 'Hello test', 'RECIPE', 103, 'N', '2017-12-22 17:51:00', NULL),
+(60, 1, 'test 1234567', 'RECIPE', 103, 'N', '2017-12-22 17:51:42', NULL),
+(61, 1, 'test 12345', 'RECIPE', 103, 'N', '2017-12-22 17:59:17', NULL),
+(62, 1, 'TEST COMMENT-26', 'RECIPE', 103, 'N', '2017-12-28 09:23:50', NULL),
+(63, 1, 'TEST COMMENT-22', 'RECIPE', 103, 'N', '2017-12-30 08:57:05', NULL),
+(64, 1, 'Hii', 'RECIPE', 103, 'N', '2018-01-16 00:56:08', NULL),
+(65, 1, 'Hi', 'RECIPE', 103, 'N', '2018-01-16 00:56:09', NULL),
+(66, 1, 'Ndnd', 'RECIPE', 103, 'N', '2018-01-16 23:46:25', NULL),
+(67, 1, 'Ndnd', 'RECIPE', 103, 'N', '2018-01-16 23:46:26', NULL),
+(68, 1, 'Jdnd', 'RECIPE', 103, 'N', '2018-01-16 23:46:42', NULL),
+(69, 1, 'Jdnd', 'RECIPE', 103, 'N', '2018-01-16 23:46:43', NULL),
+(70, 1, 'TEST COMMENT-65', 'RECIPE', 103, 'N', '2018-02-15 10:45:56', NULL),
+(71, 1, 'humpty Dumpty sat on a wall', 'RECIPE', 103, 'N', '2018-03-03 13:10:58', NULL),
+(72, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photoas well as a recipe image - 25', 'RECIPE', 105, 'N', '2018-03-21 12:26:54', NULL),
+(76, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 79', 'RECIPE', 105, 'N', '2018-03-21 12:34:03', NULL),
+(78, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 72', 'RECIPE_IMG', 105, 'N', '2018-03-21 12:35:07', NULL),
+(79, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 50', 'RECIPE_IMG', 105, 'N', '2018-03-21 12:35:16', NULL),
+(80, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 04', 'RECIPE', 105, 'N', '2018-03-21 12:35:29', NULL),
+(85, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 61', 'RECIPE', 96, 'N', '2018-03-21 12:41:26', NULL),
+(86, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 66', 'RECIPE', 105, 'N', '2018-03-21 18:34:41', NULL),
+(87, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 07', 'RECIPE_IMG', 96, 'N', '2018-03-21 18:34:48', NULL),
+(88, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 61', 'RECIPE', 105, 'N', '2018-03-21 18:42:58', NULL),
+(89, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 48', 'RECIPE_IMG', 96, 'N', '2018-03-21 18:43:04', NULL),
+(90, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 58', 'RECIPE', 105, 'N', '2018-03-21 18:57:59', NULL),
+(91, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 89', 'RECIPE_IMG', 96, 'N', '2018-03-21 18:58:22', NULL),
+(92, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 47', 'USER', 1, 'N', '2018-03-22 12:08:20', NULL),
+(93, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 35', 'USER', 1, 'N', '2018-03-22 12:09:06', NULL),
+(94, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 40', 'RECIPE_IMG', 96, 'N', '2018-03-22 12:09:14', NULL),
+(95, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 78', 'RECIPE', 105, 'N', '2018-03-22 12:09:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -225,7 +262,21 @@ INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_OR_AKA_ID`, `QTY_ID`, `ING_QTY`, `
 (158, 105, 27, 3, 2, '2018-03-18 11:14:27', NULL),
 (159, 105, 26, 7, 10, '2018-03-18 11:14:27', NULL),
 (160, 105, 25, 1, 1, '2018-03-18 11:14:27', NULL),
-(161, 105, 24, 6, 1, '2018-03-18 11:14:27', NULL);
+(161, 105, 24, 6, 1, '2018-03-18 11:14:27', NULL),
+(162, 106, 1, 1, 5, '2018-03-24 17:55:56', NULL),
+(163, 106, 2, 2, 6, '2018-03-24 17:55:56', NULL),
+(170, 110, 1, 1, 5, '2018-03-24 18:01:14', NULL),
+(171, 110, 2, 2, 6, '2018-03-24 18:01:15', NULL),
+(172, 111, 1, 1, 5, '2018-03-24 18:01:42', NULL),
+(173, 111, 2, 2, 6, '2018-03-24 18:01:42', NULL),
+(174, 112, 1, 1, 5, '2018-03-24 18:06:09', NULL),
+(175, 112, 2, 2, 6, '2018-03-24 18:06:09', NULL),
+(176, 113, 1, 1, 5, '2018-03-24 18:12:13', NULL),
+(177, 113, 2, 2, 6, '2018-03-24 18:12:14', NULL),
+(178, 114, 1, 1, 5, '2018-03-24 18:17:49', NULL),
+(179, 114, 2, 2, 6, '2018-03-24 18:17:49', NULL),
+(180, 115, 1, 1, 5, '2018-03-24 18:18:15', NULL),
+(181, 115, 2, 2, 6, '2018-03-24 18:18:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -439,7 +490,7 @@ CREATE TABLE `LIKES` (
 --
 
 INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-13 18:51:02'),
+(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-20 19:24:44'),
 (2, 2, 'RECIPE', 103, 'N', '2017-10-15 12:49:50', '2017-11-07 12:00:57'),
 (3, 3, 'RECIPE', 103, 'N', '2017-11-07 15:14:53', NULL),
 (4, 4, 'RECIPE', 103, 'N', '2017-12-06 18:15:07', '2017-12-15 15:02:26'),
@@ -458,14 +509,18 @@ INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_
 (18, 1, 'COMMENT', 54, 'Y', '2018-01-16 00:56:05', '2018-03-01 22:10:11'),
 (19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL),
 (21, 1, 'RECIPE_IMG', 1, 'N', '2018-03-13 13:24:57', NULL),
-(22, 1, 'RECIPE_IMG', 96, 'N', '2018-03-13 13:27:35', '2018-03-17 10:51:35'),
-(23, 1, 'USER', 1, 'N', '2018-03-13 18:01:10', '2018-03-17 19:40:09'),
+(22, 1, 'RECIPE_IMG', 96, 'N', '2018-03-13 13:27:35', '2018-03-20 19:16:30'),
+(23, 1, 'USER', 1, 'N', '2018-03-13 18:01:10', '2018-03-24 21:51:18'),
 (24, 1, 'USER', 2, 'N', '2018-03-13 18:03:36', NULL),
 (25, 1, 'USER', 3, 'N', '2018-03-13 18:07:08', NULL),
 (26, 1, 'USER', 4, 'Y', '2018-03-13 18:10:16', '2018-03-13 18:10:18'),
 (27, 1, 'RECIPE_IMG', 94, 'Y', '2018-03-17 10:15:31', '2018-03-17 11:50:08'),
 (28, 1, 'RECIPE_IMG', 95, 'N', '2018-03-17 10:56:37', '2018-03-17 11:49:51'),
-(29, 1, 'RECIPE', 3, 'Y', '2018-03-17 11:14:54', '2018-03-17 11:17:53');
+(29, 1, 'RECIPE', 3, 'Y', '2018-03-17 11:14:54', '2018-03-17 11:17:53'),
+(30, 1, 'RECIPE_IMG', 100, 'N', '2018-03-19 19:36:17', NULL),
+(31, 1, 'RECIPE_IMG', 102, 'N', '2018-03-19 19:36:47', NULL),
+(32, 1, 'RECIPE_IMG', 97, 'Y', '2018-03-20 18:58:30', '2018-03-20 19:24:55'),
+(33, 1, 'RECIPE', 105, 'N', '2018-03-23 19:00:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -589,7 +644,14 @@ INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DE
 (91, 'TEST_RECIPE_NAME 5', 1, 1, 'N', 1, '2017-12-06 15:23:47', NULL),
 (103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19'),
 (104, 'TEST_RECIPE_NAME - 65', 1, 1, 'N', 1, '2018-03-18 10:04:17', NULL),
-(105, 'Bhindi in Sarson and Posto Sauce', 2, 1, 'N', 1, '2018-03-18 11:14:26', NULL);
+(105, 'Bhindi in Sarson and Posto Sauce', 2, 1, 'N', 1, '2018-03-18 11:14:26', NULL),
+(106, 'TEST_RECIPE_NAME - 25', 1, 1, 'N', 1, '2018-03-24 17:55:56', NULL),
+(110, 'TEST_RECIPE_NAME - 84', 1, 1, 'N', 1, '2018-03-24 18:01:14', NULL),
+(111, 'TEST_RECIPE_NAME - 27', 1, 1, 'N', 1, '2018-03-24 18:01:42', NULL),
+(112, 'TEST_RECIPE_NAME - 98', 1, 1, 'N', 1, '2018-03-24 18:06:09', NULL),
+(113, 'TEST_RECIPE_NAME - 15', 1, 1, 'N', 1, '2018-03-24 18:12:13', NULL),
+(114, 'TEST_RECIPE_NAME - 28', 1, 1, 'N', 1, '2018-03-24 18:17:49', NULL),
+(115, 'TEST_RECIPE_NAME - 82', 1, 1, 'N', 1, '2018-03-24 18:18:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -660,7 +722,21 @@ INSERT INTO `RECIPE_IMG` (`RCP_IMG_ID`, `RCP_ID`, `RCP_IMG`, `CREATE_DTM`, `MOD_
 (101, 105, 'app_data/users/1/recipes/105/images/5aae3c05f29dc.jpg', '2018-03-18 11:14:30', NULL),
 (102, 105, 'app_data/users/1/recipes/105/images/5aae3c06257ec.jpg', '2018-03-18 11:14:30', NULL),
 (103, 105, 'app_data/users/1/recipes/105/images/5aae3c064c9b5.jpg', '2018-03-18 11:14:30', NULL),
-(104, 105, 'app_data/users/1/recipes/105/images/5aae3c06739cd.jpg', '2018-03-18 11:14:30', NULL);
+(104, 105, 'app_data/users/1/recipes/105/images/5aae3c06739cd.jpg', '2018-03-18 11:14:30', NULL),
+(105, 106, 'app_data/users/1/recipes/106/images/5ab6831cecb16.jpg', '2018-03-24 17:55:57', NULL),
+(106, 106, 'app_data/users/1/recipes/106/images/5ab6831d169bd.jpg', '2018-03-24 17:55:57', NULL),
+(113, 110, 'app_data/users/1/recipes/110/images/5ab6845bc1b9e.jpg', '2018-03-24 18:01:15', NULL),
+(114, 110, 'app_data/users/1/recipes/110/images/5ab6845bdfc28.jpg', '2018-03-24 18:01:15', NULL),
+(115, 111, 'app_data/users/1/recipes/111/images/5ab684774b890.jpg', '2018-03-24 18:01:43', NULL),
+(116, 111, 'app_data/users/1/recipes/111/images/5ab68477698c5.jpg', '2018-03-24 18:01:43', NULL),
+(117, 112, 'app_data/users/1/recipes/112/images/5ab685823b052.jpg', '2018-03-24 18:06:10', NULL),
+(118, 112, 'app_data/users/1/recipes/112/images/5ab685825902c.jpg', '2018-03-24 18:06:10', NULL),
+(119, 113, 'app_data/users/1/recipes/113/images/5ab686eead1cb.jpg', '2018-03-24 18:12:14', NULL),
+(120, 113, 'app_data/users/1/recipes/113/images/5ab686eecb128.jpg', '2018-03-24 18:12:14', NULL),
+(121, 114, 'app_data/users/1/recipes/114/images/5ab6883e2068a.jpg', '2018-03-24 18:17:50', NULL),
+(122, 114, 'app_data/users/1/recipes/114/images/5ab6883e3e66a.jpg', '2018-03-24 18:17:50', NULL),
+(123, 115, 'app_data/users/1/recipes/115/images/5ab6885864d06.jpg', '2018-03-24 18:18:16', NULL),
+(124, 115, 'app_data/users/1/recipes/115/images/5ab6885882d32.jpg', '2018-03-24 18:18:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -715,7 +791,21 @@ INSERT INTO `RECIPE_STEPS` (`RCP_STPS_ID`, `RCP_ID`, `RCP_STEP`, `CREATE_DTM`, `
 (87, 105, 'Add the paste and a bit of water and cover the pan for 10 minutes.', '2018-03-18 11:14:28', NULL),
 (88, 105, 'Check to see if the bhindi is soft and then remove from the gas.', '2018-03-18 11:14:28', NULL),
 (89, 105, 'Garnish with coriander. Sprinkle some pepper.', '2018-03-18 11:14:29', NULL),
-(90, 105, 'Serve it hot & enjoy your meal !', '2018-03-18 11:14:29', NULL);
+(90, 105, 'Serve it hot & enjoy your meal !', '2018-03-18 11:14:29', NULL),
+(91, 106, 'TEST STEP !', '2018-03-24 17:55:56', NULL),
+(92, 106, 'TEST STEP 2', '2018-03-24 17:55:56', NULL),
+(99, 110, 'TEST STEP !', '2018-03-24 18:01:15', NULL),
+(100, 110, 'TEST STEP 2', '2018-03-24 18:01:15', NULL),
+(101, 111, 'TEST STEP !', '2018-03-24 18:01:42', NULL),
+(102, 111, 'TEST STEP 2', '2018-03-24 18:01:42', NULL),
+(103, 112, 'TEST STEP !', '2018-03-24 18:06:09', NULL),
+(104, 112, 'TEST STEP 2', '2018-03-24 18:06:09', NULL),
+(105, 113, 'TEST STEP !', '2018-03-24 18:12:14', NULL),
+(106, 113, 'TEST STEP 2', '2018-03-24 18:12:14', NULL),
+(107, 114, 'TEST STEP !', '2018-03-24 18:17:49', NULL),
+(108, 114, 'TEST STEP 2', '2018-03-24 18:17:49', NULL),
+(109, 115, 'TEST STEP !', '2018-03-24 18:18:15', NULL),
+(110, 115, 'TEST STEP 2', '2018-03-24 18:18:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -946,7 +1036,28 @@ INSERT INTO `RECIPE_TASTE` (`RCP_TST_ID`, `RCP_ID`, `TST_ID`, `TST_QTY`, `CREATE
 (319, 104, 3, 2, '2018-03-18 10:04:18', NULL),
 (320, 105, 1, 4, '2018-03-18 11:14:29', NULL),
 (321, 105, 2, 1, '2018-03-18 11:14:29', NULL),
-(322, 105, 3, 0, '2018-03-18 11:14:29', NULL);
+(322, 105, 3, 0, '2018-03-18 11:14:29', NULL),
+(323, 106, 1, 4, '2018-03-24 17:55:56', NULL),
+(324, 106, 2, 3, '2018-03-24 17:55:56', NULL),
+(325, 106, 3, 2, '2018-03-24 17:55:56', NULL),
+(335, 110, 1, 4, '2018-03-24 18:01:15', NULL),
+(336, 110, 2, 3, '2018-03-24 18:01:15', NULL),
+(337, 110, 3, 2, '2018-03-24 18:01:15', NULL),
+(338, 111, 1, 4, '2018-03-24 18:01:43', NULL),
+(339, 111, 2, 3, '2018-03-24 18:01:43', NULL),
+(340, 111, 3, 2, '2018-03-24 18:01:43', NULL),
+(341, 112, 1, 4, '2018-03-24 18:06:09', NULL),
+(342, 112, 2, 3, '2018-03-24 18:06:10', NULL),
+(343, 112, 3, 2, '2018-03-24 18:06:10', NULL),
+(344, 113, 1, 4, '2018-03-24 18:12:14', NULL),
+(345, 113, 2, 3, '2018-03-24 18:12:14', NULL),
+(346, 113, 3, 2, '2018-03-24 18:12:14', NULL),
+(347, 114, 1, 4, '2018-03-24 18:17:49', NULL),
+(348, 114, 2, 3, '2018-03-24 18:17:49', NULL),
+(349, 114, 3, 2, '2018-03-24 18:17:50', NULL),
+(350, 115, 1, 4, '2018-03-24 18:18:16', NULL),
+(351, 115, 2, 3, '2018-03-24 18:18:16', NULL),
+(352, 115, 3, 2, '2018-03-24 18:18:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -1431,7 +1542,48 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (715, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-17 19:36:20', NULL),
 (716, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-17 19:36:22', NULL),
 (717, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-03-17 19:40:07', NULL),
-(718, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-17 19:40:09', NULL);
+(718, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-17 19:40:09', NULL),
+(719, 76, 76, 'USER_ADD', 76, 1, 'N', '2018-03-18 17:09:16', NULL),
+(720, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-03-19 19:36:17', NULL),
+(721, 1, 1, 'LIKE_RECIPE_IMG_ADD', 31, 1, 'N', '2018-03-19 19:36:48', NULL),
+(722, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 22, 1, 'N', '2018-03-20 18:50:45', NULL),
+(723, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-20 18:51:30', NULL),
+(724, 1, 1, 'LIKE_RECIPE_REMOVE', 1, 1, 'N', '2018-03-20 18:58:12', NULL),
+(725, 1, 1, 'LIKE_RECIPE_ADD', 1, 1, 'N', '2018-03-20 18:58:15', NULL),
+(726, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 22, 1, 'N', '2018-03-20 18:58:18', NULL),
+(727, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-20 18:58:23', NULL),
+(728, 1, 1, 'LIKE_RECIPE_IMG_ADD', 32, 1, 'N', '2018-03-20 18:58:30', NULL),
+(729, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 22, 1, 'N', '2018-03-20 19:13:54', NULL),
+(730, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-03-20 19:16:30', NULL),
+(731, 1, 1, 'LIKE_RECIPE_REMOVE', 1, 1, 'N', '2018-03-20 19:16:35', NULL),
+(732, 1, 1, 'LIKE_RECIPE_ADD', 1, 1, 'N', '2018-03-20 19:24:44', NULL),
+(733, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 32, 1, 'N', '2018-03-20 19:24:55', NULL),
+(741, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 96, 1, 'N', '2018-03-21 18:43:04', NULL),
+(742, 1, 1, 'COMMENT_RECIPE_ADD', 90, 1, 'N', '2018-03-21 18:58:00', NULL),
+(743, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 91, 1, 'N', '2018-03-21 18:58:23', NULL),
+(744, 1, 1, 'COMMENT_RECIPE_ADD', 93, 1, 'N', '2018-03-22 12:09:06', NULL),
+(745, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 94, 1, 'N', '2018-03-22 12:09:14', NULL),
+(746, 1, 1, 'COMMENT_RECIPE_ADD', 95, 1, 'N', '2018-03-22 12:09:18', NULL),
+(747, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-03-23 19:00:11', NULL),
+(748, 1, 1, 'RECIPE_ADD', 106, 1, 'N', '2018-03-24 17:55:57', NULL),
+(752, 1, 1, 'RECIPE_ADD', 110, 1, 'N', '2018-03-24 18:01:16', NULL),
+(753, 1, 1, 'RECIPE_ADD', 111, 1, 'N', '2018-03-24 18:01:43', NULL),
+(754, 1, 1, 'RECIPE_ADD', 112, 1, 'N', '2018-03-24 18:06:10', NULL),
+(755, 1, 1, 'RECIPE_ADD', 113, 1, 'N', '2018-03-24 18:12:15', NULL),
+(756, 1, 1, 'RECIPE_ADD', 114, 1, 'N', '2018-03-24 18:17:50', NULL),
+(757, 1, 1, 'RECIPE_ADD', 115, 1, 'N', '2018-03-24 18:18:16', NULL),
+(758, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-03-24 21:24:23', NULL),
+(759, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-03-24 21:51:18', NULL),
+(760, 77, 77, 'USER_ADD', 77, 1, 'N', '2018-03-24 22:01:24', NULL),
+(761, 78, 78, 'USER_ADD', 78, 1, 'N', '2018-03-24 22:04:05', NULL),
+(762, 79, 79, 'USER_ADD', 79, 1, 'N', '2018-03-24 22:12:20', NULL),
+(763, 80, 80, 'USER_ADD', 80, 1, 'N', '2018-03-24 22:19:26', NULL),
+(764, 81, 81, 'USER_ADD', 81, 1, 'N', '2018-03-24 22:28:02', NULL),
+(765, 82, 82, 'USER_ADD', 82, 1, 'N', '2018-03-24 22:31:31', NULL),
+(766, 83, 83, 'USER_ADD', 83, 1, 'N', '2018-03-24 22:32:53', NULL),
+(767, 84, 84, 'USER_ADD', 84, 1, 'N', '2018-03-24 22:46:28', NULL),
+(770, 87, 87, 'USER_ADD', 87, 1, 'N', '2018-03-25 10:06:17', NULL),
+(771, 88, 88, 'USER_ADD', 88, 1, 'N', '2018-03-25 19:37:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -1515,7 +1667,7 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`, `VERI_CODE_DTM`, `IMG`, `MOBILE`, `MOBILE_SCOPE_ID`, `PASSWORD`, `NAME`, `GENDER`, `GENDER_SCOPE_ID`, `SSID`, `SALT`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'cookery@cookery.com', 1, 50069951, '2018-02-15 10:45:10', 'app_data/users/1/profile/images/5a79d59025e15.jpg', '2456540685', 1, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  17', 'F', 1, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-02-15 10:50:03'),
+(1, 1, 'cookery@cookery.com', 1, 73185123, '2018-03-24 21:26:35', 'app_data/users/1/profile/images/5ab6b3f780f34.jpg', '2456540685', 1, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  17', 'O', 1, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-03-24 21:37:12'),
 (2, 1, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'USER - 2', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
 (3, 1, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'USER - 3', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
 (4, 1, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '8124627522', 1, 'cm9jazJaUEtw', 'USER - 4', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
@@ -1586,7 +1738,18 @@ INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`
 (69, 1, 'hgvj@gmail.com', 1, 69125900, '2018-03-10 22:10:58', NULL, NULL, 1, 'Z2d2a3Z2RVE3b0E=', 'Agv', '', 1, 'uJvTObPp7A', 'RVE3b0E=', '2018-03-10 22:10:58', NULL),
 (70, 1, 'fug@gmail.com', 1, 9425499, '2018-03-10 22:12:33', NULL, NULL, 1, 'ZnVqZ2d5ZnhlSjJpQQ==', 'Tfgg jgffyh', '', 1, 'Vrvva2vx91', 'ZUoyaUE=', '2018-03-10 22:12:33', NULL),
 (74, 1, 'dial2vishal@gmail.com', 1, 47012927, '2018-03-11 00:29:17', NULL, NULL, 1, 'Y29va2VyeTd5V1JM', 'vishal varshney', 'M', 1, 'rdWkqIxJbV', 'N3lXUkw=', '2018-03-11 00:29:17', '2018-03-11 00:57:53'),
-(75, 1, 'mywayanadtrip2017@gmail.com', 1, 1927904, '2018-03-11 01:01:30', NULL, NULL, 1, 'Y29va2VyeWd2bVoy', 'Vishal Varshney', '', 1, 'WXRIvJHkbV', 'Z3ZtWjI=', '2018-03-11 01:01:30', NULL);
+(75, 1, 'mywayanadtrip2017@gmail.com', 1, 1927904, '2018-03-11 01:01:30', NULL, NULL, 1, 'Y29va2VyeWd2bVoy', 'Vishal Varshney', '', 1, 'WXRIvJHkbV', 'Z3ZtWjI=', '2018-03-11 01:01:30', NULL),
+(76, 1, 'user@cookery.com', 1, 34117358, '2018-03-18 17:09:16', NULL, NULL, 1, 'dXNlckVYN21z', 'Vishal', '', 1, 'fRcKbiUBxo', 'RVg3bXM=', '2018-03-18 17:09:16', NULL),
+(77, 1, 'vishal@yahoo.com', 1, 51277786, '2018-03-24 22:01:24', NULL, NULL, 1, 'eWFob29pRVhaZA==', 'Vishal', '', 1, 'vF4kvKZfJE', 'aUVYWmQ=', '2018-03-24 22:01:24', NULL),
+(78, 1, 'vaihal@hotmail.com', 1, 2934660, '2018-03-24 22:04:05', NULL, NULL, 1, 'aG90bWFpbDZQTTlk', 'Vishal', '', 1, 'SPqzQm5C7j', 'NlBNOWQ=', '2018-03-24 22:04:05', NULL),
+(79, 1, 'lobik@hotmail.com', 1, 65164111, '2018-03-24 22:12:20', NULL, NULL, 1, 'aG90bWFpbHFVVHJs', 'Vishal', '', 1, '0Pnxh3lKdH', 'cVVUcmw=', '2018-03-24 22:12:20', NULL),
+(80, 1, 'twst@outlook.com', 1, 86337830, '2018-03-24 22:19:26', NULL, NULL, 1, 'b3V0bG9va0pWV25N', 'Vishal', '', 1, 'LTSNS9rrGz', 'SlZXbk0=', '2018-03-24 22:19:26', NULL),
+(81, 1, 'emial@gmail.com', 1, 66912922, '2018-03-24 22:28:01', NULL, NULL, 1, 'Z21haWxvdUNCYg==', 'Vishal', '', 1, 'THPQdIIyhh', 'b3VDQmI=', '2018-03-24 22:28:01', NULL),
+(82, 1, 'email@gmail.com', 1, 87603266, '2018-03-24 22:31:31', NULL, NULL, 1, 'Z21haWw0WmJHRw==', 'Vishal', '', 1, 'BbQBQeEEJH', 'NFpiR0c=', '2018-03-24 22:31:31', NULL),
+(83, 1, 'yirrg@gjvgm.vom', 1, 81381558, '2018-03-24 22:32:53', NULL, NULL, 1, 'dGlnZXJiWjlwRQ==', 'Tigrr', '', 1, 'AKMEuM8koj', 'Ylo5cEU=', '2018-03-24 22:32:53', NULL),
+(84, 1, 'test@cookerymail.com', 1, 35775628, '2018-03-24 22:46:28', NULL, NULL, 1, 'Y29va2VyeW1haWxqSENuMw==', 'Vishal ', '', 1, 'K3ys39vWal', 'akhDbjM=', '2018-03-24 22:46:28', NULL),
+(87, 1, 'ajitkamathk@gmail.com', 1, 42703034, '2018-03-25 10:06:17', NULL, NULL, 1, 'Q09PS0VSWVZiOG9V', 'Test User -  79', '', 1, 'guyQJdehaK', 'VmI4b1U=', '2018-03-25 10:06:17', NULL),
+(88, 1, 'cook@gmail.com', 1, 15957800, '2018-03-25 19:37:24', NULL, NULL, 1, 'Y29vazl4aTNP', 'Vishal', '', 1, 'TxedRplew3', 'OXhpM08=', '2018-03-25 19:37:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -1722,18 +1885,25 @@ CREATE TABLE `VIEWS` (
 INSERT INTO `VIEWS` (`VIEW_ID`, `USER_ID`, `RCP_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
 (8, 3, 78, '2017-12-05 18:40:07', NULL),
 (9, 1, 3, '2017-12-06 16:01:57', NULL),
-(11, 1, 103, '2017-12-13 18:13:18', NULL);
+(11, 1, 103, '2017-12-13 18:13:18', NULL),
+(12, 1, 105, '2018-03-18 15:18:28', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `ABOUT_US`
+--
+ALTER TABLE `ABOUT_US`
+  ADD UNIQUE KEY `ABOUT_US_ID_INDEX` (`ABOUT_US_ID`);
+
+--
 -- Indexes for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
   ADD PRIMARY KEY (`COM_ID`),
-  ADD KEY `RCP_ID` (`RCP_ID`),
+  ADD KEY `RCP_ID` (`TYPE_ID`),
   ADD KEY `USER_ID` (`USER_ID`);
 
 --
@@ -1932,10 +2102,16 @@ ALTER TABLE `VIEWS`
 --
 
 --
+-- AUTO_INCREMENT for table `ABOUT_US`
+--
+ALTER TABLE `ABOUT_US`
+  MODIFY `ABOUT_US_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `CONTAINS`
@@ -1947,7 +2123,7 @@ ALTER TABLE `CONTAINS`
 -- AUTO_INCREMENT for table `DISH`
 --
 ALTER TABLE `DISH`
-  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT for table `FAVOURITES`
@@ -1983,7 +2159,7 @@ ALTER TABLE `ING_AKA`
 -- AUTO_INCREMENT for table `LIKES`
 --
 ALTER TABLE `LIKES`
-  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `MILESTONE`
@@ -2007,7 +2183,7 @@ ALTER TABLE `RANK`
 -- AUTO_INCREMENT for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
-  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_CONTAINS`
@@ -2019,19 +2195,19 @@ ALTER TABLE `RECIPE_CONTAINS`
 -- AUTO_INCREMENT for table `RECIPE_IMG`
 --
 ALTER TABLE `RECIPE_IMG`
-  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_STEPS`
 --
 ALTER TABLE `RECIPE_STEPS`
-  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_TASTE`
 --
 ALTER TABLE `RECIPE_TASTE`
-  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=323;
+  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
 
 --
 -- AUTO_INCREMENT for table `REVIEWS`
@@ -2055,7 +2231,7 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=719;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=772;
 
 --
 -- AUTO_INCREMENT for table `TRENDS`
@@ -2073,7 +2249,7 @@ ALTER TABLE `TRENDS_ITEM`
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `USER_ING_LIST`
@@ -2097,7 +2273,7 @@ ALTER TABLE `USER_RELATIONSHIP`
 -- AUTO_INCREMENT for table `VIEWS`
 --
 ALTER TABLE `VIEWS`
-  MODIFY `VIEW_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `VIEW_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -2107,7 +2283,6 @@ ALTER TABLE `VIEWS`
 -- Constraints for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
-  ADD CONSTRAINT `FK_RECIPE_COMMENTS` FOREIGN KEY (`RCP_ID`) REFERENCES `RECIPE` (`rcp_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_USER_COMMENTS` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
