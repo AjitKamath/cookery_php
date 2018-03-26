@@ -1,13 +1,19 @@
 <?php
 	class Like{
-		public static function fetchLikedUsers($type, $type_id, $index){
+		public static function fetchLikedUsers($loggedInUserId, $type, $type_id, $index){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : loggedInUser(".$loggedInUserId.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
+			if(!Util::check_for_null($loggedInUserId)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty loggedInUserId");
+				return;
+			}
+			
 			if(!Util::check_for_null($type)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
 				return;
@@ -27,7 +33,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$result_array = self::getLikedUsers($con, $type, $type_id, $index);
+				$result_array = self::getLikedUsers($con, $loggedInUserId, $type, $type_id, $index);
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
@@ -38,14 +44,20 @@
 			}
 		}
 		
-		public static function getLikedUsers($con, $type, $type_id, $index){
+		public static function getLikedUsers($con, $loggedInUserId, $type, $type_id, $index){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : loggedInUser(".$loggedInUserId.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
+			if(!Util::check_for_null($loggedInUserId)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty loggedInUserId");
+				return;
+			}
+			
 			if(!Util::check_for_null($type)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
 				return;
@@ -79,6 +91,9 @@
 					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
 					$temp_array['NAME'] = $result_obj->NAME;
 					$temp_array['IMG'] = $result_obj->IMG;
+					
+					$temp_array['following'] = User::getIsUserFollowing($con, $loggedInUserId, $result_obj->USER_ID);
+					$temp_array['followed'] = User::getIsUserFollowing($con, $result_obj->USER_ID, $loggedInUserId);
 					
 					array_push($result_array, $temp_array); 
 				}

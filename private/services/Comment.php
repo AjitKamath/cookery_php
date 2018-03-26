@@ -37,62 +37,6 @@
 			}
 		}
 		
-		public static function fetchComment($com_id){
-            //request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : com_id(".$com_id.")");
-            //request
-
-            //check for null/empty
-			if(!Util::check_for_null($com_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty com_id");
-                return;
-            }
-			//check for null/empty
-
-            try{
-                $con = DatabaseUtil::getInstance()->open_connection();
-
-                $query = "SELECT COM_ID, COMMENT, USR.USER_ID, USR.NAME, USR.IMG, COM.CREATE_DTM 
-							FROM `COMMENTS` AS COM 
-							INNER JOIN `USER` AS USR ON USR.USER_ID = COM.USER_ID 
-							AND COM.IS_DEL = 'N'";
-				$result = mysqli_query($con ,$query);
-
-                $result_array = array();
-                if($result_data = $result->fetch_object()){
-					$temp_arr['COM_ID'] = $result_data->COM_ID;
-					$temp_arr['USER_ID'] = $result_data->USER_ID;
-					$temp_arr['COMMENT'] = $result_data->COMMENT;
-					$temp_arr['CREATE_DTM'] = $result_data->CREATE_DTM;
-					
-					$temp_arr['userName'] = $result_data->NAME;
-					$temp_arr['userImage'] = $result_data->IMG;
-					
-					//get users who have liked the comment
-					$temp_arr['likedUsers'] = Like::getLikedUsers($con, "COMMENT", $result_data->COM_ID, 0);
-					//get users who have liked the comment
-					
-					//if the user has liked comment
-					$temp_arr['userLiked'] = Like::isUserLiked($con, $user_id, "COMMENT", $result_data->COM_ID);
-					//if the user has liked comment
-					
-                    array_push($result_array, $temp_arr);
-                }
-
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total comments fetched : ".sizeof($result_array));
-
-                //response
-                echo json_encode($result_array);
-                //response
-            }
-            catch(Exception $e){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-            }
-            finally{
-                DatabaseUtil::getInstance()->close_connection($con);
-            }
-        }
-		
 		public static function deleteComment($com_id, $user_id){
             //request
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : com_id(".$com_id.")");

@@ -1,13 +1,19 @@
 <?php
 	class View{
 		
-		public static function fetchViewedUsers($rcp_id, $index){
+		public static function fetchViewedUsers($logged_in_user_id, $rcp_id, $index){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
+			if(!Util::check_for_null($logged_in_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+				return;
+			}
+			
 			if(!Util::check_for_null($rcp_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
 				return;
@@ -22,7 +28,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				$result_array = self::getViewedUsers($con, $rcp_id, $index);
+				$result_array = self::getViewedUsers($con, $logged_in_user_id, $rcp_id, $index);
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
@@ -62,13 +68,19 @@
 			}
 		}
 		
-		public static function getViewedUsers($con, $rcp_id, $index){
+		public static function getViewedUsers($con, $logged_in_user_id, $rcp_id, $index){
 			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
 			//request
 
 			//check for null/empty
+			if(!Util::check_for_null($logged_in_user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+				return;
+			}
+			
 			if(!Util::check_for_null($rcp_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
 				return;
@@ -95,6 +107,9 @@
 					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
 					$temp_array['NAME'] = $result_obj->NAME;
 					$temp_array['IMG'] = $result_obj->IMG;
+					
+					$temp_array['following'] = User::getIsUserFollowing($con, $logged_in_user_id, $result_obj->USER_ID);
+					$temp_array['followed'] = User::getIsUserFollowing($con, $result_obj->USER_ID, $logged_in_user_id);
 					
 					array_push($result_array, $temp_array); 
 				}

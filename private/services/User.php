@@ -109,6 +109,7 @@
 					
 					//check if the logged in user is following $result_data->USER_ID
 					$temp_array['following'] = self::getIsUserFollowing($con, $logged_in_user_id, $result_data->USER_ID);
+					$temp_array['followed'] = self::getIsUserFollowing($con, $result_data->USER_ID, $logged_in_user_id);
 					
 					array_push($result_array, $temp_array);
 				}
@@ -168,6 +169,7 @@
 					
 					//check if the logged in user is following $result_data->USER_ID
 					$temp_array['following'] = self::getIsUserFollowing($con, $logged_in_user_id, $result_data->USER_ID);
+					$temp_array['followed'] = self::getIsUserFollowing($con, $result_data->USER_ID, $logged_in_user_id);
 					
 					array_push($result_array, $temp_array);
 				}

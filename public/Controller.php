@@ -113,9 +113,6 @@
 	else if(COMMENT_SUBMIT == $function_key){
 		echo Comment::submitComment($user_id, $type, $type_id, $comment);
 	}
-	else if(COMMENT_FETCH == $function_key){
-		echo Comment::fetchComment($com_id);
-	}
 	//comment
 	
 	//recipe
@@ -212,7 +209,7 @@
 		echo View::fetchRecipeViews($rcp_id);
 	}
 	else if(VIEW_FETCH_USERS == $function_key){
-		echo View::fetchViewedUsers($rcp_id, $index);
+		echo View::fetchViewedUsers($logged_in_user_id, $rcp_id, $index);
 	}
 	//view
 	
@@ -266,7 +263,7 @@
 		echo Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::fetchLikedUsers ($type, $type_id, $index);
+		echo Like::fetchLikedUsers ($logged_in_user_id, $type, $type_id, $index);
 	}
 	//like
 

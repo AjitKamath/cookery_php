@@ -528,10 +528,6 @@
 					$temp_array['userName'] = $result_data->NAME;
 					$temp_array['userImage'] = $result_data->IMG;
 					
-					//get users who have liked the review
-					//$temp_array['likes'] = Like::getLikedUsers($con, "REVIEW", $result_data->REV_ID);
-					//get users who have liked the review
-					
 					//likes count
 					$temp_array['likesCount'] = Like::getLikeCount($con, "REVIEW", $result_data->REV_ID);
 					//likes count
