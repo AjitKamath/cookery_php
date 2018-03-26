@@ -114,9 +114,8 @@
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
-				//transaction begins
-				mysqli_begin_transaction($con, MYSQLI_TRANS_START_READ_WRITE);
-				mysqli_autocommit($con, FALSE);
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
 				
 				//get comment type
 				$query = "SELECT TYPE FROM `COMMENTS` WHERE COM_ID = '".$com_id."'";
@@ -146,46 +145,43 @@
                 if(mysqli_query($con,  $query)){
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Comment('$com_id') successfully deleted by the user('$user_id')");
                     
-					$result_arr["err_code"]="0";
-					$result_arr["isError"]=false;
-					$result_arr["err_message"]="Comment deleted !";
+					$result_arr["err_code"] = "0";
+					$result_arr["isError"] = false;
+					$result_arr["err_message"] = "Comment deleted !";
 				
 					//register timeline
                     Timeline::addTimeline($con, $user_id, $user_id, $timeline_type, $com_id, DEFAULT_SCOPE_ID);
                     //register timeline
                 }
                 else{
-					$result_arr["err_code"]="1";
-					$result_arr["isError"]=true;
-					$result_arr["err_message"]="Comment delet failed !";
+					$result_arr["err_code"] = "1";
+					$result_arr["isError"] = true;
+					$result_arr["err_message"] = "Comment delete failed !";
 					
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Comment('$com_id') could not be deleted by the user('$user_id')");
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
-					throw new Exception("Failed to update into COMMENTS table");
+					
+					throw new Exception("Failed to update COMMENTS table");
                 } 
-				
-				echo json_encode($result_arr);
 				//delete comment
 				
-				mysqli_commit($con);
-				//transaction ends
+				//transaction end
+				DatabaseUtil::endTransaction($con);
             }
             catch(Exception $e){
-				$result_arr["err_code"]="0";
-				$result_arr["isError"]=false;
-				$result_arr["err_message"]="Comment deleted !";
-				
-				echo json_encode($result_arr);
+				$result_arr["err_code"] = "1";
+				$result_arr["isError"] = true;
+				$result_arr["err_message"] = "Comment delete failed !";
 				
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
-				throw new Exception("Something went wrong !");
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
+				
+				echo json_encode($result_arr);
             }
         }
         
@@ -301,6 +297,9 @@
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
                 //insert comment
                 $query = "INSERT INTO `COMMENTS`(`TYPE`, `TYPE_ID`, `USER_ID`, `COMMENT`, `CREATE_DTM`) 
 				VALUES('$type', '$type_id', '$user_id', '$comment', CURRENT_TIMESTAMP)";
@@ -310,9 +309,9 @@
 
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Comment('$comment') successfully submitted by the user('$user_id') for the type('$type')");
 
-                    $result_arr["err_code"]="0";
-					$result_arr["isError"]=false;
-					$result_arr["err_message"]="Successfully commented !";
+                    $result_arr["err_code"] = "0";
+					$result_arr["isError"] = false;
+					$result_arr["err_message"] = "Successfully commented !";
 				
 					//register timeline
 					$query = "";
@@ -350,29 +349,35 @@
 					
 					Timeline::addTimeline($con, $user_id, $ref_user_id, $timeline_type, $com_id, DEFAULT_SCOPE_ID);
 					//register timeline
+					
+					//transaction end
+					DatabaseUtil::endTransaction($con);
                 }
                 else{
-					$result_arr["err_code"]="1";
-					$result_arr["isError"]=true;
-					$result_arr["err_message"]="Comment failed !";
+					$result_arr["err_code"] = "1";
+					$result_arr["isError"] = true;
+					$result_arr["err_message"] = "Comment failed !";
 					
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the type('$type')");
+					
+					throw new Exception("Failed to submit comment");
                 } 
-				
-				echo json_encode($result_arr);
-                //insert comment
+				//insert comment
             }
             catch(Exception $e){
-				$result_arr["err_code"]="1";
-				$result_arr["isError"]=true;
-				$result_arr["err_message"]="Comment failed !";
+				$result_arr["err_code"] = "1";
+				$result_arr["isError"] = true;
+				$result_arr["err_message"] = "Comment failed !";
 				
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
                 
-				echo json_encode($result_arr);
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
             }
             finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				echo json_encode($result_arr);
             }
         }
     }

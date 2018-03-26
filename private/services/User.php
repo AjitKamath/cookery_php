@@ -386,6 +386,9 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
 				//prepare directories
 				if(!Util::prepare_directories($user_id)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Cannot submit the profile image as the file directories could not be created for the user($user_id).");  
@@ -429,17 +432,28 @@
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to remove all the likes for USER(".$user_id.") in LIKES table");
+						
+						throw new Exception("Failed to remove all the likes");
 					}
 					
 					echo "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
 				}
 				else{
 					echo "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
+					throw new Exception("Failed to update profile photo");
 				}
 				//update into USER table
+				
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				echo "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -895,6 +909,9 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
 				$result_array = array();
 				
 				//check if the $flwr_user_id follows/followed $flws_user_id
@@ -934,6 +951,7 @@
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! user(".$flwr_user_id.") could not follow/unfollow the user(".$flws_user_id.")");
 						$result_array['following'] = false;
+						throw new Exception("Failed to follow the user");
 					}
 				}
 				//if the $flwr_user_id follows/followed $flws_user_id
@@ -958,16 +976,22 @@
 				
 				$temp_array = array();
 				array_push($temp_array, $result_array);
-				
-				//response
-				echo json_encode($temp_array);
-				//response
+			
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				//response
+				echo json_encode($temp_array);
 			}
 		}
 		
@@ -1147,6 +1171,9 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
 				$query = "SELECT USER_ID,EMAIL FROM `USER` WHERE EMAIL = '$email'";
 				$result = mysqli_query($con, $query);
 				
@@ -1190,15 +1217,26 @@
 						//email
 						MailUtil::userEmail(USER_REGISTER, $email, "There", "Welcome Aboard");
 					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to register the user with email : ".$email);
+						throw new Exception("Failed to register the user");
+					}
 				}
 				
-				echo json_encode($data);
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				echo json_encode($data);
 			}
 		}
 		

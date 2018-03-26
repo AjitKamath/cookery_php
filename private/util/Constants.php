@@ -74,6 +74,9 @@
 
     define("DATABASE_CONNECTION_COUNTER", "database.connection.counter");
     define("DATABASE_CONNECTION_LEAK_TIMESTAMP", "database.connection.leak.timestamp");
+
+    define("DATABASE_TRANSACTION_COUNTER", "database.transaction.counter");
+    define("DATABASE_TRANSACTION_LEAK_TIMESTAMP", "database.transaction.leak.timestamp");
     //---------------------database config---------------------
 
     //---------------------------API----------------------------

@@ -93,6 +93,7 @@
 
     //Email
     define("SEND_EMAIL", "SEND_EMAIL");                               //Postman completed
-    define("DATABASE_CONNECTION_LEAK", "DATABASE_CONNECTION_LEAK");                               
+    define("DATABASE_CONNECTION_LEAK", "DATABASE_CONNECTION_LEAK");
+    define("DATABASE_TRANSACTION_LEAK", "DATABASE_TRANSACTION_LEAK");
     //Email
 ?>

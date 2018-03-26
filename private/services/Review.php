@@ -150,42 +150,51 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
 				//delete review
 				$query = "UPDATE `REVIEWS` SET IS_DEL = 'Y' WHERE REV_ID = '".$rev_id."' AND USER_ID = '".$user_id."'";
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Review('$rev_id') successfully deleted by the user('$user_id')");
 					
-					$result_arr["err_code"]="0";
-					$result_arr["isError"]=false;
-					$result_arr["err_message"]="Review deleted !";
+					$result_arr["err_code"] = "0";
+					$result_arr["isError"] = false;
+					$result_arr["err_message"] = "Review deleted !";
 
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, REVIEW_RECIPE_REMOVE, $rev_id, DEFAULT_SCOPE_ID);
 					//register timeline
 				}
 				else{
-					$result_arr["err_code"]="1";
-					$result_arr["isError"]=true;
-					$result_arr["err_message"]="Review delete failed !";
+					$result_arr["err_code"] = "1";
+					$result_arr["isError"] = true;
+					$result_arr["err_message"] = "Review delete failed !";
 					
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Review('$rev_id') could not be deleted by the user('$user_id')");
+					throw new Exception("Failed to delete review");
 				} 
-				
-				echo json_encode($result_arr);
 				//delete review
+				
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
-				$result_arr["err_code"]="1";
-				$result_arr["isError"]=true;
-				$result_arr["err_message"]="Review delete failed !";
+				$result_arr["err_code"] = "1";
+				$result_arr["isError"] = true;
+				$result_arr["err_message"] = "Review delete failed !";
 				
-				echo json_encode($result_arr);
-				
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				echo json_encode($result_arr);
 			}
 		}
 		
@@ -221,6 +230,9 @@
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
 
 				//check if user already reviewed the $rcp_id
 				$query = "SELECT REV_ID, IS_DEL FROM REVIEWS WHERE RCP_ID = '$rcp_id' AND USER_ID = '$user_id'";
@@ -247,6 +259,7 @@
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+						throw new Exception("Failed to update the review for the recipe");
 					}
 				}
 				//user is reviewing for the first time
@@ -270,6 +283,7 @@
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not review the recipe('$rcp_id') successfully.");
+						throw new Exception("Failed to review the recipe");
 					} 
 				}
 				//check if user already reviewed the $rcp_id
@@ -286,15 +300,21 @@
 
 				array_push($result_array, $temp_array); 
 				
-				//response
-				echo json_encode($result_array);
-				//response
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Somethig went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				//response
+				echo json_encode($result_array);
 			}
 		}
 		

@@ -76,35 +76,35 @@
 		}
 		
 		public static function databaseEmail($type){
+			//emails
+			$recepientEmails = array();
+			$recepientEmails[count($recepientEmails)] = MAIL_RECEPIENT_ADMIN_EMAIL_1;
+
+			//names
+			$recepientNames = array();
+			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
+
+			//attachments
+			date_default_timezone_set(LOGS_TIMEZONE);
+			$today = date(LOGS_FILE_FORMAT);
+			$now = date(LOGS_TIMESTAMP_FORMAT);
+
+			$attachments = array();
+
+			LoggerUtil::checkFile("info");
+			$file = LOGS_DIRECTORY.$today."_info.log";
+			$attachments[count($attachments)] = $file;
+
+			LoggerUtil::checkFile("error");
+			$file = LOGS_DIRECTORY.$today."_error.log";
+			$attachments[count($attachments)] = $file;
+
+			LoggerUtil::checkFile("all");
+			$file = LOGS_DIRECTORY.$today."_all.log";
+			$attachments[count($attachments)] = $file;
+			//attachments
+			
 			if(DATABASE_CONNECTION_LEAK == $type){
-				//emails
-				$recepientEmails = array();
-				$recepientEmails[count($recepientEmails)] = MAIL_RECEPIENT_ADMIN_EMAIL_1;
-
-				//names
-				$recepientNames = array();
-				$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
-
-				//attachments
-				date_default_timezone_set(LOGS_TIMEZONE);
-				$today = date(LOGS_FILE_FORMAT);
-				$now = date(LOGS_TIMESTAMP_FORMAT);
-
-				$attachments = array();
-
-				LoggerUtil::checkFile("info");
-				$file = LOGS_DIRECTORY.$today."_info.log";
-				$attachments[count($attachments)] = $file;
-
-				LoggerUtil::checkFile("error");
-				$file = LOGS_DIRECTORY.$today."_error.log";
-				$attachments[count($attachments)] = $file;
-
-				LoggerUtil::checkFile("all");
-				$file = LOGS_DIRECTORY.$today."_all.log";
-				$attachments[count($attachments)] = $file;
-				//attachments
-
 				//bodies
 				$bodies = array();
 				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_ERROR_MODERATE_CONTENT);
@@ -115,7 +115,7 @@
 					$body = str_replace("[SECONDARY_CONTENT_ERROR_CRITICAL]", "<br/>
 					<b>What happened ? </b>
 					<br/>
-					Database connection was leaked. Found multiple connections being open.
+					Database connections were leaked. Found multiple connections being open.
 					<br/>
 					<br/>
 					<b>Why it happened ? </b>
@@ -128,13 +128,39 @@
 					$body = str_replace("[TERTIARY_CONTENT_ERROR_CRITICAL]", "", $body);
 					$bodies[$i] = $body;
 				}
-
-				self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, MAIL_TEMPLATE_ERROR_MODERATE_SUBJECT, $bodies, $attachments);
-				//emails
+			}
+			else if(DATABASE_TRANSACTION_LEAK == $type){
+				//bodies
+				$bodies = array();
+				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_ERROR_MODERATE_CONTENT);
+				for ($i = 0; $i < count($recepientEmails); $i++) {
+					$body = $temp;
+					$body = str_replace("[USERNAME]", $recepientNames[$i], $body);
+					$body = str_replace("[PRIMARY_CONTENT_ERROR_CRITICAL]", "<font style=\"color: red\">There seems to be a moderate error. It may need your attention.</font>", $body);
+					$body = str_replace("[SECONDARY_CONTENT_ERROR_CRITICAL]", "<br/>
+					<b>What happened ? </b>
+					<br/>
+					Database transactions were leaked. Found multiple transactions being started.
+					<br/>
+					<br/>
+					<b>Why it happened ? </b>
+					<br/>
+					This generally happens if the transaction was started and was never ended. 
+					Ensure that there are no more than one transaction opened per service request & transaction is ended in the finally block of each service request. 
+					See attached log files to identify the crime scene.
+					<br/><br/>
+					<b>When it happened ? </b><br/>This happened at ".$now, $body);
+					$body = str_replace("[TERTIARY_CONTENT_ERROR_CRITICAL]", "", $body);
+					$bodies[$i] = $body;
+				}
 			}
 			else{
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+				return;
 			}
+			
+			self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, MAIL_TEMPLATE_ERROR_MODERATE_SUBJECT, $bodies, $attachments);
+			//emails
 		}
 		
 		public static function sendMailFrom($from, $recipientEmails, $recipientNames, $subject, $bodies, $attachments){

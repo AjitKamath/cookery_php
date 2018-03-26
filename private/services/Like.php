@@ -272,6 +272,9 @@
 
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
 
 				//check if $user_id has already liked $type & $type_id
 				$query = "SELECT LIKE_ID, IS_DEL FROM LIKES WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
@@ -410,16 +413,22 @@
 				//get total likes for the $type & $type_id
 				$result_array['likesCount'] = self::getLikeCount($con, $type, $type_id);
 
-
-				//response
-				echo json_encode($result_array);
-				//response
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				//response
+				echo json_encode($result_array);
+				//response
 			}
 		}
 	}

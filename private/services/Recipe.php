@@ -1376,41 +1376,51 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
 				//delete recipe
 				$query = "UPDATE `RECIPE` SET IS_DEL = 'Y' WHERE RCP_ID = '".$rcp_id."' AND USER_ID = '".$user_id."'";
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Recipe('$rcp_id') successfully deleted by the user('$user_id')");
 					
-					$result_arr["err_code"]="0";
-					$result_arr["isError"]=false;
-					$result_arr["err_message"]="Recipe deleted !";
+					$result_arr["err_code"] = "0";
+					$result_arr["isError"] = false;
+					$result_arr["err_message"] = "Recipe deleted !";
 					
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id, DEFAULT_SCOPE_ID);
 					//register timeline
 				}
 				else{
-					$result_arr["err_code"]="1";
-					$result_arr["isError"]=true;
-					$result_arr["err_message"]="Recipe delete failed !";
+					$result_arr["err_code"] = "1";
+					$result_arr["isError"] = true;
+					$result_arr["err_message"] = "Recipe delete failed !";
 					
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Recipe('$rcp_id') could not be deleted by the user('$user_id')");
+					throw new Exception("Failed to delete recipe");
 				} 
-				
-				echo json_encode($result_arr);
 				//delete recipe
+				
+				//transaction end
+				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				
 				$result_arr["err_code"]="1";
 				$result_arr["isError"]=true;
 				$result_arr["err_message"]="Recipe delete failed !";
-				echo json_encode($result_arr);
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				echo json_encode($result_arr);
 			}
 		}
 	}
