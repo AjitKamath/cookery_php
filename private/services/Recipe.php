@@ -256,6 +256,7 @@
 					
 					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
 					$temp_array['likesCount'] = Like::getLikeCount($con, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					$temp_array['commentsCount'] = Comment::getCommentsCount($con, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
 					
 					array_push($result_array, $temp_array); 
 				}
