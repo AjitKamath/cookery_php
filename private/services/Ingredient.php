@@ -15,16 +15,16 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT ING_ID, ING_NAME, IMG 
-							FROM `INGREDIENT` 
-							WHERE ING_NAME LIKE '%$searchQuery%'
+				$query = "SELECT ING_AKA_ID, ING_AKA_NAME, IMG 
+							FROM `ING_AKA` 
+							WHERE ING_AKA_NAME LIKE '%$searchQuery%'
 							AND IS_REG = 'Y'";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
 				while($result_data = $result->fetch_object()) {
-					$temp_array['ING_ID'] = $result_data->ING_ID;
-					$temp_array['ING_NAME'] = $result_data->ING_NAME;
+					$temp_array['ING_AKA_ID'] = $result_data->ING_AKA_ID;
+					$temp_array['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;
 					$temp_array['IMG'] = $result_data->IMG;
 					
 					array_push($result_array, $temp_array);
@@ -63,7 +63,7 @@
 				$result_array = array();
 				while($result_data = $result->fetch_object()) 
 				{
-					$subquery = "Select count(ING_ID) AS ITEMS FROM `USER_ING_LIST_ITEM` WHERE USER_ING_LIST_ID = '$result_data->USER_ING_LIST_ID'";			
+					$subquery = "Select count(ING_AKA_ID) AS ITEMS FROM `USER_ING_LIST_ITEM` WHERE USER_ING_LIST_ID = '$result_data->USER_ING_LIST_ID'";			
 					$subresult = mysqli_query($con, $subquery);
 					while($subresult_data = $subresult->fetch_object()) 
 					{
@@ -106,7 +106,7 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 								
 					$query = "SELECT * FROM USER_ING_LIST UIL INNER JOIN USER_ING_LIST_ITEM UILI ON UIL.USER_ING_LIST_ID = UILI.USER_ING_LIST_ID
-										INNER JOIN INGREDIENT ING ON UILI.ING_ID = ING.ING_ID 
+										INNER JOIN ING_AKA ING ON UILI.ING_AKA = ING.ING_AKA 
 										WHERE UIL.USER_ING_LIST_ID = '$list_id'";			
 					$result = mysqli_query($con, $query);
 
@@ -115,8 +115,8 @@
 					{
 						$data['LIST_ID'] = $result_data->USER_ING_LIST_ID;
 						$data['LIST_NAME'] = $result_data->ING_LIST_NAME;
-						$data['ING_ID'] = $result_data->ING_ID;	
-						$data['ING_NAME'] = $result_data->ING_NAME;	
+						$data['ING_AKA_ID'] = $result_data->ING_AKA_ID;	
+						$data['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;	
 						$data['IS_CHECKED'] = $result_data->IS_CHECKED;	
 						
 						array_push($result_array, $data);
@@ -206,14 +206,14 @@
 							{
 								if($listofingredients[$i] == 0)
 								{
-									$query = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$nameofingredients[$i]' , CURRENT_TIMESTAMP)";
+									$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$nameofingredients[$i]' , CURRENT_TIMESTAMP)";
 									if(mysqli_query($con, $query))
 									{
 										$listofingredients[$i] = mysqli_insert_id($con); 
-										LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$listofingredients[$i].") added into INGREDIENT table");
+										LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$listofingredients[$i].") added into ING_AKA table");
 									}					
 								}
-								$subquery = "INSERT INTO `USER_ING_LIST_ITEM` (ING_ID, USER_ING_LIST_ID, IS_CHECKED,
+								$subquery = "INSERT INTO `USER_ING_LIST_ITEM` (ING_AKA_ID, USER_ING_LIST_ID, IS_CHECKED,
 												CREATE_DTM, MOD_DTM) VALUES ('$listofingredients[$i]', '$list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
 								if(mysqli_query($con, $subquery))
 								{
@@ -251,11 +251,11 @@
 				DatabaseUtil::getInstance()->close_connection($con);
 			}
 	}
-		public static function updateUserIngedrientListFromRecipe($list_id, $ing_id)
+		public static function updateUserIngedrientListFromRecipe($list_id, $ing_aka_id)
 		{
 			//request start
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : listid(".$list_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ingredientid(".$ing_id.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ingredientid(".$ing_aka_id.")");
 			
 			//request ends
 			
@@ -266,9 +266,9 @@
 					return;
 			 }
 			
-			 if(!Util::check_for_null($ing_id))
+			 if(!Util::check_for_null($ing_aka_id))
 			 {
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_aka_id");
 					return;
 			 }
 			
@@ -279,11 +279,11 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
 				
-					$query = "INSERT INTO `USER_ING_LIST_ITEM` (ING_ID, USER_ING_LIST_ID, IS_CHECKED,
-												CREATE_DTM, MOD_DTM) VALUES ('$ing_id', '$list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
+					$query = "INSERT INTO `USER_ING_LIST_ITEM` (ING_AKA_ID, USER_ING_LIST_ID, IS_CHECKED,
+												CREATE_DTM, MOD_DTM) VALUES ('$ing_aka_id', '$list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
 					if(mysqli_query($con, $query))
 					{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$ing_id.") in List(".$list_id.") added into USER_ING_LIST_ITEM table");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$ing_aka_id.") in List(".$list_id.") added into USER_ING_LIST_ITEM table");
 					}
 					else
 					{
@@ -360,14 +360,14 @@
 							{
 								if($listofingredients[$i] == 0)
 								{
-									$query = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$nameofingredients[$i]' , CURRENT_TIMESTAMP)";
+									$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$nameofingredients[$i]' , CURRENT_TIMESTAMP)";
 									if(mysqli_query($con, $query))
 									{
 										$listofingredients[$i] = mysqli_insert_id($con); 
-										LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$listofingredients[$i].") added into INGREDIENT table");
+										LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$listofingredients[$i].") added into ING_AKA table");
 									}					
 								}
-								$subquery = "INSERT INTO `USER_ING_LIST_ITEM` (ING_ID, USER_ING_LIST_ID, IS_CHECKED,
+								$subquery = "INSERT INTO `USER_ING_LIST_ITEM` (ING_AKA_ID, USER_ING_LIST_ID, IS_CHECKED,
 												CREATE_DTM, MOD_DTM) VALUES ('$listofingredients[$i]', '$temp_list_id', 'N', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";			
 								if(mysqli_query($con, $subquery))
 								{

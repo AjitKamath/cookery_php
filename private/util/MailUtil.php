@@ -45,7 +45,7 @@
 		}
 		
 		public static function recipeEmail($type, $recipientMail, $recipientName, $subject, $recipeImage, $recipeName){
-			if(RECIPE_SUBMIT == $type){
+			if(RECIPE_SUBMIT == $type || RECIPE_MODIFY == $type || RECIPE_REMOVE == $type){
 				//emails
 				$recepientEmails = array();
 				$recepientEmails[count($recepientEmails)] = $recipientMail;
@@ -60,7 +60,20 @@
 				for ($i = 0; $i < count($recepientEmails); $i++) {
 					$body = $temp;
 					$body = str_replace("[APP_NAME]", APP_NAME, $body);
-					$body = str_replace("[TITLE]", "Woohoo ! We got your Recipe.<br/>Yes, we are excited too ! Lets roll !", $body);
+					
+					if(RECIPE_SUBMIT == $type){
+						$body = str_replace("[TITLE]", "Woohoo ! We got your Recipe.<br/>Yes, we are excited too ! Lets roll !", $body);
+					}
+					else if(RECIPE_MODIFY == $type){
+						$body = str_replace("[TITLE]", "You just made your recipe more tasty !", $body);
+					}
+					else if(RECIPE_REMOVE == $type){
+						$body = str_replace("[TITLE]", "That's sad ! Let us know if we can help you improve your recipe", $body);
+					}
+					else{
+						$body = str_replace("[TITLE]", "Oops !", $body);
+					}
+					
 					$body = str_replace("[RECIPE_IMAGE]", $recipeImage, $body);
 					$body = str_replace("[RECIPE_NAME]", $recipeName, $body);
 					$body = str_replace("[SUPPORT_EMAIL]", MAIL_REPLY_EMAIL, $body);

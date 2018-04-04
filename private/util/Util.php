@@ -151,6 +151,10 @@
 			return str_replace(HOME_DIRECTORY,"",$absolute_path);
 		}
 		
+		public static function getAbsolutePath($relativePath){
+			return HOME_DIRECTORY.$relativePath;
+		}
+		
 		public static function getSmartDecimal($decimal){
 			if($decimal == 0 || $decimal == "0.0"){
 				return 0;

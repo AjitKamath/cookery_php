@@ -39,8 +39,8 @@
 	$user_id 		= isset($_POST['user_id']) ? $_POST['user_id'] : '';
 	$rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
 	$food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
-	$ing_id         = isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
-	$ing_nm         = isset($_POST['ing_nm']) ? $_POST['ing_nm'] : '';
+	$ing_aka_id     = isset($_POST['ing_aka_id']) ? $_POST['ing_aka_id'] : '';
+	$ing_aka_name   = isset($_POST['ing_aka_name']) ? $_POST['ing_aka_name'] : '';
 	$qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
 	$ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
 	$rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
@@ -135,7 +135,7 @@
 		echo Recipe::fetchUserReviewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_SUBMIT == $function_key){
-		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
+		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $qty_id, $ing_qty, 
 								  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	else if(RECIPE_SEARCH == $function_key){
@@ -174,7 +174,7 @@
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT == $function_key){
-		echo Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_id , $ing_nm);
+		echo Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_aka_id , $ing_aka_name);
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
@@ -182,10 +182,10 @@
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
-		echo Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_id , $ing_nm);
+		echo Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_aka_id , $ing_aka_name);
 	}
 	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT_FROM_RECIPE == $function_key){
-		echo Ingredient::updateUserIngedrientListFromRecipe($list_id, $ing_id );
+		echo Ingredient::updateUserIngedrientListFromRecipe($list_id, $ing_aka_id );
 	}
 	//ingredient
 	

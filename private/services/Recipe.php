@@ -55,11 +55,12 @@
 							FROM RECIPE AS RCP
 							INNER JOIN USER AS USR ON USR.USER_ID = RCP.USER_ID 
 							INNER JOIN DISH AS DSH ON DSH.RCP_ID = RCP.RCP_ID
-							INNER JOIN INGREDIENT AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
+							INNER JOIN ING_AKA AS ING_AKA ON ING_AKA.ING_AKA_ID = DSH.ING_AKA_ID
 							WHERE (RCP_NAME LIKE '%".$searchQuery."%'
-							OR ING_NAME LIKE '%".$searchQuery."%' 
+							OR ING_AKA_NAME LIKE '%".$searchQuery."%' 
 							OR USR.NAME LIKE '%".$searchQuery."%')
 							AND RCP.IS_DEL = 'N'
+							AND ING_AKA.IS_REG = 'Y'
 							LIMIT 10";
 				
 				$result = mysqli_query($con, $query);
@@ -145,17 +146,17 @@
 			
 			try{
 				//fetch primary recipe image
-				$query = "SELECT ING.ING_ID, ING.ING_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
+				$query = "SELECT ING_AKA.ING_AKA_ID, ING_AKA.ING_AKA_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
 								INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
-								INNER JOIN  `INGREDIENT` AS ING ON ING.ING_ID = DSH.ING_OR_AKA_ID
+								INNER JOIN  `ING_AKA` AS ING_AKA ON ING_AKA.ING_AKA_ID = DSH.ING_AKA_ID
 								INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
 								WHERE RCP.RCP_ID = '$rcp_id' ";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
 				while($result_data = $result->fetch_object()){
-					$temparr['ING_ID'] = $result_data->ING_ID;
-					$temparr['ING_NAME'] = $result_data->ING_NAME;
+					$temparr['ING_AKA_ID'] = $result_data->ING_AKA_ID;
+					$temparr['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;
 					$temparr['QTY_NAME'] = $result_data->QTY_NAME;
 					$temparr['ING_QTY'] = $result_data->ING_QTY;
 
@@ -204,6 +205,35 @@
 			}
 		}
 		
+		public static function getRecipeName($con, $rcp_id){
+			//request
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
+			//request
+			
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				return;
+			}
+			
+			try{
+				//fetch recipe name
+				$query = "SELECT RCP_NAME FROM RECIPE WHERE RCP_ID = '".$rcp_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_obj = $result->fetch_object()){
+					return $result_obj->RCP_NAME;
+				}
+				//fetch recipe name
+				
+				return "";
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+			}
+		}
+		
 		public static function getRecipeImages($con, $user_id, $rcp_id){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
@@ -237,7 +267,7 @@
 			}
 		}
 		
-		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_id, $ing_nm, $qty_id, $ing_qty, 
+		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_nm, $qty_id, $ing_qty, 
 											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
 			//request
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
@@ -251,12 +281,12 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_steps[".$i."](".$rcp_steps[$i].")");
 			}
 
-			for ($i = 0; $i < count($ing_id); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_id[".$i."](".$ing_id[$i].")");
+			for ($i = 0; $i < count($ing_aka_id); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_aka_id[".$i."](".$ing_aka_id[$i].")");
 			}
 
-			for ($i = 0; $i < count($ing_nm); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_nm[".$i."](".$ing_nm[$i].")");
+			for ($i = 0; $i < count($ing_aka_nm); $i++) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_aka_nm[".$i."](".$ing_aka_nm[$i].")");
 			}
 
 			for ($i = 0; $i < count($qty_id); $i++) {
@@ -303,8 +333,8 @@
 				return;
 			}
 
-			if(count($ing_id) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_id");
+			if(count($ing_aka_id) == 0){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_aka_id");
 				return;
 			}
 
@@ -344,15 +374,15 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty rcp_id");
 			}
 
-			if(!Util::check_for_null($ing_nm)){
+			if(!Util::check_for_null($ing_aka_nm)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty ing_nm");
 			}
 			//optional
 			//check for null/empty
 
 			//validations
-			$ing_count = count($ing_id);
-			if(count($ing_nm) != $ing_count || count($ing_qty) != $ing_count || count($qty_id) != $ing_count){
+			$ing_count = count($ing_aka_id);
+			if(count($ing_aka_nm) != $ing_count || count($ing_qty) != $ing_count || count($qty_id) != $ing_count){
 
 			}
 			//validations
@@ -391,28 +421,28 @@
 						//delete the old ingredients in DISH table
 
 						//update/insert ingredients into DISH table
-						for($i = 0; $i< count($ing_id); $i++){
-							$temp_ing_id = $ing_id[$i];
+						for($i = 0; $i< count($ing_aka_id); $i++){
+							$temp_ing_aka_id = $ing_aka_id[$i];
 
-							//if the $ing_id[i] is empty/null, user has entered custom ingredient. insert it in INGREDIENT table then in DISH table
-							if($temp_ing_id == null || $temp_ing_id == ''){
-								$query = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP)";
+							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
+							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
+								$query = "INSERT INTO `ING_AKA` ( `ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$ing_aka_nm' , CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
-									$temp_ing_id = mysqli_insert_id($con); 
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_id.") added into INGREDIENT table");
+									$temp_ing_aka_id = mysqli_insert_id($con); 
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");
 								}
 								else{
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into INGREDIENT table.");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into ING_AKA table.");
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
-									throw new Exception("Failed to insert into INGREDIENT table");
+									throw new Exception("Failed to insert into ING_AKA table");
 								}
 							}
-							//if the $ing_id[i] is empty/null, user has entered custom ingredient. insert it in INGREDIENT table then in DISH table
+							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 
 							//insert into DISH table
-							$query = "INSERT INTO `DISH` (`RCP_ID` , `ING_OR_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) 
-										VALUES ('$rcp_id' , '$temp_ing_id' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
+							$query = "INSERT INTO `DISH` (`RCP_ID` , `ING_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) 
+										VALUES ('$rcp_id' , '$temp_ing_aka_id' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
 							if(mysqli_query($con, $query)){
 								$dish_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$dish_id.") added into DISH table");
@@ -524,6 +554,7 @@
 					//prepare directories
 
 					$upload_failed = false;
+					$primaryRecipeImage = "";
 					for($i = 0; $i< count($rcp_images['tmp_name']); $i++){
 						try{
 							$recipe_image = $recipe_images_dir.uniqid().".jpg";
@@ -548,6 +579,10 @@
 								move_uploaded_file($tmpFilePath, $recipe_image);
 								$atleast_one_uploaded = true;
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$recipe_image.") uploaded");
+								
+								if(!Util::check_for_null($primaryRecipeImage)){
+									$primaryRecipeImage = $recipe_image;
+								} 
 							}
 						}
 						catch(Exception $e){
@@ -568,6 +603,9 @@
 					}
 					else{
 						$response['err_message'] = "Recipe has been updated !";
+						
+						Timeline::addTimeline($con, $user_id, $user_id, RECIPE_MODIFY, $rcp_id, DEFAULT_SCOPE_ID);
+						MailUtil::recipeEmail(RECIPE_MODIFY, User::getEmail($con, $user_id), User::getUsername($con, $user_id), "Your Recipe is Updated", $primaryRecipeImage, $rcp_nm);
 					}
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 
@@ -588,28 +626,28 @@
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") added into RECIPE table by User(".$user_id.")");
 
 						//insert ingredients into DISH table
-						for($i = 0; $i< count($ing_id); $i++){
-							$temp_ing_id = $ing_id[$i];
+						for($i = 0; $i< count($ing_aka_id); $i++){
+							$temp_ing_aka_id = $ing_aka_id[$i];
 
-							//if the $ing_id[i] is empty/null, user has entered custom ingredient. insert it in INGREDIENT table then in DISH table
-							if($temp_ing_id == null || $temp_ing_id == ''){
-								$query = "INSERT INTO `INGREDIENT` (`ING_NAME` , `CREATE_DTM`) VALUES ('$ing_nm' , CURRENT_TIMESTAMP)";
+							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
+							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
+								$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$ing_aka_nm' , CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
-									$temp_ing_id = mysqli_insert_id($con); 
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_id.") added into INGREDIENT table");
+									$temp_ing_aka_id = mysqli_insert_id($con); 
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");
 								}
 								else{
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into INGREDIENT table.");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into ING_AKA table.");
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
-									throw new Exception("Failed to insert into INGREDIENT table");
+									throw new Exception("Failed to insert into ING_AKA table");
 								}
 							}
-							//if the $ing_id[i] is empty/null, user has entered custom ingredient. insert it in INGREDIENT table then in DISH table
+							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 
 							//insert into DISH table
-							$query = "INSERT INTO `DISH` (`RCP_ID` , `ING_OR_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) 
-										VALUES ('$rcp_id' , '$temp_ing_id' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
+							$query = "INSERT INTO `DISH` (`RCP_ID` , `ING_AKA_ID` , `QTY_ID` , `ING_QTY` , `CREATE_DTM`) 
+										VALUES ('$rcp_id' , '$temp_ing_aka_id' , '$qty_id[$i]' , '$ing_qty[$i]' , CURRENT_TIMESTAMP)";
 							if(mysqli_query($con, $query)){
 								$dish_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$dish_id.") added into DISH table");
@@ -707,9 +745,8 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$recipe_image.") uploaded");
 								
 								if(!Util::check_for_null($primaryRecipeImage)){
-									$primaryRecipeImage = FILE_SERVER_PATH.Util::get_relative_path($recipe_image);
+									$primaryRecipeImage = $recipe_image;
 								}  
-								
 							}
 						}
 						catch(Exception $e){
@@ -1389,9 +1426,13 @@
 					$result_arr["isError"] = false;
 					$result_arr["err_message"] = "Recipe deleted !";
 					
+					$primaryRecipeImage = array_slice(self::getRecipePrimaryImage($con, $user_id, $rcp_id), 0);
+					$rcp_nm = self::getRecipeName($con, $rcp_id);
+					
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id, DEFAULT_SCOPE_ID);
-					//register timeline
+					MailUtil::recipeEmail(RECIPE_REMOVE, User::getEmail($con, $user_id), User::getUsername($con, $user_id), "Your Recipe is Deleted", 
+										  Util::getAbsolutePath($primaryRecipeImage[0]["RCP_IMG"]), $rcp_nm);
 				}
 				else{
 					$result_arr["err_code"] = "1";
