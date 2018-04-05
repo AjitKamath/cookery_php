@@ -1,13 +1,9 @@
 <?php
 	class Recipe{
 		public static function getRecipesCount($con, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 				return;
 			}
 			
@@ -25,24 +21,19 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function searchRecipes($user_id, $searchQuery){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : query(".$searchQuery.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 				return;
 			}
 			
 			if(!Util::check_for_null($searchQuery)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty searchQuery");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."searchQuery");
 				return;
 			}
 			//check for null/empty
@@ -100,7 +91,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -108,13 +99,9 @@
 		}
 		
 		public static function getRecipeAvgRating($con, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -129,18 +116,14 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeIngredients($con, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -166,18 +149,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipePrimaryImage($con, $user_id, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -201,18 +180,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeName($con, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -230,18 +205,14 @@
 				return "";
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeImages($con, $user_id, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -264,108 +235,66 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_nm, $qty_id, $ing_qty, 
 											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_nm(".$rcp_nm.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_csn_nm(".$food_csn_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : food_typ_id(".$food_typ_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-
-			//arrays
-			for ($i = 0; $i < count($rcp_steps); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_steps[".$i."](".$rcp_steps[$i].")");
-			}
-
-			for ($i = 0; $i < count($ing_aka_id); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_aka_id[".$i."](".$ing_aka_id[$i].")");
-			}
-
-			for ($i = 0; $i < count($ing_aka_nm); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_aka_nm[".$i."](".$ing_aka_nm[$i].")");
-			}
-
-			for ($i = 0; $i < count($qty_id); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : qty_id[".$i."](".$qty_id[$i].")");
-			}
-
-			for ($i = 0; $i < count($ing_qty); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : ing_qty[".$i."](".$ing_qty[$i].")");
-			}
-
-			for ($i = 0; $i < count($tst_id); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : tst_id[".$i."](".$tst_id[$i].")");
-			}
-
-			for ($i = 0; $i < count($tst_qty); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : tst_qty[".$i."](".$tst_qty[$i].")");
-			}
-
-			for ($i = 0; $i < count($rcp_images['tmp_name']); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_images[".$i."](".$rcp_images['tmp_name'][$i].")");
-			} 
-			//arrays
-			//request
-
 			//check for null/empty
 			//mandatory
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id)");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id)");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_nm)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_nm");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_nm");
 				return;
 			}
 
 			if(!Util::check_for_null($food_typ_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food_typ_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."food_typ_id");
 				return;
 			}
 
 			if(!Util::check_for_null($food_csn_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food_csn_nm");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."food_csn_nm");
 				return;
 			}
 
 			if(count($ing_aka_id) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_aka_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ing_aka_id");
 				return;
 			}
 
 			if(!Util::check_for_null($qty_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty qty_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."qty_id");
 				return;
 			}
 
 			if(!Util::check_for_null($ing_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ing_qty");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ing_qty");
 				return;
 			}
 
 			if(!Util::check_for_null($tst_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty tst_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tst_id");
 				return;
 			}
 
 			if(!Util::check_for_null($tst_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty tst_qty");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tst_qty");
 				return;
 			}  
 
 			if(count($rcp_images['name']) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_images");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_images");
 				return;
 			}
 
 			if(count($rcp_steps) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_steps");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_steps");
 				return;
 			}
 			//mandatory
@@ -787,7 +716,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				$response['err_message'] = "FAIL";
 				$response['isError'] = true;
 
@@ -799,13 +728,9 @@
 		}
 		
 		public static function getRecipeSteps($con, $rcp_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			//check for null/empty
@@ -825,24 +750,19 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function fetchUserViewedRecipes($user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -925,7 +845,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -933,19 +853,14 @@
 		}
 		
 		public static function fetchUserReviewedRecipes($user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -1029,7 +944,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1037,19 +952,14 @@
 		}
 		
 		public static function fetchUsersRecipes($user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -1122,7 +1032,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1130,19 +1040,14 @@
 		}
 		
 		public static function fetchFavoriteRecipes($user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -1223,7 +1128,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1231,19 +1136,14 @@
 		}
 		
 		public static function fetchRecipeReview($rcp_id, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp id");
 				return;
 			}
 			//check for null/empty
@@ -1271,7 +1171,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1279,19 +1179,14 @@
 		}
 		
 		public static function fetchRecipe($rcp_id, $user_id){
-			//params
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//params
-
 			//validations
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty recipe id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipe id");
 				return;
 			}
 
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			//validations
@@ -1394,19 +1289,14 @@
 		}
 		
 		public static function deleteRecipe($rcp_id, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rcp_id(".$rcp_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp id");
 				return;
 			}
 			//check for null/empty
@@ -1450,7 +1340,7 @@
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				
 				$result_arr["err_code"]="1";
 				$result_arr["isError"]=true;

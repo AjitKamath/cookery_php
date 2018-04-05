@@ -193,16 +193,16 @@
             
             //check for null/empty
 			if(!Util::check_for_null($from)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty from");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."from");
 				return;
 			}
 			
             if(count($recipientEmails) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty recipientEmails");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipientEmails");
 				return;
 			}
             if(count($recipientNames) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty recipientNames");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipientNames");
 				return;
 			}
 			if(Util::check_for_null($attachments)){
@@ -211,11 +211,11 @@
 				}
 			}
             if(!Util::check_for_null($subject)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty subject");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."subject");
 				return;
 			}
             if(!Util::check_for_null($bodies)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty body");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."body");
 				return;
 			}
             

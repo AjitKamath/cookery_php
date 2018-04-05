@@ -1,6 +1,8 @@
 <?php
 	class Security{
 		public static function authenticateAPI($headers){
+			LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "Authenticating request ..");
+			
 			if ( array_key_exists(API_KEY_IDENTFIER, $headers) ) {
 				$api_key = $headers[ API_KEY_IDENTFIER ];
 			}
@@ -23,7 +25,6 @@
 				return false;
 			}
 			else if($api_key == API_KEY_ANDROID){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "!!!!! SECURITY PASSED !!!!!");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST SOURCE	: ANDROID");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "API KEY		: ".$api_key);
@@ -31,7 +32,6 @@
 				return true;
 			}
 			else if($api_key == API_KEY_WEB){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "!!!!! SECURITY PASSED !!!!!");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST SOURCE	: WEB");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "API KEY		: ".$api_key);
@@ -39,7 +39,6 @@
 				return true;
 			}
 			else{
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "!!!!! SECURITY FAILED !!!!!");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "REQUEST SOURCE	: UNKNOWN");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "API KEY		: ".$api_key);

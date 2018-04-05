@@ -1,25 +1,19 @@
 <?php
 	class User{
 		public static function searchUsers($search_query, $logged_in_user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$search_query.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($search_query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty search_query");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."search_query");
 					return;
 			}
 			
 			if(!Util::check_for_null($logged_in_user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."logged_in_user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($index)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 					return;
 			}
 			//check for null/empty
@@ -57,7 +51,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -65,25 +59,19 @@
 		}
 		
 		public static function fetchUserFollowers($user_id, $logged_in_user_id, $index){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($logged_in_user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."logged_in_user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($index)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 					return;
 			}
 			//check for null/empty
@@ -117,7 +105,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -125,25 +113,19 @@
 		}
 		
 		public static function fetchUserFollowings($user_id, $logged_in_user_id, $index){
-			//request
-      		LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : logged_in_user_id(".$logged_in_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($logged_in_user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty logged_in_user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."logged_in_user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($index)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
 					return;
 			}
 			//check for null/empty
@@ -177,7 +159,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -185,20 +167,14 @@
 		}
 		
 		public static function fetchUser($user_id, $flwr_user_id, $forWhom){
-			//request
-      		LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : forWhom(".$forWhom.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 					return;
 			}
 			
 			if(!Util::check_for_null($forWhom)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty forWhom");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."forWhom");
 					return;
 			}
 			//check for null/empty
@@ -260,7 +236,7 @@
 						
 						//check if logged in user is following the user
 						if(!Util::check_for_null($flwr_user_id)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."flwr_user_id");
 							return;
 						}
 						
@@ -293,7 +269,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -301,13 +277,9 @@
 		}
 		
 		public static function getScopeName($con, $scope_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : scope_id(".$scope_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($scope_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty scope_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."scope_id");
 				return;
 			}
 			//check for null/empty
@@ -323,24 +295,19 @@
 				//fetch scope name
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getIsUserFollowing($con, $flwr_user_id, $flws_user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flws_user_id(".$flws_user_id.")");
-			//request
-			
 			//check for null/empty
 			if(!Util::check_for_null($flwr_user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."flwr_user_id");
 				return;
 			}
 			
 			if(!Util::check_for_null($flws_user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flws_user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."flws_user_id");
 				return;
 			}
 			//check for null/empty
@@ -360,27 +327,19 @@
 				return false;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function updateUserImage($user_id, $image){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			
-			for ($i = 0; $i < count($image['tmp_name']); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : image[".$i."](".$image['tmp_name'][$i].")");
-			} 
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(count($image) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty image");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."image");
 				return;
 			}
 			//check for null/empty
@@ -451,7 +410,7 @@
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				echo "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
 				
 				//roll back
@@ -463,25 +422,19 @@
 		}
 		
 		public static function updateUserGender($user_id, $gender, $gender_scope_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : gender(".$gender.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : gender_scope_id(".$gender_scope_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($gender)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty gender");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."gender");
 				return;
 			}
 			
 			if(!Util::check_for_null($gender_scope_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty gender_scope_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."gender_scope_id");
 				return;
 			}
 			//check for null/empty
@@ -531,7 +484,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -539,25 +492,19 @@
 		}
 		
 		public static function updateUserPhone($user_id, $mobile, $mobile_scope_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile(".$mobile.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : mobile_scope_id(".$mobile_scope_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($mobile)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty mobile");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."mobile");
 				return;
 			}
 			
 			if(!Util::check_for_null($mobile_scope_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty mobile_scope_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."mobile_scope_id");
 				return;
 			}
 			//check for null/empty
@@ -611,7 +558,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -619,25 +566,19 @@
 		}
 		
 		public static function updateUserPassword($user_id, $password, $new_password){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : password(".$password.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : new password(".$new_password.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($password)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty password");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."password");
 				return;
 			}
 			
 			if(!Util::check_for_null($new_password)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty new password");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."new password");
 				return;
 			}
 			//check for null/empty
@@ -683,7 +624,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -691,19 +632,14 @@
 		}
 		
 		public static function updateUserName($user_id, $name){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : name(".$name.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($name)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty name");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."name");
 				return;
 			}
 			//check for null/empty
@@ -725,7 +661,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -733,25 +669,19 @@
 		}
 		
 		public static function updateUserEmail($user_id, $email, $email_scope_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email_scope_id(".$email_scope_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($email)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email");
 				return;
 			}
 			
 			if(!Util::check_for_null($email_scope_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email_scope_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email_scope_id");
 				return;
 			}
 			//check for null/empty
@@ -811,7 +741,7 @@
 				
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -819,19 +749,14 @@
 		}
 		
 		public static function verifyEmail($email, $veri_code){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : veri code(".$veri_code.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($email)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email");
 				return;
 			}
 			
 			if(!Util::check_for_null($veri_code)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty veri_code");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."veri_code");
 				return;
 			}
 			//check for null/empty
@@ -882,7 +807,7 @@
 				//update VERI_CODE & VERI_CODE_DTM
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -891,19 +816,14 @@
 		
 		
 		public static function submitFollowUser($flwr_user_id, $flws_user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flwr_user_id(".$flwr_user_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : flws_user_id(".$flws_user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($flwr_user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flwr_user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."flwr_user_id");
 				return;
 			}
 
 			if(!Util::check_for_null($flws_user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty flws_user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."flws_user_id");
 				return;
 			}
 			//check for null/empty
@@ -984,7 +904,7 @@
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
@@ -998,13 +918,9 @@
 		}
 		
 		public static function getFollowersCount($con, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 				return;
 			}
 			//check for null/empty
@@ -1023,18 +939,14 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getFollowingCount($con, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
 				return;
 			}
 			//check for null/empty
@@ -1053,24 +965,19 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function login($email, $password){
-			//request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : password(".$password.")");
-            //request
-
-            //check for null/empty
+			//check for null/empty
             if(!Util::check_for_null($email)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email");
                 return;
             }
 
             if(!Util::check_for_null($password)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty password");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."password");
                 return;
             }
             //check for null/empty
@@ -1106,7 +1013,7 @@
 				echo json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1114,13 +1021,9 @@
 		}
 		
 		public static function userRegisterCheck($email){
-		//request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
-			//request
-
-            //check for null/empty
+			//check for null/empty
             if(!Util::check_for_null($email)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email");
                 return;
             }
 			//check for null/empty
@@ -1143,7 +1046,7 @@
 					echo json_encode($result_array);
 				}
 				catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1152,19 +1055,14 @@
 		}
 		
 		public static function register($email, $password, $name){
-			//request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : email(".$email.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : namegit a(".$name.")");
-			//request
-
-            //check for null/empty
+			//check for null/empty
             if(!Util::check_for_null($email)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty email");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."email");
                 return;
             }
 
             if(!Util::check_for_null($name)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty name");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."name");
                 return;
             }
 			
@@ -1230,7 +1128,7 @@
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
@@ -1243,13 +1141,9 @@
 		}
 		
 		public static function getUsername($con, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			//check for null/empty
@@ -1266,18 +1160,14 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getEmail($con, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
 				return;
 			}
 			//check for null/empty
@@ -1294,7 +1184,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 	}

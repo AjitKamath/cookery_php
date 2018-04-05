@@ -1,19 +1,14 @@
 <?php
 	class Comment{
 		public static function getCommentsCount($con, $type, $type_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
 				return;
 			}
 			
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type_id");
 				return;
 			}
 			//check for null/empty
@@ -33,24 +28,19 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function deleteComment($com_id, $user_id){
-            //request
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : com_id(".$com_id.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-            //request
-
-            //check for null/empty
+			//check for null/empty
             if(!Util::check_for_null($user_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
                 return;
             }
 
             if(!Util::check_for_null($com_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty com id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."com id");
                 return;
             }
             //check for null/empty
@@ -117,7 +107,7 @@
 				$result_arr["isError"] = true;
 				$result_arr["err_message"] = "Comment delete failed !";
 				
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
@@ -130,31 +120,24 @@
         }
         
         public static function fetchComments($user_id, $type, $type_id, $index){
-            //request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : index(".$index.")");
-            //request
-
-            //check for null/empty
+			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
                 return;
             }
 			
             if(!Util::check_for_null($type)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
                 return;
             }
 			
 			if(!Util::check_for_null($type_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type_id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type_id");
                 return;
             }
 			
 			if(!Util::check_for_null($index)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty index");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
                 return;
             }
             //check for null/empty
@@ -201,7 +184,7 @@
                 //response
             }
             catch(Exception $e){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
@@ -209,31 +192,24 @@
         }
 		
 		public static function submitComment($user_id, $type, $type_id, $comment){
-            //request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type(".$type.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : type_id(".$type_id.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : comment(".$comment.")");
-            //request
-
-            //check for null/empty
+			//check for null/empty
             if(!Util::check_for_null($user_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
                 return;
             }
 			
 			if(!Util::check_for_null($type)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
                 return;
             }
 
             if(!Util::check_for_null($type_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty type id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
                 return;
             }
 
             if(!Util::check_for_null($comment)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty comment");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."comment");
                 return;
             }
             //check for null/empty
@@ -287,7 +263,7 @@
 					}
 					
 					if(!Util::check_for_null($ref_user_id)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ref_user_id");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ref_user_id");
 						return;
 					}
 					
@@ -313,7 +289,7 @@
 				$result_arr["isError"] = true;
 				$result_arr["err_message"] = "Comment failed !";
 				
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
                 
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);

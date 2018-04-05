@@ -3,30 +3,21 @@
 
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "");
-
-	//function key
-	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
-	if(!Util::check_for_null($function_key)){
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
-		return;
-	}
-	//function key
-
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
-
-	//security check
 	if(!Security::authenticateAPI(apache_request_headers())){
 		return;
 	}
 
-	//log POST & FILES params from the request
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", json_encode($_POST));
-	
-	if(Util::check_for_null($_FILES)){
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", json_encode($_FILES));
+	//function key
+	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
+
+	//check for null/empty
+	if(!Util::check_for_null($function_key)){
+		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
+		return;
 	}
-	//log POST & FILES params from the request
+	
+	//check for null/empty
+	//function key
 
 	//params
 	$searchQuery 	= isset($_POST['search_query']) ? $_POST['search_query'] : '';
@@ -79,6 +70,8 @@
 
 	$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
 	//params
+
+	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
 
 	//master data
 	if(MASTER_DATA_FETCH_ALL == $function_key){

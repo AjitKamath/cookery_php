@@ -1,14 +1,9 @@
 <?php
 	class Milestone{
 		public static function getRankAndMilestone($con, $rank_id, $user_id){
-			//request
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : rank_id(".$rank_id.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : user_id(".$user_id.")");
-			//request
-
 			//check for null/empty
 			if(!Util::check_for_null($rank_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty rank_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rank_id");
 					return;
 			}
 			//check for null/empty
@@ -48,7 +43,7 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 	}
