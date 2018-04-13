@@ -3,12 +3,12 @@
 		public static function modifyTimelineScope($tmln_id, $scope_id){
 			//check for null/empty
 			if(!Util::check_for_null($tmln_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tmln_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tmln_id");
 				return;
 			}
 
 			if(!Util::check_for_null($scope_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."scope_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."scope_id");
 				return;
 			}
 			//check for null/empty
@@ -20,22 +20,22 @@
 				$query = "UPDATE `TIMELINES` SET SCOPE_ID = '".$scope_id."' WHERE TMLN_ID = '".$tmln_id."'";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Timeline(".$tmln_id.") scope has been updated to '".$scope_id."'");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "Timeline(".$tmln_id.") scope has been updated to '".$scope_id."'");
 					
 					//fetch scope name
 					$scopeName = User::getScopeName($con, $scope_id);
 					//fetch scope name
 					
-					echo "[{\"TMLN_ID\":\"$tmln_id\",\"scopeId\":\"$scope_id\",\"scopeName\":\"$scopeName\"}]"; 
+					return "[{\"TMLN_ID\":\"$tmln_id\",\"scopeId\":\"$scope_id\",\"scopeName\":\"$scopeName\"}]"; 
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Timeline(".$tmln_id.") scope could not be updated to '".$scope_id."'");
-					echo "[]"; 
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Timeline(".$tmln_id.") scope could not be updated to '".$scope_id."'");
+					return "[]"; 
 				} 
 				//register the timeline
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -45,7 +45,7 @@
 		public static function deleteTimeline($tmln_id){
 			//check for null/empty
 			if(!Util::check_for_null($tmln_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tmln_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tmln_id");
 				return;
 			}
 			//check for null/empty
@@ -57,17 +57,17 @@
 				$query = "UPDATE `TIMELINES` SET IS_DEL = 'Y' WHERE TMLN_ID = '".$tmln_id."'";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Timeline(".$tmln_id.") has been marked as deleted");
-					echo "{\"is_error\":false,\"err_code\":0,\"err_message\":\"Timeline deleted !\"}"; 
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "Timeline(".$tmln_id.") has been marked as deleted");
+					return "{\"is_error\":false,\"err_code\":0,\"err_message\":\"Timeline deleted !\"}"; 
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Timeline(".$tmln_id.") could not be deleted");
-					echo "{\"is_error\":true,\"err_code\":1,\"err_message\":\"Timeline could not be deleted !\"}"; 
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Timeline(".$tmln_id.") could not be deleted");
+					return "{\"is_error\":true,\"err_code\":1,\"err_message\":\"Timeline could not be deleted !\"}"; 
 				} 
 				//register the timeline
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -77,22 +77,22 @@
 		public static function addTimeline($con, $user_id, $ref_user_id, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($ref_user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ref user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ref user id");
 				return;
 			}
 
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			//check for null/empty
@@ -102,27 +102,27 @@
 				$query = "INSERT INTO `TIMELINES` (`USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`, `CREATE_DTM`) VALUES ('$user_id', '$ref_user_id', '$type', '$type_id', CURRENT_TIMESTAMP)";
 
 				if(mysqli_query($con, $query)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "Registered a timeline for the user(".$user_id.") & reference user(".$ref_user_id.") for the type(".$type.") with type id(".$type_id.")");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "Registered a timeline for the user(".$user_id.") & reference user(".$ref_user_id.") for the type(".$type.") with type id(".$type_id.")");
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The timeline for the user(".$user_id.") & reference user(".$ref_user_id.")for the type(".$type.") with type id(".$type_id.") could not be registered");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! The timeline for the user(".$user_id.") & reference user(".$ref_user_id.")for the type(".$type.") with type id(".$type_id.") could not be registered");
 				} 
 				//register the timeline
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function fetchUserTimeline($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."timeline id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."timeline id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -394,7 +394,7 @@
 						}
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! The timeline type('.$result_data->TYPE.') is not yet implemented.');
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, 'Error ! The timeline type('.$result_data->TYPE.') is not yet implemented.');
 					}
 
 					array_push($result_array, $timeline_array);
@@ -402,11 +402,11 @@
 				//get timeline details for $tmln_id
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -416,12 +416,12 @@
 		public static function fetchUserStories($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."timeline id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."timeline id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -693,7 +693,7 @@
 						}
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! The timeline type('.$result_data->TYPE.') is not yet implemented.');
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, 'Error ! The timeline type('.$result_data->TYPE.') is not yet implemented.');
 					}
 
 					array_push($result_array, $timeline_array);
@@ -701,11 +701,11 @@
 				//get timeline details for $tmln_id
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);

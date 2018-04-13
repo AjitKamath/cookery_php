@@ -3,7 +3,7 @@
 		public static function getRankAndMilestone($con, $rank_id, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($rank_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rank_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."rank_id");
 					return;
 			}
 			//check for null/empty
@@ -35,15 +35,13 @@
 						}
 					}
 					
-					
-					
 					array_push($result_array, $temp_array);
 				}
 
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 	}

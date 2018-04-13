@@ -3,12 +3,12 @@
       	public static function submitFavourite($user_id, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipe id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."recipe id");
 				return;
 			}
 			//check for null/empty
@@ -22,34 +22,35 @@
 
 				if($result_data = $result->fetch_object()){
 					if('Y' == $result_data->IS_DEL){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has favorite recipe with recipe id(".$rcp_id."). and with indicator as Y");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has favorite recipe with recipe id(".$rcp_id."). and with indicator as Y");
 
 						$query = "UPDATE FAVOURITES SET IS_DEL = 'N', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND RCP_ID = '$rcp_id' ";
 
 						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has marked recipe again as favorite recipe with recipe id(".$rcp_id."). successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has marked recipe again as favorite recipe with recipe id(".$rcp_id."). successfully.");
 						}
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has favorite recipe with recipe id(".$rcp_id."). and with indicator as N");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has favorite recipe with recipe id(".$rcp_id."). and with indicator as N");
 
 						$query = "UPDATE FAVOURITES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND RCP_ID = '$rcp_id' ";
 
 						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has marked recipe again as favorite recipe with recipe id(".$rcp_id."). successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has marked recipe again as favorite recipe with recipe id(".$rcp_id."). successfully.");
 						}
 					}
 				}
 				//if there is no entry in FAVOURITES table
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has not yet marked the recipe as favourite with recipe id(".$rcp_id."). So marking it");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has not yet marked the recipe as favourite with recipe id(".$rcp_id."). So marking it");
 
-					$query = "INSERT INTO `FAVOURITES` (`RCP_ID`, `USER_ID`, `IS_DEL` , `CREATE_DTM` , `MOD_DTM`) VALUES ('$rcp_id', '$user_id', 'N' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+					$query = "INSERT INTO `FAVOURITES` (`RCP_ID`, `USER_ID`, `IS_DEL` , `CREATE_DTM` , `MOD_DTM`) 
+								VALUES ('$rcp_id', '$user_id', 'N' , CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 
 					if(mysqli_query($con, $query)){
 						$like_id = mysqli_insert_id($con);
 
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "The user(".$user_id.") has marked recipe as favorite with recipe id(".$rcp_id.") successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "The user(".$user_id.") has marked recipe as favorite with recipe id(".$rcp_id.") successfully.");
 					}
 				}
 
@@ -71,12 +72,12 @@
 					array_push($response_array, $result_array);
 
 					//response
-					echo json_encode($response_array);
+					return json_encode($response_array);
 					//response
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -86,12 +87,12 @@
 		public static function getFavouriteStatus($con, $rcp_id, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipe id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."recipe id");
 				return;
 			}
 
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			//check for null/empty
@@ -113,7 +114,7 @@
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 	}

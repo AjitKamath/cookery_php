@@ -3,22 +3,22 @@
 		public static function fetchLikedUsers($loggedInUserId, $type, $type_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($loggedInUserId)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."loggedInUserId");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."loggedInUserId");
 				return;
 			}
 			
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -27,10 +27,10 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
 				$result_array = self::getLikedUsers($con, $loggedInUserId, $type, $type_id, $index);
-				echo json_encode($result_array);
+				return json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -40,22 +40,22 @@
 		public static function getLikedUsers($con, $loggedInUserId, $type, $type_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($loggedInUserId)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."loggedInUserId");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."loggedInUserId");
 				return;
 			}
 			
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -87,24 +87,24 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function isUserLiked($con, $user_id, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			//check for null/empty
@@ -125,24 +125,24 @@
 				return false;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getUserLikeCount($con, $user_id, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			//check for null/empty
@@ -163,14 +163,14 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getUsersRecipesLikesCount($con, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			//check for null/empty
@@ -190,19 +190,19 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getLikeCount($con, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			//check for null/empty
@@ -222,24 +222,24 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function submitLike($user_id, $type, $type_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($type)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type");
 				return;
 			}
 
 			if(!Util::check_for_null($type_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."type id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."type id");
 				return;
 			}
 			//check for null/empty
@@ -261,29 +261,29 @@
 					//if the user has unliked it, like it
 					$is_add = false;
 					if('Y' == $result_data->IS_DEL){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has not liked the type(".$type.") with type id(".$type_id."). liking it.");
 
 						$query = "UPDATE LIKES SET IS_DEL = 'N', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
 							$is_add = true;
 						}
 						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
 						}
 					}
 					//if the user has unliked it, like it
 					//if the user has liked it, unlike it
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has already liked the type(".$type.") with type id(".$type_id."). unliking it.");
 
 						$query = "UPDATE LIKES SET IS_DEL = 'Y', MOD_DTM = CURRENT_TIMESTAMP WHERE USER_ID = '$user_id' AND TYPE = '$type' AND TYPE_ID = '$type_id' ";
 						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has unliked the type(".$type.") with type id(".$type_id.") successfully.");
 							$is_add = false;
 						}
 						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not unlike the type(".$type.") with type id(".$type_id.") successfully.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed !! The user(".$user_id.") could not unlike the type(".$type.") with type id(".$type_id.") successfully.");
 						}
 					}
 					//if the user has liked it, unlike it
@@ -291,16 +291,17 @@
 				//if there is already an entry in LIKES table
 				//if there is no entry in LIKES table
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "The user(".$user_id.") has not yet liked the type(".$type.") with type id(".$type_id."). So liking it");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "The user(".$user_id.") has not yet liked the type(".$type.") with type id(".$type_id."). So liking it");
 
-					$query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`) VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP)";
+					$query = "INSERT INTO `LIKES` (`USER_ID`, `TYPE`, `TYPE_ID` , `CREATE_DTM`) 
+								VALUES ('$user_id', '$type', '$type_id',  CURRENT_TIMESTAMP)";
 					if(mysqli_query($con, $query)){
 						$like_id = mysqli_insert_id($con);
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I" , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "The user(".$user_id.") has liked the type(".$type.") with type id(".$type_id.") successfully.");
 						$is_add = true;
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed !! The user(".$user_id.") could not like the type(".$type.") with type id(".$type_id.") successfully.");
 					} 
 				}
 				//if there is no entry in LIKES table
@@ -359,7 +360,7 @@
 					}
 				}
 				else{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not understand the like TYPE('".$type."')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Could not understand the like TYPE('".$type."')");
 					return;
 				}
 				
@@ -371,7 +372,7 @@
 				}
 
 				if(!Util::check_for_null($ref_user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ref_user_id");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ref_user_id");
 					return;
 				}
 
@@ -391,8 +392,8 @@
 				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Something went wrong !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
@@ -401,7 +402,7 @@
 				DatabaseUtil::getInstance()->close_connection($con);
 				
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 		}

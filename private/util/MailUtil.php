@@ -40,7 +40,7 @@
 				//emails
 			}
 			else{
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not identify the email type : ".$type);
 			}
 		}
 		
@@ -84,7 +84,7 @@
 				//emails
 			}
 			else{
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not identify the email type : ".$type);
 			}
 		}
 		
@@ -168,7 +168,7 @@
 				}
 			}
 			else{
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not identify the email type : ".$type);
 				return;
 			}
 			
@@ -179,57 +179,57 @@
 		public static function sendMailFrom($from, $recipientEmails, $recipientNames, $subject, $bodies, $attachments){
 			//request
             for ($i = 0; $i < count($recipientEmails); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : recipientEmails[".$i."](".$recipientEmails[$i].")");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : recipientEmails[".$i."](".$recipientEmails[$i].")");
 			}
             for ($i = 0; $i < count($recipientNames); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : recipientNames[".$i."](".$recipientNames[$i].")");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : recipientNames[".$i."](".$recipientNames[$i].")");
 			}
 			for ($i = 0; $i < count($attachments); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : attachments[".$i."](".$attachments[$i].")");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : attachments[".$i."](".$attachments[$i].")");
 			}
-            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : subject(".$subject.")");
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "REQUEST PARAM : from(".$from.")");
+            LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : subject(".$subject.")");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : from(".$from.")");
             //request
             
             //check for null/empty
 			if(!Util::check_for_null($from)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."from");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."from");
 				return;
 			}
 			
             if(count($recipientEmails) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipientEmails");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."recipientEmails");
 				return;
 			}
             if(count($recipientNames) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipientNames");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."recipientNames");
 				return;
 			}
 			if(Util::check_for_null($attachments)){
 				if(count($attachments) == 0){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "null/empty attachments");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "null/empty attachments");
 				}
 			}
             if(!Util::check_for_null($subject)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."subject");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."subject");
 				return;
 			}
             if(!Util::check_for_null($bodies)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."body");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."body");
 				return;
 			}
             
             if(count($recipientEmails) != count($recipientNames)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count :"+count($recipientEmails));
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Names count :"+count($recipientNames));
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count & Recipient Names count should match");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Recipient Emails count :"+count($recipientEmails));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Recipient Names count :"+count($recipientNames));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Recipient Emails count & Recipient Names count should match");
 				return;
             }
 			
 			if(count($recipientEmails) != count($bodies)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count :"+count($recipientEmails));
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Bodies count :"+count($bodies));
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Recipient Emails count & Recipient Names count should match");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Recipient Emails count :"+count($recipientEmails));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Bodies count :"+count($bodies));
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Recipient Emails count & Recipient Names count should match");
 				return;
 			}
             //check for null/empty
@@ -249,7 +249,7 @@
 				return json_encode($temp);
 			}
 			else{
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify from whom the email has to be sent : ".$from);
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not identify from whom the email has to be sent : ".$from);
 			}
 		}
 		
@@ -280,7 +280,7 @@
 						if(file_exists($attachments[$j])){
 							$mail->addAttachment($attachments[$j], basename($attachments[$j]));
 						} else {
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! File does not exist " . $attachments[$j]);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! File does not exist " . $attachments[$j]);
 						}
 					}
 					//Attachments
@@ -293,15 +293,15 @@
 					//body
 					$mail->Body = $bodies[$i];
 					$mail->send();
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
 					//body
 				}
 				//Recipients
                 
                 return true;
             } catch (Exception $e) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", $mail->ErrorInfo);
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $mail->ErrorInfo);
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
             }
 			
 			return false;
@@ -337,7 +337,7 @@
 						if (move_uploaded_file($attachments['tmp_name'][$i], $uploadfile)) {
 							$mail->addAttachment($uploadfile, $filename);
 						} else {
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to attach file to email by moving file to " . $uploadfile);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to attach file to email by moving file to " . $uploadfile);
 						}
 						
 						//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
@@ -353,11 +353,11 @@
 				//Content
 
                 $mail->send();
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Email(s) sent with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email(s) sent with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
                 return true;
             } catch (Exception $e) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", $mail->ErrorInfo);
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $mail->ErrorInfo);
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
             }
 			
 			return false;

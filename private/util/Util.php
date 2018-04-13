@@ -1,32 +1,5 @@
 <?php
 	class Util{
-		public static function mailTrigger($mailto, $vrfctn_code){
-			//$to = $mailto;
-			$to = "dial2vishal@gmail.com";
-			$subject = "COOKERY EMAIL VERIFICATION EMAIL";
-
-			$message = "
-			<html>
-			<head>
-			<title>Email Verification</title>
-			</head>
-			<body>
-			Hi,<br>
-			<p>This is auto-generated email,Do not reply to this mail.</p>
-			CLICK ON THE LINK TO CONFIRM YOUR EMAIL AND STAY CONNECTED
-							<br><br><br><br>
-			<b>Thanks,<br>
-			Cookery Team</b>
-			</body>
-			</html>";
-
-			// Always set content-type when sending HTML email
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-			mail($to, $subject, $message, $headers);
-		}
-
 		public static function generateRandomString($length = 10) {
 			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$charactersLength = strlen($characters);
@@ -96,50 +69,50 @@
 			$filename = "util.php";
 
 			if(!file_exists(APP_DATA_DIRECTORY)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".APP_DATA_DIRECTORY.") does not exist ! Create it manually with 0777 permission !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".APP_DATA_DIRECTORY.") does not exist ! Create it manually with 0777 permission !");
 				return false;
 			}
 
 			if(!file_exists(APP_DATA_USERS_DIRECTORY)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".APP_DATA_USERS_DIRECTORY.") does not exist. Creating it.");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".APP_DATA_USERS_DIRECTORY.") does not exist. Creating it.");
 				if(!self::create_directory(APP_DATA_USERS_DIRECTORY)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".APP_DATA_USERS_DIRECTORY.") could not be created !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".APP_DATA_USERS_DIRECTORY.") could not be created !");
 					return false;
 				}
 			}
 
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id;
 			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
 				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}
 			}
 			
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY;
 			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
 				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}
 			}
 			
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY.APP_DATA_PROFILE_IMAGES_DIRECTORY;
 			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
 				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}
 			}
 
 			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY;
 			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Directory(".$directory.") does not exist. Creating it.");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
 				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Directory(".$directory.") could not be created !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
 					return false;
 				}
 			}
@@ -168,6 +141,10 @@
 		
 		public static function endsWith($haystack, $needle){
 		   return !($needle[strlen($needle) - 1] === $haystack);
+		}
+		
+		public static function setResponseHeader($code) {
+			header('X-PHP-Response-Code: '.$code, true, $code);
 		}
 	}
 ?>

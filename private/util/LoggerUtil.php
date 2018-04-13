@@ -20,21 +20,21 @@
 				if(LOGS_SWITCH == 'ALL'){
 					self::registerLog(self::checkFile("all"), $className, $methodName, $lineNumber, $type, $message);
 					
-					if($type == "I"){
+					if($type == LOG_TYPE_INFO){
 						self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
 					}
 					
-					if($type == "E"){
+					if($type == LOG_TYPE_ERROR){
 						self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
 					}
 				}
 				else if(LOGS_SWITCH == 'INFO'){
-					if($type == "I"){
+					if($type == LOG_TYPE_INFO){
 						self::registerLog(self::checkFile("info"), $className, $methodName, $lineNumber, $type, $message);
 					}
 				}
 				else if(LOGS_SWITCH == 'ERROR'){
-					if($type == "E"){
+					if($type == LOG_TYPE_ERROR){
 						self::registerLog(self::checkFile("error"), $className, $methodName, $lineNumber, $type, $message);
 					}
 				}

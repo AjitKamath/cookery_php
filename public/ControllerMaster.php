@@ -3,21 +3,30 @@
 
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
+	LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, "");
+
+	//function key
+	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
+	if(!Util::check_for_null($function_key)){
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_ERROR, "Error ! null/empty function_key");
+		return;
+	}
+	//function key
+
+	LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, "=====>".$function_key);
+
+	//security check
 	if(!Security::authenticateAPI(apache_request_headers())){
 		return;
 	}
 
-	//function key
-	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
-
-	//check for null/empty
-	if(!Util::check_for_null($function_key)){
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", "Error ! null/empty function_key");
-		return;
-	}
+	//log POST & FILES params from the request
+	LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, json_encode($_POST));
 	
-	//check for null/empty
-	//function key
+	if(Util::check_for_null($_FILES)){
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, json_encode($_FILES));
+	}
+	//log POST & FILES params from the request
 
 	//params
 	$searchQuery 	= isset($_POST['search_query']) ? $_POST['search_query'] : '';
@@ -71,230 +80,235 @@
 	$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
 	//params
 
-	LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
+	$response = "";
 
 	//master data
 	if(MASTER_DATA_FETCH_ALL == $function_key){
-		echo MasterData::fetchAllMasterData();
+		$response = MasterData::fetchAllMasterData();
 	}
 	//master data
 
 	//quantity
 	else if(QUANTITY_FETCH_ALL == $function_key){
-		echo Quantity::fetchAllQuantities();
+		$response = Quantity::fetchAllQuantities();
 	}
 	//quantity
 	
 	//food cuisine
 	else if(FOOD_CUISINE_FETCH_ALL == $function_key){
-		echo FoodCuisine::fetchAllFoodCuisines();
+		$response = FoodCuisine::fetchAllFoodCuisines();
 	}
 	//food cuisine
 	
 	//food type
 	else if(FOOD_TYPE_FETCH_ALL == $function_key){
-		echo FoodType::fetchAllFoodTypes();
+		$response = FoodType::fetchAllFoodTypes();
 	}
 	//food type	
 
 	//taste
 	else if(TASTE_FETCH_ALL == $function_key){
-		echo Taste::fetchAllTastes();
+		$response = Taste::fetchAllTastes();
 	}
 	//taste
 
 	//comment
 	else if(COMMENT_DELETE == $function_key){
-		echo Comment::deleteComment($com_id, $user_id);
+		$response = Comment::deleteComment($com_id, $user_id);
 	}
 	else if(COMMENT_FETCH_ALL == $function_key){
-		echo Comment::fetchComments($user_id, $type, $type_id, $index);
+		$response = Comment::fetchComments($user_id, $type, $type_id, $index);
 	}
 	else if(COMMENT_SUBMIT == $function_key){
-		echo Comment::submitComment($user_id, $type, $type_id, $comment);
+		$response = Comment::submitComment($user_id, $type, $type_id, $comment);
 	}
 	//comment
 	
 	//recipe
 	else if(RECIPE_DELETE == $function_key){
-		echo Recipe::deleteRecipe($rcp_id, $user_id);
+		$response = Recipe::deleteRecipe($rcp_id, $user_id);
 	}
 	else if(RECIPE_FETCH == $function_key){
-		echo Recipe::fetchRecipe($rcp_id, $user_id);
+		$response = Recipe::fetchRecipe($rcp_id, $user_id);
 	}
 	else if(RECIPE_FAVORITE_FETCH == $function_key){
-		echo Recipe::fetchFavoriteRecipes($user_id, $index);
+		$response = Recipe::fetchFavoriteRecipes($user_id, $index);
 	}
 	else if(RECIPE_USER_FETCH == $function_key){
-		echo Recipe::fetchUsersRecipes($user_id, $index);
+		$response = Recipe::fetchUsersRecipes($user_id, $index);
 	}
 	else if(RECIPE_USER_VIEWED_FETCH == $function_key){
-		echo Recipe::fetchUserViewedRecipes($user_id, $index);
+		$response = Recipe::fetchUserViewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_USER_REVIEWED_FETCH == $function_key){
-		echo Recipe::fetchUserReviewedRecipes($user_id, $index);
+		$response = Recipe::fetchUserReviewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_SUBMIT == $function_key){
-		echo Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $qty_id, $ing_qty, 
+		$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $qty_id, $ing_qty, 
 								  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	else if(RECIPE_SEARCH == $function_key){
-		echo Recipe::searchRecipes($user_id, $searchQuery);
+		$response = Recipe::searchRecipes($user_id, $searchQuery);
 	}
 	//recipe
 	
 	//review
 	else if(REVIEW_USER_FETCH == $function_key){
-		echo Review::fetchUserRecipeReview($user_id, $rcp_id);
+		$response = Review::fetchUserRecipeReview($user_id, $rcp_id);
 	}
 	else if(REVIEW_USER_FETCH_ALL == $function_key){
-		echo Review::fetchUsersReviews($user_id, $index);
+		$response = Review::fetchUsersReviews($user_id, $index);
 	}
 	else if(REVIEW_SUBMIT == $function_key){
-		echo Review::submitReview($rcp_id, $user_id, $review, $rating);
+		$response = Review::submitReview($rcp_id, $user_id, $review, $rating);
 	}
 	else if(REVIEW_DELETE == $function_key){
-		echo Review::deleteReview($rev_id, $user_id);
+		$response = Review::deleteReview($rev_id, $user_id);
 	}
 	else if(REVIEW_RECIPE_AVG_RATING == $function_key){
-		echo Review::fetchAverageRecipeRating($rcp_id);
+		$response = Review::fetchAverageRecipeRating($rcp_id);
 	}
 	else if(REVIEW_RECIPE_FETCH == $function_key){
-		echo Review::fetchRecipeReviews($user_id, $rcp_id, $index);
+		$response = Review::fetchRecipeReviews($user_id, $rcp_id, $index);
 	}
 	//review
 	
 	//ingredient
 	else if(INGREDIENT_FETCH == $function_key){
-		echo Ingredient::fetchIngredients($searchQuery);
+		$response = Ingredient::fetchIngredients($searchQuery);
 	}
 
 	else if(MYLIST_FETCH == $function_key){
-		echo Ingredient::checkUserLists($user_id);
+		$response = Ingredient::checkUserLists($user_id);
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT == $function_key){
-		echo Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_aka_id , $ing_aka_name);
+		$response = Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_aka_id , $ing_aka_name);
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
-		echo Ingredient::viewuserIngedrientList($list_id);
+		$response = Ingredient::viewuserIngedrientList($list_id);
 	}
 
 	else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
-		echo Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_aka_id , $ing_aka_name);
+		$response = Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_aka_id , $ing_aka_name);
 	}
 	else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT_FROM_RECIPE == $function_key){
-		echo Ingredient::updateUserIngedrientListFromRecipe($list_id, $ing_aka_id );
+		$response = Ingredient::updateUserIngedrientListFromRecipe($list_id, $ing_aka_id );
 	}
 	//ingredient
 	
 	//timeline
 	else if(TIMELINE_USER_FETCH == $function_key){
-		echo Timeline::fetchUserTimeline($user_id, $index);
+		$response = Timeline::fetchUserTimeline($user_id, $index);
 	}
 	else if(STORY_USER_FETCH == $function_key){
-		echo Timeline::fetchUserStories($user_id, $index);
+		$response = Timeline::fetchUserStories($user_id, $index);
 	}
 	else if(TIMELINE_SCOPE_MODIFY == $function_key){
-		echo Timeline::modifyTimelineScope($tmln_id, $scope_id);
+		$response = Timeline::modifyTimelineScope($tmln_id, $scope_id);
 	}
 	else if(TIMELINE_DELETE == $function_key){
-		echo Timeline::deleteTimeline($tmln_id);
+		$response = Timeline::deleteTimeline($tmln_id);
 	}
 	//timeline
 	
 	//view
 	else if(VIEW_RECIPE_FETCH == $function_key){
-		echo View::fetchRecipeViews($rcp_id);
+		$response = View::fetchRecipeViews($rcp_id);
 	}
 	else if(VIEW_FETCH_USERS == $function_key){
-		echo View::fetchViewedUsers($logged_in_user_id, $rcp_id, $index);
+		$response = View::fetchViewedUsers($logged_in_user_id, $rcp_id, $index);
 	}
 	//view
 	
 	//user
 	else if(USER_LOGIN == $function_key){
-		echo User::login($email, $password);
+		$response = User::login($email, $password);
 	}
 	else if(USER_REGISTER == $function_key){
-		echo User::register($email, $password, $name);
+		$response = User::register($email, $password, $name);
 	}
 	else if(USER_FETCH_PUBLIC == $function_key || USER_FETCH_SELF == $function_key){
-		echo User::fetchUser($user_id, $logged_in_user_id, $function_key);
+		$response = User::fetchUser($user_id, $logged_in_user_id, $function_key);
 	}
 	else if(USER_FOLLOW_SUBMIT == $function_key){
-		echo User::submitFollowUser($flwr_user_id, $flws_user_id);
+		$response = User::submitFollowUser($flwr_user_id, $flws_user_id);
 	}
 	else if(USER_FOLLOWERS_FETCH == $function_key){
-		echo User::fetchUserFollowers($user_id, $logged_in_user_id, $index);
+		$response = User::fetchUserFollowers($user_id, $logged_in_user_id, $index);
 	}
 	else if(USER_FOLLOWINGS_FETCH == $function_key){
-		echo User::fetchUserFollowings($user_id, $logged_in_user_id, $index);
+		$response = User::fetchUserFollowings($user_id, $logged_in_user_id, $index);
 	}
 	else if(USER_UPDATE_NAME == $function_key){
-		echo User::updateUserName($user_id, $name);
+		$response = User::updateUserName($user_id, $name);
 	}
 	else if(USER_UPDATE_EMAIL == $function_key){
-		echo User::updateUserEmail($user_id, $email, $scope_id);
+		$response = User::updateUserEmail($user_id, $email, $scope_id);
 	}
 	else if(USER_UPDATE_PASSWORD == $function_key){
-		echo User::updateUserPassword($user_id, $password, $new_password);
+		$response = User::updateUserPassword($user_id, $password, $new_password);
 	}
 	else if(USER_UPDATE_PHONE == $function_key){
-		echo User::updateUserPhone($user_id, $mobile, $scope_id);
+		$response = User::updateUserPhone($user_id, $mobile, $scope_id);
 	}
 	else if(USER_UPDATE_GENDER == $function_key){
-		echo User::updateUserGender($user_id, $gender, $scope_id);
+		$response = User::updateUserGender($user_id, $gender, $scope_id);
 	}
 	else if(USER_UPDATE_IMAGE == $function_key){
-		echo User::updateUserImage($user_id, $image);
+		$response = User::updateUserImage($user_id, $image);
 	}
 	else if(USER_REGISTER_CHECK == $function_key){
-		echo User::userRegisterCheck($email);
+		$response = User::userRegisterCheck($email);
 	}
 	else if(USER_SEARCH == $function_key){
-		echo User::searchUsers($searchQuery, $logged_in_user_id, $index);
+		$response = User::searchUsers($searchQuery, $logged_in_user_id, $index);
 	}
 	//user
 
 	//like
 	else if(LIKE_SUBMIT == $function_key){
-		echo Like::submitLike($user_id, $type, $type_id);
+		$response = Like::submitLike($user_id, $type, $type_id);
 	}
 	else if(LIKE_FETCH_USERS == $function_key){
-		echo Like::fetchLikedUsers ($logged_in_user_id, $type, $type_id, $index);
+		$response = Like::fetchLikedUsers ($logged_in_user_id, $type, $type_id, $index);
 	}
 	//like
 
 	//favourite
 	else if(FAV_SUBMIT == $function_key){
-		echo Favourites::submitFavourite($user_id, $rcp_id);
+		$response = Favourites::submitFavourite($user_id, $rcp_id);
 	}
 	//favourite
 
 	//trends
 	else if(TREND_FETCH == $function_key){
-		echo Trend::fetchActiveTrends($user_id);
+		$response = Trend::fetchActiveTrends($user_id);
 	}
 	//trends
 
 	else{
-		$msg1 = UNIDENTIFIED_FUNCTION_KEY;  
-		$msg2 = "1. Check if '".$function_key."' is defined in FunctionKeys.php";
-		$msg3 = "2. Check if '".$function_key."' is handled in Controller.php";
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_ERROR, UNIDENTIFIED_FUNCTION_KEY);
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_ERROR, "1. Check if '".$function_key."' is defined in FunctionKeys.php");
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_ERROR, "2. Check if '".$function_key."' is handled in Controller.php");
 		
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg1);
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg2);
-		LoggerUtil::logger(__FILE__, "Controller", __LINE__, "E", $msg3);
-		
-        echo "\n".$msg1;  
-		echo "\n".$msg2;
-		echo "\n".$msg3;
+        Util::setResponseHeader(HTTP_NOT_IMPLEMENTED);
     }
-    
-    LoggerUtil::logger(__FILE__, "Controller", __LINE__, "I", "<=====".$function_key);
-	
+
+	if(!Util::check_for_null($response)){
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_ERROR, "Error ! null/empty response");
+		Util::setResponseHeader(HTTP_INTERNAL_ERROR);
+	}
+	else{
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, "Response:");
+		LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, $response);
+		Util::setResponseHeader(HTTP_OK);
+		echo $response;
+	}
+
+    LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, "<=====".$function_key);
+
 	//this function triggers on every class object creation or static method calls
 	function __autoload($class_name){
         //relative paths to directories to scan for autoload
@@ -311,7 +325,6 @@
 			//see if the file exsists
             if(file_exists($file_path)){
 				require_once($file_path);
-                //echo "autoloaded : ".$file_path;
                 return;
             }            
         }

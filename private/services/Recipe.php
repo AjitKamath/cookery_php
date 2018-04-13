@@ -3,7 +3,7 @@
 		public static function getRecipesCount($con, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
 				return;
 			}
 			
@@ -21,19 +21,19 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function searchRecipes($user_id, $searchQuery){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
 				return;
 			}
 			
 			if(!Util::check_for_null($searchQuery)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."searchQuery");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."searchQuery");
 				return;
 			}
 			//check for null/empty
@@ -88,10 +88,10 @@
 					array_push($result_array, $temp_array); 
 				}
 				
-				echo json_encode($result_array);
+				return json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -101,7 +101,7 @@
 		public static function getRecipeAvgRating($con, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -116,14 +116,14 @@
 				return 0;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeIngredients($con, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -149,14 +149,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipePrimaryImage($con, $user_id, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -180,14 +180,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeName($con, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -205,14 +205,14 @@
 				return "";
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getRecipeImages($con, $user_id, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			
@@ -235,7 +235,7 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
@@ -244,57 +244,57 @@
 			//check for null/empty
 			//mandatory
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user_id)");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id)");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_nm)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_nm");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_nm");
 				return;
 			}
 
 			if(!Util::check_for_null($food_typ_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."food_typ_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."food_typ_id");
 				return;
 			}
 
 			if(!Util::check_for_null($food_csn_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."food_csn_nm");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."food_csn_nm");
 				return;
 			}
 
 			if(count($ing_aka_id) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ing_aka_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_aka_id");
 				return;
 			}
 
 			if(!Util::check_for_null($qty_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."qty_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."qty_id");
 				return;
 			}
 
 			if(!Util::check_for_null($ing_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."ing_qty");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_qty");
 				return;
 			}
 
 			if(!Util::check_for_null($tst_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tst_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_id");
 				return;
 			}
 
 			if(!Util::check_for_null($tst_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."tst_qty");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_qty");
 				return;
 			}  
 
 			if(count($rcp_images['name']) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_images");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_images");
 				return;
 			}
 
 			if(count($rcp_steps) == 0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_steps");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_steps");
 				return;
 			}
 			//mandatory
@@ -331,8 +331,8 @@
 					//update recipe
 					//update RECIPE table
 					$query = "UPDATE `RECIPE` 
-								SET `RCP_NAME` = '".$rcp_nm."', `FOOD_TYP_ID` = '".$food_typ_id."', `FOOD_CSN_ID` = '".$food_csn_id."', 
-								`MOD_DTM` = CURRENT_TIMESTAMP
+								SET `RCP_NAME` = '".DatabaseUtil::cleanUpString($con, $rcp_nm)."', `FOOD_TYP_ID` = '".$food_typ_id."', 
+								`FOOD_CSN_ID` = '".$food_csn_id."', `MOD_DTM` = CURRENT_TIMESTAMP
 							  	WHERE RCP_ID = '".$rcp_id."'";
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") updated into RECIPE table by User(".$user_id.")");
@@ -343,9 +343,9 @@
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "All Ingredients for Recipe(".$rcp_id.") are deleted from DISH table");
 						}
 						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to delete Ingredients for Recipe(".$rcp_id.") from DISH table.");
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete Ingredients for Recipe(".$rcp_id.") from DISH table.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 							throw new Exception("Failed to delete Ingredients for Recipe(".$rcp_id.") from DISH table.");
 						}
 						//delete the old ingredients in DISH table
@@ -356,15 +356,16 @@
 
 							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
-								$query = "INSERT INTO `ING_AKA` ( `ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$ing_aka_nm' , CURRENT_TIMESTAMP)";
+								$query = "INSERT INTO `ING_AKA` ( `ING_AKA_NAME` , `CREATE_DTM`) 
+											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."' , CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
 									$temp_ing_aka_id = mysqli_insert_id($con); 
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");
 								}
 								else{
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into ING_AKA table.");
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into ING_AKA table.");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 									throw new Exception("Failed to insert into ING_AKA table");
 								}
 							}
@@ -378,9 +379,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$dish_id.") added into DISH table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into DISH table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into DISH table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into DISH table");
 							}
 							//insert into DISH table
@@ -393,9 +394,9 @@
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "All steps for Recipe(".$rcp_id.") are deleted from RECIPE_STEPS table");
 						}
 						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to delete steps for Recipe(".$rcp_id.") from RECIPE_STEPS table.");
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete steps for Recipe(".$rcp_id.") from RECIPE_STEPS table.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 							throw new Exception("Failed to delete steps for Recipe(".$rcp_id.") from RECIPE_STEPS table.");
 						}
 						//delete the old recipe steps from RECIPE_STEPS table
@@ -403,15 +404,15 @@
 						//insert recipe steps into RECIPE_STEPS table
 						for($i = 0; $i< count($rcp_steps); $i++){
 							$query = "INSERT INTO `RECIPE_STEPS` (`RCP_ID` , `RCP_STEP` , `CREATE_DTM`) 
-									  VALUES ('$rcp_id' , '$rcp_steps[$i]' , CURRENT_TIMESTAMP)";
+									  VALUES ('$rcp_id' , '".DatabaseUtil::cleanUpString($con, $rcp_steps[$i])."' , CURRENT_TIMESTAMP)";
 							if(mysqli_query($con, $query)){
 								$rcp_stps_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Step(".$rcp_stps_id.") added into RECIPE_STEPS table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_STEPS table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_STEPS table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_STEPS table");
 							}
 						}
@@ -423,9 +424,9 @@
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "All tastes for Recipe(".$rcp_id.") are deleted from RECIPE_TASTE table");
 						}
 						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 							throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
 						}
 						//delete the old recipe tastes from RECIPE_TASTE table
@@ -439,9 +440,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into DISH table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_TASTE table");
 							}
 						}
@@ -460,9 +461,9 @@
 						//NOTE : not deleting the images from its phyiscal path as of now.
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
 					}
 					//delete the old recipe tastes from RECIPE_TASTE table
@@ -470,15 +471,15 @@
 					//upload images. if atleast one image is uploaded, warn the user but recipe must be added without rolling back
 					//prepare directories
 					if(!Util::prepare_directories($user_id)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
 					}
 
 					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
 					if(!Util::create_directory($recipe_images_dir)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to create directory(".$recipe_images_dir.")");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to create directory(".$recipe_images_dir.")");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Failed to create directory(".$recipe_images_dir.")");
 					}
 					//prepare directories
@@ -497,9 +498,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$rcp_img_id.") added into RECIPE_IMG table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_IMG table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_IMG table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_IMG table");
 							}
 							//insert into RECIPE_IMG table
@@ -516,14 +517,14 @@
 							}
 						}
 						catch(Exception $e){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Image upload fail exception : ".$e->getMessage());
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Image upload fail exception : ".$e->getMessage());
 							$upload_failed = true;
 						}
 					}
 
 					if(!$atleast_one_uploaded){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Could not upload atleast one recipe image");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Could not upload atleast one recipe image");
 					}
 
@@ -550,7 +551,7 @@
 					//add recipe
 					//insert into RECIPE table
 					$query = "INSERT INTO `RECIPE` (`RCP_NAME` , `FOOD_TYP_ID` , `FOOD_CSN_ID`, `USER_ID`, `CREATE_DTM`) 
-							  VALUES ('$rcp_nm' , '$food_typ_id' , '$food_csn_id' , '$user_id' , CURRENT_TIMESTAMP)";
+							  VALUES ('".DatabaseUtil::cleanUpString($con, $rcp_nm)."' , '$food_typ_id' , '$food_csn_id' , '$user_id' , CURRENT_TIMESTAMP)";
 					if(mysqli_query($con, $query)){
 						$rcp_id = mysqli_insert_id($con);
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe(".$rcp_id.") added into RECIPE table by User(".$user_id.")");
@@ -561,15 +562,16 @@
 
 							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
-								$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) VALUES ('$ing_aka_nm' , CURRENT_TIMESTAMP)";
+								$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) 
+											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."' , CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
 									$temp_ing_aka_id = mysqli_insert_id($con); 
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");
 								}
 								else{
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into ING_AKA table.");
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into ING_AKA table.");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 									throw new Exception("Failed to insert into ING_AKA table");
 								}
 							}
@@ -583,9 +585,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$dish_id.") added into DISH table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into DISH table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into DISH table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into DISH table");
 							}
 							//insert into DISH table
@@ -595,15 +597,15 @@
 						//insert recipe steps into RECIPE_STEPS table
 						for($i = 0; $i< count($rcp_steps); $i++){
 							$query = "INSERT INTO `RECIPE_STEPS` (`RCP_ID` , `RCP_STEP` , `CREATE_DTM`) 
-									  VALUES ('$rcp_id' , '$rcp_steps[$i]' , CURRENT_TIMESTAMP)";
+									  VALUES ('$rcp_id' , '".DatabaseUtil::cleanUpString($con, $rcp_steps[$i])."' , CURRENT_TIMESTAMP)";
 							if(mysqli_query($con, $query)){
 								$rcp_stps_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Step(".$rcp_stps_id.") added into RECIPE_STEPS table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_STEPS table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_STEPS table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_STEPS table");
 							}
 						}
@@ -618,9 +620,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into DISH table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_TASTE table");
 							}
 						}
@@ -634,15 +636,15 @@
 					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
 					//prepare directories
 					if(!Util::prepare_directories($user_id)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
 					}
 
 					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
 					if(!Util::create_directory($recipe_images_dir)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to create directory(".$recipe_images_dir.")");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to create directory(".$recipe_images_dir.")");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Failed to create directory(".$recipe_images_dir.")");
 					}
 					//prepare directories
@@ -661,9 +663,9 @@
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$rcp_img_id.") added into RECIPE_IMG table");
 							}
 							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Failed to insert into RECIPE_IMG table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_IMG table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into RECIPE_IMG table");
 							}
 							//insert into RECIPE_IMG table
@@ -680,14 +682,14 @@
 							}
 						}
 						catch(Exception $e){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Image upload fail exception : ".$e->getMessage());
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Image upload fail exception : ".$e->getMessage());
 							$upload_failed = true;
 						}
 					}
 
 					if(!$atleast_one_uploaded){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Could not upload atleast one recipe image");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Rolling back !");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 						throw new Exception("Could not upload atleast one recipe image");
 					}
 
@@ -712,11 +714,11 @@
 				//submit recipe transaction ends here
 				
 				//response
-				echo json_encode($response);
+				return json_encode($response);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				$response['err_message'] = "FAIL";
 				$response['isError'] = true;
 
@@ -730,7 +732,7 @@
 		public static function getRecipeSteps($con, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
 			//check for null/empty
@@ -750,19 +752,19 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function fetchUserViewedRecipes($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -841,11 +843,11 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -855,12 +857,12 @@
 		public static function fetchUserReviewedRecipes($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -940,11 +942,11 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -954,12 +956,12 @@
 		public static function fetchUsersRecipes($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -1028,11 +1030,11 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1042,12 +1044,12 @@
 		public static function fetchFavoriteRecipes($user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			
 			if(!Util::check_for_null($index)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."index");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
 				return;
 			}
 			//check for null/empty
@@ -1124,11 +1126,11 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1138,12 +1140,12 @@
 		public static function fetchRecipeReview($rcp_id, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp id");
 				return;
 			}
 			//check for null/empty
@@ -1167,11 +1169,11 @@
 				//get review for $rcp_id & $user_id
 
 				//response
-				echo json_encode($result_array);
+				return json_encode($result_array);
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1181,12 +1183,12 @@
 		public static function fetchRecipe($rcp_id, $user_id){
 			//validations
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."recipe id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."recipe id");
 				return;
 			}
 
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 			//validations
@@ -1275,13 +1277,13 @@
 					array_push($response_array, $result_array);
 
 					//response
-					echo json_encode($response_array);
+					return json_encode($response_array);
 					//response
 				}
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Error ! Could not fetch recipe');
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", $e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, 'Error ! Could not fetch recipe');
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -1291,12 +1293,12 @@
 		public static function deleteRecipe($rcp_id, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
 			if(!Util::check_for_null($rcp_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", NULL_OR_EMPTY."rcp id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp id");
 				return;
 			}
 			//check for null/empty
@@ -1330,7 +1332,7 @@
 					$result_arr["isError"] = true;
 					$result_arr["err_message"] = "Recipe delete failed !";
 					
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed !! Recipe('$rcp_id') could not be deleted by the user('$user_id')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Recipe('$rcp_id') could not be deleted by the user('$user_id')");
 					throw new Exception("Failed to delete recipe");
 				} 
 				//delete recipe
@@ -1339,8 +1341,8 @@
 				DatabaseUtil::endTransaction($con);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Something went wrong !");
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				
 				$result_arr["err_code"]="1";
 				$result_arr["isError"]=true;
@@ -1352,7 +1354,7 @@
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
 				
-				echo json_encode($result_arr);
+				return json_encode($result_arr);
 			}
 		}
 	}
