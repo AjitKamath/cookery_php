@@ -18,6 +18,8 @@
     define("MAIL_TEMPLATES_DIRECTORY", WEB_DIRECTORY."templates/");
     define("MAIL_TEMPLATES_EMAILS_DIRECTORY", MAIL_TEMPLATES_DIRECTORY."emails/");
     define("FILE_SERVER_PATH", "www.finappl.com/");
+    define("SERVER_PATH","http://cookery_php-dial2vishal53897.codeanyapp.com/");
+    define("EMAIL_CONTROLLER_PATH", SERVER_PATH."public/EmailController.php");
 
     //logs
     define("LOGS_SWITCH", "ALL");       //OFF,ALL,INFO,ERROR
@@ -35,8 +37,8 @@
     define("MAIL_FROM_TEAM_COOKERY", "MAIL_FROM_TEAM_COOKERY");
     
     //admins
-    define("MAIL_RECEPIENT_ADMIN_EMAIL_1", "ajitkamathk@gmail.com");
-    define("MAIL_RECEPIENT_ADMIN_NAME_1", "Ajit");
+    define("MAIL_RECEPIENT_ADMIN_EMAIL_1", "dial2vishal@gmail.com");
+    define("MAIL_RECEPIENT_ADMIN_NAME_1", "Vishal");
 
     //---------------------mail templates---------------------
     define("MAIL_TEMPLATE_ERROR_CRITICAL_CONTENT", "error_critical.html");
@@ -47,6 +49,7 @@
 
     define("MAIL_TEMPLATE_RECIPE_CONTENT", "recipe.html");
     define("MAIL_TEMPLATE_USER_CONTENT", "user.html");
+    define("MAIL_TEMPLATE_EMAIL_CONFIRMATION_CONTENT", "emailconfirmation.html");
     //---------------------mail templates---------------------
     
     //---------------------mail server config---------------------

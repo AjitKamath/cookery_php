@@ -15,7 +15,7 @@
 	//TODO: This class must be equipped to handle the misusing of this service as a spam gateway
 	//https://github.com/PHPMailer/PHPMailer/blob/master/examples/simple_contact_form.phps
     class MailUtil{
-		public static function userEmail($type, $recipientMail, $recipientName, $subject){
+		public static function userEmail($type, $recipientMail, $veri_code, $recipientName, $subject){
 			if(USER_REGISTER == $type){
 				//emails
 				$recepientEmails = array();
@@ -32,6 +32,35 @@
 					$body = $temp;
 					$body = str_replace("[APP_NAME]", APP_NAME, $body);
 					$body = str_replace("[USER_NAME]", $recipientName, $body);
+					$body = str_replace("[SUPPORT_EMAIL]", MAIL_REPLY_EMAIL, $body);
+					$body = str_replace("[USER_VERI_CODE]", EMAIL_CONTROLLER_PATH."?purpose=USER_VERIFY_EMAIL&email=".$recipientMail."&veri_code=".$veri_code, $body);
+					$bodies[$i] = $body;
+				}
+
+				self::sendMailFrom(MAIL_FROM_TEAM_COOKERY, $recepientEmails, $recepientNames, $subject, $bodies, null);
+				//emails
+			}
+			else{
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! Could not identify the email type : ".$type);
+			}
+		}
+			
+		public static function userConfirmationEmail($type, $recipientMail, $recipientName, $subject){
+			if(USER_EMAIL_CONFIRM == $type){
+				//emails
+				$recepientEmails = array();
+				$recepientEmails[count($recepientEmails)] = $recipientMail;
+
+				//names
+				$recepientNames = array();
+				$recepientNames[count($recepientNames)] = $recipientName;
+
+				//bodies
+				$bodies = array();
+				$temp = file_get_contents(MAIL_TEMPLATES_EMAILS_DIRECTORY.MAIL_TEMPLATE_EMAIL_CONFIRMATION_CONTENT);
+				for ($i = 0; $i < count($recepientEmails); $i++) {
+					$body = $temp;
+					$body = str_replace("[APP_NAME]", APP_NAME, $body);
 					$body = str_replace("[SUPPORT_EMAIL]", MAIL_REPLY_EMAIL, $body);
 					$bodies[$i] = $body;
 				}
