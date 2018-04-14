@@ -27,6 +27,8 @@
     define("LOGS_TIMEZONE", "Asia/Kolkata");  
     define("LOGS_TIMESTAMP_FORMAT", "d-m-y H:i:s"); 
     define("LOGS_FILE_FORMAT", "Y-m-d"); 
+    define("LOG_TYPE_INFO", "I"); 
+    define("LOG_TYPE_ERROR", "E"); 
 
     //email
     define("VERIFY_EMAIL_VERI_CODE_EXPIRE", "1");   //in days
@@ -165,4 +167,14 @@
     //----------------------TRENDS--------------------------------------
 
     define("DEFAULT_SCOPE_ID","1");
+
+
+    //----------------------HTTP ERROR CODES---------------------------
+    define("HTTP_OK", 200);
+    define("HTTP_FORBIDDEN", 403);
+    define("HTTP_INTERNAL_ERROR", 500);
+    define("HTTP_NOT_IMPLEMENTED", 501);
+    //----------------------HTTP ERROR CODES---------------------------
+
+    define("CONTROLLER_SERVICE", "Controller");
 ?>

@@ -13,10 +13,11 @@
 				//tastes
 				$result_array['tastes'] = Taste::fetchAllTastes1($con);
 
-				echo json_encode($result_array);
+				return json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				return "";
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
