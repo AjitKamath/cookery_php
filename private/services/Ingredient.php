@@ -129,12 +129,12 @@
 				return;
 			}
 
-			if(count($listofingredients)<0){
+			if(!count($listofingredients)>0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredients");
 				return;
 			}
 
-			if(count($nameofingredients)<0){
+			if(!count($nameofingredients)>0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredientscheck");
 				return;
 			}
@@ -266,12 +266,12 @@
 			
 		public static function saveuserIngedrientList($list_name, $user_id, $listofingredients, $nameofingredients){
 			//check for null/empty start
-			if(count($listofingredients)<0){
+			if(!count($listofingredients)>0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredients");
 				return;
 			}
 
-			if(count($nameofingredients)<0){
+			if(!count($nameofingredients)>0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."nameofingredients");
 				return;
 			}
