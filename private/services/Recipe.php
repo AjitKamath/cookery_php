@@ -129,11 +129,15 @@
 			
 			try{
 				//fetch primary recipe image
-				$query = "SELECT ING_AKA.ING_AKA_ID, ING_AKA.ING_AKA_NAME, QTY.QTY_NAME, DSH.ING_QTY FROM `DISH` AS DSH 
-								INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
-								INNER JOIN  `ING_AKA` AS ING_AKA ON ING_AKA.ING_AKA_ID = DSH.ING_AKA_ID
-								INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
-								WHERE RCP.RCP_ID = '$rcp_id' ";
+				$query = "SELECT ING_AKA.ING_AKA_ID, ING_AKA.ING_AKA_NAME, QTY.QTY_NAME, 
+							DSH.ING_QTY, ING.ING_CAT_ID, ING_CAT.ING_CAT_NAME , ING.ING_ID
+							FROM `DISH` AS DSH
+							INNER JOIN `RECIPE` AS RCP ON DSH.RCP_ID = RCP.RCP_ID
+							INNER JOIN  `ING_AKA` AS ING_AKA ON ING_AKA.ING_AKA_ID = DSH.ING_AKA_ID
+							INNER JOIN `INGREDIENT` AS ING ON ING.ING_ID = ING_AKA.ING_ID
+							INNER JOIN `ING_CATEGORIES` AS ING_CAT ON ING.ING_CAT_ID = ING_CAT.ING_CAT_ID
+							INNER JOIN  `QTY` AS QTY ON QTY.QTY_ID = DSH.QTY_ID
+							WHERE RCP.RCP_ID = '$rcp_id' ";
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
@@ -142,6 +146,9 @@
 					$temparr['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;
 					$temparr['QTY_NAME'] = $result_data->QTY_NAME;
 					$temparr['ING_QTY'] = $result_data->ING_QTY;
+					$temparr['ING_CAT_ID'] = $result_data->ING_CAT_ID;
+					$temparr['ingredientCategoryName'] = $result_data->ING_CAT_NAME;
+					$temparr['images'] = Ingredient::getIngredientPrimaryImage($con, $result_data->ING_ID);
 
 					array_push($result_array, $temparr);  
 				}
@@ -209,12 +216,44 @@
 			}
 		}
 		
+		public static function fetchRecipeImages($user_id, $rcp_id){
+			//check for null/empty
+			if(!Util::check_for_null($rcp_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				return json_encode(self::getRecipeImages($con, $user_id, $rcp_id));
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
 		public static function getRecipeImages($con, $user_id, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_id");
 				return;
 			}
+			
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
 			
 			try{
 				$query = "SELECT RCP_IMG_ID, RCP_IMG FROM RECIPE_IMG WHERE RCP_ID = '".$rcp_id."'";
@@ -356,8 +395,8 @@
 
 							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
-								$query = "INSERT INTO `ING_AKA` ( `ING_AKA_NAME` , `CREATE_DTM`) 
-											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."' , CURRENT_TIMESTAMP)";
+								$query = "INSERT INTO `ING_AKA` ( `ING_AKA_NAME` , `ING_ID`, `CREATE_DTM`) 
+											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."', '".DEFAULT_INGREDIENT_ID."', CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
 									$temp_ing_aka_id = mysqli_insert_id($con); 
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");
@@ -562,8 +601,8 @@
 
 							//if the $ing_aka_id[i] is empty/null, user has entered custom ingredient. insert it in ING_AKA table then in DISH table
 							if($temp_ing_aka_id == null || $temp_ing_aka_id == ''){
-								$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `CREATE_DTM`) 
-											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."' , CURRENT_TIMESTAMP)";
+								$query = "INSERT INTO `ING_AKA` (`ING_AKA_NAME` , `ING_ID`, `CREATE_DTM`) 
+											VALUES ('".DatabaseUtil::cleanUpString($con, $ing_aka_nm)."', '".DEFAULT_INGREDIENT_ID."', CURRENT_TIMESTAMP)";
 								if(mysqli_query($con, $query)){
 									$temp_ing_aka_id = mysqli_insert_id($con); 
 									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Ingredient(".$temp_ing_aka_id.") added into ING_AKA table");

@@ -11,8 +11,10 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT ING_AKA_ID, ING_AKA_NAME, IMG 
-							FROM `ING_AKA` 
+				$query = "SELECT ING_AKA_ID, ING_AKA_NAME, ING.ING_ID, ING.ING_CAT_ID, ING_CAT_NAME
+							FROM `ING_AKA` AS ING_AKA
+							INNER JOIN `INGREDIENT` AS ING ON ING.ING_ID = ING_AKA.ING_ID
+							INNER JOIN `ING_CATEGORIES` AS ING_CAT ON ING.ING_CAT_ID = ING_CAT.ING_CAT_ID
 							WHERE ING_AKA_NAME LIKE '%$searchQuery%'
 							AND IS_REG = 'Y'";
 				$result = mysqli_query($con, $query);
@@ -21,7 +23,10 @@
 				while($result_data = $result->fetch_object()) {
 					$temp_array['ING_AKA_ID'] = $result_data->ING_AKA_ID;
 					$temp_array['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;
-					$temp_array['IMG'] = $result_data->IMG;
+					$temp_array['ING_ID'] = $result_data->ING_ID;
+					$temp_array['ING_CAT_ID'] = $result_data->ING_CAT_ID;
+					$temp_array['ingredientCategoryName'] = $result_data->ING_CAT_NAME;
+					$temp_array['images'] = self::getIngredientPrimaryImage($con, $result_data->ING_ID);
 					
 					array_push($result_array, $temp_array);
 				}
@@ -36,7 +41,61 @@
 			}
 		}
 		
-	
+		public static function getIngredientPrimaryImage($con, $ing_id){
+			//check for null/empty
+            if(!Util::check_for_null($ing_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ing_id");
+                return;
+            }
+			//check for null/empty
+			
+			try{
+				$query = "SELECT ING_IMG
+							FROM `ING_IMAGES`
+							WHERE ING_ID = '".$ing_id."'
+							AND IS_DEF = 'Y'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_data = $result->fetch_object()) {
+					$temp_array['ING_IMG'] = $result_data->ING_IMG;
+					array_push($result_array, $temp_array);
+				}
+
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
+		public static function getIngredientImages($con, $ing_id){
+			//check for null/empty
+            if(!Util::check_for_null($ing_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ing_id");
+                return;
+            }
+			//check for null/empty
+			
+			try{
+				$query = "SELECT ING_IMG
+							FROM `ING_IMAGES`
+							WHERE ING_ID = '".$ing_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_data = $result->fetch_object()) {
+					$temp_array['ING_IMG'] = $result_data->ING_IMG;
+					array_push($result_array, $temp_array);
+				}
+
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
 		public static function checkUserLists($user_id){
 			//check for null/empty start
 			if(!Util::check_for_null($user_id)){

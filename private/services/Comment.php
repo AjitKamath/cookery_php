@@ -118,8 +118,8 @@
 				return json_encode($result_arr);
             }
         }
-        
-        public static function fetchComments($user_id, $type, $type_id, $index){
+		
+		public static function getComments($con, $user_id, $type, $type_id, $index = 0){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
@@ -135,16 +135,9 @@
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."type_id");
                 return;
             }
+			//check for null/empty
 			
-			if(!Util::check_for_null($index)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
-                return;
-            }
-            //check for null/empty
-
-            try{
-                $con = DatabaseUtil::getInstance()->open_connection();
-
+			try{
                 $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM_ID, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM 
 						FROM COMMENTS COM 
                         INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID 
@@ -182,6 +175,87 @@
                 //response
                 return json_encode($result_array);
                 //response
+            }
+            catch(Exception $e){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+            }
+		}
+		
+		public static function getComment($con, $user_id, $com_id){
+			//check for null/empty
+			if(!Util::check_for_null($com_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."com_id id");
+                return;
+            }
+			//check for null/empty
+			
+			try{
+                $query = "SELECT USR.USER_ID, USR.NAME, USR.IMG, COM_ID, COM.COMMENT, COM.CREATE_DTM, COM.MOD_DTM 
+						FROM COMMENTS COM 
+                        INNER JOIN USER USR ON USR.USER_ID = COM.USER_ID 
+						WHERE COM.COM_ID = '".$com_id."'
+						AND COM.IS_DEL = 'N'";
+				
+                $result = mysqli_query($con ,$query);
+
+                $result_array = array();
+                if($result_data = $result->fetch_object()){
+					$temp_arr['COM_ID'] = $result_data->COM_ID;
+					$temp_arr['USER_ID'] = $result_data->USER_ID;
+					$temp_arr['COMMENT'] = $result_data->COMMENT;
+					$temp_arr['CREATE_DTM'] = $result_data->CREATE_DTM;
+					$temp_arr['MOD_DTM'] = $result_data->MOD_DTM;
+					
+					$temp_arr['userName'] = $result_data->NAME;
+					$temp_arr['userImage'] = $result_data->IMG;
+					
+					//likes count
+					$temp_arr['likesCount'] = Like::getLikeCount($con, "COMMENT", $result_data->COM_ID);
+					//likes count
+					
+					//if the user has liked comment
+					$temp_arr['userLiked'] = Like::isUserLiked($con, $user_id, "COMMENT", $result_data->COM_ID);
+					//if the user has liked comment
+					
+                    array_push($result_array, $temp_arr);
+                }
+
+                //response
+                return json_encode($result_array);
+                //response
+            }
+            catch(Exception $e){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+            }
+		}
+        
+        public static function fetchComments($user_id, $type, $type_id, $index = 0){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
+                return;
+            }
+			
+            if(!Util::check_for_null($type)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."type");
+                return;
+            }
+			
+			if(!Util::check_for_null($type_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."type_id");
+                return;
+            }
+			
+			if(!Util::check_for_null($index)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."index");
+                return;
+            }
+            //check for null/empty
+
+            try{
+                $con = DatabaseUtil::getInstance()->open_connection();
+
+                return self::getComments($con, $user_id, $type, $type_id, $index);
             }
             catch(Exception $e){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
@@ -229,11 +303,7 @@
 
                     LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "Comment('$comment') successfully submitted by the user('$user_id') for the type('$type')");
 
-                    $result_arr["err_code"] = "0";
-					$result_arr["isError"] = false;
-					$result_arr["err_message"] = "Successfully commented !";
-				
-					//register timeline
+                    //register timeline
 					$query = "";
 					$timeline_type = "";
 					if('RECIPE' == $type){
@@ -272,32 +342,25 @@
 					
 					//transaction end
 					DatabaseUtil::endTransaction($con);
+					
+					//get latest comments
+					return self::getComment($con, $user_id, $com_id);
                 }
                 else{
-					$result_arr["err_code"] = "1";
-					$result_arr["isError"] = true;
-					$result_arr["err_message"] = "Comment failed !";
-					
-                    LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the type('$type')");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the type('$type')");
 					
 					throw new Exception("Failed to submit comment");
                 } 
 				//insert comment
             }
             catch(Exception $e){
-				$result_arr["err_code"] = "1";
-				$result_arr["isError"] = true;
-				$result_arr["err_message"] = "Comment failed !";
-				
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
                 
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
             }
             finally{
 				DatabaseUtil::getInstance()->close_connection($con);
-				
-				return json_encode($result_arr);
             }
         }
     }

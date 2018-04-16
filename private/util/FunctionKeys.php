@@ -18,6 +18,7 @@
 
     //recipe
     define("RECIPE_DELETE", "RECIPE_DELETE");                           //Postman completed
+    define("RECIPE_IMAGES_FETCH", "RECIPE_IMAGES_FETCH");                           //Postman completed
     define("RECIPE_FETCH", "RECIPE_FETCH");                             //Postman completed
     define("RECIPE_FAVORITE_FETCH", "RECIPE_FAVORITE_FETCH");           //Postman completed
     define("RECIPE_USER_FETCH", "RECIPE_USER_FETCH");                   //Postman completed
@@ -96,4 +97,9 @@
     define("DATABASE_CONNECTION_LEAK", "DATABASE_CONNECTION_LEAK");
     define("DATABASE_TRANSACTION_LEAK", "DATABASE_TRANSACTION_LEAK");
     //Email
+
+    //Stats
+    define("STATS_DB_VIEW", "STATS_DB_VIEW");                               //Postman completed
+    define("STATS_DB_DELETE", "STATS_DB_DELETE");                               //Postman completed
+    //Stats
 ?>

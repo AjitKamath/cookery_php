@@ -38,7 +38,11 @@
     
     //admins
     define("MAIL_RECEPIENT_ADMIN_EMAIL_1", "ajitkamathk@gmail.com");
-    define("MAIL_RECEPIENT_ADMIN_NAME_1", "Ajit");
+    define("MAIL_RECEPIENT_ADMIN_NAME_1", "Ajit Kamath");
+
+    define("MAIL_RECEPIENT_ADMIN_EMAIL_2", "dial2vishal@gmail.com");
+    define("MAIL_RECEPIENT_ADMIN_NAME_2", "Vishal Varshney");
+    //admins
 
     //---------------------mail templates---------------------
     define("MAIL_TEMPLATE_ERROR_CRITICAL_CONTENT", "error_critical.html");
@@ -163,8 +167,10 @@
     define("RECIPE_OF_THE_DAY","RECIPE_OF_THE_DAY");
     //----------------------TRENDS--------------------------------------
 
+    //----------------------DEFAULTS--------------------------------------
     define("DEFAULT_SCOPE_ID","1");
-
+    define("DEFAULT_INGREDIENT_ID","99");
+    //----------------------DEFAULTS--------------------------------------
 
     //----------------------HTTP ERROR CODES---------------------------
     define("HTTP_OK", 200);
@@ -173,5 +179,7 @@
     define("HTTP_NOT_IMPLEMENTED", 501);
     //----------------------HTTP ERROR CODES---------------------------
 
+    //Constants
     define("CONTROLLER_SERVICE", "Controller");
+    define("NULL_OR_EMPTY", "function parameter is null/empty : ");
 ?>

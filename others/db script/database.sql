@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Apr 04, 2018 at 08:09 PM
+-- Generation Time: Apr 16, 2018 at 01:06 PM
 -- Server version: 8.0.4-rc-log
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -142,7 +142,8 @@ INSERT INTO `COMMENTS` (`COM_ID`, `USER_ID`, `COMMENT`, `TYPE`, `TYPE_ID`, `IS_D
 (116, 1, '2nd', 'RECIPE_IMG', 100, 'N', '2018-04-04 20:04:18', NULL),
 (117, 1, '3rd', 'RECIPE_IMG', 100, 'N', '2018-04-04 20:04:30', NULL),
 (118, 1, 'second comment', 'RECIPE_IMG', 102, 'N', '2018-04-04 20:05:08', NULL),
-(119, 1, 'fourth', 'RECIPE_IMG', 100, 'N', '2018-04-04 20:08:35', NULL);
+(119, 1, 'fourth', 'RECIPE_IMG', 100, 'N', '2018-04-04 20:08:35', NULL),
+(120, 1, 'Hi ! This\'s just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 33', 'RECIPE', 105, 'N', '2018-04-13 11:32:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -289,7 +290,23 @@ INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_AKA_ID`, `QTY_ID`, `ING_QTY`, `CRE
 (188, 119, 1, 1, 5, '2018-03-28 18:11:58', NULL),
 (189, 119, 2, 2, 6, '2018-03-28 18:11:59', NULL),
 (194, 3, 1, 1, 5, '2018-04-04 13:58:48', NULL),
-(195, 3, 2, 2, 6, '2018-04-04 13:58:49', NULL);
+(195, 3, 2, 2, 6, '2018-04-04 13:58:49', NULL),
+(196, 121, 1, 1, 5, '2018-04-05 08:02:32', NULL),
+(197, 121, 2, 2, 6, '2018-04-05 08:02:32', NULL),
+(198, 122, 1, 1, 5, '2018-04-05 08:04:03', NULL),
+(199, 122, 2, 2, 6, '2018-04-05 08:04:03', NULL),
+(200, 123, 1, 1, 5, '2018-04-05 08:07:53', NULL),
+(201, 123, 2, 2, 6, '2018-04-05 08:07:53', NULL),
+(202, 124, 1, 1, 5, '2018-04-05 08:09:30', NULL),
+(203, 124, 2, 2, 6, '2018-04-05 08:09:30', NULL),
+(204, 125, 1, 1, 5, '2018-04-05 08:10:48', NULL),
+(205, 125, 2, 2, 6, '2018-04-05 08:10:48', NULL),
+(206, 126, 1, 1, 5, '2018-04-05 08:15:22', NULL),
+(207, 126, 2, 2, 6, '2018-04-05 08:15:22', NULL),
+(208, 127, 1, 1, 5, '2018-04-05 08:21:15', NULL),
+(209, 127, 2, 2, 6, '2018-04-05 08:21:16', NULL),
+(210, 128, 1, 1, 5, '2018-04-05 08:23:45', NULL),
+(211, 128, 2, 2, 6, '2018-04-05 08:23:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,7 +411,8 @@ INSERT INTO `FOOD_CUISINE` (`FOOD_CSN_ID`, `FOOD_CSN_NAME`, `IS_DEF`, `IMG`, `CR
 (66, 'TAIWANESE', 'N', 'app_data/master_data/cuisines/taiwanese.jpg', '2018-03-06 07:27:48', NULL),
 (67, 'THAI', 'N', 'app_data/master_data/cuisines/thai.jpg', '2018-03-06 07:27:48', NULL),
 (68, 'TURKISH', 'N', 'app_data/master_data/cuisines/turkish.jpg', '2018-03-06 07:27:48', NULL),
-(69, 'VIETNAMESE', 'N', 'app_data/master_data/cuisines/vietnamese.jpg', '2018-03-06 07:27:48', NULL);
+(69, 'VIETNAMESE', 'N', 'app_data/master_data/cuisines/vietnamese.jpg', '2018-03-06 07:27:48', NULL),
+(70, 'SCOTISH', 'N', 'app_data/master_data/cuisines/indian.jpg', '2018-04-14 05:52:30', '2018-04-14 05:52:30');
 
 -- --------------------------------------------------------
 
@@ -423,7 +441,8 @@ INSERT INTO `FOOD_TYPE` (`FOOD_TYP_ID`, `FOOD_TYP_NAME`, `IS_DEF`, `IMG`, `CREAT
 (5, 'DESSERT', 'N', 'app_data/master_data/food_type/dessert.jpg', '2017-08-27 00:00:00', NULL),
 (6, 'SOUP', 'N', 'app_data/master_data/food_type/soup.jpg', '2017-08-27 00:00:00', NULL),
 (7, 'DRINKS', 'N', 'app_data/master_data/food_type/drinks.jpg', '2017-08-27 00:00:00', NULL),
-(8, 'OTHERS', 'N', 'app_data/master_data/food_type/others.jpg', '2017-08-27 00:00:00', NULL);
+(8, 'OTHERS', 'N', 'app_data/master_data/food_type/others.jpg', '2017-08-27 00:00:00', NULL),
+(9, 'MOCKTAILS', 'N', 'app_data/master_data/food_type/breakfast.jpg', '2018-04-14 05:53:38', '2018-04-14 05:53:38');
 
 -- --------------------------------------------------------
 
@@ -433,9 +452,7 @@ INSERT INTO `FOOD_TYPE` (`FOOD_TYP_ID`, `FOOD_TYP_NAME`, `IS_DEF`, `IMG`, `CREAT
 
 CREATE TABLE `INGREDIENT` (
   `ING_ID` int(11) NOT NULL,
-  `ING_NAME` varchar(25) NOT NULL,
-  `IMG` varchar(50) NOT NULL DEFAULT 'app_data/master_data/ingredients/vegetable.jpg',
-  `IS_REG` varchar(1) NOT NULL DEFAULT 'N',
+  `ING_CAT_ID` int(11) NOT NULL DEFAULT '1',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -444,31 +461,32 @@ CREATE TABLE `INGREDIENT` (
 -- Dumping data for table `INGREDIENT`
 --
 
-INSERT INTO `INGREDIENT` (`ING_ID`, `ING_NAME`, `IMG`, `IS_REG`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'GINGER', 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(2, 'TURMERIC', 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(3, 'SALT', 'app_data/master_data/ingredients/salt.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(4, 'ONION', 'app_data/master_data/ingredients/onion.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(7, 'CORN FLOUR', 'app_data/master_data/ingredients/cornflour.jpg', 'Y', '2017-12-30 14:36:23', NULL),
-(8, 'GARLIC', 'app_data/master_data/ingredients/garlic.jpg', 'Y', '2017-12-30 14:36:23', NULL),
-(9, 'TOFU', 'app_data/master_data/ingredients/tofu.jpg', 'Y', '2017-12-30 14:38:48', NULL),
-(11, 'BUTTER', 'app_data/master_data/ingredients/butter.jpg', 'Y', '2017-12-30 15:09:31', NULL),
-(12, 'PANEER', 'app_data/master_data/ingredients/paneer.jpg', 'Y', '2017-12-30 15:11:48', NULL),
-(13, 'CHEESE', 'app_data/master_data/ingredients/cheese.jpg', 'Y', '2017-12-30 23:23:32', NULL),
-(14, 'EGG', 'app_data/master_data/ingredients/eggs.jpg', 'Y', '2018-01-12 22:02:29', NULL),
-(15, 'GARAM MASALA', 'app_data/master_data/ingredients/garammasala.jpg', 'Y', '2018-01-12 23:25:37', NULL),
-(16, 'BLACK SALT', 'app_data/master_data/ingredients/blacksalt.jpg', 'Y', '2018-01-12 23:25:37', NULL),
-(18, 'PUDINA', 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-01-12 23:30:52', NULL),
-(19, 'MILK', 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-01-14 00:23:12', NULL),
-(20, 'PEPPER', 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-03-06 00:00:00', NULL),
-(23, 'TOMATO', 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-03-06 00:00:00', NULL),
-(24, 'BHINDI', 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-03-18 08:50:56', NULL),
-(25, 'MUSTARD SEEDS', 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(26, 'POSTO SEEDS', 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(27, 'HALDI', 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(28, 'GREEN CHILLLY', 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(29, 'CORIANDER', 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(99, 'OTHER', 'app_data/master_data/ingredients/vegetable.jpg', 'N', '2018-03-28 17:32:26', NULL);
+INSERT INTO `INGREDIENT` (`ING_ID`, `ING_CAT_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, '2017-09-08 00:00:00', NULL),
+(2, 1, '2017-09-08 00:00:00', NULL),
+(3, 1, '2017-09-08 00:00:00', NULL),
+(4, 1, '2017-09-08 00:00:00', NULL),
+(7, 1, '2017-12-30 14:36:23', NULL),
+(8, 1, '2017-12-30 14:36:23', NULL),
+(9, 1, '2017-12-30 14:38:48', NULL),
+(11, 1, '2017-12-30 15:09:31', NULL),
+(12, 1, '2017-12-30 15:11:48', NULL),
+(13, 1, '2017-12-30 23:23:32', NULL),
+(14, 1, '2018-01-12 22:02:29', NULL),
+(15, 1, '2018-01-12 23:25:37', NULL),
+(16, 1, '2018-01-12 23:25:37', NULL),
+(18, 1, '2018-01-12 23:30:52', NULL),
+(19, 1, '2018-01-14 00:23:12', NULL),
+(20, 1, '2018-03-06 00:00:00', NULL),
+(23, 1, '2018-03-06 00:00:00', NULL),
+(24, 1, '2018-03-18 08:50:56', NULL),
+(25, 1, '2018-03-18 00:00:00', NULL),
+(26, 1, '2018-03-18 00:00:00', NULL),
+(27, 1, '2018-03-18 00:00:00', NULL),
+(28, 1, '2018-03-18 00:00:00', NULL),
+(29, 1, '2018-03-18 00:00:00', NULL),
+(99, 1, '2018-03-28 17:32:26', NULL),
+(101, 1, '2018-04-14 05:18:41', '2018-04-14 05:18:41');
 
 -- --------------------------------------------------------
 
@@ -480,7 +498,6 @@ CREATE TABLE `ING_AKA` (
   `ING_AKA_ID` int(11) NOT NULL,
   `ING_ID` int(11) NOT NULL DEFAULT '99',
   `ING_AKA_NAME` varchar(25) NOT NULL,
-  `IMG` varchar(50) NOT NULL DEFAULT 'app_data/master_data/ingredients/vegetable.jpg',
   `IS_REG` varchar(1) NOT NULL DEFAULT 'N',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
@@ -490,30 +507,98 @@ CREATE TABLE `ING_AKA` (
 -- Dumping data for table `ING_AKA`
 --
 
-INSERT INTO `ING_AKA` (`ING_AKA_ID`, `ING_ID`, `ING_AKA_NAME`, `IMG`, `IS_REG`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'GINGER', 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(2, 2, 'TURMERIC', 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(3, 3, 'SALT', 'app_data/master_data/ingredients/salt.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(4, 4, 'ONION', 'app_data/master_data/ingredients/onion.jpg', 'Y', '2017-09-08 00:00:00', NULL),
-(7, 7, 'CORN FLOUR', 'app_data/master_data/ingredients/cornflour.jpg', 'Y', '2017-12-30 14:36:23', NULL),
-(8, 8, 'GARLIC', 'app_data/master_data/ingredients/garlic.jpg', 'Y', '2017-12-30 14:36:23', NULL),
-(9, 9, 'TOFU', 'app_data/master_data/ingredients/tofu.jpg', 'Y', '2017-12-30 14:38:48', NULL),
-(11, 11, 'BUTTER', 'app_data/master_data/ingredients/butter.jpg', 'Y', '2017-12-30 15:09:31', NULL),
-(12, 12, 'PANEER', 'app_data/master_data/ingredients/paneer.jpg', 'Y', '2017-12-30 15:11:48', NULL),
-(13, 13, 'CHEESE', 'app_data/master_data/ingredients/cheese.jpg', 'Y', '2017-12-30 23:23:32', NULL),
-(14, 14, 'EGG', 'app_data/master_data/ingredients/eggs.jpg', 'Y', '2018-01-12 22:02:29', NULL),
-(15, 15, 'GARAM MASALA', 'app_data/master_data/ingredients/garammasala.jpg', 'Y', '2018-01-12 23:25:37', NULL),
-(16, 16, 'BLACK SALT', 'app_data/master_data/ingredients/blacksalt.jpg', 'Y', '2018-01-12 23:25:37', NULL),
-(18, 18, 'PUDINA', 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-01-12 23:30:52', NULL),
-(19, 19, 'MILK', 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-01-14 00:23:12', NULL),
-(20, 20, 'PEPPER', 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-03-06 00:00:00', NULL),
-(23, 23, 'TOMATO', 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-03-06 00:00:00', NULL),
-(24, 24, 'BHINDI', 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-03-18 08:50:56', NULL),
-(25, 25, 'MUSTARD SEEDS', 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(26, 26, 'POSTO SEEDS', 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(27, 27, 'HALDI', 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(28, 28, 'GREEN CHILLLY', 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-03-18 00:00:00', NULL),
-(29, 29, 'CORIANDER', 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-03-18 00:00:00', NULL);
+INSERT INTO `ING_AKA` (`ING_AKA_ID`, `ING_ID`, `ING_AKA_NAME`, `IS_REG`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'GINGER', 'Y', '2017-09-08 00:00:00', NULL),
+(2, 2, 'TURMERIC', 'Y', '2017-09-08 00:00:00', NULL),
+(3, 3, 'SALT', 'Y', '2017-09-08 00:00:00', NULL),
+(4, 4, 'ONION', 'Y', '2017-09-08 00:00:00', NULL),
+(7, 7, 'CORN FLOUR', 'Y', '2017-12-30 14:36:23', NULL),
+(8, 8, 'GARLIC', 'Y', '2017-12-30 14:36:23', NULL),
+(9, 9, 'TOFU', 'Y', '2017-12-30 14:38:48', NULL),
+(11, 11, 'BUTTER', 'Y', '2017-12-30 15:09:31', NULL),
+(12, 12, 'PANEER', 'Y', '2017-12-30 15:11:48', NULL),
+(13, 13, 'CHEESE', 'Y', '2017-12-30 23:23:32', NULL),
+(14, 14, 'EGG', 'Y', '2018-01-12 22:02:29', NULL),
+(15, 15, 'GARAM MASALA', 'Y', '2018-01-12 23:25:37', NULL),
+(16, 16, 'BLACK SALT', 'Y', '2018-01-12 23:25:37', NULL),
+(18, 18, 'PUDINA', 'Y', '2018-01-12 23:30:52', NULL),
+(19, 19, 'MILK', 'Y', '2018-01-14 00:23:12', NULL),
+(20, 20, 'PEPPER', 'Y', '2018-03-06 00:00:00', NULL),
+(23, 23, 'TOMATO', 'Y', '2018-03-06 00:00:00', NULL),
+(24, 24, 'BHINDI', 'Y', '2018-03-18 08:50:56', NULL),
+(25, 25, 'MUSTARD SEEDS', 'Y', '2018-03-18 00:00:00', NULL),
+(26, 26, 'POSTO SEEDS', 'Y', '2018-03-18 00:00:00', NULL),
+(27, 27, 'HALDI', 'Y', '2018-03-18 00:00:00', NULL),
+(28, 28, 'GREEN CHILLLY', 'Y', '2018-03-18 00:00:00', NULL),
+(29, 29, 'CORIANDER', 'Y', '2018-03-18 00:00:00', NULL),
+(31, 101, 'DALIA', 'Y', '2018-04-14 05:18:41', '2018-04-14 05:18:41'),
+(32, 99, 'MALAI', 'N', '2018-04-16 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ING_CATEGORIES`
+--
+
+CREATE TABLE `ING_CATEGORIES` (
+  `ING_CAT_ID` int(11) NOT NULL,
+  `ING_CAT_NAME` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ING_CATEGORIES`
+--
+
+INSERT INTO `ING_CATEGORIES` (`ING_CAT_ID`, `ING_CAT_NAME`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'OTHERS', '2018-04-15 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ING_IMAGES`
+--
+
+CREATE TABLE `ING_IMAGES` (
+  `ING_IMG_ID` int(11) NOT NULL,
+  `ING_ID` int(11) NOT NULL,
+  `ING_IMG` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `IS_DEF` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ING_IMAGES`
+--
+
+INSERT INTO `ING_IMAGES` (`ING_IMG_ID`, `ING_ID`, `ING_IMG`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(2, 2, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(3, 3, 'app_data/master_data/ingredients/salt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(4, 4, 'app_data/master_data/ingredients/onion.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(5, 7, 'app_data/master_data/ingredients/cornflour.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(6, 8, 'app_data/master_data/ingredients/garlic.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(7, 9, 'app_data/master_data/ingredients/tofu.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(8, 11, 'app_data/master_data/ingredients/butter.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(9, 12, 'app_data/master_data/ingredients/paneer.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(10, 13, 'app_data/master_data/ingredients/cheese.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(11, 14, 'app_data/master_data/ingredients/eggs.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(12, 15, 'app_data/master_data/ingredients/garammasala.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(13, 16, 'app_data/master_data/ingredients/blacksalt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(14, 18, 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(15, 19, 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(16, 20, 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(17, 23, 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(18, 24, 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(19, 25, 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(20, 26, 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(21, 27, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(22, 28, 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(23, 29, 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(24, 101, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(25, 99, 'app_data/master_data/ingredients/vegetable.jpg', 'N', '2018-04-15 22:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -556,20 +641,26 @@ INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_
 (19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL),
 (21, 1, 'RECIPE_IMG', 1, 'N', '2018-03-13 13:24:57', NULL),
 (22, 1, 'RECIPE_IMG', 96, 'Y', '2018-03-13 13:27:35', '2018-03-26 17:01:33'),
-(23, 1, 'USER', 1, 'Y', '2018-03-13 18:01:10', '2018-03-26 17:01:37'),
+(23, 1, 'USER', 1, 'N', '2018-03-13 18:01:10', '2018-04-15 16:00:43'),
 (24, 1, 'USER', 2, 'N', '2018-03-13 18:03:36', NULL),
 (25, 1, 'USER', 3, 'N', '2018-03-13 18:07:08', NULL),
-(26, 1, 'USER', 4, 'Y', '2018-03-13 18:10:16', '2018-03-13 18:10:18'),
+(26, 1, 'USER', 4, 'N', '2018-03-13 18:10:16', '2018-04-15 11:09:28'),
 (27, 1, 'RECIPE_IMG', 94, 'Y', '2018-03-17 10:15:31', '2018-03-17 11:50:08'),
 (28, 1, 'RECIPE_IMG', 95, 'N', '2018-03-17 10:56:37', '2018-03-17 11:49:51'),
 (29, 1, 'RECIPE', 3, 'Y', '2018-03-17 11:14:54', '2018-03-17 11:17:53'),
-(30, 1, 'RECIPE_IMG', 100, 'N', '2018-03-19 19:36:17', NULL),
-(31, 1, 'RECIPE_IMG', 102, 'N', '2018-03-19 19:36:47', NULL),
+(30, 1, 'RECIPE_IMG', 100, 'Y', '2018-03-19 19:36:17', '2018-04-15 08:50:23'),
+(31, 1, 'RECIPE_IMG', 102, 'Y', '2018-03-19 19:36:47', '2018-04-15 08:50:59'),
 (32, 1, 'RECIPE_IMG', 97, 'Y', '2018-03-20 18:58:30', '2018-03-20 19:24:55'),
 (33, 1, 'RECIPE', 105, 'N', '2018-03-23 19:00:11', '2018-03-26 17:01:28'),
 (34, 2, 'RECIPE', 105, 'N', '2018-03-26 19:05:54', NULL),
 (35, 3, 'RECIPE', 105, 'N', '2018-03-26 19:06:00', NULL),
-(36, 4, 'RECIPE', 105, 'N', '2018-03-26 19:06:07', NULL);
+(36, 4, 'RECIPE', 105, 'N', '2018-03-26 19:06:07', NULL),
+(37, 1, 'COMMENT', 95, 'N', '2018-04-14 22:31:00', '2018-04-14 23:55:10'),
+(38, 1, 'COMMENT', 96, 'N', '2018-04-14 22:56:33', '2018-04-15 09:02:23'),
+(39, 1, 'COMMENT', 120, 'N', '2018-04-14 23:41:05', NULL),
+(40, 1, 'RECIPE_IMG', 103, 'N', '2018-04-15 00:07:19', NULL),
+(41, 1, 'RECIPE_IMG', 104, 'N', '2018-04-15 08:51:18', NULL),
+(42, 1, 'REVIEW', 15, 'N', '2018-04-15 09:56:24', '2018-04-15 10:21:49');
 
 -- --------------------------------------------------------
 
@@ -704,7 +795,15 @@ INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DE
 (116, 'Masala puri', 4, 1, 'N', 100, '2018-03-27 23:46:31', NULL),
 (117, 'TEST_RECIPE_NAME - 40', 1, 1, 'N', 1, '2018-03-28 18:08:30', NULL),
 (118, 'TEST_RECIPE_NAME - 02', 1, 1, 'N', 1, '2018-03-28 18:10:43', NULL),
-(119, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-03-28 18:11:58', NULL);
+(119, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-03-28 18:11:58', NULL),
+(121, 'TEST_RECIPE_NAME - 01', 1, 1, 'N', 1, '2018-04-05 08:02:32', NULL),
+(122, 'TEST_RECIPE_NAME - 07', 1, 1, 'N', 1, '2018-04-05 08:04:03', NULL),
+(123, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-04-05 08:07:53', NULL),
+(124, 'TEST_RECIPE_NAME - 42', 1, 1, 'N', 1, '2018-04-05 08:09:30', NULL),
+(125, 'TEST_RECIPE_NAME - 78', 1, 1, 'N', 1, '2018-04-05 08:10:48', NULL),
+(126, 'TEST_RECIPE_NAME - 11', 1, 1, 'N', 1, '2018-04-05 08:15:22', NULL),
+(127, 'TEST_RECIPE_NAME - 99', 1, 1, 'N', 1, '2018-04-05 08:21:15', NULL),
+(128, 'TEST_RECIPE_NAME - 60', 1, 1, 'N', 1, '2018-04-05 08:23:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -794,7 +893,23 @@ INSERT INTO `RECIPE_IMG` (`RCP_IMG_ID`, `RCP_ID`, `RCP_IMG`, `CREATE_DTM`, `MOD_
 (129, 118, 'app_data/users/1/recipes/118/images/5abbbe843c625.jpg', '2018-03-28 18:10:44', NULL),
 (130, 119, 'app_data/users/1/recipes/119/images/5abbbecfa6caf.jpg', '2018-03-28 18:11:59', NULL),
 (131, 119, 'app_data/users/1/recipes/119/images/5abbbecfc4ff1.jpg', '2018-03-28 18:11:59', NULL),
-(135, 3, 'app_data/users/1/recipes/3/images/5ac4bdfa478cb.jpg', '2018-04-04 13:58:50', NULL);
+(135, 3, 'app_data/users/1/recipes/3/images/5ac4bdfa478cb.jpg', '2018-04-04 13:58:50', NULL),
+(136, 121, 'app_data/users/1/recipes/121/images/5ac5bbf99213a.jpg', '2018-04-05 08:02:33', NULL),
+(137, 121, 'app_data/users/1/recipes/121/images/5ac5bbf9b0473.jpg', '2018-04-05 08:02:33', NULL),
+(138, 122, 'app_data/users/1/recipes/122/images/5ac5bc5498fc4.jpg', '2018-04-05 08:04:04', NULL),
+(139, 122, 'app_data/users/1/recipes/122/images/5ac5bc54b703f.jpg', '2018-04-05 08:04:04', NULL),
+(140, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a0d6d6.jpg', '2018-04-05 08:07:54', NULL),
+(141, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a2b790.jpg', '2018-04-05 08:07:54', NULL),
+(142, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b77e66.jpg', '2018-04-05 08:09:31', NULL),
+(143, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b95e5a.jpg', '2018-04-05 08:09:31', NULL),
+(144, 125, 'app_data/users/1/recipes/125/images/5ac5bde964980.jpg', '2018-04-05 08:10:49', NULL),
+(145, 125, 'app_data/users/1/recipes/125/images/5ac5bde982928.jpg', '2018-04-05 08:10:49', NULL),
+(146, 126, 'app_data/users/1/recipes/126/images/5ac5befb5d8a7.jpg', '2018-04-05 08:15:23', NULL),
+(147, 126, 'app_data/users/1/recipes/126/images/5ac5befb7b6f5.jpg', '2018-04-05 08:15:23', NULL),
+(148, 127, 'app_data/users/1/recipes/127/images/5ac5c05cbf186.jpg', '2018-04-05 08:21:16', NULL),
+(149, 127, 'app_data/users/1/recipes/127/images/5ac5c05cdd08b.jpg', '2018-04-05 08:21:16', NULL),
+(150, 128, 'app_data/users/1/recipes/128/images/5ac5c0f239dc5.jpg', '2018-04-05 08:23:46', NULL),
+(151, 128, 'app_data/users/1/recipes/128/images/5ac5c0f257d30.jpg', '2018-04-05 08:23:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -871,7 +986,23 @@ INSERT INTO `RECIPE_STEPS` (`RCP_STPS_ID`, `RCP_ID`, `RCP_STEP`, `CREATE_DTM`, `
 (117, 119, 'TEST STEP 2', '2018-03-28 18:11:59', NULL),
 (124, 3, 'This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. This is a step 1. ', '2018-04-04 13:58:49', NULL),
 (125, 3, 'This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. This is a step 2. \r\n', '2018-04-04 13:58:49', NULL),
-(126, 3, 'This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. ', '2018-04-04 13:58:49', NULL);
+(126, 3, 'This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. This is a step 3. ', '2018-04-04 13:58:49', NULL),
+(127, 121, 'TEST STEP !', '2018-04-05 08:02:33', NULL),
+(128, 121, 'TEST STEP 2', '2018-04-05 08:02:33', NULL),
+(129, 122, 'TEST STEP !', '2018-04-05 08:04:04', NULL),
+(130, 122, 'TEST STEP 2', '2018-04-05 08:04:04', NULL),
+(131, 123, 'TEST STEP !', '2018-04-05 08:07:53', NULL),
+(132, 123, 'TEST STEP 2', '2018-04-05 08:07:53', NULL),
+(133, 124, 'TEST STEP !', '2018-04-05 08:09:30', NULL),
+(134, 124, 'TEST STEP 2', '2018-04-05 08:09:31', NULL),
+(135, 125, 'TEST STEP !', '2018-04-05 08:10:48', NULL),
+(136, 125, 'TEST STEP 2', '2018-04-05 08:10:48', NULL),
+(137, 126, 'TEST STEP !', '2018-04-05 08:15:22', NULL),
+(138, 126, 'TEST STEP 2', '2018-04-05 08:15:22', NULL),
+(139, 127, 'TEST STEP !', '2018-04-05 08:21:16', NULL),
+(140, 127, 'TEST STEP 2', '2018-04-05 08:21:16', NULL),
+(141, 128, 'TEST STEP !', '2018-04-05 08:23:45', NULL),
+(142, 128, 'TEST STEP 2', '2018-04-05 08:23:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -1135,7 +1266,31 @@ INSERT INTO `RECIPE_TASTE` (`RCP_TST_ID`, `RCP_ID`, `TST_ID`, `TST_QTY`, `CREATE
 (364, 119, 3, 2, '2018-03-28 18:11:59', NULL),
 (371, 3, 1, 4, '2018-04-04 13:58:49', NULL),
 (372, 3, 2, 3, '2018-04-04 13:58:49', NULL),
-(373, 3, 3, 2, '2018-04-04 13:58:50', NULL);
+(373, 3, 3, 2, '2018-04-04 13:58:50', NULL),
+(374, 121, 1, 4, '2018-04-05 08:02:33', NULL),
+(375, 121, 2, 3, '2018-04-05 08:02:33', NULL),
+(376, 121, 3, 2, '2018-04-05 08:02:33', NULL),
+(377, 122, 1, 4, '2018-04-05 08:04:04', NULL),
+(378, 122, 2, 3, '2018-04-05 08:04:04', NULL),
+(379, 122, 3, 2, '2018-04-05 08:04:04', NULL),
+(380, 123, 1, 4, '2018-04-05 08:07:53', NULL),
+(381, 123, 2, 3, '2018-04-05 08:07:53', NULL),
+(382, 123, 3, 2, '2018-04-05 08:07:53', NULL),
+(383, 124, 1, 4, '2018-04-05 08:09:31', NULL),
+(384, 124, 2, 3, '2018-04-05 08:09:31', NULL),
+(385, 124, 3, 2, '2018-04-05 08:09:31', NULL),
+(386, 125, 1, 4, '2018-04-05 08:10:49', NULL),
+(387, 125, 2, 3, '2018-04-05 08:10:49', NULL),
+(388, 125, 3, 2, '2018-04-05 08:10:49', NULL),
+(389, 126, 1, 4, '2018-04-05 08:15:23', NULL),
+(390, 126, 2, 3, '2018-04-05 08:15:23', NULL),
+(391, 126, 3, 2, '2018-04-05 08:15:23', NULL),
+(392, 127, 1, 4, '2018-04-05 08:21:16', NULL),
+(393, 127, 2, 3, '2018-04-05 08:21:16', NULL),
+(394, 127, 3, 2, '2018-04-05 08:21:16', NULL),
+(395, 128, 1, 4, '2018-04-05 08:23:45', NULL),
+(396, 128, 2, 3, '2018-04-05 08:23:46', NULL),
+(397, 128, 3, 2, '2018-04-05 08:23:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -1724,7 +1879,89 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (840, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 116, 1, 'N', '2018-04-04 20:04:18', NULL),
 (841, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 117, 1, 'N', '2018-04-04 20:04:31', NULL),
 (842, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 118, 1, 'N', '2018-04-04 20:05:08', NULL),
-(843, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 119, 1, 'N', '2018-04-04 20:08:35', NULL);
+(843, 1, 1, 'COMMENT_RECIPE_IMG_ADD', 119, 1, 'N', '2018-04-04 20:08:35', NULL),
+(844, 1, 1, 'RECIPE_ADD', 121, 1, 'N', '2018-04-05 08:02:33', NULL),
+(845, 1, 1, 'RECIPE_ADD', 122, 1, 'N', '2018-04-05 08:04:04', NULL),
+(846, 1, 1, 'RECIPE_ADD', 123, 1, 'N', '2018-04-05 08:07:54', NULL),
+(847, 1, 1, 'RECIPE_ADD', 124, 1, 'N', '2018-04-05 08:09:31', NULL),
+(848, 1, 1, 'RECIPE_ADD', 125, 1, 'N', '2018-04-05 08:10:49', NULL),
+(849, 1, 1, 'RECIPE_ADD', 126, 1, 'N', '2018-04-05 08:15:23', NULL),
+(850, 1, 1, 'RECIPE_ADD', 127, 1, 'N', '2018-04-05 08:21:17', NULL),
+(851, 1, 1, 'RECIPE_ADD', 128, 1, 'N', '2018-04-05 08:23:46', NULL),
+(852, 1, 1, 'COMMENT_RECIPE_ADD', 120, 1, 'N', '2018-04-13 11:32:59', NULL),
+(853, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-14 15:32:15', NULL),
+(854, 112, 112, 'USER_ADD', 112, 1, 'N', '2018-04-14 16:32:55', NULL),
+(855, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 31, 1, 'N', '2018-04-14 20:15:36', NULL),
+(856, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 22:31:00', NULL),
+(857, 1, 1, 'LIKE_COMMENT_ADD', 38, 1, 'N', '2018-04-14 22:56:33', NULL),
+(858, 1, 1, 'LIKE_COMMENT_REMOVE', 38, 1, 'N', '2018-04-14 22:57:28', NULL),
+(859, 1, 1, 'LIKE_COMMENT_ADD', 38, 1, 'N', '2018-04-14 23:05:38', NULL),
+(860, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:06:17', NULL),
+(861, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:06:34', NULL),
+(862, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:09:07', NULL),
+(863, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:38:38', NULL),
+(864, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:40:49', NULL),
+(865, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:40:55', NULL),
+(866, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:40:56', NULL),
+(867, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:40:57', NULL),
+(868, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:40:59', NULL),
+(869, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:41:00', NULL),
+(870, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:41:02', NULL),
+(871, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:41:02', NULL),
+(872, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:41:04', NULL),
+(873, 1, 1, 'LIKE_COMMENT_ADD', 39, 1, 'N', '2018-04-14 23:41:06', NULL),
+(874, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:42:54', NULL),
+(875, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:42:58', NULL),
+(876, 1, 1, 'LIKE_COMMENT_REMOVE', 38, 1, 'N', '2018-04-14 23:43:01', NULL),
+(877, 1, 1, 'LIKE_COMMENT_ADD', 38, 1, 'N', '2018-04-14 23:43:03', NULL),
+(878, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:43:05', NULL),
+(879, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:50:36', NULL),
+(880, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:51:57', NULL),
+(881, 1, 1, 'LIKE_COMMENT_REMOVE', 37, 1, 'N', '2018-04-14 23:52:09', NULL),
+(882, 1, 1, 'LIKE_COMMENT_ADD', 37, 1, 'N', '2018-04-14 23:55:10', NULL),
+(883, 1, 1, 'LIKE_COMMENT_REMOVE', 38, 1, 'N', '2018-04-14 23:55:40', NULL),
+(884, 1, 1, 'LIKE_RECIPE_IMG_ADD', 40, 1, 'N', '2018-04-15 00:07:19', NULL),
+(885, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 00:07:25', NULL),
+(886, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 00:07:39', NULL),
+(887, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 06:56:15', NULL),
+(888, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 06:56:40', NULL),
+(889, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 06:56:55', NULL),
+(890, 1, 1, 'LIKE_RECIPE_IMG_ADD', 31, 1, 'N', '2018-04-15 06:58:46', NULL),
+(891, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 07:02:54', NULL),
+(892, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 07:04:18', NULL),
+(893, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 07:09:11', NULL),
+(894, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 08:27:17', NULL),
+(895, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 08:27:25', NULL),
+(896, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 08:43:11', NULL),
+(897, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 08:43:31', NULL),
+(898, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 08:44:39', NULL),
+(899, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 08:44:42', NULL),
+(900, 1, 1, 'LIKE_RECIPE_IMG_ADD', 30, 1, 'N', '2018-04-15 08:44:45', NULL),
+(901, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 30, 1, 'N', '2018-04-15 08:50:23', NULL),
+(902, 1, 1, 'LIKE_RECIPE_IMG_REMOVE', 31, 1, 'N', '2018-04-15 08:50:59', NULL),
+(903, 1, 1, 'LIKE_RECIPE_IMG_ADD', 41, 1, 'N', '2018-04-15 08:51:19', NULL),
+(904, 1, 1, 'LIKE_COMMENT_ADD', 38, 1, 'N', '2018-04-15 09:02:24', NULL),
+(905, 1, 1, 'LIKE_REVIEW_ADD', 42, 1, 'N', '2018-04-15 09:56:25', NULL),
+(906, 1, 1, 'LIKE_REVIEW_REMOVE', 42, 1, 'N', '2018-04-15 10:04:38', NULL),
+(907, 1, 1, 'LIKE_REVIEW_ADD', 42, 1, 'N', '2018-04-15 10:04:50', NULL),
+(908, 1, 1, 'LIKE_REVIEW_REMOVE', 42, 1, 'N', '2018-04-15 10:16:43', NULL),
+(909, 1, 1, 'LIKE_REVIEW_ADD', 42, 1, 'N', '2018-04-15 10:18:23', NULL),
+(910, 1, 1, 'LIKE_REVIEW_REMOVE', 42, 1, 'N', '2018-04-15 10:20:45', NULL),
+(911, 1, 1, 'LIKE_REVIEW_ADD', 42, 1, 'N', '2018-04-15 10:21:27', NULL),
+(912, 1, 1, 'LIKE_REVIEW_REMOVE', 42, 1, 'N', '2018-04-15 10:21:46', NULL),
+(913, 1, 1, 'LIKE_REVIEW_ADD', 42, 1, 'N', '2018-04-15 10:21:49', NULL),
+(914, 1, 4, 'LIKE_USER_ADD', 26, 1, 'N', '2018-04-15 10:48:41', NULL),
+(915, 1, 4, 'LIKE_USER_REMOVE', 26, 1, 'N', '2018-04-15 10:49:41', NULL),
+(916, 1, 4, 'LIKE_USER_ADD', 26, 1, 'N', '2018-04-15 10:49:43', NULL),
+(917, 1, 4, 'LIKE_USER_REMOVE', 26, 1, 'N', '2018-04-15 10:51:56', NULL),
+(918, 1, 4, 'LIKE_USER_ADD', 26, 1, 'N', '2018-04-15 11:00:38', NULL),
+(919, 1, 4, 'LIKE_USER_REMOVE', 26, 1, 'N', '2018-04-15 11:09:16', NULL),
+(920, 1, 4, 'LIKE_USER_ADD', 26, 1, 'N', '2018-04-15 11:09:28', NULL),
+(921, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-04-15 12:12:08', NULL),
+(922, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-04-15 12:12:47', NULL),
+(923, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-04-15 15:56:37', NULL),
+(924, 1, 1, 'LIKE_USER_REMOVE', 23, 1, 'N', '2018-04-15 16:00:31', NULL),
+(925, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-04-15 16:00:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -1785,20 +2022,20 @@ INSERT INTO `TRENDS_ITEM` (`TRND_ITEM_ID`, `TRND_ID`, `TRND_ITEM_TYPE`, `TRND_IT
 
 CREATE TABLE `USER` (
   `USER_ID` int(11) NOT NULL,
-  `RANK_ID` int(11) NOT NULL DEFAULT '1',
+  `NAME` varchar(25) DEFAULT NULL,
   `EMAIL` varchar(50) NOT NULL,
-  `EMAIL_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
   `VERI_CODE` int(8) NOT NULL,
-  `VERI_CODE_DTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `IMG` varchar(50) DEFAULT NULL,
   `MOBILE` varchar(15) DEFAULT NULL,
-  `MOBILE_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
   `PASSWORD` varchar(25) NOT NULL,
-  `NAME` varchar(25) DEFAULT NULL,
   `GENDER` varchar(1) DEFAULT '',
   `GENDER_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
+  `MOBILE_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
+  `EMAIL_SCOPE_ID` int(11) NOT NULL DEFAULT '1',
+  `RANK_ID` int(11) NOT NULL DEFAULT '1',
   `SSID` varchar(25) DEFAULT NULL,
   `SALT` varchar(25) DEFAULT NULL,
+  `VERI_CODE_DTM` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1807,92 +2044,93 @@ CREATE TABLE `USER` (
 -- Dumping data for table `USER`
 --
 
-INSERT INTO `USER` (`USER_ID`, `RANK_ID`, `EMAIL`, `EMAIL_SCOPE_ID`, `VERI_CODE`, `VERI_CODE_DTM`, `IMG`, `MOBILE`, `MOBILE_SCOPE_ID`, `PASSWORD`, `NAME`, `GENDER`, `GENDER_SCOPE_ID`, `SSID`, `SALT`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'ajitkamathk@gmail.com', 1, 31516801, '2018-03-26 19:59:53', 'app_data/users/1/profile/images/5ab6b3f780f34.jpg', '2456540685', 1, 'Q09PS0VSWXNOS1dJ', 'TEST NAME -  17', 'O', 1, '', 'c05LV0k=', '2017-09-23 00:00:00', '2018-03-26 19:59:53'),
-(2, 1, 'testemail@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '9962218578', 1, 'aWFtdGVzdE15RkJE', 'USER - 2', 'm', 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
-(3, 1, 'testemail2@cookery.com', 1, 0, '2017-12-29 06:29:04', NULL, '7503876065', 1, 'aWFtdGVzdG9TS3Ay', 'USER - 3', 'm', 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-10-31 05:22:11', NULL),
-(4, 1, 'vishal@cookery.com', 1, 0, '2017-12-29 06:29:04', 'app_data/users/99/profile/images/5ab6b3f780f34.jpg', '8124627522', 1, 'cm9jazJaUEtw', 'USER - 4', 'M', 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-10-31 13:37:06', NULL),
-(5, 1, 'testuser@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1234567890', 1, 'MTIzNDU2NzgxNjhjUg==', 'USER - 5', 'M', 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-05 09:28:53', NULL),
-(6, 1, 'yOIW8uBUPh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8202377734', 1, 'MTIzNDU2Nzh6YUlrYw==', 'USER - 6', 'M', 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-06 10:09:03', NULL),
-(7, 1, 'BuaMX1inFJ@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1434819247', 1, 'MTIzNDU2NzgzeGtreA==', 'USER - 7', 'M', 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-06 10:17:52', NULL),
-(8, 1, 'mbTVNucEYo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4048666965', 1, 'MTIzNDU2NzhqWW9RRA==', 'USER - 8', 'M', 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-06 10:18:40', NULL),
-(9, 1, 'mKZ3tT6mDV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2463154465', 1, 'MTIzNDU2NzhuV1hOVA==', 'Test User', 'M', 1, '79D6gkz9YL', 'bldYTlQ=', '2017-12-06 10:19:12', NULL),
-(10, 1, 'yotGl72BQP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4706108967', 1, 'MTIzNDU2Nzhna05KRw==', 'Test User', 'M', 1, '10bR1Dhl1v', 'Z2tOSkc=', '2017-12-06 10:25:31', NULL),
-(11, 1, 'p7gerTEFcK@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3224967902', 1, 'MTIzNDU2NzhNZHhsWA==', 'Test User', 'M', 1, 'Aa0qpd0dRi', 'TWR4bFg=', '2017-12-06 10:26:31', NULL),
-(12, 1, '2hdwLAh3Qf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1122780923', 1, 'MTIzNDU2NzhhU1VXMQ==', 'Test User', 'M', 1, 'kZQae7t6VP', 'YVNVVzE=', '2017-12-06 10:32:19', NULL),
-(13, 1, '1ur6aieyL4@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7568342541', 1, 'UkZ3azZVRGJRNlE2SXpx', 'Test User', 'M', 1, 'efESK2GWwx', 'UTZJenE=', '2017-12-06 10:36:54', NULL),
-(14, 1, 'DyBbMIg3hW@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6397083418', 1, 'MzZnMUR2dnFJODhmclFj', 'USER - 14', 'M', 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-06 10:38:49', NULL),
-(15, 1, 'Ch0C1oJCgP@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1236028204', 1, 'bTh5RTNEY203Y0d3ODBR', 'USER - 15', 'M', 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-06 10:42:08', NULL),
-(16, 1, 'ZfhzXsEz5X@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0328880787', 1, 'T0ZMSUpkYm1sTTBsRDJi', 'Test User', 'M', 1, 'XVLEHSZm7U', 'MGxEMmI=', '2017-12-06 10:43:00', NULL),
-(17, 1, 'RX631Oc74f@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1925274231', 1, 'ZFVURk1SM1Z6ek9sckpo', 'Test User', 'M', 1, 'FkQwv4DZaz', 'T2xySmg=', '2017-12-06 15:20:07', NULL),
-(18, 1, 'Nq2ieecBym@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9071819562', 1, 'WGdETmlpdjRHQnMxNGVD', 'Test User', 'M', 1, 'lO8HfQ826L', 'czE0ZUM=', '2017-12-06 21:06:19', NULL),
-(19, 1, 'jj5eAEXfU9@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4282843437', 1, 'M3VEOVJDaHFWV056OUxu', 'Test User', 'M', 1, 'hmMUs3e1cd', 'Tno5TG4=', '2017-12-06 21:19:07', NULL),
-(20, 1, '29LcdlnLKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '4345019328', 1, 'SmdQc29VUlREVFVSYk1B', 'Test User', 'M', 1, 'oCThqOWUsW', 'VVJiTUE=', '2017-12-06 21:19:07', NULL),
-(21, 1, 'gUl84sC85i@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7493439821', 1, 'NjZBeVM5OVpQRjZGTHZ3', 'Test User', 'M', 1, 'V5RuFN3DlM', 'NkZMdnc=', '2017-12-06 21:19:07', NULL),
-(22, 1, 'hOpulyUcvN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2551728778', 1, 'YlpsYWo2QUNkazhsQWlq', 'Test User', 'M', 1, 'I3icXGGgbT', 'OGxBaWo=', '2017-12-06 21:19:08', NULL),
-(23, 1, 'bMfjcgsHmB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8788910625', 1, 'ZjdVQjNWbjhZQkdSTlBT', 'Test User', 'M', 1, 'sLtY3DO5bg', 'R1JOUFM=', '2017-12-06 21:19:08', NULL),
-(24, 1, 'gzzvd5mHzV@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2459219942', 1, 'd1ZDSmpndk1uMHJkZWZY', 'Test User', 'M', 1, '3NAeFBSWWU', 'cmRlZlg=', '2017-12-06 21:19:08', NULL),
-(25, 1, 'CFAXHpPwUd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7921299722', 1, 'YzVhdnpDVDlmZ05PV1pB', 'Test User', 'M', 1, 'UDzOV0DRU5', 'Tk9XWkE=', '2017-12-07 11:32:54', NULL),
-(26, 1, 'eEfVEJrxIX@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3499450811', 1, 'bXRKSUxSNzROdFI1N1Ay', 'Test User', 'M', 1, 'w50UEdmk58', 'UjU3UDI=', '2017-12-07 11:54:15', NULL),
-(27, 1, '4OjqajUs9g@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1150903063', 1, 'TXFidlN1czNlYTVyVWpI', 'Test User', 'M', 1, 'x3o7h3JaZG', 'NXJVakg=', '2017-12-07 12:05:22', NULL),
-(28, 1, 'lpZngIZUKY@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7172558694', 1, 'Q1I5dXJ2TXFLb1FqSXlU', 'Test User', 'M', 1, 'oKM3Cw6itC', 'UWpJeVQ=', '2017-12-07 12:22:14', NULL),
-(29, 1, 'Qanx1xZlef@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6077018106', 1, 'QzZTdDVNNWdiR2FVU3Fx', 'Test User', 'M', 1, 'LuHOy11sWR', 'YVVTcXE=', '2017-12-07 12:22:14', NULL),
-(30, 1, 'PE5XKyFRTO@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6856612574', 1, 'RW5vWmRMZmVhM0lXYU5h', 'Test User', 'M', 1, '37bbOr2Xt8', 'SVdhTmE=', '2017-12-07 12:22:14', NULL),
-(31, 1, 'rQnpbdgL71@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9396035651', 1, 'cndnV1hWOWlVck5UV2ZL', 'Test User', 'M', 1, 'WBoqMdPcLG', 'TlRXZks=', '2017-12-07 12:22:14', NULL),
-(32, 1, 'ztfSEk6B3C@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7311704009', 1, 'dWs3UklOeXM4S1BuUEFT', 'Test User', 'M', 1, '9uY0ZDN2g9', 'UG5QQVM=', '2017-12-07 12:22:15', NULL),
-(33, 1, 'lYoRhb8ZBf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8451165685', 1, 'b0YxZG1GckhES2R3M0Zn', 'Test User', 'M', 1, 'Dudt0IxEHI', 'ZHczRmc=', '2017-12-07 12:22:15', NULL),
-(34, 1, '3H5vt92ouL@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8549161982', 1, 'T2w2TUhiMHBSamxNWFQ3', 'Test User', 'M', 1, 'DCmE3MR3ZJ', 'bE1YVDc=', '2017-12-07 15:01:26', NULL),
-(35, 1, '4T1Z4vzjCH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2209997550', 1, 'dG81cVdlWkhmMVBncmJU', 'Test User', 'M', 1, 'lSnjYx9Yr3', 'UGdyYlQ=', '2017-12-07 15:01:39', NULL),
-(36, 1, '5M7QIvAVFd@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '2978043429', 1, 'bGs2cjFLdnhEa2JSd1pH', 'Test User', 'M', 1, 'k81O74sVaE', 'YlJ3Wkc=', '2017-12-07 15:01:46', NULL),
-(37, 1, 'gyhxa6lCeN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1449887458', 1, 'RE9jMUR2SEZ5S2w0eXBK', 'Test User', 'M', 1, 'oCaB5bkDQ1', 'bDR5cEo=', '2017-12-07 15:02:15', NULL),
-(38, 1, 'JcEK2zoeFr@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5028518859', 1, 'c2NrelhQc25XYkthRmx0', 'Test User', 'M', 1, '8XOraL8Q2k', 'S2FGbHQ=', '2017-12-07 15:02:21', NULL),
-(39, 1, 'kTWUUMdona@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '6701341132', 1, 'ZTMyZDVxcWo3U0xWYUlV', 'Test User', 'M', 1, 'Relr2grF7m', 'TFZhSVU=', '2017-12-07 15:12:20', NULL),
-(40, 1, 'G5tTSHpBzo@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9785956975', 1, 'dzFCWWxQeEdLUkJibTVl', 'Test User', 'M', 1, 'eGAnNJuj2Z', 'QmJtNWU=', '2017-12-09 02:31:36', NULL),
-(41, 1, 'szP8OEFT2Y@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8418273261', 1, 'VjlrM0VHSFhxQmJic3JS', 'Test User', 'M', 1, 'fGjcdciQF7', 'YmJzclI=', '2017-12-09 02:31:36', NULL),
-(42, 1, 'iUOPvHMUHU@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3981859004', 1, 'Y2RZTFhXSTFPdDU5Yzk1', 'Test User', 'M', 1, 'yvbV3rhwBp', 'NTljOTU=', '2017-12-09 02:31:37', NULL),
-(43, 1, 'm83W2E74ml@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8988125485', 1, 'dHZxVWVBTDNRQ2xWR0hp', 'Test User', 'M', 1, 'nokluy1nr8', 'bFZHSGk=', '2017-12-09 02:31:37', NULL),
-(44, 1, 'u5dK9mDKc3@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9466253586', 1, 'M1IzamhwSXdXeWIwVGVF', 'Test User', 'M', 1, 's1VUX7txJV', 'YjBUZUU=', '2017-12-09 02:31:38', NULL),
-(45, 1, 'AJ3uHtwFi5@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '5933337509', 1, 'S3d2NUVKbTg4Q2oyM0c3', 'Test User', 'M', 1, 'wsk7P8QkrS', 'ajIzRzc=', '2017-12-09 03:04:14', NULL),
-(46, 1, '2D3knF59UH@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '8031776077', 1, 'V25yVFhjekVLZWhkRnVj', 'Test User', 'M', 1, 'XQSDDW2AUH', 'aGRGdWM=', '2017-12-12 15:30:27', NULL),
-(47, 1, 'bxy59Uozgv@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3311571135', 1, 'czBURzFjd2JMVEo0ZTFP', 'Test User', 'M', 1, 'zervzzZPzM', 'SjRlMU8=', '2017-12-13 15:38:42', NULL),
-(48, 1, 'BnjETSM2Ce@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7804938640', 1, 'T2VDaVkzTEFwOThEZWZv', 'Test User', 'M', 1, '9grxmxpmhZ', 'OERlZm8=', '2017-12-14 11:01:33', NULL),
-(49, 1, 'mqTJxCGpka@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1202368274', 1, 'bHdOdUpDMDJacEVtYzVt', 'Test User', 'M', 1, 'atlgH3L0ph', 'RW1jNW0=', '2017-12-15 15:02:05', NULL),
-(50, 1, 'xOUqRp2oZN@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0402232131', 1, 'S1FsSHNoVXpmN3Y3dHRR', 'Test User', 'M', 1, 'CrZF7envK9', 'djd0dFE=', '2017-12-16 22:48:35', NULL),
-(51, 1, 'ndjriWzSBw@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7597298013', 1, 'a1JIVmZLZnhCSWduRHBH', 'Test User', 'M', 1, 'STYGY8xzwl', 'Z25EcEc=', '2017-12-17 14:22:14', NULL),
-(52, 1, 'zCIHqiEg2k@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '9176520834', 1, 'ODRiRWhtSjRzVlJ3c292', 'Test User', 'M', 1, '1EoMyTgiDT', 'Undzb3Y=', '2017-12-17 19:39:15', NULL),
-(53, 1, 'e0vTB20CNI@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '7795599808', 1, 'Q1dNN3JDbGd5b0F6M2RU', 'Test User', 'M', 1, 'rr3qhhYTGl', 'QXozZFQ=', '2017-12-18 09:53:36', NULL),
-(54, 1, 'cGHi8zJir7@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1344784955', 1, 'YW5NOXlvYnVINDJ1U3dY', 'Test User', 'M', 1, 'MQlMvt0SZK', 'MnVTd1g=', '2017-12-18 10:10:43', NULL),
-(55, 1, '1eitY1tUdB@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '3091295174', 1, 'dGVOcm9CZVhCc0ZjbGRx', 'Test User', 'M', 1, 'jXGYOyuPYb', 'RmNsZHE=', '2017-12-18 15:54:48', NULL),
-(56, 1, 'iG3S1XhetD@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '1376574609', 1, 'SVJzZW14ZlU1TTE3N1l0', 'Test User', 'M', 1, 'w7Wtdm6Hnt', 'MTc3WXQ=', '2017-12-19 19:58:01', NULL),
-(57, 1, 'u1STMAbyKf@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0182983869', 1, 'dTNOS1ZPdWpLNEl5djZ6', 'Test User', 'M', 1, 'jHia9CKnAj', 'SXl2Nno=', '2017-12-21 09:26:46', NULL),
-(58, 1, 'bIOX9zJiqh@gmail.com', 1, 0, '2017-12-29 06:29:04', NULL, '0494893380', 1, 'YVBSY0ljTDdpZWtkd2FY', 'Test User', 'M', 1, 'buW2OLC4kD', 'a2R3YVg=', '2017-12-28 09:23:09', NULL),
-(59, 1, 'tmnJJQY6NW@gmail.com', 1, 0, '2017-12-29 07:14:50', NULL, '6176779264', 1, 'M0xFSWpCSjVjOGUxaksz', 'Test User', 'M', 1, 'FwBucTafMt', 'ZTFqSzM=', '2017-12-29 07:14:50', NULL),
-(60, 1, '83JuYpN2mR@gmail.com', 1, 0, '2017-12-29 07:38:05', NULL, '7301820168', 1, 'bmZ3cG15d0FjTTBhRVlW', 'Test User', 'M', 1, 'OK50R4fzFj', 'MGFFWVY=', '2017-12-29 07:38:05', NULL),
-(61, 1, 'Am8gZZWHa3@gmail.com', 1, 0, '2017-12-29 08:30:55', NULL, '8114166397', 1, 'TmpiMjNTd3NyRjRwV0Nw', 'Test User', 'M', 1, 'osaJRbEWK5', 'NHBXQ3A=', '2017-12-29 08:30:55', NULL),
-(62, 1, 'w9ZiyCBczv@gmail.com', 1, 38158294, '2017-12-29 16:52:50', NULL, '3575891040', 1, 'Z1d3Z2o4MnBXUnNlZHB0', 'Test User', 'M', 1, '9ElEB5ILF0', 'c2VkcHQ=', '2017-12-29 16:52:50', NULL),
-(63, 1, 'mEmve9D2D6@gmail.com', 1, 14708985, '2017-12-30 09:53:23', NULL, NULL, 1, 'NDUzNDY0ODQ5NHNFQjI0', 'COOKERY', NULL, 1, '4YfRLcdJ2J', 'c0VCMjQ=', '2017-12-30 09:53:23', NULL),
-(64, 1, 'DkuyWf4vOz@gmail.com', 1, 88859188, '2017-12-30 09:55:20', NULL, NULL, 1, 'Q09PS0VSWVJzSGlv', 'Test User -  08', NULL, 1, '0rqwzKv526', 'UnNIaW8=', '2017-12-30 09:55:20', NULL),
-(65, 1, '2usvcVlzb6@gmail.com', 1, 55039142, '2018-01-01 11:23:18', NULL, NULL, 1, 'Q09PS0VSWVR2SzNK', 'Test User -  08', '', 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', NULL),
-(66, 1, 'aMJUvZ4CM5@gmail.com', 1, 49645219, '2018-01-18 14:23:33', NULL, NULL, 1, 'Q09PS0VSWU9QOXlG', 'Test User -  00', '', 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', NULL),
-(67, 1, 'rock@cookery.com', 1, 64728213, '2018-01-29 23:34:52', NULL, NULL, 1, 'cm9ja21uYkhY', 'Vishal', '', 1, '5pX9Gn9wlB', 'bW5iSFg=', '2018-01-29 23:34:52', NULL),
-(68, 1, 'LVcQblpRQe@gmail.com', 1, 61232494, '2018-02-15 10:44:56', NULL, NULL, 1, 'Q09PS0VSWUVjQVQw', 'Test User -  82', '', 1, 'jXPnTiVFMf', 'RWNBVDA=', '2018-02-15 10:44:56', NULL),
-(69, 1, 'hgvj@gmail.com', 1, 69125900, '2018-03-10 22:10:58', NULL, NULL, 1, 'Z2d2a3Z2RVE3b0E=', 'Agv', '', 1, 'uJvTObPp7A', 'RVE3b0E=', '2018-03-10 22:10:58', NULL),
-(70, 1, 'fug@gmail.com', 1, 9425499, '2018-03-10 22:12:33', NULL, NULL, 1, 'ZnVqZ2d5ZnhlSjJpQQ==', 'Tfgg jgffyh', '', 1, 'Vrvva2vx91', 'ZUoyaUE=', '2018-03-10 22:12:33', NULL),
-(75, 1, 'mywayanadtrip2017@gmail.com', 1, 1927904, '2018-03-11 01:01:30', NULL, NULL, 1, 'Y29va2VyeWd2bVoy', 'Vishal Varshney', '', 1, 'WXRIvJHkbV', 'Z3ZtWjI=', '2018-03-11 01:01:30', NULL),
-(76, 1, 'user@cookery.com', 1, 34117358, '2018-03-18 17:09:16', NULL, NULL, 1, 'dXNlckVYN21z', 'Vishal', '', 1, 'fRcKbiUBxo', 'RVg3bXM=', '2018-03-18 17:09:16', NULL),
-(77, 1, 'vishal@yahoo.com', 1, 51277786, '2018-03-24 22:01:24', NULL, NULL, 1, 'eWFob29pRVhaZA==', 'Vishal', '', 1, 'vF4kvKZfJE', 'aUVYWmQ=', '2018-03-24 22:01:24', NULL),
-(78, 1, 'vaihal@hotmail.com', 1, 2934660, '2018-03-24 22:04:05', NULL, NULL, 1, 'aG90bWFpbDZQTTlk', 'Vishal', '', 1, 'SPqzQm5C7j', 'NlBNOWQ=', '2018-03-24 22:04:05', NULL),
-(79, 1, 'lobik@hotmail.com', 1, 65164111, '2018-03-24 22:12:20', NULL, NULL, 1, 'aG90bWFpbHFVVHJs', 'Vishal', '', 1, '0Pnxh3lKdH', 'cVVUcmw=', '2018-03-24 22:12:20', NULL),
-(80, 1, 'twst@outlook.com', 1, 86337830, '2018-03-24 22:19:26', NULL, NULL, 1, 'b3V0bG9va0pWV25N', 'Vishal', '', 1, 'LTSNS9rrGz', 'SlZXbk0=', '2018-03-24 22:19:26', NULL),
-(81, 1, 'emial@gmail.com', 1, 66912922, '2018-03-24 22:28:01', NULL, NULL, 1, 'Z21haWxvdUNCYg==', 'Vishal', '', 1, 'THPQdIIyhh', 'b3VDQmI=', '2018-03-24 22:28:01', NULL),
-(82, 1, 'email@gmail.com', 1, 87603266, '2018-03-24 22:31:31', NULL, NULL, 1, 'Z21haWw0WmJHRw==', 'Vishal', '', 1, 'BbQBQeEEJH', 'NFpiR0c=', '2018-03-24 22:31:31', NULL),
-(83, 1, 'yirrg@gjvgm.vom', 1, 81381558, '2018-03-24 22:32:53', NULL, NULL, 1, 'dGlnZXJiWjlwRQ==', 'Tigrr', '', 1, 'AKMEuM8koj', 'Ylo5cEU=', '2018-03-24 22:32:53', NULL),
-(84, 1, 'test@cookerymail.com', 1, 35775628, '2018-03-24 22:46:28', NULL, NULL, 1, 'Y29va2VyeW1haWxqSENuMw==', 'Vishal ', '', 1, 'K3ys39vWal', 'akhDbjM=', '2018-03-24 22:46:28', NULL),
-(87, 1, 'ajitkamathk@gmail.com', 1, 42703034, '2018-03-25 10:06:17', NULL, NULL, 1, 'Q09PS0VSWVZiOG9V', 'Test User -  79', '', 1, 'guyQJdehaK', 'VmI4b1U=', '2018-03-25 10:06:17', NULL),
-(88, 1, 'cook@gmail.com', 1, 15957800, '2018-03-25 19:37:24', NULL, NULL, 1, 'Y29vazl4aTNP', 'Vishal', '', 1, 'TxedRplew3', 'OXhpM08=', '2018-03-25 19:37:24', NULL),
-(100, 1, 'vishal@cookery.in', 1, 9117251, '2018-03-27 23:41:21', NULL, NULL, 1, 'cm9ja05kY0hx', 'Vishal', '', 1, 'LEPjx6giWX', 'TmRjSHE=', '2018-03-27 23:41:21', NULL),
-(110, 1, 'vaibhavagrawal.ece09@gmail.com', 1, 0, '2018-04-02 21:01:41', NULL, NULL, 1, 'ODg5OTA5OGR3UjZZ', 'Vaibhav', '', 1, 'ApAd1j4RD1', 'ZHdSNlk=', '2018-04-02 21:01:41', NULL),
-(111, 1, 'sukanta.suku19@gmail.com', 1, 0, '2018-04-04 11:07:48', NULL, NULL, 1, 'VGVzdDEyM0lpVERD', 'Sukanta Mondal', '', 1, 'gNW1piOCIR', 'SWlUREM=', '2018-04-04 11:07:48', NULL);
+INSERT INTO `USER` (`USER_ID`, `NAME`, `EMAIL`, `VERI_CODE`, `IMG`, `MOBILE`, `PASSWORD`, `GENDER`, `GENDER_SCOPE_ID`, `MOBILE_SCOPE_ID`, `EMAIL_SCOPE_ID`, `RANK_ID`, `SSID`, `SALT`, `VERI_CODE_DTM`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'O\'reilly', 'ajitkamathk@gmail.com', 31516801, 'app_data/users/1/profile/images/5ab6b3f780f34.jpg', '2456540685', 'Q09PS0VSWXNOS1dJ', 'O', 1, 1, 1, 1, '', 'c05LV0k=', '2018-03-26 19:59:53', '2017-09-23 00:00:00', '2018-04-13 11:27:30'),
+(2, 'USER - 2', 'testemail@cookery.com', 0, NULL, '9962218578', 'aWFtdGVzdE15RkJE', 'm', 1, 1, 1, 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-12-29 06:29:04', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
+(3, 'USER - 3', 'testemail2@cookery.com', 0, NULL, '7503876065', 'aWFtdGVzdG9TS3Ay', 'm', 1, 1, 1, 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-12-29 06:29:04', '2017-10-31 05:22:11', NULL),
+(4, 'USER - 4', 'vishal@cookery.com', 0, 'app_data/users/99/profile/images/5ab6b3f780f34.jpg', '8124627522', 'cm9jazJaUEtw', 'M', 1, 1, 1, 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-12-29 06:29:04', '2017-10-31 13:37:06', NULL),
+(5, 'USER - 5', 'testuser@gmail.com', 0, NULL, '1234567890', 'MTIzNDU2NzgxNjhjUg==', 'M', 1, 1, 1, 1, '8WGpsX2MsJ', 'MTY4Y1I=', '2017-12-29 06:29:04', '2017-12-05 09:28:53', NULL),
+(6, 'USER - 6', 'yOIW8uBUPh@gmail.com', 0, NULL, '8202377734', 'MTIzNDU2Nzh6YUlrYw==', 'M', 1, 1, 1, 1, 'p1DuoOctRT', 'emFJa2M=', '2017-12-29 06:29:04', '2017-12-06 10:09:03', NULL),
+(7, 'USER - 7', 'BuaMX1inFJ@gmail.com', 0, NULL, '1434819247', 'MTIzNDU2NzgzeGtreA==', 'M', 1, 1, 1, 1, 'fugYiKnDx8', 'M3hra3g=', '2017-12-29 06:29:04', '2017-12-06 10:17:52', NULL),
+(8, 'USER - 8', 'mbTVNucEYo@gmail.com', 0, NULL, '4048666965', 'MTIzNDU2NzhqWW9RRA==', 'M', 1, 1, 1, 1, 'wqzAVyYyJt', 'allvUUQ=', '2017-12-29 06:29:04', '2017-12-06 10:18:40', NULL),
+(9, 'Test User', 'mKZ3tT6mDV@gmail.com', 0, NULL, '2463154465', 'MTIzNDU2NzhuV1hOVA==', 'M', 1, 1, 1, 1, '79D6gkz9YL', 'bldYTlQ=', '2017-12-29 06:29:04', '2017-12-06 10:19:12', NULL),
+(10, 'Test User', 'yotGl72BQP@gmail.com', 0, NULL, '4706108967', 'MTIzNDU2Nzhna05KRw==', 'M', 1, 1, 1, 1, '10bR1Dhl1v', 'Z2tOSkc=', '2017-12-29 06:29:04', '2017-12-06 10:25:31', NULL),
+(11, 'Test User', 'p7gerTEFcK@gmail.com', 0, NULL, '3224967902', 'MTIzNDU2NzhNZHhsWA==', 'M', 1, 1, 1, 1, 'Aa0qpd0dRi', 'TWR4bFg=', '2017-12-29 06:29:04', '2017-12-06 10:26:31', NULL),
+(12, 'Test User', '2hdwLAh3Qf@gmail.com', 0, NULL, '1122780923', 'MTIzNDU2NzhhU1VXMQ==', 'M', 1, 1, 1, 1, 'kZQae7t6VP', 'YVNVVzE=', '2017-12-29 06:29:04', '2017-12-06 10:32:19', NULL),
+(13, 'Test User', '1ur6aieyL4@gmail.com', 0, NULL, '7568342541', 'UkZ3azZVRGJRNlE2SXpx', 'M', 1, 1, 1, 1, 'efESK2GWwx', 'UTZJenE=', '2017-12-29 06:29:04', '2017-12-06 10:36:54', NULL),
+(14, 'USER - 14', 'DyBbMIg3hW@gmail.com', 0, NULL, '6397083418', 'MzZnMUR2dnFJODhmclFj', 'M', 1, 1, 1, 1, 'j5uaOopyRB', 'OGZyUWM=', '2017-12-29 06:29:04', '2017-12-06 10:38:49', NULL),
+(15, 'USER - 15', 'Ch0C1oJCgP@gmail.com', 0, NULL, '1236028204', 'bTh5RTNEY203Y0d3ODBR', 'M', 1, 1, 1, 1, '1cwiaP2xsA', 'R3c4MFE=', '2017-12-29 06:29:04', '2017-12-06 10:42:08', NULL),
+(16, 'Test User', 'ZfhzXsEz5X@gmail.com', 0, NULL, '0328880787', 'T0ZMSUpkYm1sTTBsRDJi', 'M', 1, 1, 1, 1, 'XVLEHSZm7U', 'MGxEMmI=', '2017-12-29 06:29:04', '2017-12-06 10:43:00', NULL),
+(17, 'Test User', 'RX631Oc74f@gmail.com', 0, NULL, '1925274231', 'ZFVURk1SM1Z6ek9sckpo', 'M', 1, 1, 1, 1, 'FkQwv4DZaz', 'T2xySmg=', '2017-12-29 06:29:04', '2017-12-06 15:20:07', NULL),
+(18, 'Test User', 'Nq2ieecBym@gmail.com', 0, NULL, '9071819562', 'WGdETmlpdjRHQnMxNGVD', 'M', 1, 1, 1, 1, 'lO8HfQ826L', 'czE0ZUM=', '2017-12-29 06:29:04', '2017-12-06 21:06:19', NULL),
+(19, 'Test User', 'jj5eAEXfU9@gmail.com', 0, NULL, '4282843437', 'M3VEOVJDaHFWV056OUxu', 'M', 1, 1, 1, 1, 'hmMUs3e1cd', 'Tno5TG4=', '2017-12-29 06:29:04', '2017-12-06 21:19:07', NULL),
+(20, 'Test User', '29LcdlnLKf@gmail.com', 0, NULL, '4345019328', 'SmdQc29VUlREVFVSYk1B', 'M', 1, 1, 1, 1, 'oCThqOWUsW', 'VVJiTUE=', '2017-12-29 06:29:04', '2017-12-06 21:19:07', NULL),
+(21, 'Test User', 'gUl84sC85i@gmail.com', 0, NULL, '7493439821', 'NjZBeVM5OVpQRjZGTHZ3', 'M', 1, 1, 1, 1, 'V5RuFN3DlM', 'NkZMdnc=', '2017-12-29 06:29:04', '2017-12-06 21:19:07', NULL),
+(22, 'Test User', 'hOpulyUcvN@gmail.com', 0, NULL, '2551728778', 'YlpsYWo2QUNkazhsQWlq', 'M', 1, 1, 1, 1, 'I3icXGGgbT', 'OGxBaWo=', '2017-12-29 06:29:04', '2017-12-06 21:19:08', NULL),
+(23, 'Test User', 'bMfjcgsHmB@gmail.com', 0, NULL, '8788910625', 'ZjdVQjNWbjhZQkdSTlBT', 'M', 1, 1, 1, 1, 'sLtY3DO5bg', 'R1JOUFM=', '2017-12-29 06:29:04', '2017-12-06 21:19:08', NULL),
+(24, 'Test User', 'gzzvd5mHzV@gmail.com', 0, NULL, '2459219942', 'd1ZDSmpndk1uMHJkZWZY', 'M', 1, 1, 1, 1, '3NAeFBSWWU', 'cmRlZlg=', '2017-12-29 06:29:04', '2017-12-06 21:19:08', NULL),
+(25, 'Test User', 'CFAXHpPwUd@gmail.com', 0, NULL, '7921299722', 'YzVhdnpDVDlmZ05PV1pB', 'M', 1, 1, 1, 1, 'UDzOV0DRU5', 'Tk9XWkE=', '2017-12-29 06:29:04', '2017-12-07 11:32:54', NULL),
+(26, 'Test User', 'eEfVEJrxIX@gmail.com', 0, NULL, '3499450811', 'bXRKSUxSNzROdFI1N1Ay', 'M', 1, 1, 1, 1, 'w50UEdmk58', 'UjU3UDI=', '2017-12-29 06:29:04', '2017-12-07 11:54:15', NULL),
+(27, 'Test User', '4OjqajUs9g@gmail.com', 0, NULL, '1150903063', 'TXFidlN1czNlYTVyVWpI', 'M', 1, 1, 1, 1, 'x3o7h3JaZG', 'NXJVakg=', '2017-12-29 06:29:04', '2017-12-07 12:05:22', NULL),
+(28, 'Test User', 'lpZngIZUKY@gmail.com', 0, NULL, '7172558694', 'Q1I5dXJ2TXFLb1FqSXlU', 'M', 1, 1, 1, 1, 'oKM3Cw6itC', 'UWpJeVQ=', '2017-12-29 06:29:04', '2017-12-07 12:22:14', NULL),
+(29, 'Test User', 'Qanx1xZlef@gmail.com', 0, NULL, '6077018106', 'QzZTdDVNNWdiR2FVU3Fx', 'M', 1, 1, 1, 1, 'LuHOy11sWR', 'YVVTcXE=', '2017-12-29 06:29:04', '2017-12-07 12:22:14', NULL),
+(30, 'Test User', 'PE5XKyFRTO@gmail.com', 0, NULL, '6856612574', 'RW5vWmRMZmVhM0lXYU5h', 'M', 1, 1, 1, 1, '37bbOr2Xt8', 'SVdhTmE=', '2017-12-29 06:29:04', '2017-12-07 12:22:14', NULL),
+(31, 'Test User', 'rQnpbdgL71@gmail.com', 0, NULL, '9396035651', 'cndnV1hWOWlVck5UV2ZL', 'M', 1, 1, 1, 1, 'WBoqMdPcLG', 'TlRXZks=', '2017-12-29 06:29:04', '2017-12-07 12:22:14', NULL),
+(32, 'Test User', 'ztfSEk6B3C@gmail.com', 0, NULL, '7311704009', 'dWs3UklOeXM4S1BuUEFT', 'M', 1, 1, 1, 1, '9uY0ZDN2g9', 'UG5QQVM=', '2017-12-29 06:29:04', '2017-12-07 12:22:15', NULL),
+(33, 'Test User', 'lYoRhb8ZBf@gmail.com', 0, NULL, '8451165685', 'b0YxZG1GckhES2R3M0Zn', 'M', 1, 1, 1, 1, 'Dudt0IxEHI', 'ZHczRmc=', '2017-12-29 06:29:04', '2017-12-07 12:22:15', NULL),
+(34, 'Test User', '3H5vt92ouL@gmail.com', 0, NULL, '8549161982', 'T2w2TUhiMHBSamxNWFQ3', 'M', 1, 1, 1, 1, 'DCmE3MR3ZJ', 'bE1YVDc=', '2017-12-29 06:29:04', '2017-12-07 15:01:26', NULL),
+(35, 'Test User', '4T1Z4vzjCH@gmail.com', 0, NULL, '2209997550', 'dG81cVdlWkhmMVBncmJU', 'M', 1, 1, 1, 1, 'lSnjYx9Yr3', 'UGdyYlQ=', '2017-12-29 06:29:04', '2017-12-07 15:01:39', NULL),
+(36, 'Test User', '5M7QIvAVFd@gmail.com', 0, NULL, '2978043429', 'bGs2cjFLdnhEa2JSd1pH', 'M', 1, 1, 1, 1, 'k81O74sVaE', 'YlJ3Wkc=', '2017-12-29 06:29:04', '2017-12-07 15:01:46', NULL),
+(37, 'Test User', 'gyhxa6lCeN@gmail.com', 0, NULL, '1449887458', 'RE9jMUR2SEZ5S2w0eXBK', 'M', 1, 1, 1, 1, 'oCaB5bkDQ1', 'bDR5cEo=', '2017-12-29 06:29:04', '2017-12-07 15:02:15', NULL),
+(38, 'Test User', 'JcEK2zoeFr@gmail.com', 0, NULL, '5028518859', 'c2NrelhQc25XYkthRmx0', 'M', 1, 1, 1, 1, '8XOraL8Q2k', 'S2FGbHQ=', '2017-12-29 06:29:04', '2017-12-07 15:02:21', NULL),
+(39, 'Test User', 'kTWUUMdona@gmail.com', 0, NULL, '6701341132', 'ZTMyZDVxcWo3U0xWYUlV', 'M', 1, 1, 1, 1, 'Relr2grF7m', 'TFZhSVU=', '2017-12-29 06:29:04', '2017-12-07 15:12:20', NULL),
+(40, 'Test User', 'G5tTSHpBzo@gmail.com', 0, NULL, '9785956975', 'dzFCWWxQeEdLUkJibTVl', 'M', 1, 1, 1, 1, 'eGAnNJuj2Z', 'QmJtNWU=', '2017-12-29 06:29:04', '2017-12-09 02:31:36', NULL),
+(41, 'Test User', 'szP8OEFT2Y@gmail.com', 0, NULL, '8418273261', 'VjlrM0VHSFhxQmJic3JS', 'M', 1, 1, 1, 1, 'fGjcdciQF7', 'YmJzclI=', '2017-12-29 06:29:04', '2017-12-09 02:31:36', NULL),
+(42, 'Test User', 'iUOPvHMUHU@gmail.com', 0, NULL, '3981859004', 'Y2RZTFhXSTFPdDU5Yzk1', 'M', 1, 1, 1, 1, 'yvbV3rhwBp', 'NTljOTU=', '2017-12-29 06:29:04', '2017-12-09 02:31:37', NULL),
+(43, 'Test User', 'm83W2E74ml@gmail.com', 0, NULL, '8988125485', 'dHZxVWVBTDNRQ2xWR0hp', 'M', 1, 1, 1, 1, 'nokluy1nr8', 'bFZHSGk=', '2017-12-29 06:29:04', '2017-12-09 02:31:37', NULL),
+(44, 'Test User', 'u5dK9mDKc3@gmail.com', 0, NULL, '9466253586', 'M1IzamhwSXdXeWIwVGVF', 'M', 1, 1, 1, 1, 's1VUX7txJV', 'YjBUZUU=', '2017-12-29 06:29:04', '2017-12-09 02:31:38', NULL),
+(45, 'Test User', 'AJ3uHtwFi5@gmail.com', 0, NULL, '5933337509', 'S3d2NUVKbTg4Q2oyM0c3', 'M', 1, 1, 1, 1, 'wsk7P8QkrS', 'ajIzRzc=', '2017-12-29 06:29:04', '2017-12-09 03:04:14', NULL),
+(46, 'Test User', '2D3knF59UH@gmail.com', 0, NULL, '8031776077', 'V25yVFhjekVLZWhkRnVj', 'M', 1, 1, 1, 1, 'XQSDDW2AUH', 'aGRGdWM=', '2017-12-29 06:29:04', '2017-12-12 15:30:27', NULL),
+(47, 'Test User', 'bxy59Uozgv@gmail.com', 0, NULL, '3311571135', 'czBURzFjd2JMVEo0ZTFP', 'M', 1, 1, 1, 1, 'zervzzZPzM', 'SjRlMU8=', '2017-12-29 06:29:04', '2017-12-13 15:38:42', NULL),
+(48, 'Test User', 'BnjETSM2Ce@gmail.com', 0, NULL, '7804938640', 'T2VDaVkzTEFwOThEZWZv', 'M', 1, 1, 1, 1, '9grxmxpmhZ', 'OERlZm8=', '2017-12-29 06:29:04', '2017-12-14 11:01:33', NULL),
+(49, 'Test User', 'mqTJxCGpka@gmail.com', 0, NULL, '1202368274', 'bHdOdUpDMDJacEVtYzVt', 'M', 1, 1, 1, 1, 'atlgH3L0ph', 'RW1jNW0=', '2017-12-29 06:29:04', '2017-12-15 15:02:05', NULL),
+(50, 'Test User', 'xOUqRp2oZN@gmail.com', 0, NULL, '0402232131', 'S1FsSHNoVXpmN3Y3dHRR', 'M', 1, 1, 1, 1, 'CrZF7envK9', 'djd0dFE=', '2017-12-29 06:29:04', '2017-12-16 22:48:35', NULL),
+(51, 'Test User', 'ndjriWzSBw@gmail.com', 0, NULL, '7597298013', 'a1JIVmZLZnhCSWduRHBH', 'M', 1, 1, 1, 1, 'STYGY8xzwl', 'Z25EcEc=', '2017-12-29 06:29:04', '2017-12-17 14:22:14', NULL),
+(52, 'Test User', 'zCIHqiEg2k@gmail.com', 0, NULL, '9176520834', 'ODRiRWhtSjRzVlJ3c292', 'M', 1, 1, 1, 1, '1EoMyTgiDT', 'Undzb3Y=', '2017-12-29 06:29:04', '2017-12-17 19:39:15', NULL),
+(53, 'Test User', 'e0vTB20CNI@gmail.com', 0, NULL, '7795599808', 'Q1dNN3JDbGd5b0F6M2RU', 'M', 1, 1, 1, 1, 'rr3qhhYTGl', 'QXozZFQ=', '2017-12-29 06:29:04', '2017-12-18 09:53:36', NULL),
+(54, 'Test User', 'cGHi8zJir7@gmail.com', 0, NULL, '1344784955', 'YW5NOXlvYnVINDJ1U3dY', 'M', 1, 1, 1, 1, 'MQlMvt0SZK', 'MnVTd1g=', '2017-12-29 06:29:04', '2017-12-18 10:10:43', NULL),
+(55, 'Test User', '1eitY1tUdB@gmail.com', 0, NULL, '3091295174', 'dGVOcm9CZVhCc0ZjbGRx', 'M', 1, 1, 1, 1, 'jXGYOyuPYb', 'RmNsZHE=', '2017-12-29 06:29:04', '2017-12-18 15:54:48', NULL),
+(56, 'Test User', 'iG3S1XhetD@gmail.com', 0, NULL, '1376574609', 'SVJzZW14ZlU1TTE3N1l0', 'M', 1, 1, 1, 1, 'w7Wtdm6Hnt', 'MTc3WXQ=', '2017-12-29 06:29:04', '2017-12-19 19:58:01', NULL),
+(57, 'Test User', 'u1STMAbyKf@gmail.com', 0, NULL, '0182983869', 'dTNOS1ZPdWpLNEl5djZ6', 'M', 1, 1, 1, 1, 'jHia9CKnAj', 'SXl2Nno=', '2017-12-29 06:29:04', '2017-12-21 09:26:46', NULL),
+(58, 'Test User', 'bIOX9zJiqh@gmail.com', 0, NULL, '0494893380', 'YVBSY0ljTDdpZWtkd2FY', 'M', 1, 1, 1, 1, 'buW2OLC4kD', 'a2R3YVg=', '2017-12-29 06:29:04', '2017-12-28 09:23:09', NULL),
+(59, 'Test User', 'tmnJJQY6NW@gmail.com', 0, NULL, '6176779264', 'M0xFSWpCSjVjOGUxaksz', 'M', 1, 1, 1, 1, 'FwBucTafMt', 'ZTFqSzM=', '2017-12-29 07:14:50', '2017-12-29 07:14:50', NULL),
+(60, 'Test User', '83JuYpN2mR@gmail.com', 0, NULL, '7301820168', 'bmZ3cG15d0FjTTBhRVlW', 'M', 1, 1, 1, 1, 'OK50R4fzFj', 'MGFFWVY=', '2017-12-29 07:38:05', '2017-12-29 07:38:05', NULL),
+(61, 'Test User', 'Am8gZZWHa3@gmail.com', 0, NULL, '8114166397', 'TmpiMjNTd3NyRjRwV0Nw', 'M', 1, 1, 1, 1, 'osaJRbEWK5', 'NHBXQ3A=', '2017-12-29 08:30:55', '2017-12-29 08:30:55', NULL),
+(62, 'Test User', 'w9ZiyCBczv@gmail.com', 38158294, NULL, '3575891040', 'Z1d3Z2o4MnBXUnNlZHB0', 'M', 1, 1, 1, 1, '9ElEB5ILF0', 'c2VkcHQ=', '2017-12-29 16:52:50', '2017-12-29 16:52:50', NULL),
+(63, 'COOKERY', 'mEmve9D2D6@gmail.com', 14708985, NULL, NULL, 'NDUzNDY0ODQ5NHNFQjI0', NULL, 1, 1, 1, 1, '4YfRLcdJ2J', 'c0VCMjQ=', '2017-12-30 09:53:23', '2017-12-30 09:53:23', NULL),
+(64, 'Test User -  08', 'DkuyWf4vOz@gmail.com', 88859188, NULL, NULL, 'Q09PS0VSWVJzSGlv', NULL, 1, 1, 1, 1, '0rqwzKv526', 'UnNIaW8=', '2017-12-30 09:55:20', '2017-12-30 09:55:20', NULL),
+(65, 'Test User -  08', '2usvcVlzb6@gmail.com', 55039142, NULL, NULL, 'Q09PS0VSWVR2SzNK', '', 1, 1, 1, 1, '7bzJJtwkqG', 'VHZLM0o=', '2018-01-01 11:23:18', '2018-01-01 11:23:18', NULL),
+(66, 'Test User -  00', 'aMJUvZ4CM5@gmail.com', 49645219, NULL, NULL, 'Q09PS0VSWU9QOXlG', '', 1, 1, 1, 1, 'qeAtZdPW3D', 'T1A5eUY=', '2018-01-18 14:23:33', '2018-01-18 14:23:33', NULL),
+(67, 'Vishal', 'rock@cookery.com', 64728213, NULL, NULL, 'cm9ja21uYkhY', '', 1, 1, 1, 1, '5pX9Gn9wlB', 'bW5iSFg=', '2018-01-29 23:34:52', '2018-01-29 23:34:52', NULL),
+(68, 'Test User -  82', 'LVcQblpRQe@gmail.com', 61232494, NULL, NULL, 'Q09PS0VSWUVjQVQw', '', 1, 1, 1, 1, 'jXPnTiVFMf', 'RWNBVDA=', '2018-02-15 10:44:56', '2018-02-15 10:44:56', NULL),
+(69, 'Agv', 'hgvj@gmail.com', 69125900, NULL, NULL, 'Z2d2a3Z2RVE3b0E=', '', 1, 1, 1, 1, 'uJvTObPp7A', 'RVE3b0E=', '2018-03-10 22:10:58', '2018-03-10 22:10:58', NULL),
+(70, 'Tfgg jgffyh', 'fug@gmail.com', 9425499, NULL, NULL, 'ZnVqZ2d5ZnhlSjJpQQ==', '', 1, 1, 1, 1, 'Vrvva2vx91', 'ZUoyaUE=', '2018-03-10 22:12:33', '2018-03-10 22:12:33', NULL),
+(75, 'Vishal Varshney', 'mywayanadtrip2017@gmail.com', 1927904, NULL, NULL, 'Y29va2VyeWd2bVoy', '', 1, 1, 1, 1, 'WXRIvJHkbV', 'Z3ZtWjI=', '2018-03-11 01:01:30', '2018-03-11 01:01:30', NULL),
+(76, 'Vishal', 'user@cookery.com', 34117358, NULL, NULL, 'dXNlckVYN21z', '', 1, 1, 1, 1, 'fRcKbiUBxo', 'RVg3bXM=', '2018-03-18 17:09:16', '2018-03-18 17:09:16', NULL),
+(77, 'Vishal', 'vishal@yahoo.com', 51277786, NULL, NULL, 'eWFob29pRVhaZA==', '', 1, 1, 1, 1, 'vF4kvKZfJE', 'aUVYWmQ=', '2018-03-24 22:01:24', '2018-03-24 22:01:24', NULL),
+(78, 'Vishal', 'vaihal@hotmail.com', 2934660, NULL, NULL, 'aG90bWFpbDZQTTlk', '', 1, 1, 1, 1, 'SPqzQm5C7j', 'NlBNOWQ=', '2018-03-24 22:04:05', '2018-03-24 22:04:05', NULL),
+(79, 'Vishal', 'lobik@hotmail.com', 65164111, NULL, NULL, 'aG90bWFpbHFVVHJs', '', 1, 1, 1, 1, '0Pnxh3lKdH', 'cVVUcmw=', '2018-03-24 22:12:20', '2018-03-24 22:12:20', NULL),
+(80, 'Vishal', 'twst@outlook.com', 86337830, NULL, NULL, 'b3V0bG9va0pWV25N', '', 1, 1, 1, 1, 'LTSNS9rrGz', 'SlZXbk0=', '2018-03-24 22:19:26', '2018-03-24 22:19:26', NULL),
+(81, 'Vishal', 'emial@gmail.com', 66912922, NULL, NULL, 'Z21haWxvdUNCYg==', '', 1, 1, 1, 1, 'THPQdIIyhh', 'b3VDQmI=', '2018-03-24 22:28:01', '2018-03-24 22:28:01', NULL),
+(82, 'Vishal', 'email@gmail.com', 87603266, NULL, NULL, 'Z21haWw0WmJHRw==', '', 1, 1, 1, 1, 'BbQBQeEEJH', 'NFpiR0c=', '2018-03-24 22:31:31', '2018-03-24 22:31:31', NULL),
+(83, 'Tigrr', 'yirrg@gjvgm.vom', 81381558, NULL, NULL, 'dGlnZXJiWjlwRQ==', '', 1, 1, 1, 1, 'AKMEuM8koj', 'Ylo5cEU=', '2018-03-24 22:32:53', '2018-03-24 22:32:53', NULL),
+(84, 'Vishal ', 'test@cookerymail.com', 35775628, NULL, NULL, 'Y29va2VyeW1haWxqSENuMw==', '', 1, 1, 1, 1, 'K3ys39vWal', 'akhDbjM=', '2018-03-24 22:46:28', '2018-03-24 22:46:28', NULL),
+(87, 'Test User -  79', 'ajitkamathk@gmail.com', 42703034, NULL, NULL, 'Q09PS0VSWVZiOG9V', '', 1, 1, 1, 1, 'guyQJdehaK', 'VmI4b1U=', '2018-03-25 10:06:17', '2018-03-25 10:06:17', NULL),
+(88, 'Vishal', 'cook@gmail.com', 15957800, NULL, NULL, 'Y29vazl4aTNP', '', 1, 1, 1, 1, 'TxedRplew3', 'OXhpM08=', '2018-03-25 19:37:24', '2018-03-25 19:37:24', NULL),
+(100, 'Vishal', 'vishal@cookery.in', 9117251, NULL, NULL, 'cm9ja05kY0hx', '', 1, 1, 1, 1, 'LEPjx6giWX', 'TmRjSHE=', '2018-03-27 23:41:21', '2018-03-27 23:41:21', NULL),
+(110, 'Vaibhav', 'vaibhavagrawal.ece09@gmail.com', 0, NULL, NULL, 'ODg5OTA5OGR3UjZZ', '', 1, 1, 1, 1, 'ApAd1j4RD1', 'ZHdSNlk=', '2018-04-02 21:01:41', '2018-04-02 21:01:41', NULL),
+(111, 'Sukanta Mondal', 'sukanta.suku19@gmail.com', 0, NULL, NULL, 'VGVzdDEyM0lpVERD', '', 1, 1, 1, 1, 'gNW1piOCIR', 'SWlUREM=', '2018-04-04 11:07:48', '2018-04-04 11:07:48', NULL),
+(112, 'Vishal', 'dial2vishal@gmail.com', 0, NULL, NULL, 'cm9ja0lXUnV3', '', 1, 1, 1, 1, 'LcKqFOxrvf', 'SVdSdXc=', '2018-04-14 16:32:54', '2018-04-14 16:32:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -2091,7 +2329,8 @@ ALTER TABLE `FOOD_TYPE`
 -- Indexes for table `INGREDIENT`
 --
 ALTER TABLE `INGREDIENT`
-  ADD PRIMARY KEY (`ING_ID`);
+  ADD PRIMARY KEY (`ING_ID`),
+  ADD KEY `INGREDIENT_FK1` (`ING_CAT_ID`);
 
 --
 -- Indexes for table `ING_AKA`
@@ -2099,6 +2338,19 @@ ALTER TABLE `INGREDIENT`
 ALTER TABLE `ING_AKA`
   ADD PRIMARY KEY (`ING_AKA_ID`),
   ADD KEY `ING_AKA_FK1` (`ING_ID`);
+
+--
+-- Indexes for table `ING_CATEGORIES`
+--
+ALTER TABLE `ING_CATEGORIES`
+  ADD PRIMARY KEY (`ING_CAT_ID`);
+
+--
+-- Indexes for table `ING_IMAGES`
+--
+ALTER TABLE `ING_IMAGES`
+  ADD PRIMARY KEY (`ING_IMG_ID`),
+  ADD KEY `ING_IMAGES_FK1` (`ING_ID`);
 
 --
 -- Indexes for table `LIKES`
@@ -2258,7 +2510,7 @@ ALTER TABLE `ABOUT_US`
 -- AUTO_INCREMENT for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `CONTAINS`
@@ -2270,7 +2522,7 @@ ALTER TABLE `CONTAINS`
 -- AUTO_INCREMENT for table `DISH`
 --
 ALTER TABLE `DISH`
-  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT for table `FAVOURITES`
@@ -2282,31 +2534,43 @@ ALTER TABLE `FAVOURITES`
 -- AUTO_INCREMENT for table `FOOD_CUISINE`
 --
 ALTER TABLE `FOOD_CUISINE`
-  MODIFY `FOOD_CSN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `FOOD_CSN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `FOOD_TYPE`
 --
 ALTER TABLE `FOOD_TYPE`
-  MODIFY `FOOD_TYP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `FOOD_TYP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `INGREDIENT`
 --
 ALTER TABLE `INGREDIENT`
-  MODIFY `ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `ING_AKA`
 --
 ALTER TABLE `ING_AKA`
-  MODIFY `ING_AKA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ING_AKA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `ING_CATEGORIES`
+--
+ALTER TABLE `ING_CATEGORIES`
+  MODIFY `ING_CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `ING_IMAGES`
+--
+ALTER TABLE `ING_IMAGES`
+  MODIFY `ING_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `LIKES`
 --
 ALTER TABLE `LIKES`
-  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `MILESTONE`
@@ -2330,7 +2594,7 @@ ALTER TABLE `RANK`
 -- AUTO_INCREMENT for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
-  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_CONTAINS`
@@ -2342,19 +2606,19 @@ ALTER TABLE `RECIPE_CONTAINS`
 -- AUTO_INCREMENT for table `RECIPE_IMG`
 --
 ALTER TABLE `RECIPE_IMG`
-  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_STEPS`
 --
 ALTER TABLE `RECIPE_STEPS`
-  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_TASTE`
 --
 ALTER TABLE `RECIPE_TASTE`
-  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
+  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
 
 --
 -- AUTO_INCREMENT for table `REVIEWS`
@@ -2378,7 +2642,7 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=844;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=926;
 
 --
 -- AUTO_INCREMENT for table `TRENDS`
@@ -2396,7 +2660,7 @@ ALTER TABLE `TRENDS_ITEM`
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `USER_ING_LIST`
@@ -2453,10 +2717,22 @@ ALTER TABLE `FAVOURITES`
   ADD CONSTRAINT `USER_FAV_FK` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `INGREDIENT`
+--
+ALTER TABLE `INGREDIENT`
+  ADD CONSTRAINT `INGREDIENT_FK1` FOREIGN KEY (`ING_CAT_ID`) REFERENCES `ING_CATEGORIES` (`ing_cat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `ING_AKA`
 --
 ALTER TABLE `ING_AKA`
   ADD CONSTRAINT `ING_AKA_FK1` FOREIGN KEY (`ING_ID`) REFERENCES `INGREDIENT` (`ing_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `ING_IMAGES`
+--
+ALTER TABLE `ING_IMAGES`
+  ADD CONSTRAINT `ING_IMAGES_FK1` FOREIGN KEY (`ING_ID`) REFERENCES `INGREDIENT` (`ing_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `LIKES`
