@@ -1120,7 +1120,7 @@
 						//register timeline
 						
 						//email
-						MailUtil::userEmail(USER_REGISTER, $email, "There", "Welcome Aboard");
+						MailUtil::userEmail(USER_REGISTER, $email, $vericode, $name, "Welcome Aboard");
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed to register the user with email : ".$email);

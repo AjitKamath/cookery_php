@@ -14,13 +14,14 @@
  	$purpose = isset($_GET['purpose']) ? $_GET['purpose'] : '';
 	$email = isset($_GET['email']) ? $_GET['email'] : '';
 	$veri_code = isset($_GET['veri_code']) ? $_GET['veri_code'] : '';
+	$name = isset($_GET['name']) ? $_GET['name'] : '';
 
 	//check for null/empty
-    if(!Util::check_for_null($function_key) && !Util::check_for_null($purpose)){
+    /*if(!Util::check_for_null($function_key) && !Util::check_for_null($purpose)){
         LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "E", "Error ! null/empty purpose");
 		LoggerUtil::logger(__FILE__, "EmailController", __LINE__, "E", "Error ! null/empty function_key");
         return;
-    }
+    }*/
 	//check for null/empty
 	
 	LoggerUtil::logger(__FILE__, "Email", __LINE__, "I", "");
@@ -48,11 +49,14 @@
 			echo "<b>Email could not be verified !</b>";
 		}
 		else if(VERIFY_EMAIL_VERIFIED == $response){
-			echo "<html>";
+			/*echo "<html>";
 			echo "<title></title>";
-			echo "<b>Email verified !</b>";
+			echo "<b>Email verified !</b>";*/
+			$url = "http://cookery_php-dial2vishal53897.codeanyapp.com/public/confirm_redirect_temp.html";
+			header('Location: '.$url);
+			// send confirmation email
+			MailUtil::userConfirmationEmail(USER_EMAIL_CONFIRM, $email, $name, "Congratulations");
 			
-			//TODO: send confirmation email
 		}
 		else{
 			echo "<html>";
