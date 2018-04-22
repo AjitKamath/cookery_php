@@ -3,12 +3,12 @@
 
     public static function saveIgredient($ingredientname, $ingredientakaname, $img){
 		   //check for null/empty
-			if(!Util::check_for_null($ingredientname)){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient name");
+			if(!Utility::check_for_null($ingredientname)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient name");
 					return;
 			}
-			if(!Util::check_for_null($ingredientakaname)){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient AKA name");
+			if(!Utility::check_for_null($ingredientakaname)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient AKA name");
 					return;
 			}
 			try{
@@ -46,13 +46,13 @@
 						}
 						else{
 							$data['message'] = "failed";
-							Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
+							Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
 							mysqli_rollback($connection);
 						}
 					}
  					echo json_encode($data);
 				}catch(Exception $e){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 					mysqli_rollback($connection);
 				}
 				finally{
@@ -63,8 +63,8 @@
 		
 		 public static function saveFoodType($foodtypename, $img){
 		   //check for null/empty
-			if(!Util::check_for_null($foodtypename)){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food type name");
+			if(!Utility::check_for_null($foodtypename)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food type name");
 					return;
 			}
 			try{
@@ -87,12 +87,12 @@
 							}
 							else{
 							$data['message'] = "failed";
-							Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
+							Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
 						}
 					}
  					echo json_encode($data);
 				}catch(Exception $e){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				}
 				finally{
 					DatabaseUtil::getInstance()->close_connection($connection);
@@ -101,8 +101,8 @@
 		
 		 public static function saveFoodCuisine($foodcuisinename, $img){
 		   //check for null/empty
-			if(!Util::check_for_null($foodcuisinename)){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food Cuisine name");
+			if(!Utility::check_for_null($foodcuisinename)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food Cuisine name");
 					return;
 			}
 			try{
@@ -125,25 +125,200 @@
 							}
 							else{
 							$data['message'] = "failed";
-							Util::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
+							Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
 						}
 					}
  					echo json_encode($data);
 				}catch(Exception $e){
-					Util::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				}
 				finally{
 					DatabaseUtil::getInstance()->close_connection($connection);
 				}
 		}
 		
-		
-		
-		
+    public static function multipleFoodTypeDelete($foodtypeids){
+		   //check for null/empty
+			if(!Utility::check_for_null($foodtypeids)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food type id");
+					return;
+			}
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					foreach($foodtypeids as $foodtypeid)
+					{
+						$result = mysqli_query($connection,"UPDATE `FOOD_TYPE` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `FOOD_TYP_ID` = '$foodtypeid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+					}
+ 					echo json_encode($data);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
     
-   
-	
+    public static function multipleFoodCuisineDelete($foodcuisineids){
+		   //check for null/empty
+			if(!Utility::check_for_null($foodcuisineids)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food cuisine id");
+					return;
+			}
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					foreach($foodcuisineids as $foodcuisineid)
+					{
+						$result = mysqli_query($connection,"UPDATE `FOOD_CUISINE` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `FOOD_CSN_ID` = '$foodcuisineid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+					}
+ 					echo json_encode($data);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
 		
+    public static function multipleIngredientDelete($ingids){
+		   //check for null/empty
+			if(!Utility::check_for_null($ingids)){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient id");
+					return;
+			}
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					foreach($ingids as $ingid)
+					{
+						$result = mysqli_query($connection,"UPDATE `ING_AKA` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `ING_ID` = '$ingid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+					}
+ 					echo json_encode($data);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+      
+      public static function deleteIngredient($ingid)
+			{
+				 //check for null/empty
+				if(!Utility::check_for_null($ingid)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient id");
+						return;
+				}
+				try{
+						$connection = DatabaseUtil::getInstance()->open_connection();
+						$result = mysqli_query($connection,"UPDATE `ING_AKA` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `ING_ID` = '$ingid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+						echo json_encode($data);
+					}catch(Exception $e){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					}
+					finally{
+						DatabaseUtil::getInstance()->close_connection($connection);
+					}
+		}
+		
+		public static function deleteFoodCuisine($foodcuisineid)
+			{
+				 //check for null/empty
+				if(!Utility::check_for_null($foodcuisineid)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty food cuisine id");
+						return;
+				}
+				try{
+						$connection = DatabaseUtil::getInstance()->open_connection();
+						$result = mysqli_query($connection,"UPDATE `FOOD_CUISINE` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `FOOD_CSN_ID` = '$foodcuisineid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+						echo json_encode($data);
+					}catch(Exception $e){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					}
+					finally{
+						DatabaseUtil::getInstance()->close_connection($connection);
+					}
+		}
+    
+    public static function deleteAdminUser($userid)
+			{
+				 //check for null/empty
+				if(!Utility::check_for_null($userid)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");
+						return;
+				}
+				try{
+						$connection = DatabaseUtil::getInstance()->open_connection();
+						$result = mysqli_query($connection,"UPDATE `ADMIN_USER` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `ADMIN_USER_ID` = '$userid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+						echo json_encode($data);
+					}catch(Exception $e){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					}
+					finally{
+						DatabaseUtil::getInstance()->close_connection($connection);
+					}
+		}
+    
+    
+    public static function deleteFoodType($foodtypeid)
+			{
+				 //check for null/empty
+				if(!Utility::check_for_null($foodtypeid)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food type id");
+						return;
+				}
+				try{
+						$connection = DatabaseUtil::getInstance()->open_connection();
+						$result = mysqli_query($connection,"UPDATE `FOOD_TYPE` SET `IS_DEL` = 'Y',`MOD_DTM` = CURRENT_TIMESTAMP WHERE `FOOD_TYP_ID` = '$foodtypeid'");
+						if($result){
+							$data['message'] = "success";
+						}
+						else{
+							$data['message'] = "failed";
+						}
+						echo json_encode($data);
+					}catch(Exception $e){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+					}
+					finally{
+						DatabaseUtil::getInstance()->close_connection($connection);
+					}
+		}
+  	
 		
 	
  }

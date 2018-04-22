@@ -182,7 +182,7 @@
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "SELECT USER_ID, USR.RANK_ID, RANK_NAME, EMAIL_SCOPE_ID, EMAIL, MOBILE_SCOPE_ID, MOBILE, 
+				$query = "SELECT USER_ID, USR.RANK_ID, RANK_NAME, EMAIL_SCOPE_ID, EMAIL, VERI_CODE, MOBILE_SCOPE_ID, MOBILE, 
 							IMG, NAME, GENDER_SCOPE_ID, GENDER, USR.CREATE_DTM 
 							FROM `USER` AS USR
 							INNER JOIN `RANK` AS RNK ON RNK.RANK_ID = USR.RANK_ID
@@ -250,6 +250,8 @@
 						$temp_array['EMAIL'] = $result_data->EMAIL;
 						$temp_array['MOBILE'] = $result_data->MOBILE;
 						$temp_array['GENDER'] = $result_data->GENDER;
+            $temp_array['VERI_CODE'] = $result_data->VERI_CODE;
+            
 						
 						//fetch current achieved rank & milestone
 						$temp_array['currentRankAndMilestone'] = Milestone::getRankAndMilestone($con, $result_data->RANK_ID, $user_id);	
@@ -1054,10 +1056,15 @@
 		
 		}
 		
-		public static function register($email, $password, $name){
+		public static function register($email, $passkey, $name){
 			//check for null/empty
             if(!Util::check_for_null($email)){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."email");
+                return;
+            }
+       
+            if(!Util::check_for_null($passkey)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."password");
                 return;
             }
 
@@ -1089,11 +1096,11 @@
 					$ssid = Util::generateRandomString(); 		//TODO: this must be php session id and not a random string
 					$salt = Util::generateSalt(); 
 
-					if($password == "DEFAULT_SOCIAL_PASSWORD"){
-						$password = "cookery";
+					if($passkey == "DEFAULT_SOCIAL_PASSWORD"){
+						$passkey = "cookery";
 					}
-					$password = $password.$salt;
-					$password = base64_encode($password);
+					$passkey = $passkey.$salt;
+					$passkey = base64_encode($passkey);
 
 					$salt = base64_encode($salt);
 					
@@ -1101,7 +1108,7 @@
 					$query = "INSERT INTO `USER` 
 								(EMAIL, VERI_CODE, VERI_CODE_DTM, PASSWORD, NAME, SSID, SALT, CREATE_DTM) 
 								values('".DatabaseUtil::cleanUpString($con, $email)."', '$vericode', CURRENT_TIMESTAMP, 
-								'".DatabaseUtil::cleanUpString($con, $password)."', '".DatabaseUtil::cleanUpString($con, $name)."', 
+								'".DatabaseUtil::cleanUpString($con, $passkey)."', '".DatabaseUtil::cleanUpString($con, $name)."', 
 								'$ssid', '$salt', CURRENT_TIMESTAMP)";
 					
 					if(mysqli_query($con, $query)){
