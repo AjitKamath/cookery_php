@@ -191,6 +191,35 @@
 			}
 		}
 		
+		public static function getRecipeImage($con, $rcp_img_id){
+			//check for null/empty
+			if(!Util::check_for_null($rcp_img_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_img_id");
+				return;
+			}
+			
+			try{
+				$query = "SELECT RCP_IMG_ID, RCP_IMG FROM RECIPE_IMG WHERE RCP_IMG_ID = '".$rcp_img_id."'";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				if($result_obj = $result->fetch_object()){
+					$temp_array['RCP_IMG_ID'] = $result_obj->RCP_IMG_ID;
+					$temp_array['RCP_IMG'] = $result_obj->RCP_IMG;
+					
+					$temp_array['userLiked'] = Like::isUserLiked($con, $user_id, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					$temp_array['likesCount'] = Like::getLikeCount($con, 'RECIPE_IMG', $result_obj->RCP_IMG_ID);
+					
+					array_push($result_array, $temp_array); 
+				}
+				
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
 		public static function getRecipeName($con, $rcp_id){
 			//check for null/empty
 			if(!Util::check_for_null($rcp_id)){

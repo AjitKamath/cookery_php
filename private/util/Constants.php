@@ -96,8 +96,8 @@
 
     //---------------------------SONAR CLOUD----------------------------
     define("SONAR_PROJECT_KEY_IDENTFIER", "X-SonarQube-Project");
-    define("SONAR_PROJECT_KE_ANDROID", "Cookery_Android_DEV_Key");
-    define("SONAR_PROJECT_KE_PHP", "");
+    define("SONAR_PROJECT_KEY_ANDROID", "Cookery_Android_DEV_Key");
+    define("SONAR_PROJECT_KEY_PHP", "");
     //---------------------------SONAR CLOUD----------------------------
 
     //---------------------timeline---------------------
