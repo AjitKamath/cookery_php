@@ -217,6 +217,9 @@
 					//likes count
 					$temp_array['likesCount'] = Like::getLikeCount($con, "USER", $user_id);
 					
+					//comments count
+					$temp_array['commentsCount'] = Comment::getCommentsCount($con, "USER", $user_id);
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
 						if('1' == $result_data->EMAIL_SCOPE_ID){

@@ -128,6 +128,9 @@
 			else if(RECIPE_DELETE == $function_key){
 				$response = Recipe::deleteRecipe($rcp_id, $user_id);
 			}
+			else if(RECIPE_IMAGES_FETCH == $function_key){
+				$response = Recipe::fetchRecipeImages($user_id, $rcp_id);
+			}
 			else if(RECIPE_FETCH == $function_key){
 				$response = Recipe::fetchRecipe($rcp_id, $user_id);
 			}
@@ -287,6 +290,15 @@
 				$response = Trend::fetchActiveTrends($user_id);
 			}
 			//trends
+			
+			//stats
+			else if(STATS_DB_VIEW == $function_key){
+				$response = DatabaseUtil::showDatabaseAuditParameters();
+			}
+			else if(STATS_DB_DELETE == $function_key){
+				$response = DatabaseUtil::deleteDatabaseAuditParameters();
+			}
+			//stats
 
 			else{
 				LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_ERROR, UNIDENTIFIED_FUNCTION_KEY);

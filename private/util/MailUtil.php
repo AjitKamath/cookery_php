@@ -121,10 +121,12 @@
 			//emails
 			$recepientEmails = array();
 			$recepientEmails[count($recepientEmails)] = MAIL_RECEPIENT_ADMIN_EMAIL_1;
+			$recepientEmails[count($recepientEmails)] = MAIL_RECEPIENT_ADMIN_EMAIL_2;
 
 			//names
 			$recepientNames = array();
 			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
+			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_2;
 
 			//attachments
 			date_default_timezone_set(LOGS_TIMEZONE);
