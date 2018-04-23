@@ -16,7 +16,7 @@
 	LoggerUtil::logger(__FILE__, CONTROLLER_SERVICE, __LINE__, LOG_TYPE_INFO, "=====>".$function_key);
 
 	//security check
-	if(!Security::authenticateAPI(apache_request_headers())){
+	if(!SecurityUtil::authenticateAPI(apache_request_headers())){
 		return;
 	}
 

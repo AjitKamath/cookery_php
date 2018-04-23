@@ -347,6 +347,7 @@
 			}
 			//check for null/empty
 
+			$response = "";
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -376,7 +377,7 @@
 						SET IMG = '".Util::get_relative_path($new_image)."',
 						MOD_DTM = CURRENT_TIMESTAMP
 						WHERE USER_ID = '".$user_id."'";
-
+				
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Profile Image updated !");
 					
@@ -400,10 +401,10 @@
 						throw new Exception("Failed to remove all the likes");
 					}
 					
-					return "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
+					$response = "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
 				}
 				else{
-					return "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
+					$response = "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
 					throw new Exception("Failed to update profile photo");
 				}
 				//update into USER table
@@ -414,13 +415,15 @@
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
-				return "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
+				$response = "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				
+				return $response;
 			}
 		}
 		

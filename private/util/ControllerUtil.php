@@ -2,9 +2,11 @@
 	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
 
 	class ControllerUtil{
-		public static function serviceController($post, $files){
+		public static function serviceController(){
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "");
-
+			
+			//echo var_dump($_FILES);
+			
 			//function key
 			$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 			if(!Util::check_for_null($function_key)){
@@ -20,6 +22,7 @@
 				return;
 			}
 
+			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "--");
 			//log POST & FILES params from the request
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, json_encode($_POST));
 
@@ -319,7 +322,7 @@
 				echo $response;
 			}
 
-			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "<=====".$function_key);
+			//LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "<=====".$function_key);
 		}
 	}
 
