@@ -73,10 +73,10 @@
 																	<i class="fa fa-angle-left pull-right"></i>
 															</a>
 															<ul class="treeview-menu">
-																	<li><a href="#"><i class="fa fa-angle-double-right"></i> Add User</a></li>
-																	<li><a href="#"><i class="fa fa-angle-double-right"></i> Remove User</a></li>
-																	<li><a href="#"><i class="fa fa-angle-double-right"></i> Manage User Role</a></li>
-																	<li><a href="#"><i class="fa fa-angle-double-right"></i> Reset Password</a></li>
+																	<li><a href="adduser.php"><i class="fa fa-angle-double-right"></i> Add User</a></li>
+																	<li><a href="deleteuser.php"><i class="fa fa-angle-double-right"></i> Remove User</a></li>
+																	<li><a href="manageuserrole.php"><i class="fa fa-angle-double-right"></i> Manage User Role</a></li>
+																	<li><a href="resetpassword.php"><i class="fa fa-angle-double-right"></i> Reset Password</a></li>
 															</ul>
 													</li>
 									</ul>
