@@ -1,6 +1,5 @@
 <?php
 	class AuditUtil{
-		
 		public static function registerAuditData(){
 			$clientIP = self::getClientIP();
 			$apiKey = self::getApiKey();
@@ -32,7 +31,8 @@
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "RESPONSE CODE  -> ".$httpStatusCode);
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "FUNCTION KEY   -> ".$functionKey);
 			
-			//TODO: store audit data in db
+			//register request into Audit table
+			Audit::submitAudit($clientIP, $apiKey, $clientOS, $clientBrowser, $clientIdentifier, $httpStatusCode, $functionKey, $country, $city);
 			
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "<=====".$functionKey);
 		}
