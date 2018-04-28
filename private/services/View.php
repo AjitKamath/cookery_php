@@ -84,7 +84,7 @@
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
-				if($result_obj = $result->fetch_object()){
+				while($result_obj = $result->fetch_object()){
 					$temp_array['USER_ID'] = $result_obj->USER_ID; 
 					$temp_array['MOD_DTM'] = $result_obj->MOD_DTM;
 					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;

@@ -181,7 +181,33 @@
 			
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
-
+				
+				$result = self::getUser($con, $user_id, $flwr_user_id, $forWhom);
+				
+				return json_encode($result);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+			}
+		}
+		
+		public static function getUser($con, $user_id, $flwr_user_id, $forWhom){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+					return;
+			}
+			
+			if(!Util::check_for_null($forWhom)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."forWhom");
+					return;
+			}
+			//check for null/empty
+			
+			try{
 				$query = "SELECT USER_ID, USR.RANK_ID, RANK_NAME, EMAIL_SCOPE_ID, EMAIL, VERI_CODE, MOBILE_SCOPE_ID, MOBILE, 
 							IMG, NAME, GENDER_SCOPE_ID, GENDER, USR.CREATE_DTM 
 							FROM `USER` AS USR
@@ -253,7 +279,7 @@
 						$temp_array['EMAIL'] = $result_data->EMAIL;
 						$temp_array['MOBILE'] = $result_data->MOBILE;
 						$temp_array['GENDER'] = $result_data->GENDER;
-            $temp_array['VERI_CODE'] = $result_data->VERI_CODE;
+            			$temp_array['VERI_CODE'] = $result_data->VERI_CODE;
             
 						
 						//fetch current achieved rank & milestone
@@ -271,13 +297,10 @@
 					array_push($result_array, $temp_array);
 				}
 
-				return json_encode($result_array);
+				return $result_array;
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
-			}
-			finally{
-				DatabaseUtil::getInstance()->close_connection($con);
 			}
 		}
 		
@@ -349,7 +372,7 @@
 			}
 			//check for null/empty
 
-			$response = "";
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -399,14 +422,13 @@
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to remove all the likes for USER(".$user_id.") in LIKES table");
-						
 						throw new Exception("Failed to remove all the likes");
 					}
 					
-					$response = "{'err_code':0,'isError':false,'err_message':'Your profile photo has been updated !'}";
+					$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 				}
 				else{
-					$response = "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to update user image");
 					throw new Exception("Failed to update profile photo");
 				}
 				//update into USER table
@@ -417,7 +439,6 @@
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
-				$response = "{'err_code':1,'isError':true,'err_message':'Could not update your profile photo !'}";
 				
 				//roll back
 				DatabaseUtil::rollbackTransaction($con);
@@ -425,7 +446,7 @@
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
 				
-				return $response;
+				return json_encode($response);
 			}
 		}
 		
@@ -447,6 +468,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -469,10 +491,10 @@
 				
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Gender & scope updated !");
-						return "{'err_code':0,'isError':false,'err_message':'Your gender & its privacy has been updated !'}";
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 					}
 					else{
-						return "{'err_code':1,'isError':true,'err_message':'Could not update your gender !'}";
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Gender & its scope could not be updated");
 					}
 				}
 				//if old and new gender are same
@@ -484,10 +506,10 @@
 				
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Gender scope updated !");
-						return "{'err_code':0,'isError':false,'err_message':'Your gender privacy has been updated !'}";
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 					}
 					else{
-						return "{'err_code':1,'isError':true,'err_message':'Could not update your gender privacy !'}";
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Gender scope could not be updated");
 					}
 				}
 			}
@@ -496,6 +518,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -517,6 +540,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -542,11 +566,11 @@
 
 						//TODO: mechanism to store OTP, OTP_DTM in database and send the same OTP for verifying the phone number to the new phone number.
 						//this must be done only if the user has modified the phone number which can be verified by comparing before and after the mobile number update
-
-						return "{'err_code':0,'isError':false,'err_message':'Your phone number & its privacy has been updated !'}";
+						
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 					}
 					else{
-						return "{'err_code':1,'isError':true,'err_message':'Could not update your phone number !'}";
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Phone Number could not be updated !");
 					}
 				}
 				//if old and new mobile are not same
@@ -556,13 +580,13 @@
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'";
 				
-						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Phone Number scope updated !");
-							return "{'err_code':0,'isError':false,'err_message':'Your phone number privacy has been updated !'}";
-						}
-						else{
-							return "{'err_code':1,'isError':true,'err_message':'Could not update your phone number privacy !'}";
-						}
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Phone Number scope updated !");
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Phone Number scope could not be updated !");
+					}
 				}
 			}
 			catch(Exception $e){
@@ -570,6 +594,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -591,6 +616,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -619,15 +645,14 @@
 						
 						if(mysqli_query($con, $query)){
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Password updated !");
-							return "{'err_code':0,'isError':false,'err_message':'Your password has been updated !'}";
+							$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 						}
 						else{
-							return "{'err_code':1,'isError':true,'err_message':'Could not update your password !'}";
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Password could not be updated !");
 						}
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Incorrect password");
-						return "{'err_code':1,'isError':true,'err_message':'Your current password is wrong !'}";
 					}
 				}
 			}
@@ -636,6 +661,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -652,6 +678,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -662,10 +689,10 @@
 				
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Name updated !");
-					return "{'err_code':0,'isError':false,'err_message':'Your name has been updated !'}";
+					$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 				}
 				else{
-					return "{'err_code':1,'isError':true,'err_message':'Could not update your name'}";
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Could not update your name ");
 				}
 			}
 			catch(Exception $e){
@@ -673,6 +700,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -694,6 +722,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -723,10 +752,10 @@
 
 						//TODO: verification email with veri_code has to be sent here only if the email has been changed(check the email before and after the update)
 
-						return "{'err_code':0,'isError':false,'err_message':'Your email & its privacy has been updated !'}";
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 					}
 					else{
-						return "{'err_code':1,'isError':true,'err_message':'Could not update your email'}";
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not update email");
 					}
 					//update with new veri code
 				}
@@ -739,10 +768,10 @@
 
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email scope updated !");
-						return "{'err_code':0,'isError':false,'err_message':'Your email privacy has been updated !'}";
+						$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 					}
 					else{
-						return "{'err_code':1,'isError':true,'err_message':'Could not update your email privacy !'}";
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not update email privacy ");
 					}
 					//update with new veri code
 				}
@@ -753,6 +782,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -1004,10 +1034,7 @@
 					$password = base64_encode($password);
 					
 					if($result_obj->EMAIL == $email && $result_obj->PASSWORD == $password){
-						$temp["USER_ID"] = $result_obj->USER_ID;
-						$temp["EMAIL"] = $result_obj->EMAIL;
-						$temp["NAME"] = $result_obj->NAME;
-						
+						$temp = self::getUser($con, $result_obj->USER_ID, $result_obj->USER_ID, USER_FETCH_SELF);
 						array_push($result_array, $temp);
 					}
 					else{

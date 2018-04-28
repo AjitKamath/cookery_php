@@ -10,7 +10,7 @@
 
 	//SMTP needs accurate times, and the PHP time zone MUST be set
 	//This should be done in your php.ini, but this is how to do it if you don't have access to that
-	date_default_timezone_set('Etc/UTC');
+	date_default_timezone_set(LOGS_TIMEZONE);
 
 	//TODO: This class must be equipped to handle the misusing of this service as a spam gateway
 	//https://github.com/PHPMailer/PHPMailer/blob/master/examples/simple_contact_form.phps
@@ -127,7 +127,7 @@
 			$recepientNames = array();
 			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
 			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_2;
-
+			
 			//attachments
 			date_default_timezone_set(LOGS_TIMEZONE);
 			$today = date(LOGS_FILE_FORMAT);
@@ -166,6 +166,7 @@
 					<br/>
 					This generally happens if the connection was not closed after opening it. 
 					Ensure that there are no more than one connection opened per service request & connection is closed in the finally block of each service request. 
+					Check if there is a return statement before closing the connection.
 					See attached log files to identify the crime scene.
 					<br/><br/>
 					<b>When it happened ? </b><br/>This happened at ".$now, $body);
@@ -190,7 +191,8 @@
 					<b>Why it happened ? </b>
 					<br/>
 					This generally happens if the transaction was started and was never ended. 
-					Ensure that there are no more than one transaction opened per service request & transaction is ended in the finally block of each service request. 
+					Ensure that there are no more than one transaction opened per service request & transaction is ended in the finally block of each service request.
+					Check if there is a return statement before closing the transaction.
 					See attached log files to identify the crime scene.
 					<br/><br/>
 					<b>When it happened ? </b><br/>This happened at ".$now, $body);
@@ -323,6 +325,7 @@
 
 					//body
 					$mail->Body = $bodies[$i];
+					
 					$mail->send();
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
 					//body

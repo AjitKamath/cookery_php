@@ -5,8 +5,6 @@
 		public static function serviceController(){
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "");
 			
-			//echo var_dump($_FILES);
-			
 			//function key
 			$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 			if(!Util::check_for_null($function_key)){
@@ -32,55 +30,57 @@
 			//log POST & FILES params from the request
 
 			//params
-			$searchQuery 	= isset($_POST['search_query']) ? $_POST['search_query'] : '';
+			$searchQuery 		= isset($_POST['search_query']) ? $_POST['search_query'] : '';
 
-			$com_id 		= isset($_POST['com_id']) ? $_POST['com_id'] : '';
-			$comment 		= isset($_POST['comment']) ? $_POST['comment'] : '';
+			$com_id 			= isset($_POST['com_id']) ? $_POST['com_id'] : '';
+			$comment 			= isset($_POST['comment']) ? $_POST['comment'] : '';
 
-			$type			= isset($_POST['type']) ? $_POST['type'] : '';
-			$type_id		= isset($_POST['type_id']) ? $_POST['type_id'] : '';
+			$type				= isset($_POST['type']) ? $_POST['type'] : '';
+			$type_id			= isset($_POST['type_id']) ? $_POST['type_id'] : '';
 
-			$rev_id			= isset($_POST['rev_id']) ? $_POST['rev_id'] : '';
-			$review 		= isset($_POST['review']) ? $_POST['review'] : '';
-			$rating 		= isset($_POST['rating']) ? $_POST['rating'] : '';
+			$rev_id			    = isset($_POST['rev_id']) ? $_POST['rev_id'] : '';
+			$review 			= isset($_POST['review']) ? $_POST['review'] : '';
+			$rating 			= isset($_POST['rating']) ? $_POST['rating'] : '';
 
-			$index			= isset($_POST['index']) ? $_POST['index'] : '0';
-			$tmln_id		= isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
+			$index				= isset($_POST['index']) ? $_POST['index'] : '0';
+			$tmln_id			= isset($_POST['tmln_id']) ? $_POST['tmln_id'] : '';
 
-			$rcp_id 		= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
-			$user_id 		= isset($_POST['user_id']) ? $_POST['user_id'] : '';
-			$rcp_nm         = isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
-			$food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
-			$ing_aka_id     = isset($_POST['ing_aka_id']) ? $_POST['ing_aka_id'] : '';
-			$ing_aka_name   = isset($_POST['ing_aka_name']) ? $_POST['ing_aka_name'] : '';
-			$qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
-			$ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
-			$rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
-			$tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
-			$tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
-			$food_typ_id    = isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
-			$rcp_images     = isset($_FILES['images']) ? $_FILES['images'] : '';
+			$rcp_id 			= isset($_POST['rcp_id']) ? $_POST['rcp_id'] : '';
+			$user_id 			= isset($_POST['user_id']) ? $_POST['user_id'] : '';
+			$rcp_nm       		= isset($_POST['rcp_nm']) ? $_POST['rcp_nm'] : '';
+			$food_csn_id  		= isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
+			$ing_aka_id			= isset($_POST['ing_aka_id']) ? $_POST['ing_aka_id'] : '';
+			$ing_aka_name 	 	= isset($_POST['ing_aka_name']) ? $_POST['ing_aka_name'] : '';
+			$ing_uom_id       	= isset($_POST['ing_uom_id']) ? $_POST['ing_uom_id'] : '';
+			$ing_uom_value     	= isset($_POST['ing_uom_value']) ? $_POST['ing_uom_value'] : '';
+			$rcp_steps    	  	= isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
+			$tst_id      	  	= isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
+			$tst_qty     	  	= isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
+			$food_typ_id 	   	= isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
+			$rcp_images 	    = isset($_FILES['images']) ? $_FILES['images'] : '';
 
-			$email			= isset($_POST['email']) ? $_POST['email'] : '';
-			$password		= isset($_POST['password']) ? $_POST['password'] : '';
-			$mobile			= isset($_POST['mobile']) ? $_POST['mobile'] : '';
-			$name			= isset($_POST['name']) ? $_POST['name'] : '';
-			$gender			= isset($_POST['gender']) ? $_POST['gender'] : '';
+			$email				= isset($_POST['email']) ? $_POST['email'] : '';
+			$password			= isset($_POST['password']) ? $_POST['password'] : '';
+			$mobile				= isset($_POST['mobile']) ? $_POST['mobile'] : '';
+			$name				= isset($_POST['name']) ? $_POST['name'] : '';
+			$gender				= isset($_POST['gender']) ? $_POST['gender'] : '';
 
-			$flwr_user_id	= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
-			$flws_user_id	= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
+			$flwr_user_id		= isset($_POST['flwr_user_id']) ? $_POST['flwr_user_id'] : '';
+			$flws_user_id		= isset($_POST['flws_user_id']) ? $_POST['flws_user_id'] : '';
 
-			$list_name		= isset($_POST['list_name']) ? $_POST['list_name'] : '';
-			$type			= isset($_POST['type']) ? $_POST['type'] : '';
-			$list_id 		= isset($_POST['list_id']) ? $_POST['list_id'] : '';
+			$list_name			= isset($_POST['list_name']) ? $_POST['list_name'] : '';
+			$type				= isset($_POST['type']) ? $_POST['type'] : '';
+			$list_id 			= isset($_POST['list_id']) ? $_POST['list_id'] : '';
 
-			$new_password 	= isset($_POST['new_password']) ? $_POST['new_password'] : '';
+			$new_password 		= isset($_POST['new_password']) ? $_POST['new_password'] : '';
 
-			$image			= isset($_FILES['image']) ? $_FILES['image'] : '';
+			$image				= isset($_FILES['image']) ? $_FILES['image'] : '';
 
-			$logged_in_user_id 		= isset($_POST['logged_in_user_id']) ? $_POST['logged_in_user_id'] : '';
+			$logged_in_user_id 	= isset($_POST['logged_in_user_id']) ? $_POST['logged_in_user_id'] : '';
 
 			$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
+
+			$ing_id				= isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
 			//params
 
 			$response = "";
@@ -91,30 +91,18 @@
 			}
 			//master data
 
-			//quantity
-			else if(QUANTITY_FETCH_ALL == $function_key){
-				$response = Quantity::fetchAllQuantities();
+			//cuisine
+			if(CUISINE_FETCH == $function_key){
+				$response = FoodCuisine::fetchFoodCuisines($searchQuery);
 			}
-			//quantity
-
-			//food cuisine
-			else if(FOOD_CUISINE_FETCH_ALL == $function_key){
-				$response = FoodCuisine::fetchAllFoodCuisines();
-			}
-			//food cuisine
-
+			//cuisine
+			
 			//food type
-			else if(FOOD_TYPE_FETCH_ALL == $function_key){
-				$response = FoodType::fetchAllFoodTypes();
+			if(FOOD_TYPE_FETCH == $function_key){
+				$response = FoodType::fetchFoodTypes($searchQuery);
 			}
-			//food type	
-
-			//taste
-			else if(TASTE_FETCH_ALL == $function_key){
-				$response = Taste::fetchAllTastes();
-			}
-			//taste
-
+			//food type
+				
 			//comment
 			else if(COMMENT_DELETE == $function_key){
 				$response = Comment::deleteComment($com_id, $user_id);
@@ -150,7 +138,7 @@
 				$response = Recipe::fetchUserReviewedRecipes($user_id, $index);
 			}
 			else if(RECIPE_SUBMIT == $function_key){
-				$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $qty_id, $ing_qty, 
+				$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $ing_uom_id, $ing_uom_value, 
 										  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 			}
 			else if(RECIPE_SEARCH == $function_key){
@@ -282,6 +270,12 @@
 			}
 			//like
 
+			//favourite
+			else if(NUTRIENT_INGREDIENT_FETCH == $function_key){
+				$response = Nutrient::fetchIngredientNutrientValues($ing_id);
+			}
+			//favourite
+			
 			//favourite
 			else if(FAV_SUBMIT == $function_key){
 				$response = Favourites::submitFavourite($user_id, $rcp_id);

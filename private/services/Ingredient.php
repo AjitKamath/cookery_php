@@ -84,7 +84,7 @@
 				$result = mysqli_query($con, $query);
 
 				$result_array = array();
-				if($result_data = $result->fetch_object()) {
+				while($result_data = $result->fetch_object()) {
 					$temp_array['ING_IMG'] = $result_data->ING_IMG;
 					array_push($result_array, $temp_array);
 				}

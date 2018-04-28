@@ -53,8 +53,8 @@
 		
 		public static function getClientIdentifier(){
 			$clientIdentifier = '';
-			if (isset($_SERVER['HTTP_ORIGIN']))
-				$clientIdentifier = $_SERVER['HTTP_ORIGIN'];
+			if (isset($_SERVER['HTTP_X_APP_UNIQUE_ID']))
+				$clientIdentifier = $_SERVER['HTTP_X_APP_UNIQUE_ID'];
 			else
 				$clientIdentifier = 'UNKNOWN';
 			return $clientIdentifier;
@@ -127,7 +127,7 @@
 		
 		function getClientBrowser() {
 			$user_agent = $_SERVER['HTTP_USER_AGENT'];
-			$browser        =   "Unknown Browser";
+			$browser        =   "UNKNOWN";
 			$browser_array  =   array(
                             '/msie/i'       =>  'Internet Explorer',
                             '/firefox/i'    =>  'Firefox',

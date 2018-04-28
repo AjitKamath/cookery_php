@@ -80,6 +80,8 @@
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
     define("DATABASE_PORT", "3307");
+	
+	define("DATABASE_TIMEZONE_OFFSET", "+5:30");	//this is relative to UTC timezone. For eg: IST is +5:30
 
     define("DATABASE_CONNECTION_COUNTER", "database.connection.counter");
     define("DATABASE_CONNECTION_LEAK_TIMESTAMP", "database.connection.leak.timestamp");

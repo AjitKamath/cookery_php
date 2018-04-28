@@ -5,13 +5,16 @@
 				$con = DatabaseUtil::getInstance()->open_connection();
 
 				//food types
-				$result_array['foodTypes'] = FoodType::fetchAllFoodTypes1($con);
+				$result_array['foodTypes'] = FoodType::getAllFoodTypes($con);
 				
 				//cuisines
-				$result_array['foodCuisines'] = FoodCuisine::fetchAllFoodCuisines1($con);
+				$result_array['foodCuisines'] = FoodCuisine::getAllFoodCuisines($con);
 				
 				//tastes
-				$result_array['tastes'] = Taste::fetchAllTastes1($con);
+				$result_array['tastes'] = Taste::getAllTastes($con);
+				
+				//quantity
+				$result_array['ingredientUOMs'] = IngredientUOM::getAllIngredientUOM($con);
 
 				return json_encode($result_array);
 			}

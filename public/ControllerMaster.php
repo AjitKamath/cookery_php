@@ -50,8 +50,8 @@
 	$food_csn_id    = isset($_POST['food_csn_id']) ? $_POST['food_csn_id'] : '';
 	$ing_aka_id     = isset($_POST['ing_aka_id']) ? $_POST['ing_aka_id'] : '';
 	$ing_aka_name   = isset($_POST['ing_aka_name']) ? $_POST['ing_aka_name'] : '';
-	$qty_id         = isset($_POST['qty_id']) ? $_POST['qty_id'] : '';
-	$ing_qty        = isset($_POST['ing_qty']) ? $_POST['ing_qty'] : '';
+	$ing_uom_id     = isset($_POST['ing_uom_id']) ? $_POST['ing_uom_id'] : '';
+	$ing_uom_value  = isset($_POST['ing_uom_value']) ? $_POST['ing_uom_value'] : '';
 	$rcp_steps      = isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
 	$tst_id         = isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
 	$tst_qty        = isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
@@ -88,30 +88,6 @@
 	}
 	//master data
 
-	//quantity
-	else if(QUANTITY_FETCH_ALL == $function_key){
-		$response = Quantity::fetchAllQuantities();
-	}
-	//quantity
-	
-	//food cuisine
-	else if(FOOD_CUISINE_FETCH_ALL == $function_key){
-		$response = FoodCuisine::fetchAllFoodCuisines();
-	}
-	//food cuisine
-	
-	//food type
-	else if(FOOD_TYPE_FETCH_ALL == $function_key){
-		$response = FoodType::fetchAllFoodTypes();
-	}
-	//food type	
-
-	//taste
-	else if(TASTE_FETCH_ALL == $function_key){
-		$response = Taste::fetchAllTastes();
-	}
-	//taste
-
 	//comment
 	else if(COMMENT_DELETE == $function_key){
 		$response = Comment::deleteComment($com_id, $user_id);
@@ -144,7 +120,7 @@
 		$response = Recipe::fetchUserReviewedRecipes($user_id, $index);
 	}
 	else if(RECIPE_SUBMIT == $function_key){
-		$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $qty_id, $ing_qty, 
+		$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $ing_uom_id, $ing_uom_value, 
 								  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
 	}
 	else if(RECIPE_SEARCH == $function_key){
