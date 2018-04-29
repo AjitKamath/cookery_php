@@ -142,6 +142,7 @@
 
 				$result_array = array();
 				while($result_data = $result->fetch_object()){
+					$temparr['ING_ID'] = $result_data->ING_ID;
 					$temparr['ING_AKA_ID'] = $result_data->ING_AKA_ID;
 					$temparr['ING_AKA_NAME'] = $result_data->ING_AKA_NAME;
 					$temparr['ING_UOM_NAME'] = $result_data->ING_UOM_NAME;

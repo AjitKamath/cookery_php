@@ -9,5 +9,3 @@ AuthUserFile /home/cabox/workspace/secure/.htpasswd
 
 #Require all granted = allows all, Require valid-user = allows only those defined in AuthUserFile
 Require all granted
-
-

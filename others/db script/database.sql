@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Apr 23, 2018 at 08:44 PM
+-- Generation Time: Apr 29, 2018 at 09:46 PM
 -- Server version: 8.0.11
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -13,26 +13,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookery`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ABOUT_US`
---
-
-CREATE TABLE `ABOUT_US` (
-  `ABOUT_US_ID` int(11) NOT NULL,
-  `ABOUT_US_DESC` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `CREATE_DTM` timestamp NOT NULL,
-  `MOD_DTM` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `ABOUT_US`
---
-
-INSERT INTO `ABOUT_US` (`ABOUT_US_ID`, `ABOUT_US_DESC`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'Test for About us super heros', '2018-03-18 15:32:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -59,6 +39,1421 @@ CREATE TABLE `ADMIN_USER` (
 INSERT INTO `ADMIN_USER` (`ADMIN_USER_ID`, `ADMIN_USER_NAME`, `ADMIN_USER_PASSWORD`, `ADMIN_USER_ROLE`, `ADMIN_USER_MOBILE`, `ADMIN_USER_EMAIL`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
 (1, 'vishal', 'cm9jaw==', 'Admin', 7448145685, 'dial2vishal@gmail.com', 'N', '2018-04-22 00:44:40', '2018-04-22 00:44:40'),
 (2, 'test', 'dGVzdA==', 'Employee', 9962218577, 'vishalva06@gmail.com', 'N', '2018-04-22 00:45:27', '2018-04-22 01:59:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AUDIT`
+--
+
+CREATE TABLE `AUDIT` (
+  `AUDIT_ID` int(11) NOT NULL,
+  `CLNT_ID` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `CLNT_IP_ADD` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `API_KEY` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CLNT_OS` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CLNT_BROWSER` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `HTTP_STAT_CD` int(5) DEFAULT NULL,
+  `FUNC_KEY` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `COUNTRY` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CITY` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `AUDIT`
+--
+
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-24 14:59:02', NULL),
+(2, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-24 15:10:49', NULL),
+(3, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-24 15:10:51', NULL),
+(4, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-24 15:11:14', NULL),
+(5, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-24 15:11:21', NULL),
+(6, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-24 15:11:23', NULL),
+(7, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:05:56', NULL),
+(8, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'FOOD_TYPE_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:05:59', NULL),
+(9, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'FOOD_CUISINE_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:06:01', NULL),
+(10, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:06:01', NULL),
+(11, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'QUANTITY_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:06:03', NULL),
+(12, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'TASTE_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:06:05', NULL),
+(13, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:06:10', NULL),
+(14, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'Unknown Browser', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:06:15', NULL),
+(15, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:28:59', NULL),
+(16, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:29:04', NULL),
+(17, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:29:13', NULL),
+(18, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:29:18', NULL),
+(19, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:29:19', NULL),
+(20, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:34:49', NULL),
+(21, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:34:54', NULL),
+(22, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:35:03', NULL),
+(23, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:35:08', NULL),
+(24, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:37:24', NULL),
+(25, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:44:25', NULL),
+(26, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:44:30', NULL),
+(27, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:44:39', NULL),
+(28, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:44:43', NULL),
+(29, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:45:18', NULL),
+(30, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '183.82.38.108', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:46:16', NULL),
+(31, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '183.82.38.108', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:52:15', NULL),
+(32, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '183.82.38.108', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:52:53', NULL),
+(33, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:53:30', NULL),
+(34, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:53:35', NULL),
+(35, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:53:44', NULL),
+(36, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:53:49', NULL),
+(37, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-24 17:54:19', NULL),
+(38, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:57:24', NULL),
+(39, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:57:29', NULL),
+(40, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:57:34', NULL),
+(41, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 17:57:39', NULL),
+(42, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:57:40', NULL),
+(43, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 17:57:43', NULL),
+(44, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-24 17:58:08', NULL),
+(45, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:58:10', NULL),
+(46, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:58:17', NULL),
+(47, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 17:58:23', NULL),
+(48, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-24 18:20:33', NULL),
+(49, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-24 18:20:38', NULL),
+(50, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-24 18:20:48', NULL),
+(51, 'UNKNOWN', '183.82.38.108', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-24 18:20:51', NULL),
+(52, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:01:56', NULL),
+(53, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:01:58', NULL),
+(54, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:02:33', NULL),
+(55, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:02:35', NULL),
+(56, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:03:05', NULL),
+(57, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:03:07', NULL),
+(58, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:05:24', NULL),
+(59, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:06:50', NULL),
+(60, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:14:28', NULL),
+(61, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:14:59', NULL),
+(62, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:15:40', NULL),
+(63, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:16:48', NULL),
+(64, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:24:11', NULL),
+(65, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:24:56', NULL),
+(66, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', '', '2018-04-25 11:25:25', NULL),
+(67, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 11:31:27', NULL),
+(68, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 12:30:07', NULL),
+(69, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-25 12:30:10', NULL),
+(70, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_VIEW', 'IN', '', '2018-04-25 12:30:12', NULL),
+(71, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_DELETE', 'IN', '', '2018-04-25 12:30:17', NULL),
+(72, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 500, 'STATS_DB_DELETE', 'IN', '', '2018-04-25 12:30:18', NULL),
+(73, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 12:34:34', NULL),
+(74, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 12:34:50', NULL),
+(75, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 12:37:37', NULL),
+(76, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-25 12:39:00', NULL),
+(77, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:48:07', NULL),
+(78, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:49:18', NULL),
+(79, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:49:37', NULL),
+(80, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:50:45', NULL),
+(81, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:51:25', NULL),
+(82, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:52:23', NULL),
+(83, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'COMMENT_SUBMIT', 'IN', '', '2018-04-25 12:53:30', NULL),
+(84, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:54:21', NULL),
+(85, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:55:17', NULL),
+(86, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:55:55', NULL),
+(87, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'LIKE_SUBMIT', 'IN', '', '2018-04-25 12:57:15', NULL),
+(88, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:11:13', NULL),
+(89, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:16:08', NULL),
+(90, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'UNKNOWN', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:16:44', NULL),
+(91, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:20:24', NULL),
+(92, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:26:56', NULL),
+(93, 'UNKNOWN', '49.206.114.13', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-25 16:28:27', NULL),
+(94, 'UNKNOWN', '49.206.114.13', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-25 16:34:46', NULL),
+(95, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '49.206.114.13', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-25 16:35:48', NULL),
+(96, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '49.206.114.13', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-25 16:35:57', NULL),
+(97, 'chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop', '49.206.114.13', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-25 16:39:07', NULL),
+(98, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.114.13', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-25 16:40:03', NULL),
+(99, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.38.91', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 04:38:59', NULL),
+(100, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.38.91', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 04:41:00', NULL),
+(101, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.38.91', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-26 04:41:42', NULL),
+(102, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'CUISINE_FETCH', 'IN', '', '2018-04-26 06:34:19', NULL),
+(103, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'CUISINE_FETCH', 'IN', '', '2018-04-26 06:34:32', NULL),
+(104, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'CUISINE_FETCH', 'IN', '', '2018-04-26 06:34:44', NULL),
+(105, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'FOOD_TYPE_FETCH', 'IN', '', '2018-04-26 06:43:57', NULL),
+(106, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:39:01', NULL),
+(107, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:39:50', NULL),
+(108, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:39:55', NULL),
+(109, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:01', NULL),
+(110, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:05', NULL),
+(111, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:05', NULL),
+(112, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:10', NULL),
+(113, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:40:10', NULL),
+(114, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:40:34', NULL),
+(115, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:44', NULL),
+(116, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:54', NULL),
+(117, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:57', NULL),
+(118, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:40:59', NULL),
+(119, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 16:41:01', NULL),
+(120, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:41:03', NULL),
+(121, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:48:12', NULL),
+(122, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:17', NULL),
+(123, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:21', NULL),
+(124, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:25', NULL),
+(125, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:26', NULL),
+(126, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 16:48:30', NULL),
+(127, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:31', NULL),
+(128, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:34', NULL),
+(129, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:36', NULL),
+(130, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:38', NULL),
+(131, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 16:48:40', NULL),
+(132, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:29:28', NULL),
+(133, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:29:33', NULL),
+(134, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:29:43', NULL),
+(135, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:29:48', NULL),
+(136, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:30:10', NULL),
+(137, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:30:16', NULL),
+(138, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:30:16', NULL),
+(139, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:30:19', NULL),
+(140, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:30:24', NULL),
+(141, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:30:25', NULL),
+(142, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:30:30', NULL),
+(143, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:02', NULL),
+(144, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:04', NULL),
+(145, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:19', NULL),
+(146, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:19', NULL),
+(147, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:22', NULL),
+(148, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:22', NULL),
+(149, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:25', NULL),
+(150, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:25', NULL),
+(151, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:28', NULL),
+(152, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:28', NULL),
+(153, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:31', NULL),
+(154, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:31', NULL),
+(155, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:34', NULL),
+(156, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:34', NULL),
+(157, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:38', NULL),
+(158, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:38', NULL),
+(159, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:41', NULL),
+(160, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:41', NULL),
+(161, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:44', NULL),
+(162, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:44', NULL),
+(163, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:52', NULL),
+(164, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:55', NULL),
+(165, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:31:58', NULL),
+(166, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:01', NULL),
+(167, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:04', NULL),
+(168, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:08', NULL),
+(169, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:11', NULL),
+(170, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:14', NULL),
+(171, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:17', NULL),
+(172, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:21', NULL),
+(173, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:24', NULL),
+(174, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:27', NULL),
+(175, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:30', NULL),
+(176, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:33', NULL),
+(177, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:37', NULL),
+(178, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:40', NULL),
+(179, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:43', NULL),
+(180, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:46', NULL),
+(181, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:49', NULL),
+(182, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:52', NULL),
+(183, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:55', NULL),
+(184, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:32:58', NULL),
+(185, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:02', NULL),
+(186, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:05', NULL),
+(187, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:08', NULL),
+(188, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:11', NULL),
+(189, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:14', NULL),
+(190, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:17', NULL),
+(191, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:21', NULL),
+(192, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:24', NULL),
+(193, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:27', NULL),
+(194, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:30', NULL),
+(195, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:33', NULL),
+(196, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:36', NULL),
+(197, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:39', NULL),
+(198, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:43', NULL),
+(199, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:46', NULL),
+(200, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:49', NULL),
+(201, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:52', NULL),
+(202, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:55', NULL),
+(203, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:33:58', NULL),
+(204, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:02', NULL),
+(205, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:05', NULL),
+(206, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:08', NULL),
+(207, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:11', NULL),
+(208, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:14', NULL),
+(209, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:17', NULL),
+(210, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:21', NULL),
+(211, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:24', NULL),
+(212, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:27', NULL),
+(213, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:34:35', NULL),
+(214, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:41', NULL),
+(215, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:44', NULL),
+(216, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:47', NULL),
+(217, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:50', NULL),
+(218, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:34:51', NULL),
+(219, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:55', NULL),
+(220, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:55', NULL),
+(221, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:58', NULL),
+(222, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:34:58', NULL),
+(223, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:01', NULL),
+(224, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:01', NULL),
+(225, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:04', NULL),
+(226, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:04', NULL),
+(227, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:07', NULL),
+(228, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:07', NULL),
+(229, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:10', NULL),
+(230, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:10', NULL),
+(231, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:13', NULL),
+(232, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:14', NULL),
+(233, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:16', NULL),
+(234, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:17', NULL),
+(235, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:19', NULL),
+(236, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:20', NULL),
+(237, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:22', NULL),
+(238, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:23', NULL),
+(239, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:26', NULL),
+(240, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:26', NULL),
+(241, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:29', NULL),
+(242, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:29', NULL),
+(243, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:35:37', NULL),
+(244, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:43', NULL),
+(245, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:52', NULL),
+(246, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:35:57', NULL),
+(247, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:39:04', NULL),
+(248, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:09', NULL);
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(249, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:15', NULL),
+(250, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:18', NULL),
+(251, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:19', NULL),
+(252, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:39:22', NULL),
+(253, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:24', NULL),
+(254, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:26', NULL),
+(255, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:27', NULL),
+(256, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:29', NULL),
+(257, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:30', NULL),
+(258, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:32', NULL),
+(259, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:33', NULL),
+(260, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:35', NULL),
+(261, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:36', NULL),
+(262, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:38', NULL),
+(263, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:39', NULL),
+(264, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:41', NULL),
+(265, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:43', NULL),
+(266, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:44', NULL),
+(267, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:46', NULL),
+(268, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:47', NULL),
+(269, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:49', NULL),
+(270, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:51', NULL),
+(271, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:52', NULL),
+(272, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:54', NULL),
+(273, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:55', NULL),
+(274, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:57', NULL),
+(275, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:39:58', NULL),
+(276, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:40:00', NULL),
+(277, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:40:01', NULL),
+(278, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:40:03', NULL),
+(279, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:40:05', NULL),
+(280, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:47:29', NULL),
+(281, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:47:34', NULL),
+(282, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:47:44', NULL),
+(283, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:47:49', NULL),
+(284, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:02', NULL),
+(285, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:48:04', NULL),
+(286, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:05', NULL),
+(287, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:08', NULL),
+(288, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:09', NULL),
+(289, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:11', NULL),
+(290, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:48:11', NULL),
+(291, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:50:17', NULL),
+(292, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:22', NULL),
+(293, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:31', NULL),
+(294, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:31', NULL),
+(295, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:34', NULL),
+(296, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:37', NULL),
+(297, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:50:39', NULL),
+(298, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:40', NULL),
+(299, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:50:42', NULL),
+(300, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:51:10', NULL),
+(301, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:51:56', NULL),
+(302, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:52:22', NULL),
+(303, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:52:45', NULL),
+(304, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:54:04', NULL),
+(305, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:09', NULL),
+(306, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:18', NULL),
+(307, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:24', NULL),
+(308, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:29', NULL),
+(309, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:54:29', NULL),
+(310, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:33', NULL),
+(311, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:35', NULL),
+(312, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:54:36', NULL),
+(313, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOW_SUBMIT', 'IN', 'Chennai', '2018-04-26 17:54:49', NULL),
+(314, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:09', NULL),
+(315, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:22', NULL),
+(316, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:25', NULL),
+(317, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:28', NULL),
+(318, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:31', NULL),
+(319, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:34', NULL),
+(320, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:55:37', NULL),
+(321, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:56:11', NULL),
+(322, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:57:39', NULL),
+(323, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:57:46', NULL),
+(324, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 17:57:55', NULL),
+(325, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 17:58:00', NULL),
+(326, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 17:58:17', NULL),
+(327, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 17:58:17', NULL),
+(328, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:58:21', NULL),
+(329, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:58:38', NULL),
+(330, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:58:41', NULL),
+(331, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:59:22', NULL),
+(332, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 17:59:41', NULL),
+(333, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:00:06', NULL),
+(334, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:01:04', NULL),
+(335, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:01:10', NULL),
+(336, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:01:20', NULL),
+(337, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:01:24', NULL),
+(338, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:01:51', NULL),
+(339, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:16:26', NULL),
+(340, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:16:31', NULL),
+(341, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:16:40', NULL),
+(342, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:16:45', NULL),
+(343, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:16:49', NULL),
+(344, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:17:01', NULL),
+(345, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:07', NULL),
+(346, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:17:08', NULL),
+(347, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:12', NULL),
+(348, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:14', NULL),
+(349, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:14', NULL),
+(350, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:35', NULL),
+(351, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:17:37', NULL),
+(352, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:18:13', NULL),
+(353, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:18:16', NULL),
+(354, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:18:20', NULL),
+(355, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:18:23', NULL),
+(356, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:22:21', NULL),
+(357, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:22:26', NULL),
+(358, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:22:36', NULL),
+(359, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:22:41', NULL),
+(360, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:18', NULL),
+(361, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:23:18', NULL),
+(362, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:22', NULL),
+(363, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:24', NULL),
+(364, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:25', NULL),
+(365, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:29', NULL),
+(366, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:31', NULL),
+(367, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:37', NULL),
+(368, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:23:39', NULL),
+(369, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_SEARCH', 'IN', 'Chennai', '2018-04-26 18:23:47', NULL),
+(370, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:23:57', NULL),
+(371, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:29:13', NULL),
+(372, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:18', NULL),
+(373, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:23', NULL),
+(374, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:27', NULL),
+(375, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:27', NULL),
+(376, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:29:32', NULL),
+(377, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:32', NULL),
+(378, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:38', NULL),
+(379, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:29:41', NULL),
+(380, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:29:46', NULL),
+(381, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:33:08', NULL),
+(382, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:33:13', NULL),
+(383, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:33:22', NULL),
+(384, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:33:27', NULL),
+(385, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:34:04', NULL),
+(386, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:34:05', NULL),
+(387, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:34:09', NULL),
+(388, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:34:11', NULL),
+(389, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:34:12', NULL),
+(390, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:34:22', NULL),
+(391, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOW_SUBMIT', 'IN', 'Chennai', '2018-04-26 18:34:30', NULL),
+(392, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:35:08', NULL),
+(393, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:35:14', NULL),
+(394, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:35:23', NULL),
+(395, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:35:28', NULL),
+(396, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:35:35', NULL),
+(397, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:35:42', NULL),
+(398, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:35:47', NULL),
+(399, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:35:57', NULL),
+(400, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:36:02', NULL),
+(401, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:36:56', NULL),
+(402, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:36:57', NULL),
+(403, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:37:01', NULL),
+(404, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:37:03', NULL),
+(405, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 18:37:04', NULL),
+(406, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:37:12', NULL),
+(407, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOW_SUBMIT', 'IN', 'Chennai', '2018-04-26 18:37:27', NULL),
+(408, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOW_SUBMIT', 'IN', 'Chennai', '2018-04-26 18:37:38', NULL),
+(409, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:37:45', NULL),
+(410, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:37:47', NULL),
+(411, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:38:24', NULL),
+(412, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:38:36', NULL),
+(413, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 18:38:39', NULL),
+(414, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-26 18:38:47', NULL),
+(415, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:54:48', NULL),
+(416, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:54:54', NULL),
+(417, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:55:03', NULL),
+(418, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:55:07', NULL),
+(419, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:55:46', NULL),
+(420, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:55:51', NULL),
+(421, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:56:00', NULL),
+(422, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:56:05', NULL),
+(423, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 18:56:14', NULL),
+(424, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:21', NULL),
+(425, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:24', NULL),
+(426, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:27', NULL),
+(427, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:29', NULL),
+(428, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:32', NULL),
+(429, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:35', NULL),
+(430, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:39', NULL),
+(431, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:41', NULL),
+(432, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:44', NULL),
+(433, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:47', NULL),
+(434, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:50', NULL),
+(435, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:53', NULL),
+(436, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:56', NULL),
+(437, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:56:59', NULL),
+(438, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:02', NULL),
+(439, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:05', NULL),
+(440, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:08', NULL),
+(441, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:11', NULL),
+(442, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:14', NULL),
+(443, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:17', NULL),
+(444, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:20', NULL),
+(445, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:23', NULL),
+(446, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:26', NULL),
+(447, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:29', NULL),
+(448, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:32', NULL),
+(449, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:35', NULL),
+(450, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:38', NULL),
+(451, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:40', NULL),
+(452, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:43', NULL),
+(453, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:46', NULL),
+(454, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:49', NULL),
+(455, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:52', NULL),
+(456, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:55', NULL),
+(457, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:57:58', NULL),
+(458, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:01', NULL),
+(459, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:04', NULL),
+(460, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:07', NULL),
+(461, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:10', NULL),
+(462, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:13', NULL),
+(463, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:16', NULL),
+(464, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:19', NULL),
+(465, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:22', NULL),
+(466, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:58:30', NULL),
+(467, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 18:58:45', NULL),
+(468, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:58:50', NULL),
+(469, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 18:58:59', NULL),
+(470, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 18:59:04', NULL),
+(471, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 18:59:14', NULL),
+(472, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:21', NULL),
+(473, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:24', NULL),
+(474, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:27', NULL),
+(475, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:30', NULL),
+(476, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:33', NULL),
+(477, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:36', NULL),
+(478, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:39', NULL),
+(479, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:42', NULL),
+(480, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:45', NULL),
+(481, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:48', NULL),
+(482, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:51', NULL),
+(483, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:54', NULL),
+(484, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 18:59:57', NULL),
+(485, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:00:00', NULL),
+(486, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:00:03', NULL),
+(487, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:00:05', NULL),
+(488, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:00:08', NULL),
+(489, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:00:12', NULL);
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(490, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:00:19', NULL),
+(491, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:00:25', NULL),
+(492, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:00:34', NULL),
+(493, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:00:39', NULL),
+(494, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:00:48', NULL),
+(495, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:01:04', NULL),
+(496, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:02:44', NULL),
+(497, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:07:38', NULL),
+(498, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:07:43', NULL),
+(499, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:07:53', NULL),
+(500, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:07:57', NULL),
+(501, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:08:08', NULL),
+(502, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:08:13', NULL),
+(503, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:08:37', NULL),
+(504, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:09:11', NULL),
+(505, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:09:16', NULL),
+(506, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:09:25', NULL),
+(507, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:09:31', NULL),
+(508, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:11:11', NULL),
+(509, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:11:16', NULL),
+(510, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:11:26', NULL),
+(511, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:11:30', NULL),
+(512, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:11:38', NULL),
+(513, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:11:47', NULL),
+(514, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:11:50', NULL),
+(515, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:14:04', NULL),
+(516, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:14:09', NULL),
+(517, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:14:18', NULL),
+(518, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:14:23', NULL),
+(519, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:14:32', NULL),
+(520, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:14:38', NULL),
+(521, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:14:57', NULL),
+(522, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:16:53', NULL),
+(523, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:16:58', NULL),
+(524, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:17:09', NULL),
+(525, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:17:14', NULL),
+(526, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:17:23', NULL),
+(527, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:17:28', NULL),
+(528, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:21:12', NULL),
+(529, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:21:17', NULL),
+(530, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:21:26', NULL),
+(531, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:06', NULL),
+(532, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:30', NULL),
+(533, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:32', NULL),
+(534, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:35', NULL),
+(535, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:37', NULL),
+(536, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:40', NULL),
+(537, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:42', NULL),
+(538, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:45', NULL),
+(539, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:47', NULL),
+(540, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:50', NULL),
+(541, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:52', NULL),
+(542, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:55', NULL),
+(543, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:22:57', NULL),
+(544, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:23:00', NULL),
+(545, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:23:02', NULL),
+(546, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:23:05', NULL),
+(547, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:23:07', NULL),
+(548, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:23:10', NULL),
+(549, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:24:08', NULL),
+(550, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:24:13', NULL),
+(551, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:24:23', NULL),
+(552, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:24:27', NULL),
+(553, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:24:36', NULL),
+(554, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:24:41', NULL),
+(555, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:24:44', NULL),
+(556, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:24:47', NULL),
+(557, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:26:29', NULL),
+(558, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:26:34', NULL),
+(559, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:26:43', NULL),
+(560, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:26:48', NULL),
+(561, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:27:02', NULL),
+(562, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:27:09', NULL),
+(563, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:27:12', NULL),
+(564, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:27:15', NULL),
+(565, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:27:30', NULL),
+(566, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:29:11', NULL),
+(567, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:16', NULL),
+(568, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:26', NULL),
+(569, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:30', NULL),
+(570, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:32', NULL),
+(571, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:29:35', NULL),
+(572, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:36', NULL),
+(573, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:39', NULL),
+(574, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:39', NULL),
+(575, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:29:54', NULL),
+(576, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:01', NULL),
+(577, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:04', NULL),
+(578, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:06', NULL),
+(579, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:09', NULL),
+(580, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:11', NULL),
+(581, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:14', NULL),
+(582, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:16', NULL),
+(583, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:19', NULL),
+(584, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:21', NULL),
+(585, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:24', NULL),
+(586, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:26', NULL),
+(587, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:29', NULL),
+(588, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:31', NULL),
+(589, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:34', NULL),
+(590, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:36', NULL),
+(591, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:39', NULL),
+(592, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:41', NULL),
+(593, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:44', NULL),
+(594, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:46', NULL),
+(595, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:49', NULL),
+(596, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:51', NULL),
+(597, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:53', NULL),
+(598, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:56', NULL),
+(599, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:30:58', NULL),
+(600, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:31:01', NULL),
+(601, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:31:03', NULL),
+(602, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:31:06', NULL),
+(603, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:31:09', NULL),
+(604, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:32:08', NULL),
+(605, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:33:47', NULL),
+(606, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:33:53', NULL),
+(607, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.207.184.174', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:34:04', NULL),
+(608, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:34:38', NULL),
+(609, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:34:43', NULL),
+(610, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:34:53', NULL),
+(611, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:34:57', NULL),
+(612, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:35:07', NULL),
+(613, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:12', NULL),
+(614, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:15', NULL),
+(615, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:17', NULL),
+(616, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:20', NULL),
+(617, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:22', NULL),
+(618, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:25', NULL),
+(619, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:27', NULL),
+(620, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:30', NULL),
+(621, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:32', NULL),
+(622, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:35', NULL),
+(623, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:37', NULL),
+(624, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:40', NULL),
+(625, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:43', NULL),
+(626, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:45', NULL),
+(627, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:48', NULL),
+(628, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:50', NULL),
+(629, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:53', NULL),
+(630, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:55', NULL),
+(631, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:35:58', NULL),
+(632, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:36:00', NULL),
+(633, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:36:03', NULL),
+(634, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:36:05', NULL),
+(635, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:36:08', NULL),
+(636, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:37:24', NULL),
+(637, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:37:30', NULL),
+(638, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:37:39', NULL),
+(639, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:37:44', NULL),
+(640, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:37:53', NULL),
+(641, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:37:59', NULL),
+(642, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:38:02', NULL),
+(643, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:38:21', NULL),
+(644, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:40:43', NULL),
+(645, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:40:48', NULL),
+(646, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:40:58', NULL),
+(647, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:41:02', NULL),
+(648, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:41:52', NULL),
+(649, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:41:59', NULL),
+(650, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:42:01', NULL),
+(651, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:42:15', NULL),
+(652, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:42:36', NULL),
+(653, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:41', NULL),
+(654, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWERS_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:48', NULL),
+(655, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:51', NULL),
+(656, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:52', NULL),
+(657, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:55', NULL),
+(658, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:42:57', NULL),
+(659, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:58', NULL),
+(660, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:42:59', NULL),
+(661, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:43:11', NULL),
+(662, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FOLLOWINGS_FETCH', 'IN', 'Chennai', '2018-04-26 19:43:14', NULL),
+(663, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:46:40', NULL),
+(664, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:46:45', NULL),
+(665, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:46:55', NULL),
+(666, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:46:59', NULL),
+(667, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:47:09', NULL),
+(668, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:15', NULL),
+(669, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:18', NULL),
+(670, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:20', NULL),
+(671, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:23', NULL),
+(672, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:25', NULL),
+(673, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:28', NULL),
+(674, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:30', NULL),
+(675, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:33', NULL),
+(676, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:35', NULL),
+(677, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:38', NULL),
+(678, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:40', NULL),
+(679, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:43', NULL),
+(680, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:45', NULL),
+(681, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:48', NULL),
+(682, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:50', NULL),
+(683, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:53', NULL),
+(684, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:55', NULL),
+(685, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:47:58', NULL),
+(686, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:48:00', NULL),
+(687, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:48:03', NULL),
+(688, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:48:12', NULL),
+(689, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:48:17', NULL),
+(690, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:48:27', NULL),
+(691, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:48:31', NULL),
+(692, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:48:40', NULL),
+(693, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:48:52', NULL),
+(694, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:48:55', NULL),
+(695, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-26 19:50:50', NULL),
+(696, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:50:55', NULL),
+(697, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-26 19:51:05', NULL),
+(698, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-26 19:51:09', NULL),
+(699, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-26 19:51:20', NULL),
+(700, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:51:26', NULL),
+(701, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'VIEW_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:51:29', NULL),
+(702, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:51:55', NULL),
+(703, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.174', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_FETCH_USERS', 'IN', 'Chennai', '2018-04-26 19:51:57', NULL),
+(704, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:24:32', NULL),
+(705, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:24:38', NULL),
+(706, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:24:47', NULL),
+(707, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:24:55', NULL),
+(708, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:25:00', NULL),
+(709, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:25:09', NULL),
+(710, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:25:14', NULL),
+(711, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:25:22', NULL),
+(712, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:26:57', NULL),
+(713, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:28:30', NULL),
+(714, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:28:35', NULL),
+(715, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:28:44', NULL),
+(716, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:28:48', NULL),
+(717, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:30:30', NULL),
+(718, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:30:39', NULL),
+(719, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:30:52', NULL),
+(720, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:31:12', NULL),
+(721, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:31:23', NULL),
+(722, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:31:32', NULL),
+(723, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:31:33', NULL),
+(724, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:31:36', NULL),
+(725, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:31:44', NULL),
+(726, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:32:46', NULL),
+(727, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:32:54', NULL),
+(728, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:33:03', NULL),
+(729, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 17:33:03', NULL),
+(730, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:33:08', NULL),
+(731, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:51:30', NULL),
+(732, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:51:40', NULL);
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(733, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:51:44', NULL),
+(734, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:53:35', NULL),
+(735, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:53:45', NULL),
+(736, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-27 17:53:46', NULL),
+(737, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:53:49', NULL),
+(738, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:54:28', NULL),
+(739, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:54:37', NULL),
+(740, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:54:43', NULL),
+(741, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:55:15', NULL),
+(742, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:55:49', NULL),
+(743, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:55:54', NULL),
+(744, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:56:13', NULL),
+(745, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:56:22', NULL),
+(746, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:56:27', NULL),
+(747, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:57:12', NULL),
+(748, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:57:22', NULL),
+(749, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:57:26', NULL),
+(750, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:59:07', NULL),
+(751, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 17:59:17', NULL),
+(752, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:59:21', NULL),
+(753, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 17:59:53', NULL),
+(754, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 18:00:03', NULL),
+(755, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:00:07', NULL),
+(756, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:03:33', NULL),
+(757, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 18:03:43', NULL),
+(758, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:03:47', NULL),
+(759, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:04:23', NULL),
+(760, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 18:04:34', NULL),
+(761, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:04:38', NULL),
+(762, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 18:05:09', NULL),
+(763, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 18:05:22', NULL),
+(764, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:06:38', NULL),
+(765, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:06:51', NULL),
+(766, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:08:57', NULL),
+(767, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:09:47', NULL),
+(768, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:10:04', NULL),
+(769, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 18:14:25', NULL),
+(770, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FETCH_PUBLIC', 'IN', 'Chennai', '2018-04-27 18:14:35', NULL),
+(771, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 18:17:52', NULL),
+(772, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'RECIPE_IMAGES_FETCH', 'IN', 'Chennai', '2018-04-27 18:35:00', NULL),
+(773, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:57:38', NULL),
+(774, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 18:57:47', NULL),
+(775, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 18:57:51', NULL),
+(776, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 18:59:23', NULL),
+(777, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_GENDER', 'IN', 'Chennai', '2018-04-27 19:02:11', NULL),
+(778, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_GENDER', 'IN', 'Chennai', '2018-04-27 19:02:26', NULL),
+(779, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_GENDER', 'IN', 'Chennai', '2018-04-27 19:02:49', NULL),
+(780, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 19:10:09', NULL),
+(781, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:10:52', NULL),
+(782, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:11:02', NULL),
+(783, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:11:06', NULL),
+(784, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:11:26', NULL),
+(785, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:14:11', NULL),
+(786, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:14:21', NULL),
+(787, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:14:22', NULL),
+(788, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:14:25', NULL),
+(789, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:15:39', NULL),
+(790, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:15:48', NULL),
+(791, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:15:49', NULL),
+(792, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:15:53', NULL),
+(793, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:16:17', NULL),
+(794, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:16:27', NULL),
+(795, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:16:31', NULL),
+(796, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:16:40', NULL),
+(797, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:17:54', NULL),
+(798, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:18:03', NULL),
+(799, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:18:03', NULL),
+(800, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:18:08', NULL),
+(801, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:18:30', NULL),
+(802, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:18:40', NULL),
+(803, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:18:44', NULL),
+(804, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:22:03', NULL),
+(805, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:22:12', NULL),
+(806, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:22:16', NULL),
+(807, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:22:30', NULL),
+(808, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:22:51', NULL),
+(809, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:23:00', NULL),
+(810, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:23:04', NULL),
+(811, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:24:13', NULL),
+(812, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:24:23', NULL),
+(813, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:24:27', NULL),
+(814, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:25:02', NULL),
+(815, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:25:07', NULL),
+(816, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:25:12', NULL),
+(817, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:25:16', NULL),
+(818, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:25:41', NULL),
+(819, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:27:29', NULL),
+(820, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:27:42', NULL),
+(821, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:27:51', NULL),
+(822, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:27:52', NULL),
+(823, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:27:55', NULL),
+(824, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:28:13', NULL),
+(825, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:30:30', NULL),
+(826, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:30:38', NULL),
+(827, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:30:40', NULL),
+(828, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:30:44', NULL),
+(829, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:31:01', NULL),
+(830, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:31:19', NULL),
+(831, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:33:06', NULL),
+(832, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:35:46', NULL),
+(833, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:41:02', NULL),
+(834, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:41:11', NULL),
+(835, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:41:16', NULL),
+(836, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:41:23', NULL),
+(837, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:41:45', NULL),
+(838, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:47:49', NULL),
+(839, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:47:59', NULL),
+(840, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:48:03', NULL),
+(841, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:48:16', NULL),
+(842, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 19:48:26', NULL),
+(843, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 19:48:30', NULL),
+(844, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 19:49:03', NULL),
+(845, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:49:37', NULL),
+(846, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:54:49', NULL),
+(847, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 500, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:55:49', NULL),
+(848, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 500, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:56:17', NULL),
+(849, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 19:58:16', NULL),
+(850, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:06:01', NULL),
+(851, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:06:10', NULL),
+(852, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:06:15', NULL),
+(853, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:06:22', NULL),
+(854, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 20:06:46', NULL),
+(855, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:07:02', NULL),
+(856, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:07:15', NULL),
+(857, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:14:42', NULL),
+(858, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:14:46', NULL),
+(859, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:14:51', NULL),
+(860, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:14:55', NULL),
+(861, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:14:59', NULL),
+(862, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:15:34', NULL),
+(863, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:15:44', NULL),
+(864, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:15:48', NULL),
+(865, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:15:49', NULL),
+(866, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:16:40', NULL),
+(867, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:18:17', NULL),
+(868, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:18:26', NULL),
+(869, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:18:27', NULL),
+(870, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:18:31', NULL),
+(871, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:18:47', NULL),
+(872, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:19:45', NULL),
+(873, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:19:55', NULL),
+(874, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:19:59', NULL),
+(875, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:20:25', NULL),
+(876, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:20:36', NULL),
+(877, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:23:11', NULL),
+(878, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:23:19', NULL),
+(879, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:23:21', NULL),
+(880, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:23:25', NULL),
+(881, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:23:54', NULL),
+(882, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:24:55', NULL),
+(883, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:34:03', NULL),
+(884, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:34:05', NULL),
+(885, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:34:12', NULL),
+(886, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:34:16', NULL),
+(887, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_IMAGE', 'IN', 'Chennai', '2018-04-27 20:34:38', NULL),
+(888, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:36:26', NULL),
+(889, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:36:42', NULL),
+(890, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:38:12', NULL),
+(891, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:38:21', NULL),
+(892, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:38:23', NULL),
+(893, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:38:25', NULL),
+(894, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:38:34', NULL),
+(895, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:43:09', NULL),
+(896, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:43:13', NULL),
+(897, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:43:19', NULL),
+(898, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:43:22', NULL),
+(899, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:43:26', NULL),
+(900, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:44:12', NULL),
+(901, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:47:06', NULL),
+(902, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:47:16', NULL),
+(903, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:47:16', NULL),
+(904, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:47:20', NULL),
+(905, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 20:47:21', NULL),
+(906, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:49:32', NULL),
+(907, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:49:41', NULL),
+(908, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:49:45', NULL),
+(909, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:50:05', NULL),
+(910, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 20:50:14', NULL),
+(911, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:50:46', NULL),
+(912, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:50:54', NULL),
+(913, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:50:55', NULL),
+(914, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:50:59', NULL),
+(915, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 20:51:02', NULL),
+(916, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:55:03', NULL),
+(917, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 20:55:12', NULL),
+(918, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 20:55:16', NULL),
+(919, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:55:21', NULL),
+(920, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_NAME', 'IN', 'Chennai', '2018-04-27 20:55:48', NULL),
+(921, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 20:56:11', NULL),
+(922, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 20:56:53', NULL),
+(923, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:02:50', NULL),
+(924, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:03:00', NULL),
+(925, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:03:04', NULL),
+(926, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:03:23', NULL),
+(927, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 21:03:36', NULL),
+(928, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:03:51', NULL),
+(929, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_EMAIL', 'IN', 'Chennai', '2018-04-27 21:04:06', NULL),
+(930, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:04:55', NULL),
+(931, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:06:26', NULL),
+(932, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:06:36', NULL),
+(933, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:06:40', NULL),
+(934, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:06:40', NULL),
+(935, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PHONE', 'IN', 'Chennai', '2018-04-27 21:06:46', NULL),
+(936, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PHONE', 'IN', 'Chennai', '2018-04-27 21:06:57', NULL),
+(937, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:07:35', NULL),
+(938, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PHONE', 'IN', 'Chennai', '2018-04-27 21:07:40', NULL),
+(939, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:13:02', NULL),
+(940, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:13:06', NULL),
+(941, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:13:12', NULL),
+(942, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:13:16', NULL),
+(943, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_GENDER', 'IN', 'Chennai', '2018-04-27 21:13:23', NULL),
+(944, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:13:36', NULL),
+(945, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:18:11', NULL),
+(946, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:18:15', NULL),
+(947, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:18:21', NULL),
+(948, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:18:25', NULL),
+(949, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:19:00', NULL),
+(950, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:25:30', NULL),
+(951, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:25:34', NULL),
+(952, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:25:39', NULL),
+(953, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:25:43', NULL),
+(954, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:25:51', NULL),
+(955, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:26:55', NULL),
+(956, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:26:58', NULL),
+(957, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:27:04', NULL),
+(958, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:27:08', NULL),
+(959, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:27:19', NULL),
+(960, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:27:42', NULL),
+(961, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:28:13', NULL),
+(962, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:28:31', NULL),
+(963, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:29:27', NULL),
+(964, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:29:53', NULL),
+(965, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:31:39', NULL),
+(966, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:34:34', NULL),
+(967, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:34:44', NULL),
+(968, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:34:48', NULL),
+(969, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:35:28', NULL),
+(970, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:35:43', NULL),
+(971, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:36:19', NULL),
+(972, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:36:28', NULL),
+(973, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:36:29', NULL),
+(974, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:36:33', NULL),
+(975, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:36:47', NULL),
+(976, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:37:44', NULL);
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(977, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:37:53', NULL),
+(978, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:37:57', NULL),
+(979, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:38:20', NULL),
+(980, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:38:43', NULL),
+(981, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:39:18', NULL),
+(982, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:41:04', NULL),
+(983, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_FETCH_SELF', 'IN', 'Chennai', '2018-04-27 21:41:13', NULL),
+(984, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-27 21:41:14', NULL),
+(985, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-27 21:41:18', NULL),
+(986, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:41:26', NULL),
+(987, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:41:49', NULL),
+(988, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_PASSWORD', 'IN', 'Chennai', '2018-04-27 21:43:25', NULL),
+(989, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-27 21:44:15', NULL),
+(990, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.116.153', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'USER_UPDATE_GENDER', 'IN', 'Chennai', '2018-04-27 21:44:38', NULL),
+(991, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.116.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'USER_LOGIN', 'IN', 'Chennai', '2018-04-27 21:44:57', NULL),
+(992, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-28 05:24:21', NULL),
+(993, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-28 05:37:37', NULL),
+(994, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 05:37:52', NULL),
+(995, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'RECIPE_FAVORITE_FETCH', 'IN', 'Chennai', '2018-04-28 05:38:39', NULL),
+(996, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'RECIPE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 05:39:03', NULL),
+(997, 'fhbjgbiflinjbdggehcddcbncdddomop', '183.82.39.112', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 05:39:43', NULL),
+(998, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 05:54:08', NULL),
+(999, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 05:54:18', NULL),
+(1000, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 05:54:21', NULL),
+(1001, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:51:33', NULL),
+(1002, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 06:51:42', NULL),
+(1003, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:51:46', NULL),
+(1004, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-28 06:52:46', NULL),
+(1005, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 06:53:01', NULL),
+(1006, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 06:53:03', NULL),
+(1007, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_SUBMIT', 'IN', 'Chennai', '2018-04-28 06:54:24', NULL),
+(1008, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:54:36', NULL),
+(1009, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 06:54:46', NULL),
+(1010, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:56:44', NULL),
+(1011, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 06:56:54', NULL),
+(1012, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:56:58', NULL),
+(1013, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:57:39', NULL),
+(1014, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'MASTER_DATA_FETCH_ALL', 'IN', 'Chennai', '2018-04-28 06:57:44', NULL),
+(1015, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 06:57:49', NULL),
+(1016, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 06:57:53', NULL),
+(1017, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 06:58:02', NULL),
+(1018, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-28 06:58:17', NULL),
+(1019, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:07:44', NULL),
+(1020, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 07:07:54', NULL),
+(1021, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:07:58', NULL),
+(1022, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 07:08:20', NULL),
+(1023, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-28 07:08:28', NULL),
+(1024, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 07:08:48', NULL),
+(1025, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-28 07:08:54', NULL),
+(1026, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 07:09:56', NULL),
+(1027, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-28 07:10:02', NULL),
+(1028, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'LIKE_SUBMIT', 'IN', 'Chennai', '2018-04-28 07:10:09', NULL),
+(1029, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_DELETE', 'IN', 'Chennai', '2018-04-28 07:16:17', NULL),
+(1030, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:16:28', NULL),
+(1031, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_DELETE', 'IN', 'Chennai', '2018-04-28 07:16:44', NULL),
+(1032, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:16:51', NULL),
+(1033, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:52:46', NULL),
+(1034, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 07:52:56', NULL),
+(1035, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 07:53:01', NULL),
+(1036, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 08:59:18', NULL),
+(1037, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:01:09', NULL),
+(1038, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:01:19', NULL),
+(1039, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:01:24', NULL),
+(1040, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:01:34', NULL),
+(1041, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:02:19', NULL),
+(1042, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:02:29', NULL),
+(1043, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:02:34', NULL),
+(1044, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:02:43', NULL),
+(1045, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:06:02', NULL),
+(1046, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:06:12', NULL),
+(1047, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:06:17', NULL),
+(1048, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:06:27', NULL),
+(1049, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:11:16', NULL),
+(1050, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:11:26', NULL),
+(1051, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:11:31', NULL),
+(1052, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:11:56', NULL),
+(1053, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:14:27', NULL),
+(1054, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:14:37', NULL),
+(1055, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:14:42', NULL),
+(1056, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:14:52', NULL),
+(1057, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:15:53', NULL),
+(1058, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:16:03', NULL),
+(1059, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:16:08', NULL),
+(1060, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:16:18', NULL),
+(1061, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:17:36', NULL),
+(1062, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:17:46', NULL),
+(1063, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:17:51', NULL),
+(1064, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:18:02', NULL),
+(1065, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:19:51', NULL),
+(1066, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:20:00', NULL),
+(1067, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:20:05', NULL),
+(1068, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:23:10', NULL),
+(1069, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:23:20', NULL),
+(1070, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:23:25', NULL),
+(1071, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:23:35', NULL),
+(1072, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:04', NULL),
+(1073, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:13', NULL),
+(1074, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:22', NULL),
+(1075, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:31', NULL),
+(1076, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:36', NULL),
+(1077, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:24:46', NULL),
+(1078, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:26:25', NULL),
+(1079, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:26:35', NULL),
+(1080, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:26:40', NULL),
+(1081, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:26:49', NULL),
+(1082, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:32:24', NULL),
+(1083, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:32:33', NULL),
+(1084, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:32:39', NULL),
+(1085, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:32:48', NULL),
+(1086, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:33:30', NULL),
+(1087, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:33:40', NULL),
+(1088, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:33:46', NULL),
+(1089, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:33:56', NULL),
+(1090, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:37:28', NULL),
+(1091, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 09:37:38', NULL),
+(1092, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 09:37:43', NULL),
+(1093, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '183.82.39.112', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 09:38:02', NULL),
+(1094, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-28 15:29:08', NULL),
+(1095, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-28 15:29:46', NULL),
+(1096, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-28 15:30:43', NULL),
+(1097, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'CUISINE_FETCH', 'IN', '', '2018-04-28 15:31:00', NULL),
+(1098, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'MASTER_DATA_FETCH_ALL', 'IN', '', '2018-04-28 15:32:21', NULL),
+(1099, 'fhbjgbiflinjbdggehcddcbncdddomop', '180.211.71.153', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Windows 7', 'Safari', 200, 'CUISINE_FETCH', 'IN', '', '2018-04-28 15:32:24', NULL),
+(1100, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:47:51', NULL),
+(1101, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 20:48:01', NULL),
+(1102, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:48:07', NULL),
+(1103, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 20:51:53', NULL),
+(1104, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 20:54:18', NULL),
+(1105, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:54:37', NULL),
+(1106, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 20:54:46', NULL),
+(1107, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:54:52', NULL),
+(1108, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 20:55:02', NULL),
+(1109, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:56:33', NULL),
+(1110, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 20:56:42', NULL),
+(1111, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 20:56:48', NULL),
+(1112, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 20:56:58', NULL),
+(1113, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:00:25', NULL),
+(1114, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 21:00:35', NULL),
+(1115, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:00:40', NULL),
+(1116, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 21:27:12', NULL),
+(1117, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 21:27:38', NULL),
+(1118, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 21:29:36', NULL),
+(1119, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 21:31:23', NULL),
+(1120, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:36:14', NULL),
+(1121, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 21:36:23', NULL),
+(1122, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:36:29', NULL),
+(1123, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 21:36:53', NULL),
+(1124, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:37:47', NULL),
+(1125, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 21:37:56', NULL),
+(1126, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:38:02', NULL),
+(1127, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:38:55', NULL),
+(1128, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:39:04', NULL),
+(1129, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 21:39:13', NULL),
+(1130, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:39:19', NULL),
+(1131, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 21:39:28', NULL),
+(1132, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:42:06', NULL),
+(1133, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-28 21:42:15', NULL),
+(1134, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-28 21:42:21', NULL),
+(1135, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-28 21:42:31', NULL),
+(1136, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'NUTRIENT_INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-28 22:01:21', NULL),
+(1137, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:00:36', NULL),
+(1138, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 07:00:46', NULL),
+(1139, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:00:51', NULL),
+(1140, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 07:01:01', NULL),
+(1141, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:01:44', NULL),
+(1142, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 07:01:53', NULL),
+(1143, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:01:59', NULL),
+(1144, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 07:02:09', NULL),
+(1145, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:04:39', NULL),
+(1146, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 07:04:49', NULL),
+(1147, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:04:54', NULL),
+(1148, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-29 07:11:23', NULL),
+(1149, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'INGREDIENT_FETCH', 'IN', 'Chennai', '2018-04-29 07:11:35', NULL),
+(1150, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:16:38', NULL),
+(1151, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 07:16:48', NULL),
+(1152, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:16:53', NULL),
+(1153, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 07:49:51', NULL),
+(1154, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:57:18', NULL),
+(1155, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 07:57:28', NULL),
+(1156, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 07:57:33', NULL),
+(1157, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 07:57:45', NULL),
+(1158, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:03:49', NULL),
+(1159, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:03:59', NULL),
+(1160, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:04:05', NULL),
+(1161, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:04:20', NULL),
+(1162, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:14:20', NULL),
+(1163, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:14:29', NULL),
+(1164, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:14:34', NULL),
+(1165, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:14:45', NULL),
+(1166, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:17:45', NULL),
+(1167, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:17:55', NULL),
+(1168, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:18:00', NULL),
+(1169, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:18:11', NULL),
+(1170, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:20:39', NULL),
+(1171, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:20:48', NULL),
+(1172, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:20:53', NULL),
+(1173, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:21:04', NULL),
+(1174, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:27:39', NULL),
+(1175, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:27:53', NULL),
+(1176, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:27:58', NULL),
+(1177, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:28:37', NULL),
+(1178, 'fhbjgbiflinjbdggehcddcbncdddomop', '49.206.113.119', 'AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0', 'Linux', 'Safari', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:30:59', NULL),
+(1179, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:33:16', NULL),
+(1180, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:36:53', NULL),
+(1181, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 08:37:02', NULL),
+(1182, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 08:37:08', NULL),
+(1183, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.206.113.119', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 08:37:18', NULL),
+(1184, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:02:30', NULL),
+(1185, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:02:40', NULL),
+(1186, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:02:45', NULL),
+(1187, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:02:57', NULL),
+(1188, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:04:16', NULL),
+(1189, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:04:25', NULL),
+(1190, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:04:30', NULL),
+(1191, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:05:25', NULL),
+(1192, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:05:34', NULL),
+(1193, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:05:39', NULL),
+(1194, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:05:49', NULL),
+(1195, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:05:58', NULL),
+(1196, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:06:04', NULL),
+(1197, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:06:38', NULL),
+(1198, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:06:47', NULL),
+(1199, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:06:52', NULL),
+(1200, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:07:03', NULL),
+(1201, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:08:11', NULL),
+(1202, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:08:20', NULL),
+(1203, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:08:25', NULL),
+(1204, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:09:03', NULL),
+(1205, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:09:43', NULL),
+(1206, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:09:53', NULL),
+(1207, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:09:58', NULL),
+(1208, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:50:42', NULL),
+(1209, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:50:52', NULL),
+(1210, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:50:57', NULL),
+(1211, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:51:07', NULL),
+(1212, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:52:26', NULL),
+(1213, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:55:11', NULL),
+(1214, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 13:55:20', NULL),
+(1215, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 13:55:26', NULL),
+(1216, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 13:55:36', NULL),
+(1217, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:19:07', NULL),
+(1218, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:19:16', NULL),
+(1219, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:19:22', NULL),
+(1220, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 14:19:34', NULL);
+INSERT INTO `AUDIT` (`AUDIT_ID`, `CLNT_ID`, `CLNT_IP_ADD`, `API_KEY`, `CLNT_OS`, `CLNT_BROWSER`, `HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1221, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:21:14', NULL),
+(1222, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:21:24', NULL),
+(1223, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:21:29', NULL),
+(1224, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 14:21:44', NULL),
+(1225, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:22:22', NULL),
+(1226, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:22:32', NULL),
+(1227, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:22:37', NULL),
+(1228, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:23:27', NULL),
+(1229, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:23:36', NULL),
+(1230, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:23:41', NULL),
+(1231, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:23:53', NULL),
+(1232, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:24:03', NULL),
+(1233, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:24:08', NULL),
+(1234, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:24:26', NULL),
+(1235, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:24:36', NULL),
+(1236, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:24:41', NULL),
+(1237, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:29', NULL),
+(1238, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:39', NULL),
+(1239, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:42', NULL),
+(1240, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:44', NULL),
+(1241, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:51', NULL),
+(1242, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:25:57', NULL),
+(1243, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:26:15', NULL),
+(1244, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:26:25', NULL),
+(1245, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:26:30', NULL),
+(1246, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:28:04', NULL),
+(1247, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:28:15', NULL),
+(1248, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:28:20', NULL),
+(1249, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:31:05', NULL),
+(1250, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:31:14', NULL),
+(1251, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:31:19', NULL),
+(1252, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:31:47', NULL),
+(1253, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:31:56', NULL),
+(1254, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:01', NULL),
+(1255, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:10', NULL),
+(1256, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:19', NULL),
+(1257, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:24', NULL),
+(1258, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:32', NULL),
+(1259, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:42', NULL),
+(1260, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:47', NULL),
+(1261, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:32:58', NULL),
+(1262, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:33:07', NULL),
+(1263, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:33:12', NULL),
+(1264, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:34:53', NULL),
+(1265, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 14:35:02', NULL),
+(1266, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 14:35:08', NULL),
+(1267, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 14:35:17', NULL),
+(1268, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:23:33', NULL),
+(1269, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:23:43', NULL),
+(1270, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:23:48', NULL),
+(1271, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 16:24:00', NULL),
+(1272, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:41:30', NULL),
+(1273, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:41:40', NULL),
+(1274, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:41:45', NULL),
+(1275, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 16:42:01', NULL),
+(1276, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:44:44', NULL),
+(1277, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:44:54', NULL),
+(1278, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:44:59', NULL),
+(1279, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:46:31', NULL),
+(1280, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:46:40', NULL),
+(1281, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:46:45', NULL),
+(1282, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 16:47:05', NULL),
+(1283, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:48:30', NULL),
+(1284, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:48:40', NULL),
+(1285, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:48:45', NULL),
+(1286, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:49:59', NULL),
+(1287, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:09', NULL),
+(1288, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:14', NULL),
+(1289, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:27', NULL),
+(1290, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:36', NULL),
+(1291, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:42', NULL),
+(1292, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:50:57', NULL),
+(1293, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:51:06', NULL),
+(1294, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:51:11', NULL),
+(1295, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:51:35', NULL),
+(1296, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:51:44', NULL),
+(1297, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:51:50', NULL),
+(1298, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:21', NULL),
+(1299, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:31', NULL),
+(1300, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:37', NULL),
+(1301, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:43', NULL),
+(1302, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:53', NULL),
+(1303, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:52:58', NULL),
+(1304, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:54:33', NULL),
+(1305, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:54:43', NULL),
+(1306, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:54:48', NULL),
+(1307, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:55:59', NULL),
+(1308, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:56:09', NULL),
+(1309, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:56:14', NULL),
+(1310, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:56:17', NULL),
+(1311, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:56:27', NULL),
+(1312, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:56:32', NULL),
+(1313, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:57:01', NULL),
+(1314, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:57:11', NULL),
+(1315, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:57:16', NULL),
+(1316, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:58:03', NULL),
+(1317, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 16:58:12', NULL),
+(1318, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 16:58:17', NULL),
+(1319, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 16:58:27', NULL),
+(1320, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:00:58', NULL),
+(1321, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 17:01:08', NULL),
+(1322, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:01:13', NULL),
+(1323, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'RECIPE_FETCH', 'IN', 'Chennai', '2018-04-29 17:01:23', NULL),
+(1324, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:19', NULL),
+(1325, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:28', NULL),
+(1326, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:34', NULL),
+(1327, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:36', NULL),
+(1328, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:45', NULL),
+(1329, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:03:51', NULL),
+(1330, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:10:08', NULL),
+(1331, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 17:10:17', NULL),
+(1332, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:10:23', NULL),
+(1333, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:44:44', NULL),
+(1334, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 17:54:20', NULL),
+(1335, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:04:20', NULL),
+(1336, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:05:02', NULL),
+(1337, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:07:18', NULL),
+(1338, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:07:37', NULL),
+(1339, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:32:30', NULL),
+(1340, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:33:29', NULL),
+(1341, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:33:37', NULL),
+(1342, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:33:42', NULL),
+(1343, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:52:16', NULL),
+(1344, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:52:50', NULL),
+(1345, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:52:57', NULL),
+(1346, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:53:03', NULL),
+(1347, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:53:43', NULL),
+(1348, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:54:03', NULL),
+(1349, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:54:11', NULL),
+(1350, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:58:55', NULL),
+(1351, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 18:59:27', NULL),
+(1352, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:00:36', NULL),
+(1353, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:00:43', NULL),
+(1354, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:00:50', NULL),
+(1355, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:00:57', NULL),
+(1356, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:01:07', NULL),
+(1357, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:09:17', NULL),
+(1358, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:09:17', NULL),
+(1359, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:08', NULL),
+(1360, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:08', NULL),
+(1361, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:20', NULL),
+(1362, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:28', NULL),
+(1363, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:41', NULL),
+(1364, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:46', NULL),
+(1365, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:10:53', NULL),
+(1366, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:11:07', NULL),
+(1367, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:11:07', NULL),
+(1368, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:12:56', NULL),
+(1369, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:12:56', NULL),
+(1370, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:34:15', NULL),
+(1371, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 19:34:20', NULL),
+(1372, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:34:21', NULL),
+(1373, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:34:40', NULL),
+(1374, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:39:32', NULL),
+(1375, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 19:39:36', NULL),
+(1376, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:39:37', NULL),
+(1377, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:39:40', NULL),
+(1378, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:40:34', NULL),
+(1379, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 19:40:38', NULL),
+(1380, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:40:39', NULL),
+(1381, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'STORY_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:41:27', NULL),
+(1382, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TREND_FETCH', 'IN', 'Chennai', '2018-04-29 19:41:32', NULL),
+(1383, 'android-ffffffff-c7a6-6b14-ffff-ffffef05ac4a', '49.207.184.138', 'AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo', 'Linux', 'UNKNOWN', 200, 'TIMELINE_USER_FETCH', 'IN', 'Chennai', '2018-04-29 19:41:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -217,42 +1612,785 @@ INSERT INTO `COMMENTS` (`COM_ID`, `USER_ID`, `COMMENT`, `TYPE`, `TYPE_ID`, `IS_D
 (166, 1, 'your food sucks !', 'USER', 4, 'N', '2018-04-16 21:28:40', NULL),
 (167, 1, 'worst chef ever !!!', 'USER', 4, 'N', '2018-04-16 21:28:57', NULL),
 (168, 1, 'I apologize for my rudeness', 'USER', 4, 'N', '2018-04-16 21:29:11', NULL),
-(169, 1, 'no I don\'t !', 'RECIPE', 4, 'N', '2018-04-16 21:29:20', NULL);
+(169, 1, 'no I don\'t !', 'RECIPE', 4, 'N', '2018-04-16 21:29:20', NULL),
+(170, 1, 'Hi ! This is just a demo comment to demonstrate the comment api. The same api can be used for commenting on a recipe, a users photo as well as well as a recipe image - 52', 'RECIPE', 105, 'N', '2018-04-25 18:23:27', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `CONTAINS`
+-- Table structure for table `FAVOURITES`
 --
 
-CREATE TABLE `CONTAINS` (
-  `CONT_ID` int(11) NOT NULL,
-  `ING_ID` int(11) NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `DISH`
---
-
-CREATE TABLE `DISH` (
-  `DISH_ID` int(11) NOT NULL,
+CREATE TABLE `FAVOURITES` (
+  `FAV_ID` int(11) NOT NULL,
   `RCP_ID` int(11) NOT NULL,
-  `ING_AKA_ID` int(11) NOT NULL,
-  `QTY_ID` int(11) NOT NULL,
-  `ING_QTY` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
+  `IS_DEL` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `FAVOURITES`
+--
+
+INSERT INTO `FAVOURITES` (`FAV_ID`, `RCP_ID`, `USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(5, 103, 1, 'N', '2018-03-07 23:12:34', '2018-03-07 23:13:05'),
+(6, 105, 1, 'N', '2018-03-26 18:34:55', '2018-03-26 18:34:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FOOD_CUISINE`
+--
+
+CREATE TABLE `FOOD_CUISINE` (
+  `FOOD_CSN_ID` int(11) NOT NULL,
+  `FOOD_CSN_NAME` varchar(25) NOT NULL,
+  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
+  `IS_DEL` varchar(1) NOT NULL,
+  `IMG` varchar(50) NOT NULL DEFAULT 'images/png.png',
   `CREATE_DTM` datetime NOT NULL,
   `MOD_DTM` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `DISH`
+-- Dumping data for table `FOOD_CUISINE`
 --
 
-INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_AKA_ID`, `QTY_ID`, `ING_QTY`, `CREATE_DTM`, `MOD_DTM`) VALUES
+INSERT INTO `FOOD_CUISINE` (`FOOD_CSN_ID`, `FOOD_CSN_NAME`, `IS_DEF`, `IS_DEL`, `IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'INDIAN', 'Y', 'N', 'app_data/master_data/cuisines/indian.jpg', '2017-08-27 00:00:00', NULL),
+(10, 'AFRICAN', 'N', 'N', 'app_data/master_data/cuisines/african.jpg', '2018-03-06 07:26:29', NULL),
+(12, 'ASIAN', 'N', 'N', 'app_data/master_data/cuisines/asian.jpg', '2018-03-06 07:26:30', NULL),
+(13, 'BARBEQUE', 'N', 'N', 'app_data/master_data/cuisines/barbeque.jpg', '2018-03-06 07:26:30', NULL),
+(18, 'AMERICAN', 'N', 'N', 'app_data/master_data/cuisines/american.jpg', '2018-03-06 07:26:59', NULL),
+(21, 'BRAZILLIAN', 'N', 'N', 'app_data/master_data/cuisines/brazillian.jpg', '2018-03-06 07:26:59', NULL),
+(22, 'BRITISH', 'N', 'N', 'app_data/master_data/cuisines/british.jpg', '2018-03-06 07:26:59', NULL),
+(31, 'CARRIBEAN', 'N', 'N', 'app_data/master_data/cuisines/carribean.jpg', '2018-03-06 07:27:45', NULL),
+(32, 'CHINESE', 'N', 'N', 'app_data/master_data/cuisines/chinese.jpg', '2018-03-06 07:27:45', NULL),
+(33, 'CUBAN', 'N', 'N', 'app_data/master_data/cuisines/cuban.jpg', '2018-03-06 07:27:45', NULL),
+(34, 'ETHIOPIAN', 'N', 'N', 'app_data/master_data/cuisines/ethiopian.jpg', '2018-03-06 07:27:46', NULL),
+(35, 'EUROPEAN', 'N', 'N', 'app_data/master_data/cuisines/european.jpg', '2018-03-06 07:27:46', NULL),
+(36, 'FAST FOOD', 'N', 'N', 'app_data/master_data/cuisines/fastfood.jpg', '2018-03-06 07:27:46', NULL),
+(37, 'FILIPINO', 'N', 'N', 'app_data/master_data/cuisines/filipino.jpg', '2018-03-06 07:27:46', NULL),
+(38, 'FRENCH', 'N', 'N', 'app_data/master_data/cuisines/french.jpg', '2018-03-06 07:27:46', NULL),
+(39, 'FUSION', 'N', 'N', 'app_data/master_data/cuisines/fusion.jpg', '2018-03-06 07:27:46', NULL),
+(40, 'GERMAN', 'N', 'N', 'app_data/master_data/cuisines/german.jpg', '2018-03-06 07:27:46', NULL),
+(41, 'GLOBAL', 'N', 'N', 'app_data/master_data/cuisines/global.jpg', '2018-03-06 07:27:46', NULL),
+(42, 'GREEK', 'N', 'N', 'app_data/master_data/cuisines/greek.jpg', '2018-03-06 07:27:46', NULL),
+(43, 'HAUTE', 'N', 'N', 'app_data/master_data/cuisines/haute.jpg', '2018-03-06 07:27:46', NULL),
+(44, 'ICE CREAM', 'N', 'N', 'app_data/master_data/cuisines/icecream.jpg', '2018-03-06 07:27:46', NULL),
+(45, 'INDONESIAN', 'N', 'N', 'app_data/master_data/cuisines/indonesian.jpg', '2018-03-06 07:27:46', NULL),
+(46, 'IRANIAN', 'N', 'N', 'app_data/master_data/cuisines/iranian.jpg', '2018-03-06 07:27:47', NULL),
+(47, 'IRISH', 'N', 'N', 'app_data/master_data/cuisines/irish.jpg', '2018-03-06 07:27:47', NULL),
+(48, 'ITALIAN', 'N', 'N', 'app_data/master_data/cuisines/italian.jpg', '2018-03-06 07:27:47', NULL),
+(49, 'JAPANESE', 'N', 'N', 'app_data/master_data/cuisines/japanese.jpg', '2018-03-06 07:27:47', NULL),
+(50, 'KOREAN', 'N', 'N', 'app_data/master_data/cuisines/korean.jpg', '2018-03-06 07:27:47', NULL),
+(51, 'LEBANESE', 'N', 'N', 'app_data/master_data/cuisines/lebanese.jpg', '2018-03-06 07:27:47', NULL),
+(52, 'MALAYSIAN', 'N', 'N', 'app_data/master_data/cuisines/malaysian.jpg', '2018-03-06 07:27:47', NULL),
+(53, 'MEDITERRANEAN', 'N', 'N', 'app_data/master_data/cuisines/mediterranean.jpg', '2018-03-06 07:27:47', NULL),
+(54, 'MEXICAN', 'N', 'N', 'app_data/master_data/cuisines/mexican.jpg', '2018-03-06 07:27:47', NULL),
+(55, 'MIDDLE EASTERN', 'N', 'N', 'app_data/master_data/cuisines/middleeastern.jpg', '2018-03-06 07:27:47', NULL),
+(56, 'MOROCCAN', 'N', 'N', 'app_data/master_data/cuisines/moroccan.jpg', '2018-03-06 07:27:47', NULL),
+(57, 'PAKISTANI', 'N', 'N', 'app_data/master_data/cuisines/pakistani.jpg', '2018-03-06 07:27:47', NULL),
+(58, 'PERUVIAN', 'N', 'N', 'app_data/master_data/cuisines/peruvian.jpg', '2018-03-06 07:27:47', NULL),
+(59, 'POLISH', 'N', 'N', 'app_data/master_data/cuisines/polish.jpg', '2018-03-06 07:27:48', NULL),
+(60, 'PORTUGESE', 'N', 'N', 'app_data/master_data/cuisines/portugese.jpg', '2018-03-06 07:27:48', NULL),
+(61, 'RUSSIAN', 'N', 'N', 'app_data/master_data/cuisines/russian.jpg', '2018-03-06 07:27:48', NULL),
+(62, 'SICHUAN', 'N', 'N', 'app_data/master_data/cuisines/sichuan.jpg', '2018-03-06 07:27:48', NULL),
+(63, 'SOUTH INDIAN', 'N', 'N', 'app_data/master_data/cuisines/southindian.jpg', '2018-03-06 07:27:48', NULL),
+(64, 'SPANISH', 'N', 'N', 'app_data/master_data/cuisines/spanish.jpg', '2018-03-06 07:27:48', NULL),
+(65, 'STREET FOOD', 'N', 'N', 'app_data/master_data/cuisines/streetfood.jpg', '2018-03-06 07:27:48', NULL),
+(66, 'TAIWANESE', 'N', 'N', 'app_data/master_data/cuisines/taiwanese.jpg', '2018-03-06 07:27:48', NULL),
+(67, 'THAI', 'N', 'N', 'app_data/master_data/cuisines/thai.jpg', '2018-03-06 07:27:48', NULL),
+(68, 'TURKISH', 'N', 'N', 'app_data/master_data/cuisines/turkish.jpg', '2018-03-06 07:27:48', NULL),
+(69, 'VIETNAMESE', 'N', 'N', 'app_data/master_data/cuisines/vietnamese.jpg', '2018-03-06 07:27:48', NULL),
+(70, 'SCOTISH', 'N', 'N', 'app_data/master_data/cuisines/indian.jpg', '2018-04-14 05:52:30', '2018-04-14 05:52:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `FOOD_TYPE`
+--
+
+CREATE TABLE `FOOD_TYPE` (
+  `FOOD_TYP_ID` int(11) NOT NULL,
+  `FOOD_TYP_NAME` varchar(25) NOT NULL,
+  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
+  `IS_DEL` varchar(1) NOT NULL,
+  `IMG` varchar(50) NOT NULL DEFAULT 'images/cake.jpg',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `FOOD_TYPE`
+--
+
+INSERT INTO `FOOD_TYPE` (`FOOD_TYP_ID`, `FOOD_TYP_NAME`, `IS_DEF`, `IS_DEL`, `IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'BREAKFAST', 'N', 'N', 'app_data/master_data/food_type/breakfast.jpg', '2017-08-27 00:00:00', '2018-04-21 13:05:30'),
+(2, 'LUNCH', 'N', 'N', 'app_data/master_data/food_type/lunch.jpg', '2017-08-27 00:00:00', '2018-04-21 13:43:34'),
+(3, 'DINNER', 'Y', 'N', 'app_data/master_data/food_type/dinner.jpg', '2017-08-27 00:00:00', NULL),
+(4, 'SNACKS', 'N', 'N', 'app_data/master_data/food_type/snacks.jpg', '2017-08-27 00:00:00', NULL),
+(5, 'DESSERT', 'N', 'N', 'app_data/master_data/food_type/dessert.jpg', '2017-08-27 00:00:00', '2018-04-21 13:43:24'),
+(6, 'SOUP', 'N', 'N', 'app_data/master_data/food_type/soup.jpg', '2017-08-27 00:00:00', '2018-04-21 12:53:49'),
+(7, 'DRINKS', 'N', 'N', 'app_data/master_data/food_type/drinks.jpg', '2017-08-27 00:00:00', '2018-04-21 12:53:49'),
+(8, 'OTHERS', 'N', 'N', 'app_data/master_data/food_type/others.jpg', '2017-08-27 00:00:00', '2018-04-21 13:17:00'),
+(9, 'MOCKTAILS', 'N', 'N', 'app_data/master_data/food_type/breakfast.jpg', '2018-04-14 05:53:38', '2018-04-21 13:17:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `INGREDIENT`
+--
+
+CREATE TABLE `INGREDIENT` (
+  `ING_ID` int(11) NOT NULL,
+  `ING_CAT_ID` int(11) NOT NULL DEFAULT '1',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `INGREDIENT`
+--
+
+INSERT INTO `INGREDIENT` (`ING_ID`, `ING_CAT_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, '2017-09-08 00:00:00', NULL),
+(2, 1, '2017-09-08 00:00:00', NULL),
+(3, 1, '2017-09-08 00:00:00', NULL),
+(4, 1, '2017-09-08 00:00:00', NULL),
+(7, 1, '2017-12-30 14:36:23', NULL),
+(8, 1, '2017-12-30 14:36:23', NULL),
+(9, 1, '2017-12-30 14:38:48', NULL),
+(11, 1, '2017-12-30 15:09:31', NULL),
+(12, 1, '2017-12-30 15:11:48', NULL),
+(13, 1, '2017-12-30 23:23:32', NULL),
+(14, 1, '2018-01-12 22:02:29', NULL),
+(15, 1, '2018-01-12 23:25:37', NULL),
+(16, 1, '2018-01-12 23:25:37', NULL),
+(18, 1, '2018-01-12 23:30:52', NULL),
+(19, 1, '2018-01-14 00:23:12', NULL),
+(20, 1, '2018-03-06 00:00:00', NULL),
+(23, 1, '2018-03-06 00:00:00', NULL),
+(24, 1, '2018-03-18 08:50:56', NULL),
+(25, 1, '2018-03-18 00:00:00', NULL),
+(26, 1, '2018-03-18 00:00:00', NULL),
+(27, 1, '2018-03-18 00:00:00', NULL),
+(28, 1, '2018-03-18 00:00:00', NULL),
+(29, 1, '2018-03-18 00:00:00', NULL),
+(99, 1, '2018-03-28 17:32:26', NULL),
+(101, 1, '2018-04-14 05:18:41', '2018-04-14 05:18:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `INGREDIENT_NUTRITION`
+--
+
+CREATE TABLE `INGREDIENT_NUTRITION` (
+  `ING_NUT_ID` int(11) NOT NULL,
+  `ING_ID` int(11) NOT NULL,
+  `NUT_ID` int(11) NOT NULL,
+  `ING_NUT_VAL` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NUT_UOM_ID` int(11) NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `INGREDIENT_NUTRITION`
+--
+
+INSERT INTO `INGREDIENT_NUTRITION` (`ING_NUT_ID`, `ING_ID`, `NUT_ID`, `ING_NUT_VAL`, `NUT_UOM_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 4, '80', 6, '2018-04-24 22:00:00', NULL),
+(6, 1, 1, '0.2', 2, '2018-04-24 22:00:00', NULL),
+(7, 1, 2, '0.2', 2, '2018-04-24 22:00:00', NULL),
+(8, 1, 3, '0.2', 2, '2018-04-24 22:00:00', NULL),
+(9, 1, 14, '0', 2, '2018-04-24 22:00:00', NULL),
+(10, 1, 5, '13', 3, '2018-04-24 22:00:00', NULL),
+(11, 1, 18, '415', 3, '2018-04-24 22:00:00', NULL),
+(12, 1, 6, '2', 2, '2018-04-24 22:00:00', NULL),
+(15, 1, 23, '1.7', 2, '2018-04-24 22:00:00', NULL),
+(32, 1, 25, '1.8', 2, '2018-04-24 22:00:00', NULL),
+(33, 1, 7, '0', 1, '2018-04-24 22:00:00', NULL),
+(34, 1, 9, '8', 1, '2018-04-24 22:00:00', NULL),
+(35, 1, 8, '1', 1, '2018-04-24 22:00:00', NULL),
+(36, 1, 10, '3', 1, '2018-04-24 22:00:00', NULL),
+(37, 1, 20, '0', 1, '2018-04-24 22:00:00', NULL),
+(38, 1, 24, '10', 1, '2018-04-24 22:00:00', NULL),
+(39, 1, 19, '10', 1, '2018-04-24 22:00:00', NULL),
+(40, 1, 26, '0', 1, '2018-04-24 22:00:00', NULL),
+(41, 2, 4, '354', 6, '2018-04-24 22:00:00', NULL),
+(42, 2, 1, '3.1', 2, '2018-04-24 22:00:00', NULL),
+(43, 2, 2, '2.2', 2, '2018-04-24 22:00:00', NULL),
+(44, 2, 3, '1.7', 2, '2018-04-24 22:00:00', NULL),
+(45, 2, 14, '0', 3, '2018-04-24 22:00:00', NULL),
+(46, 2, 5, '38', 3, '2018-04-24 22:00:00', NULL),
+(47, 2, 18, '2525', 3, '2018-04-24 22:00:00', NULL),
+(48, 2, 6, '21', 2, '2018-04-24 22:00:00', NULL),
+(49, 2, 23, '3.2', 2, '2018-04-24 22:00:00', NULL),
+(50, 2, 25, '8', 2, '2018-04-24 22:00:00', NULL),
+(51, 2, 7, '0', 1, '2018-04-24 22:00:00', NULL),
+(52, 2, 9, '43', 1, '2018-04-24 22:00:00', NULL),
+(53, 2, 8, '18', 1, '2018-04-24 22:00:00', NULL),
+(54, 2, 10, '230', 1, '2018-04-24 22:00:00', NULL),
+(55, 2, 20, '0', 1, '2018-04-24 22:00:00', NULL),
+(56, 2, 24, '90', 1, '2018-04-24 22:00:00', NULL),
+(57, 2, 26, '0', 1, '2018-04-24 22:00:00', NULL),
+(58, 2, 19, '48', 1, '2018-04-24 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `INGREDIENT_UOM`
+--
+
+CREATE TABLE `INGREDIENT_UOM` (
+  `ING_UOM_ID` int(11) NOT NULL,
+  `ING_UOM_NAME` varchar(25) NOT NULL,
+  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `INGREDIENT_UOM`
+--
+
+INSERT INTO `INGREDIENT_UOM` (`ING_UOM_ID`, `ING_UOM_NAME`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'CUP', '', '2017-09-09 00:00:00', NULL),
+(2, 'PINCH', 'Y', '2017-09-09 00:00:00', NULL),
+(3, 'TABLE SPOON', '', '2017-09-09 00:00:00', NULL),
+(4, 'BOWL', '', '2017-09-09 00:00:00', NULL),
+(5, 'GLASS', '', '2017-09-09 00:00:00', NULL),
+(6, 'KILO GRAMS', 'N', '2018-03-18 00:00:00', NULL),
+(7, 'GRAMS', 'N', '2018-03-18 00:00:00', NULL),
+(10, 'LITRES', 'N', '2018-03-18 00:00:00', NULL),
+(11, 'MILLI LITRES', 'N', '2018-03-18 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ING_AKA`
+--
+
+CREATE TABLE `ING_AKA` (
+  `ING_AKA_ID` int(11) NOT NULL,
+  `ING_ID` int(11) NOT NULL DEFAULT '99',
+  `ING_AKA_NAME` varchar(25) NOT NULL,
+  `SOURCE` varchar(30) DEFAULT NULL,
+  `IS_REG` varchar(1) NOT NULL DEFAULT 'N',
+  `IS_DEL` varchar(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'N',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ING_AKA`
+--
+
+INSERT INTO `ING_AKA` (`ING_AKA_ID`, `ING_ID`, `ING_AKA_NAME`, `SOURCE`, `IS_REG`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'GINGER', NULL, 'Y', 'N', '2017-09-08 00:00:00', NULL),
+(2, 2, 'TURMERIC', NULL, 'Y', 'N', '2017-09-08 00:00:00', NULL),
+(3, 3, 'SALT', NULL, 'Y', 'N', '2017-09-08 00:00:00', NULL),
+(4, 4, 'ONION', NULL, 'Y', 'N', '2017-09-08 00:00:00', NULL),
+(7, 7, 'CORN FLOUR', NULL, 'Y', 'N', '2017-12-30 14:36:23', NULL),
+(8, 8, 'GARLIC', NULL, 'Y', 'N', '2017-12-30 14:36:23', NULL),
+(9, 9, 'TOFU', NULL, 'Y', 'N', '2017-12-30 14:38:48', NULL),
+(11, 11, 'BUTTER', NULL, 'Y', 'N', '2017-12-30 15:09:31', NULL),
+(12, 12, 'PANEER', NULL, 'Y', 'N', '2017-12-30 15:11:48', NULL),
+(13, 13, 'CHEESE', NULL, 'Y', 'N', '2017-12-30 23:23:32', NULL),
+(14, 14, 'EGG', NULL, 'Y', 'N', '2018-01-12 22:02:29', NULL),
+(15, 15, 'GARAM MASALA', NULL, 'Y', 'N', '2018-01-12 23:25:37', NULL),
+(16, 16, 'BLACK SALT', NULL, 'Y', 'N', '2018-01-12 23:25:37', NULL),
+(18, 18, 'PUDINA', NULL, 'Y', 'N', '2018-01-12 23:30:52', NULL),
+(19, 19, 'MILK', NULL, 'Y', 'N', '2018-01-14 00:23:12', NULL),
+(20, 20, 'PEPPER', NULL, 'Y', 'N', '2018-03-06 00:00:00', NULL),
+(23, 23, 'TOMATO', NULL, 'Y', 'N', '2018-03-06 00:00:00', NULL),
+(24, 24, 'BHINDI', NULL, 'Y', 'N', '2018-03-18 08:50:56', NULL),
+(25, 25, 'MUSTARD SEEDS', NULL, 'Y', 'N', '2018-03-18 00:00:00', NULL),
+(26, 26, 'POSTO SEEDS', NULL, 'Y', 'N', '2018-03-18 00:00:00', NULL),
+(27, 2, 'HALDI', NULL, 'Y', 'N', '2018-03-18 00:00:00', NULL),
+(28, 28, 'GREEN CHILLLY', NULL, 'Y', 'N', '2018-03-18 00:00:00', NULL),
+(29, 29, 'CORIANDER', NULL, 'Y', 'N', '2018-03-18 00:00:00', NULL),
+(31, 101, 'DALIA', NULL, 'Y', 'N', '2018-04-14 05:18:41', '2018-04-14 05:18:41'),
+(32, 99, 'MALAI', NULL, 'N', 'N', '2018-04-16 00:00:00', NULL),
+(33, 24, 'LADIES FINGER', NULL, 'Y', 'N', '2018-04-24 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ING_CATEGORIES`
+--
+
+CREATE TABLE `ING_CATEGORIES` (
+  `ING_CAT_ID` int(11) NOT NULL,
+  `ING_CAT_NAME` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ING_CATEGORIES`
+--
+
+INSERT INTO `ING_CATEGORIES` (`ING_CAT_ID`, `ING_CAT_NAME`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'OTHERS', '2018-04-15 22:00:00', NULL),
+(2, 'SPICES', '2018-04-23 22:00:00', NULL),
+(3, 'FLOUR', '2018-04-23 22:00:00', NULL),
+(4, 'VEGETABLES', '2018-04-23 22:00:00', NULL),
+(5, 'DIARY', '2018-04-23 22:00:00', NULL),
+(6, 'MEAT', '2018-04-23 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ING_IMAGES`
+--
+
+CREATE TABLE `ING_IMAGES` (
+  `ING_IMG_ID` int(11) NOT NULL,
+  `ING_ID` int(11) NOT NULL,
+  `ING_IMG` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'app_data/master_data/ingredients/vegetable.jpg',
+  `IS_DEF` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ING_IMAGES`
+--
+
+INSERT INTO `ING_IMAGES` (`ING_IMG_ID`, `ING_ID`, `ING_IMG`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(2, 2, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(3, 3, 'app_data/master_data/ingredients/salt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(4, 4, 'app_data/master_data/ingredients/onion.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(5, 7, 'app_data/master_data/ingredients/cornflour.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(6, 8, 'app_data/master_data/ingredients/garlic.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(7, 9, 'app_data/master_data/ingredients/tofu.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(8, 11, 'app_data/master_data/ingredients/butter.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(9, 12, 'app_data/master_data/ingredients/paneer.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(10, 13, 'app_data/master_data/ingredients/cheese.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(11, 14, 'app_data/master_data/ingredients/eggs.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(12, 15, 'app_data/master_data/ingredients/garammasala.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(13, 16, 'app_data/master_data/ingredients/blacksalt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(14, 18, 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(15, 19, 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(16, 20, 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(17, 23, 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(18, 24, 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(19, 25, 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(20, 26, 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(21, 27, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(22, 28, 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(23, 29, 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(24, 101, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
+(25, 99, 'app_data/master_data/ingredients/vegetable.jpg', 'N', '2018-04-15 22:00:00', NULL),
+(26, 2, 'app_data/master_data/ingredients/haldi.jpg', 'N', '2018-04-24 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `LIKES`
+--
+
+CREATE TABLE `LIKES` (
+  `LIKE_ID` int(11) NOT NULL,
+  `USER_ID` int(11) NOT NULL,
+  `TYPE` varchar(25) NOT NULL,
+  `TYPE_ID` int(11) NOT NULL,
+  `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `LIKES`
+--
+
+INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-20 19:24:44'),
+(2, 2, 'RECIPE', 103, 'N', '2017-10-15 12:49:50', '2017-11-07 12:00:57'),
+(3, 3, 'RECIPE', 103, 'N', '2017-11-07 15:14:53', NULL),
+(4, 4, 'RECIPE', 103, 'N', '2017-12-06 18:15:07', '2017-12-15 15:02:26'),
+(5, 1, 'COMMENT', 1, 'N', '2017-12-06 18:18:04', '2017-12-18 15:51:20'),
+(6, 1, 'REVIEW', 9, 'Y', '2017-12-06 18:19:18', '2018-03-26 17:01:46'),
+(8, 1, 'COMMENT', 9, 'Y', '2017-12-18 15:53:32', '2018-03-26 17:01:42'),
+(9, 1, 'REVIEW', 10, 'N', '2017-12-22 14:30:53', '2017-12-22 20:05:42'),
+(10, 1, 'REVIEW', 11, 'N', '2017-12-22 14:47:53', '2018-02-09 20:43:07'),
+(11, 1, 'COMMENT', 48, 'N', '2017-12-22 15:31:35', NULL),
+(12, 1, 'COMMENT', 51, 'N', '2017-12-22 15:31:53', NULL),
+(13, 1, 'COMMENT', 58, 'N', '2017-12-22 17:45:47', NULL),
+(14, 1, 'COMMENT', 50, 'N', '2017-12-22 17:51:32', NULL),
+(15, 1, 'COMMENT', 53, 'Y', '2017-12-22 20:17:26', '2018-03-01 22:10:12'),
+(16, 1, 'COMMENT', 55, 'N', '2017-12-22 20:17:30', '2018-03-01 22:10:28'),
+(17, 1, 'RECIPE', 66, 'Y', '2018-01-12 20:41:14', '2018-02-03 20:41:16'),
+(18, 1, 'COMMENT', 54, 'Y', '2018-01-16 00:56:05', '2018-03-01 22:10:11'),
+(19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL),
+(21, 1, 'RECIPE_IMG', 1, 'N', '2018-03-13 13:24:57', NULL),
+(22, 1, 'RECIPE_IMG', 96, 'N', '2018-03-13 13:27:35', '2018-04-25 18:24:19'),
+(23, 1, 'USER', 1, 'N', '2018-03-13 18:01:10', '2018-04-28 03:14:13'),
+(24, 1, 'USER', 2, 'N', '2018-03-13 18:03:36', NULL),
+(25, 1, 'USER', 3, 'N', '2018-03-13 18:07:08', NULL),
+(26, 1, 'USER', 4, 'N', '2018-03-13 18:10:16', '2018-04-15 11:09:28'),
+(27, 1, 'RECIPE_IMG', 94, 'Y', '2018-03-17 10:15:31', '2018-03-17 11:50:08'),
+(28, 1, 'RECIPE_IMG', 95, 'N', '2018-03-17 10:56:37', '2018-03-17 11:49:51'),
+(29, 1, 'RECIPE', 3, 'Y', '2018-03-17 11:14:54', '2018-03-17 11:17:53'),
+(30, 1, 'RECIPE_IMG', 100, 'N', '2018-03-19 19:36:17', '2018-04-16 18:21:03'),
+(31, 1, 'RECIPE_IMG', 102, 'Y', '2018-03-19 19:36:47', '2018-04-15 08:50:59'),
+(32, 1, 'RECIPE_IMG', 97, 'Y', '2018-03-20 18:58:30', '2018-03-20 19:24:55'),
+(33, 1, 'RECIPE', 105, 'N', '2018-03-23 19:00:11', '2018-04-28 12:38:52'),
+(34, 2, 'RECIPE', 105, 'N', '2018-03-26 19:05:54', NULL),
+(35, 3, 'RECIPE', 105, 'N', '2018-03-26 19:06:00', NULL),
+(36, 4, 'RECIPE', 105, 'N', '2018-03-26 19:06:07', NULL),
+(37, 1, 'COMMENT', 95, 'N', '2018-04-14 22:31:00', '2018-04-14 23:55:10'),
+(38, 1, 'COMMENT', 96, 'N', '2018-04-14 22:56:33', '2018-04-15 09:02:23'),
+(39, 1, 'COMMENT', 120, 'N', '2018-04-14 23:41:05', NULL),
+(40, 1, 'RECIPE_IMG', 103, 'N', '2018-04-15 00:07:19', NULL),
+(41, 1, 'RECIPE_IMG', 104, 'N', '2018-04-15 08:51:18', NULL),
+(42, 1, 'REVIEW', 15, 'N', '2018-04-15 09:56:24', '2018-04-15 10:21:49'),
+(43, 1, 'COMMENT', 115, 'N', '2018-04-16 18:21:20', NULL),
+(44, 1, 'COMMENT', 147, 'N', '2018-04-16 20:17:40', NULL),
+(45, 1, 'COMMENT', 164, 'N', '2018-04-16 21:28:00', NULL),
+(46, 1, 'COMMENT', 92, 'N', '2018-04-16 21:38:35', NULL),
+(47, 1, 'RECIPE', 148, 'N', '2018-04-28 12:28:15', '2018-04-28 12:40:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `MILESTONE`
+--
+
+CREATE TABLE `MILESTONE` (
+  `MLT_ID` int(11) NOT NULL,
+  `RANK_ID` int(11) NOT NULL,
+  `TYPE` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NUMBER` int(11) NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `MILESTONE`
+--
+
+INSERT INTO `MILESTONE` (`MLT_ID`, `RANK_ID`, `TYPE`, `NUMBER`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 1, 'LIKE', 0, '2018-01-15 00:00:00', NULL),
+(2, 1, 'REVIEW', 0, '2018-01-18 00:00:00', NULL),
+(3, 1, 'RECIPE', 0, '2018-01-25 00:00:00', NULL),
+(8, 2, 'LIKE', 100, '2018-01-15 00:00:00', NULL),
+(9, 2, 'RECIPE', 5, '2018-01-18 00:00:00', NULL),
+(10, 2, 'REVIEW', 25, '2018-01-25 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `NUTRITION`
+--
+
+CREATE TABLE `NUTRITION` (
+  `NUT_ID` int(11) NOT NULL,
+  `NUT_NAME` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NUT_CAT_ID` int(11) NOT NULL DEFAULT '99',
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `NUTRITION`
+--
+
+INSERT INTO `NUTRITION` (`NUT_ID`, `NUT_NAME`, `NUT_CAT_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'Saturated Fat', 2, '2018-04-24 20:00:00', NULL),
+(2, 'Poly Unsaturated Fat', 2, '2018-04-24 20:00:00', NULL),
+(3, 'Poly Monosaturated Fat', 2, '2018-04-24 20:00:00', NULL),
+(4, 'Calories', 1, '2018-04-24 20:00:00', NULL),
+(5, 'Sodium', 4, '2018-04-24 20:00:00', NULL),
+(6, 'Dietary Fiber', 5, '2018-04-24 20:00:00', NULL),
+(7, 'Vitamin A', 6, '2018-04-24 20:00:00', NULL),
+(8, 'Calcium', 4, '2018-04-24 20:00:00', NULL),
+(9, 'Vitamin C', 6, '2018-04-24 20:00:00', NULL),
+(10, 'Iron', 4, '2018-04-24 20:00:00', NULL),
+(14, 'Cholestrol', 3, '2018-04-24 22:00:00', NULL),
+(18, 'Pottasium', 4, '2018-04-24 22:00:00', NULL),
+(19, 'Magnesium', 4, '2018-04-24 22:00:00', NULL),
+(20, 'Vitamin D', 6, '2018-04-24 22:00:00', NULL),
+(23, 'Sugar', 5, '2018-04-24 22:00:00', NULL),
+(24, 'Vitamin B6', 6, '2018-04-24 22:00:00', NULL),
+(25, 'Protein', 3, '2018-04-24 22:00:00', NULL),
+(26, 'Vitamin B12', 6, '2018-04-24 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `NUTRITION_CATEGORIES`
+--
+
+CREATE TABLE `NUTRITION_CATEGORIES` (
+  `NUT_CAT_ID` int(10) NOT NULL,
+  `NUT_CAT_NAME` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `NUTRITION_CATEGORIES`
+--
+
+INSERT INTO `NUTRITION_CATEGORIES` (`NUT_CAT_ID`, `NUT_CAT_NAME`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'Energy', '2018-04-24 22:00:00', NULL),
+(2, 'Fats', '2018-04-24 22:00:00', NULL),
+(3, 'Nutrients', '2018-04-24 22:00:00', NULL),
+(4, 'Minerals', '2018-04-24 22:00:00', NULL),
+(5, 'Carbs', '2018-04-24 22:00:00', NULL),
+(6, 'Vitamins', '2018-04-24 22:00:00', NULL),
+(99, 'Others', '2018-04-24 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `NUTRITION_UOM`
+--
+
+CREATE TABLE `NUTRITION_UOM` (
+  `NUT_UOM_ID` int(11) NOT NULL,
+  `NUT_UOM_NAME` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CREATE_DTM` timestamp NOT NULL,
+  `MOD_DTM` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `NUTRITION_UOM`
+--
+
+INSERT INTO `NUTRITION_UOM` (`NUT_UOM_ID`, `NUT_UOM_NAME`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, '%', '2018-04-24 22:00:00', NULL),
+(2, 'g', '2018-04-24 22:00:00', NULL),
+(3, 'mg', '2018-04-24 22:00:00', NULL),
+(6, 'Cal', '2018-04-24 22:00:00', NULL),
+(7, 'KCal', '2018-04-24 22:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RANK`
+--
+
+CREATE TABLE `RANK` (
+  `RANK_ID` int(11) NOT NULL,
+  `RANK_NAME` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `RANK_RULE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `RANK`
+--
+
+INSERT INTO `RANK` (`RANK_ID`, `RANK_NAME`, `RANK_RULE`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(1, 'FOODIE', 'Initial Rank', '2018-01-18 00:00:00', NULL),
+(2, 'KITCHEN HAND', '(5 Recipes & 100 Likes) or 25 Reviews', '2018-01-18 00:00:00', NULL),
+(3, 'COMMIS CHEF', '(20 Recipes & 500 Likes) or 200 Shares or 200 Reviews', '2018-01-18 00:00:00', NULL),
+(4, 'CHEF DE PARTIE', '(25 Recipes & 1000 likes) or 400 Shares or 400 Reviews', '2018-01-18 00:00:00', NULL),
+(5, 'SOUS CHEF', '(25 Recipes & 2000 Likes) or 500 Shares or 500 Reviews', '2018-01-18 00:00:00', NULL),
+(6, 'HEAD CHEF', '(25 Recipes & 5000 Likes) or 1000 Shares or 1000 Reviews', '2018-01-18 00:00:00', NULL),
+(7, 'EXECUTIVE CHEF', '(25 Recipes & 10000 Likes) or 5000 Shares or 5000 Reviews', '2018-01-18 00:00:00', NULL),
+(8, 'SUPER CHEF', '(50 Recipes & 20000 Likes) or 10000 Shares or 10000 Reviews', '2018-01-18 00:00:00', NULL),
+(9, 'MASTER CHEF', '(75 Recipes & 30000 Likes) or 20000 Shares or 20000 Reviews', '2018-01-18 00:00:00', NULL),
+(10, 'GODS COOK', '(100 Recipes & 50000 Likes) or 30000 Shares or 30000 Reviews', '2018-01-18 00:00:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RECIPE`
+--
+
+CREATE TABLE `RECIPE` (
+  `RCP_ID` int(11) NOT NULL,
+  `RCP_NAME` varchar(50) NOT NULL,
+  `FOOD_TYP_ID` int(11) NOT NULL,
+  `FOOD_CSN_ID` int(11) NOT NULL,
+  `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
+  `USER_ID` int(11) NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `RECIPE`
+--
+
+INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DEL`, `USER_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(3, 'Updated Recipe Name', 1, 1, 'N', 1, '2017-09-15 14:04:57', '2018-04-04 13:58:48'),
+(4, 'test recipe', 3, 1, 'N', 1, '2017-12-03 11:23:26', NULL),
+(76, 'bhindi masala 1', 3, 1, 'N', 1, '2017-12-03 11:17:31', NULL),
+(77, 'bhindi masala 2', 3, 1, 'N', 1, '2017-12-03 11:17:42', NULL),
+(79, 'abcd 1', 3, 1, 'N', 1, '2017-12-03 11:31:16', NULL),
+(80, 'abcd 2', 3, 1, 'Y', 1, '2017-12-03 11:34:45', NULL),
+(81, 'act', 3, 1, 'Y', 1, '2017-12-03 11:36:13', NULL),
+(87, 'TEST_RECIPE_NAME 1', 1, 1, 'N', 1, '2017-12-06 15:15:43', NULL),
+(88, 'TEST_RECIPE_NAME 2', 1, 1, 'N', 1, '2017-12-06 15:16:58', NULL),
+(89, 'TEST_RECIPE_NAME 3', 1, 1, 'Y', 1, '2017-12-06 15:17:53', NULL),
+(90, 'TEST_RECIPE_NAME 4', 1, 1, 'N', 1, '2017-12-06 15:20:48', NULL),
+(91, 'TEST_RECIPE_NAME 5', 1, 1, 'N', 1, '2017-12-06 15:23:47', NULL),
+(103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19'),
+(104, 'TEST_RECIPE_NAME - 65', 1, 1, 'N', 1, '2018-03-18 10:04:17', NULL),
+(105, 'Bhindi in Sarson and Posto Sauce', 2, 1, 'N', 1, '2018-03-18 11:14:26', NULL),
+(106, 'TEST_RECIPE_NAME - 25', 1, 1, 'N', 1, '2018-03-24 17:55:56', NULL),
+(110, 'TEST_RECIPE_NAME - 84', 1, 1, 'N', 1, '2018-03-24 18:01:14', NULL),
+(111, 'TEST_RECIPE_NAME - 27', 1, 1, 'N', 1, '2018-03-24 18:01:42', NULL),
+(112, 'TEST_RECIPE_NAME - 98', 1, 1, 'N', 1, '2018-03-24 18:06:09', NULL),
+(113, 'TEST_RECIPE_NAME - 15', 1, 1, 'N', 1, '2018-03-24 18:12:13', NULL),
+(114, 'TEST_RECIPE_NAME - 28', 1, 1, 'N', 1, '2018-03-24 18:17:49', NULL),
+(115, 'TEST_RECIPE_NAME - 82', 1, 1, 'N', 1, '2018-03-24 18:18:15', NULL),
+(116, 'Masala puri', 4, 1, 'N', 100, '2018-03-27 23:46:31', NULL),
+(117, 'TEST_RECIPE_NAME - 40', 1, 1, 'N', 1, '2018-03-28 18:08:30', NULL),
+(118, 'TEST_RECIPE_NAME - 02', 1, 1, 'N', 1, '2018-03-28 18:10:43', NULL),
+(119, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-03-28 18:11:58', NULL),
+(121, 'TEST_RECIPE_NAME - 01', 1, 1, 'N', 1, '2018-04-05 08:02:32', NULL),
+(122, 'TEST_RECIPE_NAME - 07', 1, 1, 'N', 1, '2018-04-05 08:04:03', NULL),
+(123, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-04-05 08:07:53', NULL),
+(124, 'TEST_RECIPE_NAME - 42', 1, 1, 'N', 1, '2018-04-05 08:09:30', NULL),
+(125, 'TEST_RECIPE_NAME - 78', 1, 1, 'N', 1, '2018-04-05 08:10:48', NULL),
+(126, 'TEST_RECIPE_NAME - 11', 1, 1, 'N', 1, '2018-04-05 08:15:22', NULL),
+(127, 'TEST_RECIPE_NAME - 99', 1, 1, 'N', 1, '2018-04-05 08:21:15', NULL),
+(128, 'TEST_RECIPE_NAME - 60', 1, 1, 'N', 1, '2018-04-05 08:23:45', NULL),
+(129, 'TEST_RECIPE_NAME - 48', 1, 1, 'N', 1, '2018-04-22 19:34:00', NULL),
+(130, 'TEST_RECIPE_NAME - 27', 1, 1, 'N', 1, '2018-04-22 19:56:49', NULL),
+(131, 'TEST_RECIPE_NAME - 69', 1, 1, 'N', 1, '2018-04-22 20:03:10', NULL),
+(135, 'TEST_RECIPE_NAME - 45', 1, 1, 'N', 1, '2018-04-22 20:41:37', NULL),
+(147, 'My Grandma\'s Loki Halwa', 3, 1, 'N', 1, '2018-04-23 20:37:13', NULL),
+(148, 'Test 12345', 3, 1, 'N', 1, '2018-04-28 12:24:19', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RECIPE_IMG`
+--
+
+CREATE TABLE `RECIPE_IMG` (
+  `RCP_IMG_ID` int(11) NOT NULL,
+  `RCP_ID` int(11) NOT NULL,
+  `RCP_IMG` text NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `RECIPE_IMG`
+--
+
+INSERT INTO `RECIPE_IMG` (`RCP_IMG_ID`, `RCP_ID`, `RCP_IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
+(44, 66, 'app_data/users/1/recipes/66/images/5a06d03641be2.jpg', '2017-11-11 11:25:58', NULL),
+(45, 66, 'app_data/users/1/recipes/66/images/5a06d03658f7c.jpg', '2017-11-11 11:25:58', NULL),
+(46, 66, 'app_data/users/1/recipes/66/images/5a06d03670163.jpg', '2017-11-11 11:25:58', NULL),
+(47, 66, 'app_data/users/1/recipes/66/images/5a06d036872d8.jpg', '2017-11-11 11:25:58', NULL),
+(48, 66, 'app_data/users/1/recipes/66/images/5a06d0369e45f.jpg', '2017-11-11 11:25:58', NULL),
+(49, 71, 'app_data/users/1/recipes/71/images/5a06d2653e082.jpg', '2017-11-11 11:35:17', NULL),
+(50, 71, 'app_data/users/1/recipes/71/images/5a06d265553a1.jpg', '2017-11-11 11:35:17', NULL),
+(51, 73, 'app_data/users/1/recipes/73/images/5a06d3075d570.jpg', '2017-11-11 11:37:59', NULL),
+(52, 73, 'app_data/users/1/recipes/73/images/5a06d3077483d.jpg', '2017-11-11 11:37:59', NULL),
+(53, 76, 'app_data/users/1/recipes/76/images/5a23cf3c3ebf8.jpg', '2017-12-03 11:17:32', NULL),
+(54, 77, 'app_data/users/1/recipes/77/images/5a23cf46c52f0.jpg', '2017-12-03 11:17:42', NULL),
+(55, 78, 'app_data/users/1/recipes/78/images/5a23d09eee7d0.jpg', '2017-12-03 11:23:27', NULL),
+(56, 78, 'app_data/users/1/recipes/78/images/5a23d09f11744.jpg', '2017-12-03 11:23:27', NULL),
+(57, 79, 'app_data/users/1/recipes/79/images/5a23d2754f5f8.jpg', '2017-12-03 11:31:17', NULL),
+(58, 80, 'app_data/users/1/recipes/80/images/5a23d3462876a.jpg', '2017-12-03 11:34:46', NULL),
+(59, 81, 'app_data/users/1/recipes/81/images/5a23d39d9f9a7.jpg', '2017-12-03 11:36:13', NULL),
+(65, 87, 'app_data/users/1/recipes/87/images/5a27fb906dfd0.jpg', '2017-12-06 15:15:44', NULL),
+(66, 87, 'app_data/users/1/recipes/87/images/5a27fb9085430.jpg', '2017-12-06 15:15:44', NULL),
+(67, 88, 'app_data/users/1/recipes/88/images/5a27fbdad4d0b.jpg', '2017-12-06 15:16:58', NULL),
+(68, 88, 'app_data/users/1/recipes/88/images/5a27fbdaec019.jpg', '2017-12-06 15:16:59', NULL),
+(69, 89, 'app_data/users/1/recipes/89/images/5a27fc125b733.jpg', '2017-12-06 15:17:54', NULL),
+(70, 89, 'app_data/users/1/recipes/89/images/5a27fc1272b40.jpg', '2017-12-06 15:17:54', NULL),
+(71, 90, 'app_data/users/1/recipes/90/images/5a27fcc125b68.jpg', '2017-12-06 15:20:49', NULL),
+(72, 90, 'app_data/users/1/recipes/90/images/5a27fcc13ccf8.jpg', '2017-12-06 15:20:49', NULL),
+(73, 91, 'app_data/users/1/recipes/91/images/5a27fd7407e37.jpg', '2017-12-06 15:23:48', NULL),
+(74, 91, 'app_data/users/1/recipes/91/images/5a27fd741f13b.jpg', '2017-12-06 15:23:48', NULL),
+(96, 103, 'app_data/users/1/recipes/103/images/5a395e41862d8.jpg', '2017-12-19 19:45:21', NULL),
+(97, 103, 'app_data/users/1/recipes/103/images/5a2a22f92838d.jpg', '2017-12-19 19:45:21', NULL),
+(98, 104, 'app_data/users/1/recipes/104/images/5aae2b9248dfc.jpg', '2018-03-18 10:04:18', NULL),
+(99, 104, 'app_data/users/1/recipes/104/images/5aae2b926ffa1.jpg', '2018-03-18 10:04:18', NULL),
+(100, 105, 'app_data/users/1/recipes/105/images/5aae3c05cb800.jpg', '2018-03-18 11:14:29', NULL),
+(102, 105, 'app_data/users/1/recipes/105/images/5aae3c06257ec.jpg', '2018-03-18 11:14:30', NULL),
+(103, 105, 'app_data/users/1/recipes/105/images/5aae3c064c9b5.jpg', '2018-03-18 11:14:30', NULL),
+(104, 105, 'app_data/users/1/recipes/105/images/5aae3c06739cd.jpg', '2018-03-18 11:14:30', NULL),
+(105, 106, 'app_data/users/1/recipes/106/images/5ab6831cecb16.jpg', '2018-03-24 17:55:57', NULL),
+(106, 106, 'app_data/users/1/recipes/106/images/5ab6831d169bd.jpg', '2018-03-24 17:55:57', NULL),
+(113, 110, 'app_data/users/1/recipes/110/images/5ab6845bc1b9e.jpg', '2018-03-24 18:01:15', NULL),
+(114, 110, 'app_data/users/1/recipes/110/images/5ab6845bdfc28.jpg', '2018-03-24 18:01:15', NULL),
+(115, 111, 'app_data/users/1/recipes/111/images/5ab684774b890.jpg', '2018-03-24 18:01:43', NULL),
+(116, 111, 'app_data/users/1/recipes/111/images/5ab68477698c5.jpg', '2018-03-24 18:01:43', NULL),
+(117, 112, 'app_data/users/1/recipes/112/images/5ab685823b052.jpg', '2018-03-24 18:06:10', NULL),
+(118, 112, 'app_data/users/1/recipes/112/images/5ab685825902c.jpg', '2018-03-24 18:06:10', NULL),
+(119, 113, 'app_data/users/1/recipes/113/images/5ab686eead1cb.jpg', '2018-03-24 18:12:14', NULL),
+(120, 113, 'app_data/users/1/recipes/113/images/5ab686eecb128.jpg', '2018-03-24 18:12:14', NULL),
+(121, 114, 'app_data/users/1/recipes/114/images/5ab6883e2068a.jpg', '2018-03-24 18:17:50', NULL),
+(122, 114, 'app_data/users/1/recipes/114/images/5ab6883e3e66a.jpg', '2018-03-24 18:17:50', NULL),
+(123, 115, 'app_data/users/1/recipes/115/images/5ab6885864d06.jpg', '2018-03-24 18:18:16', NULL),
+(124, 115, 'app_data/users/1/recipes/115/images/5ab6885882d32.jpg', '2018-03-24 18:18:16', NULL),
+(125, 116, 'app_data/users/100/recipes/116/images/5ababbb8684fb.jpg', '2018-03-27 23:46:32', NULL),
+(126, 117, 'app_data/users/1/recipes/117/images/5abbbdffdc007.jpg', '2018-03-28 18:08:31', NULL),
+(127, 117, 'app_data/users/1/recipes/117/images/5abbbe0007e6e.jpg', '2018-03-28 18:08:32', NULL),
+(128, 118, 'app_data/users/1/recipes/118/images/5abbbe841e2e3.jpg', '2018-03-28 18:10:44', NULL),
+(129, 118, 'app_data/users/1/recipes/118/images/5abbbe843c625.jpg', '2018-03-28 18:10:44', NULL),
+(130, 119, 'app_data/users/1/recipes/119/images/5abbbecfa6caf.jpg', '2018-03-28 18:11:59', NULL),
+(131, 119, 'app_data/users/1/recipes/119/images/5abbbecfc4ff1.jpg', '2018-03-28 18:11:59', NULL),
+(135, 3, 'app_data/users/1/recipes/3/images/5ac4bdfa478cb.jpg', '2018-04-04 13:58:50', NULL),
+(136, 121, 'app_data/users/1/recipes/121/images/5ac5bbf99213a.jpg', '2018-04-05 08:02:33', NULL),
+(137, 121, 'app_data/users/1/recipes/121/images/5ac5bbf9b0473.jpg', '2018-04-05 08:02:33', NULL),
+(138, 122, 'app_data/users/1/recipes/122/images/5ac5bc5498fc4.jpg', '2018-04-05 08:04:04', NULL),
+(139, 122, 'app_data/users/1/recipes/122/images/5ac5bc54b703f.jpg', '2018-04-05 08:04:04', NULL),
+(140, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a0d6d6.jpg', '2018-04-05 08:07:54', NULL),
+(141, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a2b790.jpg', '2018-04-05 08:07:54', NULL),
+(142, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b77e66.jpg', '2018-04-05 08:09:31', NULL),
+(143, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b95e5a.jpg', '2018-04-05 08:09:31', NULL),
+(144, 125, 'app_data/users/1/recipes/125/images/5ac5bde964980.jpg', '2018-04-05 08:10:49', NULL),
+(145, 125, 'app_data/users/1/recipes/125/images/5ac5bde982928.jpg', '2018-04-05 08:10:49', NULL),
+(146, 126, 'app_data/users/1/recipes/126/images/5ac5befb5d8a7.jpg', '2018-04-05 08:15:23', NULL),
+(147, 126, 'app_data/users/1/recipes/126/images/5ac5befb7b6f5.jpg', '2018-04-05 08:15:23', NULL),
+(148, 127, 'app_data/users/1/recipes/127/images/5ac5c05cbf186.jpg', '2018-04-05 08:21:16', NULL),
+(149, 127, 'app_data/users/1/recipes/127/images/5ac5c05cdd08b.jpg', '2018-04-05 08:21:16', NULL),
+(150, 128, 'app_data/users/1/recipes/128/images/5ac5c0f239dc5.jpg', '2018-04-05 08:23:46', NULL),
+(151, 128, 'app_data/users/1/recipes/128/images/5ac5c0f257d30.jpg', '2018-04-05 08:23:46', NULL),
+(152, 129, 'app_data/users/1/recipes/129/images/5adcc789e2222.jpg', '2018-04-22 19:34:02', NULL),
+(153, 129, 'app_data/users/1/recipes/129/images/5adcc78a186bd.jpg', '2018-04-22 19:34:02', NULL),
+(154, 130, 'app_data/users/1/recipes/130/images/5adccce25f7bb.jpg', '2018-04-22 19:56:50', NULL),
+(155, 130, 'app_data/users/1/recipes/130/images/5adccce286b7f.jpg', '2018-04-22 19:56:50', NULL),
+(156, 131, 'app_data/users/1/recipes/131/images/5adcce5f3857a.jpg', '2018-04-22 20:03:11', NULL),
+(157, 131, 'app_data/users/1/recipes/131/images/5adcce5f5f8b6.jpg', '2018-04-22 20:03:11', NULL),
+(161, 135, 'app_data/users/1/recipes/135/images/5adcd7626b10a.jpg', '2018-04-22 20:41:38', NULL),
+(162, 135, 'app_data/users/1/recipes/135/images/5adcd76292340.jpg', '2018-04-22 20:41:38', NULL),
+(174, 147, 'app_data/users/1/recipes/147/images/5ade27daf2ca7.jpg', '2018-04-23 20:37:15', NULL),
+(175, 147, 'app_data/users/1/recipes/147/images/5ade27db26dc7.jpg', '2018-04-23 20:37:15', NULL),
+(176, 148, 'app_data/users/1/recipes/148/images/5ae41a9c9e177.jpg', '2018-04-28 12:24:20', NULL),
+(177, 148, 'app_data/users/1/recipes/148/images/5ae41a9cc5ce9.jpg', '2018-04-28 12:24:20', NULL),
+(178, 148, 'app_data/users/1/recipes/148/images/5ae41a9ced9a8.jpg', '2018-04-28 12:24:21', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `RECIPE_INGREDIENTS`
+--
+
+CREATE TABLE `RECIPE_INGREDIENTS` (
+  `RCP_ING_ID` int(11) NOT NULL,
+  `RCP_ID` int(11) NOT NULL,
+  `ING_AKA_ID` int(11) NOT NULL,
+  `ING_UOM_ID` int(11) NOT NULL,
+  `ING_UOM_VALUE` int(11) NOT NULL,
+  `CREATE_DTM` datetime NOT NULL,
+  `MOD_DTM` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `RECIPE_INGREDIENTS`
+--
+
+INSERT INTO `RECIPE_INGREDIENTS` (`RCP_ING_ID`, `RCP_ID`, `ING_AKA_ID`, `ING_UOM_ID`, `ING_UOM_VALUE`, `CREATE_DTM`, `MOD_DTM`) VALUES
 (5, 4, 2, 1, 1, '2017-09-10 05:57:07', NULL),
 (6, 4, 1, 1, 1, '2017-09-10 05:57:07', NULL),
 (7, 5, 1, 1, 1, '2017-09-10 06:36:11', NULL),
@@ -390,632 +2528,8 @@ INSERT INTO `DISH` (`DISH_ID`, `RCP_ID`, `ING_AKA_ID`, `QTY_ID`, `ING_QTY`, `CRE
 (221, 135, 1, 1, 5, '2018-04-22 20:41:37', NULL),
 (222, 135, 2, 2, 6, '2018-04-22 20:41:37', NULL),
 (234, 147, 1, 1, 1, '2018-04-23 20:37:14', NULL),
-(235, 147, 19, 1, 1, '2018-04-23 20:37:14', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `FAVOURITES`
---
-
-CREATE TABLE `FAVOURITES` (
-  `FAV_ID` int(11) NOT NULL,
-  `RCP_ID` int(11) NOT NULL,
-  `USER_ID` int(11) NOT NULL,
-  `IS_DEL` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `FAVOURITES`
---
-
-INSERT INTO `FAVOURITES` (`FAV_ID`, `RCP_ID`, `USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(5, 103, 1, 'N', '2018-03-07 23:12:34', '2018-03-07 23:13:05'),
-(6, 105, 1, 'N', '2018-03-26 18:34:55', '2018-03-26 18:34:55');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `FOOD_CUISINE`
---
-
-CREATE TABLE `FOOD_CUISINE` (
-  `FOOD_CSN_ID` int(11) NOT NULL,
-  `FOOD_CSN_NAME` varchar(25) NOT NULL,
-  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
-  `IS_DEL` varchar(1) NOT NULL,
-  `IMG` varchar(50) NOT NULL DEFAULT 'images/png.png',
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `FOOD_CUISINE`
---
-
-INSERT INTO `FOOD_CUISINE` (`FOOD_CSN_ID`, `FOOD_CSN_NAME`, `IS_DEF`, `IS_DEL`, `IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'INDIAN', 'Y', 'N', 'app_data/master_data/cuisines/indian.jpg', '2017-08-27 00:00:00', NULL),
-(10, 'AFRICAN', 'N', 'N', 'app_data/master_data/cuisines/african.jpg', '2018-03-06 07:26:29', NULL),
-(11, 'AMERICAN', 'N', 'N', 'app_data/master_data/cuisines/american.jpg', '2018-03-06 07:26:29', NULL),
-(12, 'ASIAN', 'N', 'N', 'app_data/master_data/cuisines/asian.jpg', '2018-03-06 07:26:30', NULL),
-(13, 'BARBEQUE', 'N', 'N', 'app_data/master_data/cuisines/barbeque.jpg', '2018-03-06 07:26:30', NULL),
-(14, 'BRAZILLIAN', 'N', 'N', 'app_data/master_data/cuisines/brazillian.jpg', '2018-03-06 07:26:30', NULL),
-(15, 'BRITISH', 'N', 'N', 'app_data/master_data/cuisines/british.jpg', '2018-03-06 07:26:30', NULL),
-(16, 'CANTONESE', 'N', 'N', 'app_data/master_data/cuisines/cantonese.jpg', '2018-03-06 07:26:30', NULL),
-(17, 'AFRICAN', 'N', 'N', 'app_data/master_data/cuisines/african.jpg', '2018-03-06 07:26:58', NULL),
-(18, 'AMERICAN', 'N', 'N', 'app_data/master_data/cuisines/american.jpg', '2018-03-06 07:26:59', NULL),
-(19, 'ASIAN', 'N', 'N', 'app_data/master_data/cuisines/asian.jpg', '2018-03-06 07:26:59', NULL),
-(20, 'BARBEQUE', 'N', 'N', 'app_data/master_data/cuisines/barbeque.jpg', '2018-03-06 07:26:59', NULL),
-(21, 'BRAZILLIAN', 'N', 'N', 'app_data/master_data/cuisines/brazillian.jpg', '2018-03-06 07:26:59', NULL),
-(22, 'BRITISH', 'N', 'N', 'app_data/master_data/cuisines/british.jpg', '2018-03-06 07:26:59', NULL),
-(23, 'CANTONESE', 'N', 'N', 'app_data/master_data/cuisines/cantonese.jpg', '2018-03-06 07:26:59', NULL),
-(24, 'AFRICAN', 'N', 'N', 'app_data/master_data/cuisines/african.jpg', '2018-03-06 07:27:45', NULL),
-(25, 'AMERICAN', 'N', 'N', 'app_data/master_data/cuisines/american.jpg', '2018-03-06 07:27:45', NULL),
-(26, 'ASIAN', 'N', 'N', 'app_data/master_data/cuisines/asian.jpg', '2018-03-06 07:27:45', NULL),
-(27, 'BARBEQUE', 'N', 'N', 'app_data/master_data/cuisines/barbeque.jpg', '2018-03-06 07:27:45', NULL),
-(28, 'BRAZILLIAN', 'N', 'N', 'app_data/master_data/cuisines/brazillian.jpg', '2018-03-06 07:27:45', NULL),
-(29, 'BRITISH', 'N', 'N', 'app_data/master_data/cuisines/british.jpg', '2018-03-06 07:27:45', NULL),
-(30, 'CANTONESE', 'N', 'N', 'app_data/master_data/cuisines/cantonese.jpg', '2018-03-06 07:27:45', NULL),
-(31, 'CARRIBEAN', 'N', 'N', 'app_data/master_data/cuisines/carribean.jpg', '2018-03-06 07:27:45', NULL),
-(32, 'CHINESE', 'N', 'N', 'app_data/master_data/cuisines/chinese.jpg', '2018-03-06 07:27:45', NULL),
-(33, 'CUBAN', 'N', 'N', 'app_data/master_data/cuisines/cuban.jpg', '2018-03-06 07:27:45', NULL),
-(34, 'ETHIOPIAN', 'N', 'N', 'app_data/master_data/cuisines/ethiopian.jpg', '2018-03-06 07:27:46', NULL),
-(35, 'EUROPEAN', 'N', 'N', 'app_data/master_data/cuisines/european.jpg', '2018-03-06 07:27:46', NULL),
-(36, 'FAST FOOD', 'N', 'N', 'app_data/master_data/cuisines/fastfood.jpg', '2018-03-06 07:27:46', NULL),
-(37, 'FILIPINO', 'N', 'N', 'app_data/master_data/cuisines/filipino.jpg', '2018-03-06 07:27:46', NULL),
-(38, 'FRENCH', 'N', 'N', 'app_data/master_data/cuisines/french.jpg', '2018-03-06 07:27:46', NULL),
-(39, 'FUSION', 'N', 'N', 'app_data/master_data/cuisines/fusion.jpg', '2018-03-06 07:27:46', NULL),
-(40, 'GERMAN', 'N', 'N', 'app_data/master_data/cuisines/german.jpg', '2018-03-06 07:27:46', NULL),
-(41, 'GLOBAL', 'N', 'N', 'app_data/master_data/cuisines/global.jpg', '2018-03-06 07:27:46', NULL),
-(42, 'GREEK', 'N', 'N', 'app_data/master_data/cuisines/greek.jpg', '2018-03-06 07:27:46', NULL),
-(43, 'HAUTE', 'N', 'N', 'app_data/master_data/cuisines/haute.jpg', '2018-03-06 07:27:46', NULL),
-(44, 'ICE CREAM', 'N', 'N', 'app_data/master_data/cuisines/icecream.jpg', '2018-03-06 07:27:46', NULL),
-(45, 'INDONESIAN', 'N', 'N', 'app_data/master_data/cuisines/indonesian.jpg', '2018-03-06 07:27:46', NULL),
-(46, 'IRANIAN', 'N', 'N', 'app_data/master_data/cuisines/iranian.jpg', '2018-03-06 07:27:47', NULL),
-(47, 'IRISH', 'N', 'N', 'app_data/master_data/cuisines/irish.jpg', '2018-03-06 07:27:47', NULL),
-(48, 'ITALIAN', 'N', 'N', 'app_data/master_data/cuisines/italian.jpg', '2018-03-06 07:27:47', NULL),
-(49, 'JAPANESE', 'N', 'N', 'app_data/master_data/cuisines/japanese.jpg', '2018-03-06 07:27:47', NULL),
-(50, 'KOREAN', 'N', 'N', 'app_data/master_data/cuisines/korean.jpg', '2018-03-06 07:27:47', NULL),
-(51, 'LEBANESE', 'N', 'N', 'app_data/master_data/cuisines/lebanese.jpg', '2018-03-06 07:27:47', NULL),
-(52, 'MALAYSIAN', 'N', 'N', 'app_data/master_data/cuisines/malaysian.jpg', '2018-03-06 07:27:47', NULL),
-(53, 'MEDITERRANEAN', 'N', 'N', 'app_data/master_data/cuisines/mediterranean.jpg', '2018-03-06 07:27:47', NULL),
-(54, 'MEXICAN', 'N', 'N', 'app_data/master_data/cuisines/mexican.jpg', '2018-03-06 07:27:47', NULL),
-(55, 'MIDDLE EASTERN', 'N', 'N', 'app_data/master_data/cuisines/middleeastern.jpg', '2018-03-06 07:27:47', NULL),
-(56, 'MOROCCAN', 'N', 'N', 'app_data/master_data/cuisines/moroccan.jpg', '2018-03-06 07:27:47', NULL),
-(57, 'PAKISTANI', 'N', 'N', 'app_data/master_data/cuisines/pakistani.jpg', '2018-03-06 07:27:47', NULL),
-(58, 'PERUVIAN', 'N', 'N', 'app_data/master_data/cuisines/peruvian.jpg', '2018-03-06 07:27:47', NULL),
-(59, 'POLISH', 'N', 'N', 'app_data/master_data/cuisines/polish.jpg', '2018-03-06 07:27:48', NULL),
-(60, 'PORTUGESE', 'N', 'N', 'app_data/master_data/cuisines/portugese.jpg', '2018-03-06 07:27:48', NULL),
-(61, 'RUSSIAN', 'N', 'N', 'app_data/master_data/cuisines/russian.jpg', '2018-03-06 07:27:48', NULL),
-(62, 'SICHUAN', 'N', 'N', 'app_data/master_data/cuisines/sichuan.jpg', '2018-03-06 07:27:48', NULL),
-(63, 'SOUTH INDIAN', 'N', 'N', 'app_data/master_data/cuisines/southindian.jpg', '2018-03-06 07:27:48', NULL),
-(64, 'SPANISH', 'N', 'N', 'app_data/master_data/cuisines/spanish.jpg', '2018-03-06 07:27:48', NULL),
-(65, 'STREET FOOD', 'N', 'N', 'app_data/master_data/cuisines/streetfood.jpg', '2018-03-06 07:27:48', NULL),
-(66, 'TAIWANESE', 'N', 'N', 'app_data/master_data/cuisines/taiwanese.jpg', '2018-03-06 07:27:48', NULL),
-(67, 'THAI', 'N', 'N', 'app_data/master_data/cuisines/thai.jpg', '2018-03-06 07:27:48', NULL),
-(68, 'TURKISH', 'N', 'N', 'app_data/master_data/cuisines/turkish.jpg', '2018-03-06 07:27:48', NULL),
-(69, 'VIETNAMESE', 'N', 'N', 'app_data/master_data/cuisines/vietnamese.jpg', '2018-03-06 07:27:48', NULL),
-(70, 'SCOTISH', 'N', 'N', 'app_data/master_data/cuisines/indian.jpg', '2018-04-14 05:52:30', '2018-04-14 05:52:30');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `FOOD_TYPE`
---
-
-CREATE TABLE `FOOD_TYPE` (
-  `FOOD_TYP_ID` int(11) NOT NULL,
-  `FOOD_TYP_NAME` varchar(25) NOT NULL,
-  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
-  `IS_DEL` varchar(1) NOT NULL,
-  `IMG` varchar(50) NOT NULL DEFAULT 'images/cake.jpg',
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `FOOD_TYPE`
---
-
-INSERT INTO `FOOD_TYPE` (`FOOD_TYP_ID`, `FOOD_TYP_NAME`, `IS_DEF`, `IS_DEL`, `IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'BREAKFAST', 'N', 'N', 'app_data/master_data/food_type/breakfast.jpg', '2017-08-27 00:00:00', '2018-04-21 13:05:30'),
-(2, 'LUNCH', 'N', 'N', 'app_data/master_data/food_type/lunch.jpg', '2017-08-27 00:00:00', '2018-04-21 13:43:34'),
-(3, 'DINNER', 'Y', 'N', 'app_data/master_data/food_type/dinner.jpg', '2017-08-27 00:00:00', NULL),
-(4, 'SNACKS', 'N', 'N', 'app_data/master_data/food_type/snacks.jpg', '2017-08-27 00:00:00', NULL),
-(5, 'DESSERT', 'N', 'N', 'app_data/master_data/food_type/dessert.jpg', '2017-08-27 00:00:00', '2018-04-21 13:43:24'),
-(6, 'SOUP', 'N', 'N', 'app_data/master_data/food_type/soup.jpg', '2017-08-27 00:00:00', '2018-04-21 12:53:49'),
-(7, 'DRINKS', 'N', 'N', 'app_data/master_data/food_type/drinks.jpg', '2017-08-27 00:00:00', '2018-04-21 12:53:49'),
-(8, 'OTHERS', 'N', 'N', 'app_data/master_data/food_type/others.jpg', '2017-08-27 00:00:00', '2018-04-21 13:17:00'),
-(9, 'MOCKTAILS', 'N', 'N', 'app_data/master_data/food_type/breakfast.jpg', '2018-04-14 05:53:38', '2018-04-21 13:17:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `INGREDIENT`
---
-
-CREATE TABLE `INGREDIENT` (
-  `ING_ID` int(11) NOT NULL,
-  `ING_CAT_ID` int(11) NOT NULL DEFAULT '1',
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `INGREDIENT`
---
-
-INSERT INTO `INGREDIENT` (`ING_ID`, `ING_CAT_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, '2017-09-08 00:00:00', NULL),
-(2, 1, '2017-09-08 00:00:00', NULL),
-(3, 1, '2017-09-08 00:00:00', NULL),
-(4, 1, '2017-09-08 00:00:00', NULL),
-(7, 1, '2017-12-30 14:36:23', NULL),
-(8, 1, '2017-12-30 14:36:23', NULL),
-(9, 1, '2017-12-30 14:38:48', NULL),
-(11, 1, '2017-12-30 15:09:31', NULL),
-(12, 1, '2017-12-30 15:11:48', NULL),
-(13, 1, '2017-12-30 23:23:32', NULL),
-(14, 1, '2018-01-12 22:02:29', NULL),
-(15, 1, '2018-01-12 23:25:37', NULL),
-(16, 1, '2018-01-12 23:25:37', NULL),
-(18, 1, '2018-01-12 23:30:52', NULL),
-(19, 1, '2018-01-14 00:23:12', NULL),
-(20, 1, '2018-03-06 00:00:00', NULL),
-(23, 1, '2018-03-06 00:00:00', NULL),
-(24, 1, '2018-03-18 08:50:56', NULL),
-(25, 1, '2018-03-18 00:00:00', NULL),
-(26, 1, '2018-03-18 00:00:00', NULL),
-(27, 1, '2018-03-18 00:00:00', NULL),
-(28, 1, '2018-03-18 00:00:00', NULL),
-(29, 1, '2018-03-18 00:00:00', NULL),
-(99, 1, '2018-03-28 17:32:26', NULL),
-(101, 1, '2018-04-14 05:18:41', '2018-04-14 05:18:41');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ING_AKA`
---
-
-CREATE TABLE `ING_AKA` (
-  `ING_AKA_ID` int(11) NOT NULL,
-  `ING_ID` int(11) NOT NULL DEFAULT '99',
-  `ING_AKA_NAME` varchar(25) NOT NULL,
-  `IS_REG` varchar(1) NOT NULL DEFAULT 'N',
-  `IS_DEL` varchar(1) NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ING_AKA`
---
-
-INSERT INTO `ING_AKA` (`ING_AKA_ID`, `ING_ID`, `ING_AKA_NAME`, `IS_REG`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'GINGER', 'Y', 'N', '2017-09-08 00:00:00', NULL),
-(2, 2, 'TURMERIC', 'Y', 'N', '2017-09-08 00:00:00', NULL),
-(3, 3, 'SALT', 'Y', 'N', '2017-09-08 00:00:00', NULL),
-(4, 4, 'ONION', 'Y', 'N', '2017-09-08 00:00:00', NULL),
-(7, 7, 'CORN FLOUR', 'Y', 'N', '2017-12-30 14:36:23', NULL),
-(8, 8, 'GARLIC', 'Y', 'N', '2017-12-30 14:36:23', NULL),
-(9, 9, 'TOFU', 'Y', 'N', '2017-12-30 14:38:48', NULL),
-(11, 11, 'BUTTER', 'Y', 'N', '2017-12-30 15:09:31', NULL),
-(12, 12, 'PANEER', 'Y', 'N', '2017-12-30 15:11:48', NULL),
-(13, 13, 'CHEESE', 'Y', 'N', '2017-12-30 23:23:32', NULL),
-(14, 14, 'EGG', 'Y', 'N', '2018-01-12 22:02:29', NULL),
-(15, 15, 'GARAM MASALA', 'Y', 'N', '2018-01-12 23:25:37', NULL),
-(16, 16, 'BLACK SALT', 'Y', 'N', '2018-01-12 23:25:37', NULL),
-(18, 18, 'PUDINA', 'Y', 'N', '2018-01-12 23:30:52', NULL),
-(19, 19, 'MILK', 'Y', 'N', '2018-01-14 00:23:12', NULL),
-(20, 20, 'PEPPER', 'Y', 'N', '2018-03-06 00:00:00', NULL),
-(23, 23, 'TOMATO', 'Y', 'N', '2018-03-06 00:00:00', NULL),
-(24, 24, 'BHINDI', 'Y', 'N', '2018-03-18 08:50:56', NULL),
-(25, 25, 'MUSTARD SEEDS', 'Y', 'N', '2018-03-18 00:00:00', NULL),
-(26, 26, 'POSTO SEEDS', 'Y', 'N', '2018-03-18 00:00:00', NULL),
-(27, 27, 'HALDI', 'Y', 'N', '2018-03-18 00:00:00', NULL),
-(28, 28, 'GREEN CHILLLY', 'Y', 'N', '2018-03-18 00:00:00', NULL),
-(29, 29, 'CORIANDER', 'Y', 'N', '2018-03-18 00:00:00', NULL),
-(31, 101, 'DALIA', 'Y', 'N', '2018-04-14 05:18:41', '2018-04-14 05:18:41'),
-(32, 99, 'MALAI', 'N', 'N', '2018-04-16 00:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ING_CATEGORIES`
---
-
-CREATE TABLE `ING_CATEGORIES` (
-  `ING_CAT_ID` int(11) NOT NULL,
-  `ING_CAT_NAME` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `CREATE_DTM` timestamp NOT NULL,
-  `MOD_DTM` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `ING_CATEGORIES`
---
-
-INSERT INTO `ING_CATEGORIES` (`ING_CAT_ID`, `ING_CAT_NAME`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'OTHERS', '2018-04-15 22:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ING_IMAGES`
---
-
-CREATE TABLE `ING_IMAGES` (
-  `ING_IMG_ID` int(11) NOT NULL,
-  `ING_ID` int(11) NOT NULL,
-  `ING_IMG` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `IS_DEF` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N',
-  `CREATE_DTM` timestamp NOT NULL,
-  `MOD_DTM` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `ING_IMAGES`
---
-
-INSERT INTO `ING_IMAGES` (`ING_IMG_ID`, `ING_ID`, `ING_IMG`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(2, 2, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(3, 3, 'app_data/master_data/ingredients/salt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(4, 4, 'app_data/master_data/ingredients/onion.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(5, 7, 'app_data/master_data/ingredients/cornflour.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(6, 8, 'app_data/master_data/ingredients/garlic.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(7, 9, 'app_data/master_data/ingredients/tofu.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(8, 11, 'app_data/master_data/ingredients/butter.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(9, 12, 'app_data/master_data/ingredients/paneer.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(10, 13, 'app_data/master_data/ingredients/cheese.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(11, 14, 'app_data/master_data/ingredients/eggs.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(12, 15, 'app_data/master_data/ingredients/garammasala.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(13, 16, 'app_data/master_data/ingredients/blacksalt.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(14, 18, 'app_data/master_data/ingredients/pudina.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(15, 19, 'app_data/master_data/ingredients/milk.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(16, 20, 'app_data/master_data/ingredients/pepper.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(17, 23, 'app_data/master_data/ingredients/tomato.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(18, 24, 'app_data/master_data/ingredients/bhindi.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(19, 25, 'app_data/master_data/ingredients/mustard_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(20, 26, 'app_data/master_data/ingredients/posto_seeds.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(21, 27, 'app_data/master_data/ingredients/turmeric.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(22, 28, 'app_data/master_data/ingredients/green_chilly.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(23, 29, 'app_data/master_data/ingredients/coriander.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(24, 101, 'app_data/master_data/ingredients/ginger.jpg', 'Y', '2018-04-16 06:37:19', NULL),
-(25, 99, 'app_data/master_data/ingredients/vegetable.jpg', 'N', '2018-04-15 22:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `LIKES`
---
-
-CREATE TABLE `LIKES` (
-  `LIKE_ID` int(11) NOT NULL,
-  `USER_ID` int(11) NOT NULL,
-  `TYPE` varchar(25) NOT NULL,
-  `TYPE_ID` int(11) NOT NULL,
-  `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `LIKES`
---
-
-INSERT INTO `LIKES` (`LIKE_ID`, `USER_ID`, `TYPE`, `TYPE_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'RECIPE', 103, 'N', '2017-10-15 11:19:18', '2018-03-20 19:24:44'),
-(2, 2, 'RECIPE', 103, 'N', '2017-10-15 12:49:50', '2017-11-07 12:00:57'),
-(3, 3, 'RECIPE', 103, 'N', '2017-11-07 15:14:53', NULL),
-(4, 4, 'RECIPE', 103, 'N', '2017-12-06 18:15:07', '2017-12-15 15:02:26'),
-(5, 1, 'COMMENT', 1, 'N', '2017-12-06 18:18:04', '2017-12-18 15:51:20'),
-(6, 1, 'REVIEW', 9, 'Y', '2017-12-06 18:19:18', '2018-03-26 17:01:46'),
-(8, 1, 'COMMENT', 9, 'Y', '2017-12-18 15:53:32', '2018-03-26 17:01:42'),
-(9, 1, 'REVIEW', 10, 'N', '2017-12-22 14:30:53', '2017-12-22 20:05:42'),
-(10, 1, 'REVIEW', 11, 'N', '2017-12-22 14:47:53', '2018-02-09 20:43:07'),
-(11, 1, 'COMMENT', 48, 'N', '2017-12-22 15:31:35', NULL),
-(12, 1, 'COMMENT', 51, 'N', '2017-12-22 15:31:53', NULL),
-(13, 1, 'COMMENT', 58, 'N', '2017-12-22 17:45:47', NULL),
-(14, 1, 'COMMENT', 50, 'N', '2017-12-22 17:51:32', NULL),
-(15, 1, 'COMMENT', 53, 'Y', '2017-12-22 20:17:26', '2018-03-01 22:10:12'),
-(16, 1, 'COMMENT', 55, 'N', '2017-12-22 20:17:30', '2018-03-01 22:10:28'),
-(17, 1, 'RECIPE', 66, 'Y', '2018-01-12 20:41:14', '2018-02-03 20:41:16'),
-(18, 1, 'COMMENT', 54, 'Y', '2018-01-16 00:56:05', '2018-03-01 22:10:11'),
-(19, 1, 'COMMENT', 52, 'N', '2018-03-01 22:10:13', NULL),
-(21, 1, 'RECIPE_IMG', 1, 'N', '2018-03-13 13:24:57', NULL),
-(22, 1, 'RECIPE_IMG', 96, 'Y', '2018-03-13 13:27:35', '2018-03-26 17:01:33'),
-(23, 1, 'USER', 1, 'Y', '2018-03-13 18:01:10', '2018-04-23 20:34:52'),
-(24, 1, 'USER', 2, 'N', '2018-03-13 18:03:36', NULL),
-(25, 1, 'USER', 3, 'N', '2018-03-13 18:07:08', NULL),
-(26, 1, 'USER', 4, 'N', '2018-03-13 18:10:16', '2018-04-15 11:09:28'),
-(27, 1, 'RECIPE_IMG', 94, 'Y', '2018-03-17 10:15:31', '2018-03-17 11:50:08'),
-(28, 1, 'RECIPE_IMG', 95, 'N', '2018-03-17 10:56:37', '2018-03-17 11:49:51'),
-(29, 1, 'RECIPE', 3, 'Y', '2018-03-17 11:14:54', '2018-03-17 11:17:53'),
-(30, 1, 'RECIPE_IMG', 100, 'N', '2018-03-19 19:36:17', '2018-04-16 18:21:03'),
-(31, 1, 'RECIPE_IMG', 102, 'Y', '2018-03-19 19:36:47', '2018-04-15 08:50:59'),
-(32, 1, 'RECIPE_IMG', 97, 'Y', '2018-03-20 18:58:30', '2018-03-20 19:24:55'),
-(33, 1, 'RECIPE', 105, 'N', '2018-03-23 19:00:11', '2018-03-26 17:01:28'),
-(34, 2, 'RECIPE', 105, 'N', '2018-03-26 19:05:54', NULL),
-(35, 3, 'RECIPE', 105, 'N', '2018-03-26 19:06:00', NULL),
-(36, 4, 'RECIPE', 105, 'N', '2018-03-26 19:06:07', NULL),
-(37, 1, 'COMMENT', 95, 'N', '2018-04-14 22:31:00', '2018-04-14 23:55:10'),
-(38, 1, 'COMMENT', 96, 'N', '2018-04-14 22:56:33', '2018-04-15 09:02:23'),
-(39, 1, 'COMMENT', 120, 'N', '2018-04-14 23:41:05', NULL),
-(40, 1, 'RECIPE_IMG', 103, 'N', '2018-04-15 00:07:19', NULL),
-(41, 1, 'RECIPE_IMG', 104, 'N', '2018-04-15 08:51:18', NULL),
-(42, 1, 'REVIEW', 15, 'N', '2018-04-15 09:56:24', '2018-04-15 10:21:49'),
-(43, 1, 'COMMENT', 115, 'N', '2018-04-16 18:21:20', NULL),
-(44, 1, 'COMMENT', 147, 'N', '2018-04-16 20:17:40', NULL),
-(45, 1, 'COMMENT', 164, 'N', '2018-04-16 21:28:00', NULL),
-(46, 1, 'COMMENT', 92, 'N', '2018-04-16 21:38:35', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `MILESTONE`
---
-
-CREATE TABLE `MILESTONE` (
-  `MLT_ID` int(11) NOT NULL,
-  `RANK_ID` int(11) NOT NULL,
-  `TYPE` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NUMBER` int(11) NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `MILESTONE`
---
-
-INSERT INTO `MILESTONE` (`MLT_ID`, `RANK_ID`, `TYPE`, `NUMBER`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 'LIKE', 0, '2018-01-15 00:00:00', NULL),
-(2, 1, 'REVIEW', 0, '2018-01-18 00:00:00', NULL),
-(3, 1, 'RECIPE', 0, '2018-01-25 00:00:00', NULL),
-(8, 2, 'LIKE', 100, '2018-01-15 00:00:00', NULL),
-(9, 2, 'RECIPE', 5, '2018-01-18 00:00:00', NULL),
-(10, 2, 'REVIEW', 25, '2018-01-25 00:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `QTY`
---
-
-CREATE TABLE `QTY` (
-  `QTY_ID` int(11) NOT NULL,
-  `QTY_NAME` varchar(25) NOT NULL,
-  `IS_DEF` varchar(1) NOT NULL DEFAULT 'N',
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `QTY`
---
-
-INSERT INTO `QTY` (`QTY_ID`, `QTY_NAME`, `IS_DEF`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'CUP', '', '2017-09-09 00:00:00', NULL),
-(2, 'PINCH', 'Y', '2017-09-09 00:00:00', NULL),
-(3, 'TABLE SPOON', '', '2017-09-09 00:00:00', NULL),
-(4, 'BOWL', '', '2017-09-09 00:00:00', NULL),
-(5, 'GLASS', '', '2017-09-09 00:00:00', NULL),
-(6, 'KILO GRAMS', 'N', '2018-03-18 00:00:00', NULL),
-(7, 'GRAMS', 'N', '2018-03-18 00:00:00', NULL),
-(10, 'LITRES', 'N', '2018-03-18 00:00:00', NULL),
-(11, 'MILLI LITRES', 'N', '2018-03-18 00:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `RANK`
---
-
-CREATE TABLE `RANK` (
-  `RANK_ID` int(11) NOT NULL,
-  `RANK_NAME` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `RANK_RULE` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `RANK`
---
-
-INSERT INTO `RANK` (`RANK_ID`, `RANK_NAME`, `RANK_RULE`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'FOODIE', 'Initial Rank', '2018-01-18 00:00:00', NULL),
-(2, 'KITCHEN HAND', '(5 Recipes & 100 Likes) or 25 Reviews', '2018-01-18 00:00:00', NULL),
-(3, 'COMMIS CHEF', '(20 Recipes & 500 Likes) or 200 Shares or 200 Reviews', '2018-01-18 00:00:00', NULL),
-(4, 'CHEF DE PARTIE', '(25 Recipes & 1000 likes) or 400 Shares or 400 Reviews', '2018-01-18 00:00:00', NULL),
-(5, 'SOUS CHEF', '(25 Recipes & 2000 Likes) or 500 Shares or 500 Reviews', '2018-01-18 00:00:00', NULL),
-(6, 'HEAD CHEF', '(25 Recipes & 5000 Likes) or 1000 Shares or 1000 Reviews', '2018-01-18 00:00:00', NULL),
-(7, 'EXECUTIVE CHEF', '(25 Recipes & 10000 Likes) or 5000 Shares or 5000 Reviews', '2018-01-18 00:00:00', NULL),
-(8, 'SUPER CHEF', '(50 Recipes & 20000 Likes) or 10000 Shares or 10000 Reviews', '2018-01-18 00:00:00', NULL),
-(9, 'MASTER CHEF', '(75 Recipes & 30000 Likes) or 20000 Shares or 20000 Reviews', '2018-01-18 00:00:00', NULL),
-(10, 'GODS COOK', '(100 Recipes & 50000 Likes) or 30000 Shares or 30000 Reviews', '2018-01-18 00:00:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `RECIPE`
---
-
-CREATE TABLE `RECIPE` (
-  `RCP_ID` int(11) NOT NULL,
-  `RCP_NAME` varchar(50) NOT NULL,
-  `FOOD_TYP_ID` int(11) NOT NULL,
-  `FOOD_CSN_ID` int(11) NOT NULL,
-  `IS_DEL` varchar(1) NOT NULL DEFAULT 'N',
-  `USER_ID` int(11) NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `RECIPE`
---
-
-INSERT INTO `RECIPE` (`RCP_ID`, `RCP_NAME`, `FOOD_TYP_ID`, `FOOD_CSN_ID`, `IS_DEL`, `USER_ID`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(3, 'Updated Recipe Name', 1, 1, 'N', 1, '2017-09-15 14:04:57', '2018-04-04 13:58:48'),
-(4, 'test recipe', 3, 1, 'N', 1, '2017-12-03 11:23:26', NULL),
-(76, 'bhindi masala 1', 3, 1, 'N', 1, '2017-12-03 11:17:31', NULL),
-(77, 'bhindi masala 2', 3, 1, 'N', 1, '2017-12-03 11:17:42', NULL),
-(79, 'abcd 1', 3, 1, 'N', 1, '2017-12-03 11:31:16', NULL),
-(80, 'abcd 2', 3, 1, 'Y', 1, '2017-12-03 11:34:45', NULL),
-(81, 'act', 3, 1, 'Y', 1, '2017-12-03 11:36:13', NULL),
-(87, 'TEST_RECIPE_NAME 1', 1, 1, 'N', 1, '2017-12-06 15:15:43', NULL),
-(88, 'TEST_RECIPE_NAME 2', 1, 1, 'N', 1, '2017-12-06 15:16:58', NULL),
-(89, 'TEST_RECIPE_NAME 3', 1, 1, 'Y', 1, '2017-12-06 15:17:53', NULL),
-(90, 'TEST_RECIPE_NAME 4', 1, 1, 'N', 1, '2017-12-06 15:20:48', NULL),
-(91, 'TEST_RECIPE_NAME 5', 1, 1, 'N', 1, '2017-12-06 15:23:47', NULL),
-(103, 'TEST_RECIPE_NAME 6', 1, 1, 'N', 1, '2017-12-08 06:28:24', '2017-12-19 19:45:19'),
-(104, 'TEST_RECIPE_NAME - 65', 1, 1, 'N', 1, '2018-03-18 10:04:17', NULL),
-(105, 'Bhindi in Sarson and Posto Sauce', 2, 1, 'N', 1, '2018-03-18 11:14:26', NULL),
-(106, 'TEST_RECIPE_NAME - 25', 1, 1, 'N', 1, '2018-03-24 17:55:56', NULL),
-(110, 'TEST_RECIPE_NAME - 84', 1, 1, 'N', 1, '2018-03-24 18:01:14', NULL),
-(111, 'TEST_RECIPE_NAME - 27', 1, 1, 'N', 1, '2018-03-24 18:01:42', NULL),
-(112, 'TEST_RECIPE_NAME - 98', 1, 1, 'N', 1, '2018-03-24 18:06:09', NULL),
-(113, 'TEST_RECIPE_NAME - 15', 1, 1, 'N', 1, '2018-03-24 18:12:13', NULL),
-(114, 'TEST_RECIPE_NAME - 28', 1, 1, 'N', 1, '2018-03-24 18:17:49', NULL),
-(115, 'TEST_RECIPE_NAME - 82', 1, 1, 'N', 1, '2018-03-24 18:18:15', NULL),
-(116, 'Masala puri', 4, 1, 'N', 100, '2018-03-27 23:46:31', NULL),
-(117, 'TEST_RECIPE_NAME - 40', 1, 1, 'N', 1, '2018-03-28 18:08:30', NULL),
-(118, 'TEST_RECIPE_NAME - 02', 1, 1, 'N', 1, '2018-03-28 18:10:43', NULL),
-(119, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-03-28 18:11:58', NULL),
-(121, 'TEST_RECIPE_NAME - 01', 1, 1, 'N', 1, '2018-04-05 08:02:32', NULL),
-(122, 'TEST_RECIPE_NAME - 07', 1, 1, 'N', 1, '2018-04-05 08:04:03', NULL),
-(123, 'TEST_RECIPE_NAME - 17', 1, 1, 'N', 1, '2018-04-05 08:07:53', NULL),
-(124, 'TEST_RECIPE_NAME - 42', 1, 1, 'N', 1, '2018-04-05 08:09:30', NULL),
-(125, 'TEST_RECIPE_NAME - 78', 1, 1, 'N', 1, '2018-04-05 08:10:48', NULL),
-(126, 'TEST_RECIPE_NAME - 11', 1, 1, 'N', 1, '2018-04-05 08:15:22', NULL),
-(127, 'TEST_RECIPE_NAME - 99', 1, 1, 'N', 1, '2018-04-05 08:21:15', NULL),
-(128, 'TEST_RECIPE_NAME - 60', 1, 1, 'N', 1, '2018-04-05 08:23:45', NULL),
-(129, 'TEST_RECIPE_NAME - 48', 1, 1, 'N', 1, '2018-04-22 19:34:00', NULL),
-(130, 'TEST_RECIPE_NAME - 27', 1, 1, 'N', 1, '2018-04-22 19:56:49', NULL),
-(131, 'TEST_RECIPE_NAME - 69', 1, 1, 'N', 1, '2018-04-22 20:03:10', NULL),
-(135, 'TEST_RECIPE_NAME - 45', 1, 1, 'N', 1, '2018-04-22 20:41:37', NULL),
-(147, 'My Grandma\'s Loki Halwa', 3, 1, 'N', 1, '2018-04-23 20:37:13', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `RECIPE_CONTAINS`
---
-
-CREATE TABLE `RECIPE_CONTAINS` (
-  `RCP_CONT_ID` int(11) NOT NULL,
-  `RCP_ID` int(11) NOT NULL,
-  `CONT_ID` int(11) NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `RECIPE_IMG`
---
-
-CREATE TABLE `RECIPE_IMG` (
-  `RCP_IMG_ID` int(11) NOT NULL,
-  `RCP_ID` int(11) NOT NULL,
-  `RCP_IMG` text NOT NULL,
-  `CREATE_DTM` datetime NOT NULL,
-  `MOD_DTM` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `RECIPE_IMG`
---
-
-INSERT INTO `RECIPE_IMG` (`RCP_IMG_ID`, `RCP_ID`, `RCP_IMG`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(44, 66, 'app_data/users/1/recipes/66/images/5a06d03641be2.jpg', '2017-11-11 11:25:58', NULL),
-(45, 66, 'app_data/users/1/recipes/66/images/5a06d03658f7c.jpg', '2017-11-11 11:25:58', NULL),
-(46, 66, 'app_data/users/1/recipes/66/images/5a06d03670163.jpg', '2017-11-11 11:25:58', NULL),
-(47, 66, 'app_data/users/1/recipes/66/images/5a06d036872d8.jpg', '2017-11-11 11:25:58', NULL),
-(48, 66, 'app_data/users/1/recipes/66/images/5a06d0369e45f.jpg', '2017-11-11 11:25:58', NULL),
-(49, 71, 'app_data/users/1/recipes/71/images/5a06d2653e082.jpg', '2017-11-11 11:35:17', NULL),
-(50, 71, 'app_data/users/1/recipes/71/images/5a06d265553a1.jpg', '2017-11-11 11:35:17', NULL),
-(51, 73, 'app_data/users/1/recipes/73/images/5a06d3075d570.jpg', '2017-11-11 11:37:59', NULL),
-(52, 73, 'app_data/users/1/recipes/73/images/5a06d3077483d.jpg', '2017-11-11 11:37:59', NULL),
-(53, 76, 'app_data/users/1/recipes/76/images/5a23cf3c3ebf8.jpg', '2017-12-03 11:17:32', NULL),
-(54, 77, 'app_data/users/1/recipes/77/images/5a23cf46c52f0.jpg', '2017-12-03 11:17:42', NULL),
-(55, 78, 'app_data/users/1/recipes/78/images/5a23d09eee7d0.jpg', '2017-12-03 11:23:27', NULL),
-(56, 78, 'app_data/users/1/recipes/78/images/5a23d09f11744.jpg', '2017-12-03 11:23:27', NULL),
-(57, 79, 'app_data/users/1/recipes/79/images/5a23d2754f5f8.jpg', '2017-12-03 11:31:17', NULL),
-(58, 80, 'app_data/users/1/recipes/80/images/5a23d3462876a.jpg', '2017-12-03 11:34:46', NULL),
-(59, 81, 'app_data/users/1/recipes/81/images/5a23d39d9f9a7.jpg', '2017-12-03 11:36:13', NULL),
-(65, 87, 'app_data/users/1/recipes/87/images/5a27fb906dfd0.jpg', '2017-12-06 15:15:44', NULL),
-(66, 87, 'app_data/users/1/recipes/87/images/5a27fb9085430.jpg', '2017-12-06 15:15:44', NULL),
-(67, 88, 'app_data/users/1/recipes/88/images/5a27fbdad4d0b.jpg', '2017-12-06 15:16:58', NULL),
-(68, 88, 'app_data/users/1/recipes/88/images/5a27fbdaec019.jpg', '2017-12-06 15:16:59', NULL),
-(69, 89, 'app_data/users/1/recipes/89/images/5a27fc125b733.jpg', '2017-12-06 15:17:54', NULL),
-(70, 89, 'app_data/users/1/recipes/89/images/5a27fc1272b40.jpg', '2017-12-06 15:17:54', NULL),
-(71, 90, 'app_data/users/1/recipes/90/images/5a27fcc125b68.jpg', '2017-12-06 15:20:49', NULL),
-(72, 90, 'app_data/users/1/recipes/90/images/5a27fcc13ccf8.jpg', '2017-12-06 15:20:49', NULL),
-(73, 91, 'app_data/users/1/recipes/91/images/5a27fd7407e37.jpg', '2017-12-06 15:23:48', NULL),
-(74, 91, 'app_data/users/1/recipes/91/images/5a27fd741f13b.jpg', '2017-12-06 15:23:48', NULL),
-(96, 103, 'app_data/users/1/recipes/103/images/5a395e41862d8.jpg', '2017-12-19 19:45:21', NULL),
-(97, 103, 'app_data/users/1/recipes/103/images/5a2a22f92838d.jpg', '2017-12-19 19:45:21', NULL),
-(98, 104, 'app_data/users/1/recipes/104/images/5aae2b9248dfc.jpg', '2018-03-18 10:04:18', NULL),
-(99, 104, 'app_data/users/1/recipes/104/images/5aae2b926ffa1.jpg', '2018-03-18 10:04:18', NULL),
-(100, 105, 'app_data/users/1/recipes/105/images/5aae3c05cb800.jpg', '2018-03-18 11:14:29', NULL),
-(102, 105, 'app_data/users/1/recipes/105/images/5aae3c06257ec.jpg', '2018-03-18 11:14:30', NULL),
-(103, 105, 'app_data/users/1/recipes/105/images/5aae3c064c9b5.jpg', '2018-03-18 11:14:30', NULL),
-(104, 105, 'app_data/users/1/recipes/105/images/5aae3c06739cd.jpg', '2018-03-18 11:14:30', NULL),
-(105, 106, 'app_data/users/1/recipes/106/images/5ab6831cecb16.jpg', '2018-03-24 17:55:57', NULL),
-(106, 106, 'app_data/users/1/recipes/106/images/5ab6831d169bd.jpg', '2018-03-24 17:55:57', NULL),
-(113, 110, 'app_data/users/1/recipes/110/images/5ab6845bc1b9e.jpg', '2018-03-24 18:01:15', NULL),
-(114, 110, 'app_data/users/1/recipes/110/images/5ab6845bdfc28.jpg', '2018-03-24 18:01:15', NULL),
-(115, 111, 'app_data/users/1/recipes/111/images/5ab684774b890.jpg', '2018-03-24 18:01:43', NULL),
-(116, 111, 'app_data/users/1/recipes/111/images/5ab68477698c5.jpg', '2018-03-24 18:01:43', NULL),
-(117, 112, 'app_data/users/1/recipes/112/images/5ab685823b052.jpg', '2018-03-24 18:06:10', NULL),
-(118, 112, 'app_data/users/1/recipes/112/images/5ab685825902c.jpg', '2018-03-24 18:06:10', NULL),
-(119, 113, 'app_data/users/1/recipes/113/images/5ab686eead1cb.jpg', '2018-03-24 18:12:14', NULL),
-(120, 113, 'app_data/users/1/recipes/113/images/5ab686eecb128.jpg', '2018-03-24 18:12:14', NULL),
-(121, 114, 'app_data/users/1/recipes/114/images/5ab6883e2068a.jpg', '2018-03-24 18:17:50', NULL),
-(122, 114, 'app_data/users/1/recipes/114/images/5ab6883e3e66a.jpg', '2018-03-24 18:17:50', NULL),
-(123, 115, 'app_data/users/1/recipes/115/images/5ab6885864d06.jpg', '2018-03-24 18:18:16', NULL),
-(124, 115, 'app_data/users/1/recipes/115/images/5ab6885882d32.jpg', '2018-03-24 18:18:16', NULL),
-(125, 116, 'app_data/users/100/recipes/116/images/5ababbb8684fb.jpg', '2018-03-27 23:46:32', NULL),
-(126, 117, 'app_data/users/1/recipes/117/images/5abbbdffdc007.jpg', '2018-03-28 18:08:31', NULL),
-(127, 117, 'app_data/users/1/recipes/117/images/5abbbe0007e6e.jpg', '2018-03-28 18:08:32', NULL),
-(128, 118, 'app_data/users/1/recipes/118/images/5abbbe841e2e3.jpg', '2018-03-28 18:10:44', NULL),
-(129, 118, 'app_data/users/1/recipes/118/images/5abbbe843c625.jpg', '2018-03-28 18:10:44', NULL),
-(130, 119, 'app_data/users/1/recipes/119/images/5abbbecfa6caf.jpg', '2018-03-28 18:11:59', NULL),
-(131, 119, 'app_data/users/1/recipes/119/images/5abbbecfc4ff1.jpg', '2018-03-28 18:11:59', NULL),
-(135, 3, 'app_data/users/1/recipes/3/images/5ac4bdfa478cb.jpg', '2018-04-04 13:58:50', NULL),
-(136, 121, 'app_data/users/1/recipes/121/images/5ac5bbf99213a.jpg', '2018-04-05 08:02:33', NULL),
-(137, 121, 'app_data/users/1/recipes/121/images/5ac5bbf9b0473.jpg', '2018-04-05 08:02:33', NULL),
-(138, 122, 'app_data/users/1/recipes/122/images/5ac5bc5498fc4.jpg', '2018-04-05 08:04:04', NULL),
-(139, 122, 'app_data/users/1/recipes/122/images/5ac5bc54b703f.jpg', '2018-04-05 08:04:04', NULL),
-(140, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a0d6d6.jpg', '2018-04-05 08:07:54', NULL),
-(141, 123, 'app_data/users/1/recipes/123/images/5ac5bd3a2b790.jpg', '2018-04-05 08:07:54', NULL),
-(142, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b77e66.jpg', '2018-04-05 08:09:31', NULL),
-(143, 124, 'app_data/users/1/recipes/124/images/5ac5bd9b95e5a.jpg', '2018-04-05 08:09:31', NULL),
-(144, 125, 'app_data/users/1/recipes/125/images/5ac5bde964980.jpg', '2018-04-05 08:10:49', NULL),
-(145, 125, 'app_data/users/1/recipes/125/images/5ac5bde982928.jpg', '2018-04-05 08:10:49', NULL),
-(146, 126, 'app_data/users/1/recipes/126/images/5ac5befb5d8a7.jpg', '2018-04-05 08:15:23', NULL),
-(147, 126, 'app_data/users/1/recipes/126/images/5ac5befb7b6f5.jpg', '2018-04-05 08:15:23', NULL),
-(148, 127, 'app_data/users/1/recipes/127/images/5ac5c05cbf186.jpg', '2018-04-05 08:21:16', NULL),
-(149, 127, 'app_data/users/1/recipes/127/images/5ac5c05cdd08b.jpg', '2018-04-05 08:21:16', NULL),
-(150, 128, 'app_data/users/1/recipes/128/images/5ac5c0f239dc5.jpg', '2018-04-05 08:23:46', NULL),
-(151, 128, 'app_data/users/1/recipes/128/images/5ac5c0f257d30.jpg', '2018-04-05 08:23:46', NULL),
-(152, 129, 'app_data/users/1/recipes/129/images/5adcc789e2222.jpg', '2018-04-22 19:34:02', NULL),
-(153, 129, 'app_data/users/1/recipes/129/images/5adcc78a186bd.jpg', '2018-04-22 19:34:02', NULL),
-(154, 130, 'app_data/users/1/recipes/130/images/5adccce25f7bb.jpg', '2018-04-22 19:56:50', NULL),
-(155, 130, 'app_data/users/1/recipes/130/images/5adccce286b7f.jpg', '2018-04-22 19:56:50', NULL),
-(156, 131, 'app_data/users/1/recipes/131/images/5adcce5f3857a.jpg', '2018-04-22 20:03:11', NULL),
-(157, 131, 'app_data/users/1/recipes/131/images/5adcce5f5f8b6.jpg', '2018-04-22 20:03:11', NULL),
-(161, 135, 'app_data/users/1/recipes/135/images/5adcd7626b10a.jpg', '2018-04-22 20:41:38', NULL),
-(162, 135, 'app_data/users/1/recipes/135/images/5adcd76292340.jpg', '2018-04-22 20:41:38', NULL),
-(174, 147, 'app_data/users/1/recipes/147/images/5ade27daf2ca7.jpg', '2018-04-23 20:37:15', NULL),
-(175, 147, 'app_data/users/1/recipes/147/images/5ade27db26dc7.jpg', '2018-04-23 20:37:15', NULL);
+(235, 147, 19, 1, 1, '2018-04-23 20:37:14', NULL),
+(236, 148, 27, 11, 1, '2018-04-28 12:24:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -1117,7 +2631,8 @@ INSERT INTO `RECIPE_STEPS` (`RCP_STPS_ID`, `RCP_ID`, `RCP_STEP`, `CREATE_DTM`, `
 (148, 131, 'TEST STEP 2', '2018-04-22 20:03:10', NULL),
 (152, 135, 'TEST STEP !', '2018-04-22 20:41:37', NULL),
 (153, 135, 'TEST STEP 2', '2018-04-22 20:41:37', NULL),
-(165, 147, 'once upon a time there lived a king who lived untill he died.', '2018-04-23 20:37:14', NULL);
+(165, 147, 'once upon a time there lived a king who lived untill he died.', '2018-04-23 20:37:14', NULL),
+(166, 148, 'test 1', '2018-04-28 12:24:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -1420,7 +2935,10 @@ INSERT INTO `RECIPE_TASTE` (`RCP_TST_ID`, `RCP_ID`, `TST_ID`, `TST_QTY`, `CREATE
 (418, 135, 3, 2, '2018-04-22 20:41:38', NULL),
 (452, 147, 1, 3, '2018-04-23 20:37:14', NULL),
 (453, 147, 2, 2, '2018-04-23 20:37:14', NULL),
-(454, 147, 3, 0, '2018-04-23 20:37:14', NULL);
+(454, 147, 3, 0, '2018-04-23 20:37:14', NULL),
+(455, 148, 1, 4, '2018-04-28 12:24:20', NULL),
+(456, 148, 2, 4, '2018-04-28 12:24:20', NULL),
+(457, 148, 3, 0, '2018-04-28 12:24:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -2175,7 +3693,33 @@ INSERT INTO `TIMELINES` (`TMLN_ID`, `USER_ID`, `REF_USER_ID`, `TYPE`, `TYPE_ID`,
 (1007, 1, 1, 'RECIPE_ADD', 135, 1, 'N', '2018-04-22 20:41:38', NULL),
 (1012, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-04-23 20:07:25', NULL),
 (1013, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-04-23 20:34:52', NULL),
-(1014, 1, 1, 'RECIPE_ADD', 147, 1, 'N', '2018-04-23 20:37:15', NULL);
+(1014, 1, 1, 'RECIPE_ADD', 147, 1, 'N', '2018-04-23 20:37:15', NULL),
+(1015, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-24 17:11:12', NULL),
+(1016, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-04-24 19:58:07', NULL),
+(1017, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-25 14:48:05', NULL),
+(1018, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-25 14:49:16', NULL),
+(1019, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-25 14:49:35', NULL),
+(1020, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-25 14:50:43', NULL),
+(1021, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-25 14:51:23', NULL),
+(1022, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-25 18:22:21', NULL),
+(1023, 1, 1, 'COMMENT_RECIPE_ADD', 170, 1, 'N', '2018-04-25 18:23:28', NULL),
+(1024, 1, 1, 'LIKE_RECIPE_IMG_ADD', 22, 1, 'N', '2018-04-25 18:24:19', NULL),
+(1025, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-25 18:25:15', NULL),
+(1026, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-25 18:25:53', NULL),
+(1027, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-25 18:27:13', NULL),
+(1028, 1, 3, 'USER_FOLLOW', 2, 1, 'N', '2018-04-26 23:24:48', NULL),
+(1029, 1, 2, 'USER_UNFOLLOW', 1, 1, 'N', '2018-04-27 00:04:28', NULL),
+(1030, 1, 14, 'USER_UNFOLLOW', 6, 1, 'N', '2018-04-27 00:07:25', NULL),
+(1031, 1, 14, 'USER_FOLLOW', 6, 1, 'N', '2018-04-27 00:07:36', NULL),
+(1041, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-04-28 01:36:42', NULL),
+(1042, 1, 1, 'USER_PHOTO_MODIFY', 1, 1, 'N', '2018-04-28 02:04:34', NULL),
+(1043, 1, 1, 'LIKE_USER_ADD', 23, 1, 'N', '2018-04-28 03:14:13', NULL),
+(1044, 1, 1, 'RECIPE_ADD', 148, 1, 'N', '2018-04-28 12:24:21', NULL),
+(1045, 1, 1, 'LIKE_RECIPE_ADD', 47, 1, 'Y', '2018-04-28 12:28:15', NULL),
+(1046, 1, 1, 'LIKE_RECIPE_REMOVE', 33, 1, 'N', '2018-04-28 12:38:26', NULL),
+(1047, 1, 1, 'LIKE_RECIPE_ADD', 33, 1, 'N', '2018-04-28 12:38:53', NULL),
+(1048, 1, 1, 'LIKE_RECIPE_REMOVE', 47, 1, 'N', '2018-04-28 12:40:00', NULL),
+(1049, 1, 1, 'LIKE_RECIPE_ADD', 47, 1, 'Y', '2018-04-28 12:40:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -2259,7 +3803,7 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`USER_ID`, `NAME`, `EMAIL`, `VERI_CODE`, `IMG`, `MOBILE`, `PASSWORD`, `GENDER`, `GENDER_SCOPE_ID`, `MOBILE_SCOPE_ID`, `EMAIL_SCOPE_ID`, `RANK_ID`, `SSID`, `SALT`, `VERI_CODE_DTM`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 'O\'reilly', 'ajitkamathk@gmail.com', 31516801, 'app_data/users/1/profile/images/5ade274bc7348.jpg', '2456540685', 'Q09PS0VSWXNOS1dJ', 'O', 1, 1, 1, 1, '', 'c05LV0k=', '2018-03-26 19:59:53', '2017-09-23 00:00:00', '2018-04-23 20:34:51'),
+(1, 'Ajit Kamath', 'ajith_kamath@syntelinc.com', 53129671, 'app_data/users/1/profile/images/5ae3895a60f27.jpg', '9884463437', 'Q09PS0VSWTZZQTBt', 'M', 1, 1, 1, 1, '', 'NllBMG0=', '2018-04-28 02:34:02', '2017-09-23 00:00:00', '2018-04-28 03:14:35'),
 (2, 'USER - 2', 'testemail@cookery.com', 0, NULL, '9962218578', 'aWFtdGVzdE15RkJE', 'm', 1, 1, 1, 1, 'BlsXt3B4aS', 'TXlGQkQ=', '2017-12-29 06:29:04', '2017-10-31 05:05:03', '2017-12-31 06:54:52'),
 (3, 'USER - 3', 'testemail2@cookery.com', 0, NULL, '7503876065', 'aWFtdGVzdG9TS3Ay', 'm', 1, 1, 1, 1, 'UgbYfiDJNG', 'b1NLcDI=', '2017-12-29 06:29:04', '2017-10-31 05:22:11', NULL),
 (4, 'USER - 4', 'vishal@cookery.com', 0, 'app_data/users/99/profile/images/5ab6b3f780f34.jpg', '8124627522', 'cm9jazJaUEtw', 'M', 1, 1, 1, 1, 'zXpcSp5CRx', 'MlpQS3A=', '2017-12-29 06:29:04', '2017-10-31 13:37:06', NULL),
@@ -2445,12 +3989,12 @@ CREATE TABLE `USER_RELATIONSHIP` (
 --
 
 INSERT INTO `USER_RELATIONSHIP` (`RLT_ID`, `FLWR_USER_ID`, `FLWS_USER_ID`, `IS_DEL`, `CREATE_DTM`, `MOD_DTM`) VALUES
-(1, 1, 2, 'N', '2017-12-27 08:20:02', '2018-03-26 18:36:12'),
-(2, 1, 3, 'Y', '2017-12-27 08:27:22', '2018-02-15 10:47:36'),
+(1, 1, 2, 'Y', '2017-12-27 08:20:02', '2018-04-27 00:04:28'),
+(2, 1, 3, 'N', '2017-12-27 08:27:22', '2018-04-26 23:24:47'),
 (3, 1, 4, 'N', '2018-01-08 08:37:17', '2018-03-26 19:18:13'),
 (4, 1, 8, 'N', '2018-01-08 08:37:24', NULL),
 (5, 1, 15, 'N', '2018-01-08 08:37:56', NULL),
-(6, 1, 14, 'N', '2018-01-08 08:38:08', NULL),
+(6, 1, 14, 'N', '2018-01-08 08:38:08', '2018-04-27 00:07:36'),
 (17, 4, 5, 'N', '2018-01-08 09:05:36', NULL),
 (19, 3, 4, 'N', '2018-01-08 09:07:23', '2018-01-08 09:08:04'),
 (20, 2, 3, 'N', '2018-01-08 16:14:30', '2018-01-11 08:29:10'),
@@ -2484,17 +4028,12 @@ INSERT INTO `VIEWS` (`VIEW_ID`, `USER_ID`, `RCP_ID`, `CREATE_DTM`, `MOD_DTM`) VA
 (11, 1, 103, '2017-12-13 18:13:18', NULL),
 (12, 1, 105, '2018-03-18 15:18:28', NULL),
 (13, 100, 116, '2018-03-27 23:46:53', NULL),
-(14, 100, 105, '2018-03-27 23:47:50', NULL);
+(14, 100, 105, '2018-03-27 23:47:50', NULL),
+(15, 1, 148, '2018-04-28 12:24:45', NULL);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `ABOUT_US`
---
-ALTER TABLE `ABOUT_US`
-  ADD UNIQUE KEY `ABOUT_US_ID_INDEX` (`ABOUT_US_ID`);
 
 --
 -- Indexes for table `ADMIN_USER`
@@ -2503,27 +4042,18 @@ ALTER TABLE `ADMIN_USER`
   ADD PRIMARY KEY (`ADMIN_USER_ID`);
 
 --
+-- Indexes for table `AUDIT`
+--
+ALTER TABLE `AUDIT`
+  ADD PRIMARY KEY (`AUDIT_ID`);
+
+--
 -- Indexes for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
   ADD PRIMARY KEY (`COM_ID`),
   ADD KEY `RCP_ID` (`TYPE_ID`),
   ADD KEY `USER_ID` (`USER_ID`);
-
---
--- Indexes for table `CONTAINS`
---
-ALTER TABLE `CONTAINS`
-  ADD PRIMARY KEY (`CONT_ID`),
-  ADD KEY `FK1` (`ING_ID`);
-
---
--- Indexes for table `DISH`
---
-ALTER TABLE `DISH`
-  ADD PRIMARY KEY (`DISH_ID`),
-  ADD KEY `DISH_FK1` (`QTY_ID`),
-  ADD KEY `DISH_FK2` (`ING_AKA_ID`);
 
 --
 -- Indexes for table `FAVOURITES`
@@ -2537,13 +4067,15 @@ ALTER TABLE `FAVOURITES`
 -- Indexes for table `FOOD_CUISINE`
 --
 ALTER TABLE `FOOD_CUISINE`
-  ADD PRIMARY KEY (`FOOD_CSN_ID`);
+  ADD PRIMARY KEY (`FOOD_CSN_ID`),
+  ADD UNIQUE KEY `FOOD_CSN_NAME` (`FOOD_CSN_NAME`);
 
 --
 -- Indexes for table `FOOD_TYPE`
 --
 ALTER TABLE `FOOD_TYPE`
-  ADD PRIMARY KEY (`FOOD_TYP_ID`);
+  ADD PRIMARY KEY (`FOOD_TYP_ID`),
+  ADD UNIQUE KEY `FOOD_TYP_NAME` (`FOOD_TYP_NAME`);
 
 --
 -- Indexes for table `INGREDIENT`
@@ -2553,17 +4085,36 @@ ALTER TABLE `INGREDIENT`
   ADD KEY `INGREDIENT_FK1` (`ING_CAT_ID`);
 
 --
+-- Indexes for table `INGREDIENT_NUTRITION`
+--
+ALTER TABLE `INGREDIENT_NUTRITION`
+  ADD PRIMARY KEY (`ING_NUT_ID`),
+  ADD UNIQUE KEY `ING_NUT_ID` (`ING_NUT_ID`,`ING_ID`,`NUT_ID`),
+  ADD KEY `INGREDIENT_NUTRITION_FK1` (`ING_ID`),
+  ADD KEY `INGREDIENT_NUTRITION_FK3` (`NUT_UOM_ID`),
+  ADD KEY `INGREDIENT_NUTRITION_FK2` (`NUT_ID`);
+
+--
+-- Indexes for table `INGREDIENT_UOM`
+--
+ALTER TABLE `INGREDIENT_UOM`
+  ADD PRIMARY KEY (`ING_UOM_ID`),
+  ADD UNIQUE KEY `ING_UOM_NAME` (`ING_UOM_NAME`);
+
+--
 -- Indexes for table `ING_AKA`
 --
 ALTER TABLE `ING_AKA`
   ADD PRIMARY KEY (`ING_AKA_ID`),
+  ADD UNIQUE KEY `ING_AKA_NAME` (`ING_AKA_NAME`),
   ADD KEY `ING_AKA_FK1` (`ING_ID`);
 
 --
 -- Indexes for table `ING_CATEGORIES`
 --
 ALTER TABLE `ING_CATEGORIES`
-  ADD PRIMARY KEY (`ING_CAT_ID`);
+  ADD PRIMARY KEY (`ING_CAT_ID`),
+  ADD UNIQUE KEY `ING_CAT_NAME` (`ING_CAT_NAME`);
 
 --
 -- Indexes for table `ING_IMAGES`
@@ -2588,10 +4139,27 @@ ALTER TABLE `MILESTONE`
   ADD KEY `MILESTON_FK1` (`RANK_ID`);
 
 --
--- Indexes for table `QTY`
+-- Indexes for table `NUTRITION`
 --
-ALTER TABLE `QTY`
-  ADD PRIMARY KEY (`QTY_ID`);
+ALTER TABLE `NUTRITION`
+  ADD PRIMARY KEY (`NUT_ID`),
+  ADD UNIQUE KEY `NUT_NAME` (`NUT_NAME`),
+  ADD KEY `NUTRITION_FK1` (`NUT_CAT_ID`);
+
+--
+-- Indexes for table `NUTRITION_CATEGORIES`
+--
+ALTER TABLE `NUTRITION_CATEGORIES`
+  ADD PRIMARY KEY (`NUT_CAT_ID`),
+  ADD UNIQUE KEY `NUT_CAT_NAME` (`NUT_CAT_NAME`);
+
+--
+-- Indexes for table `NUTRITION_UOM`
+--
+ALTER TABLE `NUTRITION_UOM`
+  ADD PRIMARY KEY (`NUT_UOM_ID`),
+  ADD UNIQUE KEY `NUT_UOM_NAME` (`NUT_UOM_NAME`),
+  ADD UNIQUE KEY `NUT_UOM_NAME_2` (`NUT_UOM_NAME`);
 
 --
 -- Indexes for table `RANK`
@@ -2606,17 +4174,18 @@ ALTER TABLE `RECIPE`
   ADD PRIMARY KEY (`RCP_ID`);
 
 --
--- Indexes for table `RECIPE_CONTAINS`
---
-ALTER TABLE `RECIPE_CONTAINS`
-  ADD PRIMARY KEY (`RCP_CONT_ID`),
-  ADD KEY `RECIPE_CONTAINS_FK1` (`RCP_ID`);
-
---
 -- Indexes for table `RECIPE_IMG`
 --
 ALTER TABLE `RECIPE_IMG`
   ADD PRIMARY KEY (`RCP_IMG_ID`);
+
+--
+-- Indexes for table `RECIPE_INGREDIENTS`
+--
+ALTER TABLE `RECIPE_INGREDIENTS`
+  ADD PRIMARY KEY (`RCP_ING_ID`),
+  ADD KEY `RECIPE_INGREDIENTS_FK1` (`ING_UOM_ID`),
+  ADD KEY `RECIPE_INGREDIENTS_FK2` (`ING_AKA_ID`);
 
 --
 -- Indexes for table `RECIPE_STEPS`
@@ -2721,34 +4290,22 @@ ALTER TABLE `VIEWS`
 --
 
 --
--- AUTO_INCREMENT for table `ABOUT_US`
---
-ALTER TABLE `ABOUT_US`
-  MODIFY `ABOUT_US_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `ADMIN_USER`
 --
 ALTER TABLE `ADMIN_USER`
   MODIFY `ADMIN_USER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `AUDIT`
+--
+ALTER TABLE `AUDIT`
+  MODIFY `AUDIT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1384;
+
+--
 -- AUTO_INCREMENT for table `COMMENTS`
 --
 ALTER TABLE `COMMENTS`
-  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
-
---
--- AUTO_INCREMENT for table `CONTAINS`
---
-ALTER TABLE `CONTAINS`
-  MODIFY `CONT_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `DISH`
---
-ALTER TABLE `DISH`
-  MODIFY `DISH_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
+  MODIFY `COM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `FAVOURITES`
@@ -2760,13 +4317,13 @@ ALTER TABLE `FAVOURITES`
 -- AUTO_INCREMENT for table `FOOD_CUISINE`
 --
 ALTER TABLE `FOOD_CUISINE`
-  MODIFY `FOOD_CSN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `FOOD_CSN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `FOOD_TYPE`
 --
 ALTER TABLE `FOOD_TYPE`
-  MODIFY `FOOD_TYP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `FOOD_TYP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `INGREDIENT`
@@ -2775,28 +4332,40 @@ ALTER TABLE `INGREDIENT`
   MODIFY `ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
+-- AUTO_INCREMENT for table `INGREDIENT_NUTRITION`
+--
+ALTER TABLE `INGREDIENT_NUTRITION`
+  MODIFY `ING_NUT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
+-- AUTO_INCREMENT for table `INGREDIENT_UOM`
+--
+ALTER TABLE `INGREDIENT_UOM`
+  MODIFY `ING_UOM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `ING_AKA`
 --
 ALTER TABLE `ING_AKA`
-  MODIFY `ING_AKA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ING_AKA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `ING_CATEGORIES`
 --
 ALTER TABLE `ING_CATEGORIES`
-  MODIFY `ING_CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ING_CAT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ING_IMAGES`
 --
 ALTER TABLE `ING_IMAGES`
-  MODIFY `ING_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ING_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `LIKES`
 --
 ALTER TABLE `LIKES`
-  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `LIKE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `MILESTONE`
@@ -2805,10 +4374,22 @@ ALTER TABLE `MILESTONE`
   MODIFY `MLT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `QTY`
+-- AUTO_INCREMENT for table `NUTRITION`
 --
-ALTER TABLE `QTY`
-  MODIFY `QTY_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `NUTRITION`
+  MODIFY `NUT_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `NUTRITION_CATEGORIES`
+--
+ALTER TABLE `NUTRITION_CATEGORIES`
+  MODIFY `NUT_CAT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT for table `NUTRITION_UOM`
+--
+ALTER TABLE `NUTRITION_UOM`
+  MODIFY `NUT_UOM_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `RANK`
@@ -2820,31 +4401,31 @@ ALTER TABLE `RANK`
 -- AUTO_INCREMENT for table `RECIPE`
 --
 ALTER TABLE `RECIPE`
-  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
-
---
--- AUTO_INCREMENT for table `RECIPE_CONTAINS`
---
-ALTER TABLE `RECIPE_CONTAINS`
-  MODIFY `RCP_CONT_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RCP_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_IMG`
 --
 ALTER TABLE `RECIPE_IMG`
-  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `RCP_IMG_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+
+--
+-- AUTO_INCREMENT for table `RECIPE_INGREDIENTS`
+--
+ALTER TABLE `RECIPE_INGREDIENTS`
+  MODIFY `RCP_ING_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_STEPS`
 --
 ALTER TABLE `RECIPE_STEPS`
-  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `RCP_STPS_ID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT for table `RECIPE_TASTE`
 --
 ALTER TABLE `RECIPE_TASTE`
-  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=455;
+  MODIFY `RCP_TST_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=458;
 
 --
 -- AUTO_INCREMENT for table `REVIEWS`
@@ -2868,7 +4449,7 @@ ALTER TABLE `TASTES`
 -- AUTO_INCREMENT for table `TIMELINES`
 --
 ALTER TABLE `TIMELINES`
-  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1015;
+  MODIFY `TMLN_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1050;
 
 --
 -- AUTO_INCREMENT for table `TRENDS`
@@ -2910,7 +4491,7 @@ ALTER TABLE `USER_RELATIONSHIP`
 -- AUTO_INCREMENT for table `VIEWS`
 --
 ALTER TABLE `VIEWS`
-  MODIFY `VIEW_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `VIEW_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -2921,19 +4502,6 @@ ALTER TABLE `VIEWS`
 --
 ALTER TABLE `COMMENTS`
   ADD CONSTRAINT `FK_USER_COMMENTS` FOREIGN KEY (`USER_ID`) REFERENCES `USER` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `CONTAINS`
---
-ALTER TABLE `CONTAINS`
-  ADD CONSTRAINT `FK1` FOREIGN KEY (`ING_ID`) REFERENCES `INGREDIENT` (`ing_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `DISH`
---
-ALTER TABLE `DISH`
-  ADD CONSTRAINT `DISH_FK1` FOREIGN KEY (`QTY_ID`) REFERENCES `QTY` (`qty_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `DISH_FK2` FOREIGN KEY (`ING_AKA_ID`) REFERENCES `ING_AKA` (`ing_aka_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `FAVOURITES`
@@ -2947,6 +4515,14 @@ ALTER TABLE `FAVOURITES`
 --
 ALTER TABLE `INGREDIENT`
   ADD CONSTRAINT `INGREDIENT_FK1` FOREIGN KEY (`ING_CAT_ID`) REFERENCES `ING_CATEGORIES` (`ing_cat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `INGREDIENT_NUTRITION`
+--
+ALTER TABLE `INGREDIENT_NUTRITION`
+  ADD CONSTRAINT `INGREDIENT_NUTRITION_FK1` FOREIGN KEY (`ING_ID`) REFERENCES `INGREDIENT` (`ing_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `INGREDIENT_NUTRITION_FK2` FOREIGN KEY (`NUT_ID`) REFERENCES `NUTRITION` (`nut_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `INGREDIENT_NUTRITION_FK3` FOREIGN KEY (`NUT_UOM_ID`) REFERENCES `NUTRITION_UOM` (`nut_uom_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ING_AKA`
@@ -2973,10 +4549,17 @@ ALTER TABLE `MILESTONE`
   ADD CONSTRAINT `MILESTON_FK1` FOREIGN KEY (`RANK_ID`) REFERENCES `RANK` (`rank_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `RECIPE_CONTAINS`
+-- Constraints for table `NUTRITION`
 --
-ALTER TABLE `RECIPE_CONTAINS`
-  ADD CONSTRAINT `RECIPE_CONTAINS_FK1` FOREIGN KEY (`RCP_ID`) REFERENCES `RECIPE` (`rcp_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `NUTRITION`
+  ADD CONSTRAINT `NUTRITION_FK1` FOREIGN KEY (`NUT_CAT_ID`) REFERENCES `NUTRITION_CATEGORIES` (`nut_cat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `RECIPE_INGREDIENTS`
+--
+ALTER TABLE `RECIPE_INGREDIENTS`
+  ADD CONSTRAINT `RECIPE_INGREDIENTS_FK1` FOREIGN KEY (`ING_UOM_ID`) REFERENCES `INGREDIENT_UOM` (`ing_uom_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `RECIPE_INGREDIENTS_FK2` FOREIGN KEY (`ING_AKA_ID`) REFERENCES `ING_AKA` (`ing_aka_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `RECIPE_STEPS`

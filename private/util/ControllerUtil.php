@@ -171,19 +171,18 @@
 			else if(INGREDIENT_FETCH == $function_key){
 				$response = Ingredient::fetchIngredients($searchQuery);
 			}
-
+			else if(INGREDIENT_NUTRITION_FETCH == $function_key){
+				$response = Ingredient::fetchIngredientNutrientValues($ing_id);
+			}
 			else if(MYLIST_FETCH == $function_key){
 				$response = Ingredient::checkUserLists($user_id);
 			}
-
 			else if(PHP_FUNCTION_KEY_MYLIST_SUBMIT == $function_key){
 				$response = Ingredient::saveuserIngedrientList($list_name,$user_id, $ing_aka_id , $ing_aka_name);
 			}
-
 			else if(PHP_FUNCTION_KEY_MYLIST_VIEW == $function_key){
 				$response = Ingredient::viewuserIngedrientList($list_id);
 			}
-
 			else if(PHP_FUNCTION_KEY_MYLIST_UPDATE == $function_key){
 				$response = Ingredient::updateUserIngedrientList($list_id, $list_name,$user_id, $ing_aka_id , $ing_aka_name);
 			}
@@ -270,12 +269,6 @@
 			}
 			//like
 
-			//favourite
-			else if(NUTRIENT_INGREDIENT_FETCH == $function_key){
-				$response = Nutrient::fetchIngredientNutrientValues($ing_id);
-			}
-			//favourite
-			
 			//favourite
 			else if(FAV_SUBMIT == $function_key){
 				$response = Favourites::submitFavourite($user_id, $rcp_id);

@@ -42,7 +42,8 @@
     //review
 
     //ingredient
-    define("INGREDIENT_FETCH", "INGREDIENT_FETCH");                     //Postman completed            
+    define("INGREDIENT_FETCH", "INGREDIENT_FETCH");                     //Postman completed   
+	define("INGREDIENT_NUTRITION_FETCH", "INGREDIENT_NUTRITION_FETCH");	//Postman completed   
     //ingredient
     
     //timeline
@@ -87,10 +88,6 @@
     define("PHP_FUNCTION_KEY_MYLIST_UPDATE","PHP_FUNCTION_KEY_MYLIST_UPDATE");
     define("PHP_FUNCTION_KEY_MYLIST_SUBMIT_FROM_RECIPE","PHP_FUNCTION_KEY_MYLIST_SUBMIT_FROM_RECIPE");
     //MyList
-
-	//nutrients
-	define("NUTRIENT_INGREDIENT_FETCH", "NUTRIENT_INGREDIENT_FETCH");	//Postman completed
-	//nutrients
 
     //Favourites
     define("FAV_SUBMIT","FAV_SUBMIT");
