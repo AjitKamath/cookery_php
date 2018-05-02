@@ -38,6 +38,7 @@
 			}
 			//check for null/empty
 			
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -46,7 +47,7 @@
 							FROM RECIPE AS RCP
 							INNER JOIN USER AS USR ON USR.USER_ID = RCP.USER_ID 
 							INNER JOIN RECIPE_INGREDIENTS AS RCP_ING ON RCP_ING.RCP_ID = RCP.RCP_ID
-							INNER JOIN ING_AKA AS ING_AKA ON ING_AKA.ING_AKA_ID = DSH.ING_AKA_ID
+							INNER JOIN ING_AKA AS ING_AKA ON ING_AKA.ING_AKA_ID = RCP_ING.ING_AKA_ID
 							WHERE (RCP_NAME LIKE '%".$searchQuery."%'
 							OR ING_AKA_NAME LIKE '%".$searchQuery."%' 
 							OR USR.NAME LIKE '%".$searchQuery."%')
@@ -88,13 +89,14 @@
 					array_push($result_array, $temp_array); 
 				}
 				
-				return json_encode($result_array);
+				$response = $result_array;
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -259,16 +261,18 @@
 			}
 			//check for null/empty
 			
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
-				return json_encode(self::getRecipeImages($con, $user_id, $rcp_id));
+				$response = self::getRecipeImages($con, $user_id, $rcp_id);
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -386,6 +390,7 @@
 			}
 			//validations
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -783,7 +788,7 @@
 				//submit recipe transaction ends here
 				
 				//response
-				return json_encode($response);
+				$response = json_encode($response);
 				//response
 			}
 			catch(Exception $e){
@@ -795,6 +800,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -838,6 +844,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -912,7 +919,7 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -920,6 +927,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -936,6 +944,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1011,7 +1020,7 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -1019,6 +1028,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -1035,6 +1045,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1099,7 +1110,7 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -1107,6 +1118,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response );
 			}
 		}
 		
@@ -1123,6 +1135,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1195,7 +1208,7 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Total Recipes fetched : ".sizeof($result_array));
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -1203,6 +1216,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}	
 		}
 		
@@ -1219,6 +1233,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1238,7 +1253,7 @@
 				//get review for $rcp_id & $user_id
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -1246,6 +1261,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -1262,6 +1278,7 @@
 			}
 			//validations
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1346,7 +1363,7 @@
 					array_push($response_array, $result_array);
 
 					//response
-					return json_encode($response_array);
+					$response = $response_array;
 					//response
 				}
 			}
@@ -1356,6 +1373,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -1422,7 +1440,6 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
-				
 				return json_encode($result_arr);
 			}
 		}

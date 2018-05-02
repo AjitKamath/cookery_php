@@ -1,12 +1,13 @@
 <?php
 	class Audit{
-		public static function submitAudit($clientIP, $apiKey, $clientOS, $clientBrowser, $clientIdentifier, $httpStatusCode, $functionKey, $country, $city){
+		public static function submitAudit($clientIP, $apiKey, $clientOS, $clientBrowser, $clientIdentifier, 
+										   $httpStatusCode, $functionKey, $country, $city, $responseTime){
 			try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
-				$query = "INSERT INTO `AUDIT` (`CLNT_ID`, `CLNT_IP_ADD`, `API_KEY` , `CLNT_OS`, `CLNT_BROWSER`, 
+				$query = "INSERT INTO `AUDIT` (`CLNT_ID`, `RESPONSE_TIME`, `CLNT_IP_ADD`, `API_KEY` , `CLNT_OS`, `CLNT_BROWSER`, 
 						`HTTP_STAT_CD`, `FUNC_KEY`, `COUNTRY`, `CITY`, `CREATE_DTM`) 
-						VALUES ('".$clientIdentifier."', '".$clientIP."', '".$apiKey."', '".$clientOS."', '".$clientBrowser."', 
+						VALUES ('".$clientIdentifier."', '".$responseTime."', '".$clientIP."', '".$apiKey."', '".$clientOS."', '".$clientBrowser."', 
 						'".$httpStatusCode."', '".$functionKey."', '".$country."', '".$city."', CURRENT_TIMESTAMP)";
 				
 				if(mysqli_query($con, $query)){

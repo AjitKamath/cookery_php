@@ -30,6 +30,7 @@
             }
 			//check for null/empty
 			
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -48,13 +49,14 @@
 					array_push($result_array, $temp);
 				}
 
-				return json_encode($result_array);
+				$response = $result_array;
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 	}

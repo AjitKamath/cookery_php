@@ -8,11 +8,12 @@
     define("LOGS_DIRECTORY", HOME_DIRECTORY."logs/");
     define("APP_DATA_DIRECTORY", HOME_DIRECTORY."app_data/");
     define("APP_DATA_USERS_DIRECTORY", APP_DATA_DIRECTORY."users/");
+	define("APP_DATA_TEMP_DIRECTORY", APP_DATA_DIRECTORY."temp/");
     define("APP_DATA_PROFILE_DIRECTORY", "profile/");
     define("APP_DATA_PROFILE_IMAGES_DIRECTORY", "images/");
     define("APP_DATA_RECIPES_DIRECTORY", "recipes/");
     define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
-    define("STATS_DIRECTORY", HOME_DIRECTORY."private/stats/");
+	define("STATS_DIRECTORY", HOME_DIRECTORY."private/stats/");
     define("STATS_DATABASE_FILE", "database_stats.ini");
     define("WEB_DIRECTORY", HOME_DIRECTORY."private/web/");
     define("MAIL_TEMPLATES_DIRECTORY", WEB_DIRECTORY."templates/");
@@ -79,7 +80,7 @@
     define("DATABASE_USER", "cookeryuser");
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
-    define("DATABASE_PORT", "3307");
+    define("DATABASE_PORT", "3306");
 	
 	define("DATABASE_TIMEZONE_OFFSET", "+5:30");	//this is relative to UTC timezone. For eg: IST is +5:30
 

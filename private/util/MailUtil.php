@@ -217,8 +217,8 @@
             for ($i = 0; $i < count($recipientNames); $i++) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : recipientNames[".$i."](".$recipientNames[$i].")");
 			}
-			for ($i = 0; $i < count($attachments); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : attachments[".$i."](".$attachments[$i].")");
+			if(count($attachments['name']) == 0){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : attachments[".$i."](".$attachments['name'][$i].")");
 			}
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : subject(".$subject.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : from(".$from.")");
@@ -287,7 +287,12 @@
 		}
 		
         private static function sendMails($fromEmail, $fromName, $recipientEmails, $recipientNames, $subject, $bodies, $attachments) {
-           	// Passing `true` enables exceptions
+           	for($i = 0; $i < count($recipientEmails); $i++){
+				self::sendMail($fromEmail, $fromName, $recipientEmails[$i], $recipientNames[$i], $subject, $bodies[$i], $attachments);
+			}
+			return;
+			
+			// Passing `true` enables exceptions
             $mail = new PHPMailer(true);                              
             try {
                 //Server settings
@@ -364,18 +369,23 @@
 				//Recipient
                 
                 //Attachments
-				if(Util::check_for_null($attachments)){
-					for($i = 0; $i < count($attachments['tmp_name']); $i++){
-						$uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $attachments['name'][$i]));
-						$filename = $attachments['name'][$i];
-						if (move_uploaded_file($attachments['tmp_name'][$i], $uploadfile)) {
-							$mail->addAttachment($uploadfile, $filename);
-						} else {
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to attach file to email by moving file to " . $uploadfile);
+				for($i = 0; $i< count($attachments['tmp_name']); $i++){
+					$extension = end(explode(".", $attachments['name'][$i]));
+ 					$uploadFile = APP_DATA_TEMP_DIRECTORY.hash('sha256', $attachments['name'][$i]).".".$extension;
+					
+					if (isset($attachments['tmp_name'][$i])){
+						try{
+							move_uploaded_file($attachments['tmp_name'][$i], $uploadFile);
+							$mail->addAttachment($uploadFile, $attachments['name'][$i]);
 						}
-						
-						//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
+						catch(Exception $e){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to attach file to email by moving file to " . $uploadFile);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Exception : ".$e->getMessage());
+							echo "Failed bro !";
+						}
 					}
+
+					//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
 				}
 				//Attachments
                 
@@ -387,11 +397,11 @@
 				//Content
 
                 $mail->send();
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email(s) sent with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent to ".$recipientEmail." with subject('".$subject."')");
                 return true;
             } catch (Exception $e) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $mail->ErrorInfo);
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to send email to ".$recipientEmail." with subject('".$subject."')");
             }
 			
 			return false;

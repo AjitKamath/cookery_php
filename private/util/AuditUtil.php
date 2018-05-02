@@ -20,6 +20,9 @@
 				$city = $geoLocation['geoplugin_city'];
 			}
 			
+			$responseTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+			$responseTime = self::getNumberInTwoDecimals($responseTime);
+
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "--");
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "CLIENT IP      -> ".$clientIP);
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "API KEY        -> ".$apiKey);
@@ -29,15 +32,16 @@
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "CLIENT COUNTRY -> ".$country);
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "CLIENT CITY    -> ".$city);
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "RESPONSE CODE  -> ".$httpStatusCode);
+			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "RESPONSE TIME  -> ".$responseTime);
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "FUNCTION KEY   -> ".$functionKey);
 			
 			//register request into Audit table
-			Audit::submitAudit($clientIP, $apiKey, $clientOS, $clientBrowser, $clientIdentifier, $httpStatusCode, $functionKey, $country, $city);
+			Audit::submitAudit($clientIP, $apiKey, $clientOS, $clientBrowser, $clientIdentifier, $httpStatusCode, $functionKey, $country, $city, $responseTime);
 			
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "<=====".$functionKey);
 		}
 		
-		public static function getFunctionKey(){
+		private static function getFunctionKey(){
 			$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 			if(!Util::check_for_null($function_key)){
 				return "";
@@ -47,48 +51,59 @@
 			}
 		}
 		
-		public static function getHttpResponseCode(){
+		private static function getHttpResponseCode(){
 			return http_response_code();
 		}
 		
-		public static function getClientIdentifier(){
+		private static function getClientIdentifier(){
 			$clientIdentifier = '';
-			if (isset($_SERVER['HTTP_X_APP_UNIQUE_ID']))
+			if (isset($_SERVER['HTTP_X_APP_UNIQUE_ID'])){
 				$clientIdentifier = $_SERVER['HTTP_X_APP_UNIQUE_ID'];
-			else
+			}
+			else{
 				$clientIdentifier = 'UNKNOWN';
+			}
 			return $clientIdentifier;
 		}
 		
-		public static function getClientIP(){
+		private static function getClientIP(){
 			$ipaddress = '';
-			if (isset($_SERVER['HTTP_CLIENT_IP']))
+			if (isset($_SERVER['HTTP_CLIENT_IP'])){
 				$ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-			else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+			}
+			else if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
 				$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-			else if(isset($_SERVER['HTTP_X_FORWARDED']))
+			}
+			else if(isset($_SERVER['HTTP_X_FORWARDED'])){
 				$ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-			else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+			}
+			else if(isset($_SERVER['HTTP_FORWARDED_FOR'])){
 				$ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-			else if(isset($_SERVER['HTTP_FORWARDED']))
+			}
+			else if(isset($_SERVER['HTTP_FORWARDED'])){
 				$ipaddress = $_SERVER['HTTP_FORWARDED'];
-			else if(isset($_SERVER['REMOTE_ADDR']))
+			}
+			else if(isset($_SERVER['REMOTE_ADDR'])){
 				$ipaddress = $_SERVER['REMOTE_ADDR'];
-			else
+			}
+			else{
 				$ipaddress = 'UNKNOWN';
+			}
 			return $ipaddress;
 		}
 		
-		public static function getApiKey(){
+		private static function getApiKey(){
 			$apiKey = '';
-			if (isset($_SERVER['HTTP_X_API_KEY']))
+			if (isset($_SERVER['HTTP_X_API_KEY'])){
 				$apiKey = $_SERVER['HTTP_X_API_KEY'];
-			else
+			}
+			else{
 				$apiKey = 'UNKNOWN';
+			}
 			return $apiKey;
 		}
 		
-		function getClientOS() { 
+		private static function getClientOS() { 
     		$user_agent = $_SERVER['HTTP_USER_AGENT'];
     		$os_platform    =   "UNKNOWN";
     		$os_array       =   array(
@@ -125,7 +140,7 @@
     		return $os_platform;
 		}
 		
-		function getClientBrowser() {
+		private static function getClientBrowser() {
 			$user_agent = $_SERVER['HTTP_USER_AGENT'];
 			$browser        =   "UNKNOWN";
 			$browser_array  =   array(
@@ -150,7 +165,7 @@
    			return $browser;
 		}
 		
-		function getClientGeoLocation(){
+		private static function getClientGeoLocation(){
 			/*Get user ip address*/
 			$ip_address=AuditUtil::getClientIP();
 
@@ -164,6 +179,10 @@
 			else{
 				return "";
 			}
+		}
+		
+		private static function getNumberInTwoDecimals($number){
+			return number_format((float)$number, 2, '.', '');
 		}
 	}
 ?>
