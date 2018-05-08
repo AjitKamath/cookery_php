@@ -13,6 +13,7 @@
 			}
 			//check for null/empty
 
+			$response = "[]";
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -26,11 +27,10 @@
 					$scopeName = User::getScopeName($con, $scope_id);
 					//fetch scope name
 					
-					return "[{\"TMLN_ID\":\"$tmln_id\",\"scopeId\":\"$scope_id\",\"scopeName\":\"$scopeName\"}]"; 
+					$response = "[{'TMLN_ID':'$tmln_id','scopeId':'$scope_id','scopeName':'$scopeName'}]"; 
 				}
 				else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Timeline(".$tmln_id.") scope could not be updated to '".$scope_id."'");
-					return "[]"; 
 				} 
 				//register the timeline
 			}
@@ -39,6 +39,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -50,6 +51,7 @@
 			}
 			//check for null/empty
 
+			$response = "{}";
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
@@ -58,11 +60,11 @@
 
 				if(mysqli_query($con, $query)){
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO , "Timeline(".$tmln_id.") has been marked as deleted");
-					return "{\"is_error\":false,\"err_code\":0,\"err_message\":\"Timeline deleted !\"}"; 
+					$response = "{'is_error':false,'err_code':0,'err_message':'Timeline deleted !'}"; 
 				}
 				else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Timeline(".$tmln_id.") could not be deleted");
-					return "{\"is_error\":true,\"err_code\":1,\"err_message\":\"Timeline could not be deleted !\"}"; 
+					$response = "{'is_error':true,'err_code':1,'err_message':'Timeline could not be deleted !'}"; 
 				} 
 				//register the timeline
 			}
@@ -71,6 +73,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -127,6 +130,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -455,7 +459,7 @@
 				//get timeline details for $tmln_id
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -463,6 +467,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
@@ -479,6 +484,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -766,7 +772,7 @@
 				//get timeline details for $tmln_id
 
 				//response
-				return json_encode($result_array);
+				$response = $result_array;
 				//response
 			}
 			catch(Exception $e){
@@ -774,6 +780,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 	}

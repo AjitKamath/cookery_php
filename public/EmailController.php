@@ -9,7 +9,7 @@
 	$recipientNames = isset($_POST['recipient_names']) ? $_POST['recipient_names'] : '';
 	$subject = isset($_POST['subject']) ? $_POST['subject'] : '';
 	$bodies = isset($_POST['bodies']) ? $_POST['bodies'] : '';
-	$attachments = isset($_POST['attachments']) ? $_POST['attachments'] : '';
+	$attachments = isset($_FILES['attachments']) ? $_FILES['attachments'] : '';
 	
  	$purpose = isset($_GET['purpose']) ? $_GET['purpose'] : '';
 	$email = isset($_GET['email']) ? $_GET['email'] : '';

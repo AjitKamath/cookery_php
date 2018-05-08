@@ -3,12 +3,16 @@
 
     //master
     define("MASTER_DATA_FETCH_ALL", "MASTER_DATA_FETCH_ALL");           //Postman completed
-    define("QUANTITY_FETCH_ALL", "QUANTITY_FETCH_ALL");                 //Postman completed
-    define("FOOD_CUISINE_FETCH_ALL", "FOOD_CUISINE_FETCH_ALL");         //Postman completed
-    define("FOOD_TYPE_FETCH_ALL", "FOOD_TYPE_FETCH_ALL");               //Postman completed
-    define("TASTE_FETCH_ALL", "TASTE_FETCH_ALL");                       //Postman completed
     //master
     
+	//cuisine
+    define("CUISINE_FETCH", "CUISINE_FETCH");           				//Postman completed
+    //cuisine
+
+	//cuisine
+    define("FOOD_TYPE_FETCH", "FOOD_TYPE_FETCH");           			//Postman completed
+    //cuisine
+
     //comment
     define("COMMENT_DELETE", "COMMENT_DELETE");                         //Postman completed
     define("COMMENT_FETCH_ALL", "COMMENT_FETCH_ALL");                   //Postman completed     
@@ -18,7 +22,7 @@
 
     //recipe
     define("RECIPE_DELETE", "RECIPE_DELETE");                           //Postman completed
-    define("RECIPE_IMAGES_FETCH", "RECIPE_IMAGES_FETCH");                           //Postman completed
+    define("RECIPE_IMAGES_FETCH", "RECIPE_IMAGES_FETCH");               //Postman completed
     define("RECIPE_FETCH", "RECIPE_FETCH");                             //Postman completed
     define("RECIPE_FAVORITE_FETCH", "RECIPE_FAVORITE_FETCH");           //Postman completed
     define("RECIPE_USER_FETCH", "RECIPE_USER_FETCH");                   //Postman completed
@@ -38,7 +42,8 @@
     //review
 
     //ingredient
-    define("INGREDIENT_FETCH", "INGREDIENT_FETCH");                     //Postman completed            
+    define("INGREDIENT_FETCH", "INGREDIENT_FETCH");                     //Postman completed   
+	define("INGREDIENT_NUTRITION_FETCH", "INGREDIENT_NUTRITION_FETCH");	//Postman completed   
     //ingredient
     
     //timeline

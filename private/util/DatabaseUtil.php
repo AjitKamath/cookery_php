@@ -31,7 +31,7 @@
 			}
 
 			$_SESSION[DATABASE_TRANSACTION_COUNTER] = $_SESSION[DATABASE_TRANSACTION_COUNTER] + 1;
-			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Database Transaction Status : started [transactions alive-".$_SESSION[DATABASE_TRANSACTION_COUNTER]."]");
+			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Database Transaction Status : started [transactions alive-	".$_SESSION[DATABASE_TRANSACTION_COUNTER]."]");
 			//audit
 		}
 		
@@ -59,7 +59,7 @@
 
 			if(! $conn) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed to connect to MySQL: " . mysqli_connect_error());
-				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+				Util::setResponseHeader(HTTP_INTERNAL_ERROR);
 				die("Failed to connect to MySQL: " . mysqli_error());		
 			}
 			else{
@@ -83,6 +83,8 @@
 			}
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Database Status : connected [connections alive-".$_SESSION[DATABASE_CONNECTION_COUNTER]."]");
 			
+			//Offset default mysql timezone to IST
+			mysqli_query($conn, "SET time_zone = '".DATABASE_TIMEZONE_OFFSET."'");
 			
 			return $conn;
 		}

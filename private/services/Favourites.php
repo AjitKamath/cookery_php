@@ -13,6 +13,7 @@
 			}
 			//check for null/empty
 
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -55,7 +56,6 @@
 				}
 
 				$result_array = array();
-
 				//check the status (favourite/Non-Favorite)
 				$query = "SELECT IS_DEL AS FAV_STATUS FROM FAVOURITES WHERE USER_ID = '$user_id' AND RCP_ID = '$rcp_id'";
 				$result = mysqli_query($con, $query);
@@ -72,7 +72,7 @@
 					array_push($response_array, $result_array);
 
 					//response
-					return json_encode($response_array);
+					$response = $response_array;
 					//response
 				}
 			}
@@ -81,6 +81,7 @@
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 	

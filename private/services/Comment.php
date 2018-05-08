@@ -45,6 +45,7 @@
             }
             //check for null/empty
 
+			$response = array();
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
@@ -99,6 +100,8 @@
                 } 
 				//delete comment
 				
+				$response = $result_arr;
+				
 				//transaction end
 				DatabaseUtil::endTransaction($con);
             }
@@ -114,8 +117,7 @@
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
-				
-				return json_encode($result_arr);
+				return json_encode($response);
             }
         }
 		
@@ -221,7 +223,7 @@
                 }
 
                 //response
-                return json_encode($result_array);
+                return $result_array;
                 //response
             }
             catch(Exception $e){
@@ -252,16 +254,17 @@
             }
             //check for null/empty
 
+			$response = array();
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
-
-                return self::getComments($con, $user_id, $type, $type_id, $index);
+				$response = self::getComments($con, $user_id, $type, $type_id, $index);
             }
             catch(Exception $e){
                 LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
             }
         }
 		
@@ -288,6 +291,7 @@
             }
             //check for null/empty
 
+			$response = array();
             try{
                 $con = DatabaseUtil::getInstance()->open_connection();
 
@@ -340,15 +344,14 @@
 					Timeline::addTimeline($con, $user_id, $ref_user_id, $timeline_type, $com_id, DEFAULT_SCOPE_ID);
 					//register timeline
 					
+					//get latest comments
+					$response = self::getComment($con, $user_id, $com_id);
+					
 					//transaction end
 					DatabaseUtil::endTransaction($con);
-					
-					//get latest comments
-					return self::getComment($con, $user_id, $com_id);
                 }
                 else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed !! Comment('$comment') could not be submitted by the user('$user_id') for the type('$type')");
-					
 					throw new Exception("Failed to submit comment");
                 } 
 				//insert comment
@@ -361,6 +364,7 @@
             }
             finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
             }
         }
     }

@@ -10,7 +10,7 @@
 
 	//SMTP needs accurate times, and the PHP time zone MUST be set
 	//This should be done in your php.ini, but this is how to do it if you don't have access to that
-	date_default_timezone_set('Etc/UTC');
+	date_default_timezone_set(LOGS_TIMEZONE);
 
 	//TODO: This class must be equipped to handle the misusing of this service as a spam gateway
 	//https://github.com/PHPMailer/PHPMailer/blob/master/examples/simple_contact_form.phps
@@ -127,7 +127,7 @@
 			$recepientNames = array();
 			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_1;
 			$recepientNames[count($recepientNames)] = MAIL_RECEPIENT_ADMIN_NAME_2;
-
+			
 			//attachments
 			date_default_timezone_set(LOGS_TIMEZONE);
 			$today = date(LOGS_FILE_FORMAT);
@@ -166,6 +166,7 @@
 					<br/>
 					This generally happens if the connection was not closed after opening it. 
 					Ensure that there are no more than one connection opened per service request & connection is closed in the finally block of each service request. 
+					Check if there is a return statement before closing the connection.
 					See attached log files to identify the crime scene.
 					<br/><br/>
 					<b>When it happened ? </b><br/>This happened at ".$now, $body);
@@ -190,7 +191,8 @@
 					<b>Why it happened ? </b>
 					<br/>
 					This generally happens if the transaction was started and was never ended. 
-					Ensure that there are no more than one transaction opened per service request & transaction is ended in the finally block of each service request. 
+					Ensure that there are no more than one transaction opened per service request & transaction is ended in the finally block of each service request.
+					Check if there is a return statement before closing the transaction.
 					See attached log files to identify the crime scene.
 					<br/><br/>
 					<b>When it happened ? </b><br/>This happened at ".$now, $body);
@@ -215,8 +217,8 @@
             for ($i = 0; $i < count($recipientNames); $i++) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : recipientNames[".$i."](".$recipientNames[$i].")");
 			}
-			for ($i = 0; $i < count($attachments); $i++) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : attachments[".$i."](".$attachments[$i].")");
+			if(count($attachments['name']) == 0){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : attachments[".$i."](".$attachments['name'][$i].")");
 			}
             LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : subject(".$subject.")");
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "REQUEST PARAM : from(".$from.")");
@@ -285,7 +287,12 @@
 		}
 		
         private static function sendMails($fromEmail, $fromName, $recipientEmails, $recipientNames, $subject, $bodies, $attachments) {
-           	// Passing `true` enables exceptions
+           	for($i = 0; $i < count($recipientEmails); $i++){
+				self::sendMail($fromEmail, $fromName, $recipientEmails[$i], $recipientNames[$i], $subject, $bodies[$i], $attachments);
+			}
+			return;
+			
+			// Passing `true` enables exceptions
             $mail = new PHPMailer(true);                              
             try {
                 //Server settings
@@ -323,6 +330,7 @@
 
 					//body
 					$mail->Body = $bodies[$i];
+					
 					$mail->send();
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
 					//body
@@ -361,18 +369,23 @@
 				//Recipient
                 
                 //Attachments
-				if(Util::check_for_null($attachments)){
-					for($i = 0; $i < count($attachments['tmp_name']); $i++){
-						$uploadfile = tempnam(sys_get_temp_dir(), hash('sha256', $attachments['name'][$i]));
-						$filename = $attachments['name'][$i];
-						if (move_uploaded_file($attachments['tmp_name'][$i], $uploadfile)) {
-							$mail->addAttachment($uploadfile, $filename);
-						} else {
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to attach file to email by moving file to " . $uploadfile);
+				for($i = 0; $i< count($attachments['tmp_name']); $i++){
+					$extension = end(explode(".", $attachments['name'][$i]));
+ 					$uploadFile = APP_DATA_TEMP_DIRECTORY.hash('sha256', $attachments['name'][$i]).".".$extension;
+					
+					if (isset($attachments['tmp_name'][$i])){
+						try{
+							move_uploaded_file($attachments['tmp_name'][$i], $uploadFile);
+							$mail->addAttachment($uploadFile, $attachments['name'][$i]);
 						}
-						
-						//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
+						catch(Exception $e){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to attach file to email by moving file to " . $uploadFile);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Exception : ".$e->getMessage());
+							echo "Failed bro !";
+						}
 					}
+
+					//$mail->addAttachment("tmp/".$attachments['name'][$i], 'Attachment-'.($i+1));         // Optional name
 				}
 				//Attachments
                 
@@ -384,11 +397,11 @@
 				//Content
 
                 $mail->send();
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email(s) sent with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent to ".$recipientEmail." with subject('".$subject."')");
                 return true;
             } catch (Exception $e) {
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $mail->ErrorInfo);
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to send email to ".$recipientEmail." with subject('".$subject."')");
             }
 			
 			return false;
