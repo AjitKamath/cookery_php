@@ -34,24 +34,36 @@
 	$username 						= isset($_POST['username']) ? $_POST['username'] : '';
 	$password 						= isset($_POST['password']) ? $_POST['password'] : '';
 
-	$adminusername 						= isset($_GET['adminusername']) ? $_GET['adminusername'] : '';
-	$adminpassword 						= isset($_GET['adminuserpassword']) ? $_GET['adminuserpassword'] : '';
+	$adminusername 				= isset($_GET['adminusername']) ? $_GET['adminusername'] : '';
+	$adminpassword 				= isset($_GET['adminuserpassword']) ? $_GET['adminuserpassword'] : '';
 
 	$ingredientname 			= isset($_GET['ing_name']) ? $_GET['ing_name'] : '';
+  $ingname         			= isset($_POST['ing_name']) ? $_POST['ing_name'] : '';
+  $categoryid      			= isset($_POST['category']) ? $_POST['category'] : '';
+  $ingtagid        			= isset($_POST['availableingredientsunderselectedcategory']) ? $_POST['availableingredientsunderselectedcategory'] : '';
 	$ingredientakaname 		= isset($_GET['ing_aka_name']) ? $_GET['ing_aka_name'] : '';
 	$foodtypename			 		= isset($_GET['food_type_name']) ? $_GET['food_type_name'] : '';
+  $foodtypenameadd	 		= isset($_POST['food_type_name']) ? $_POST['food_type_name'] : '';
+  $foodcuisine    	 		= isset($_POST['cuisine_name']) ? $_POST['cuisine_name'] : '';
+
+  // will be depcrecated
+  $foodtypenamesearch		= isset($_GET['foodtypename']) ? $_GET['foodtypename'] : '';
 	$foodcuisinename	 		= isset($_GET['food_cuisine_name']) ? $_GET['food_cuisine_name'] : '';
+  $foodcuisinesearch		= isset($_GET['food_csn_name_search']) ? $_GET['food_csn_name_search'] : '';
 	$foodtypeid				 		= isset($_GET['foodtypeid']) ? $_GET['foodtypeid'] : '';
 	$foodcsnid				 		= isset($_GET['foodcsnid']) ? $_GET['foodcsnid'] : '';
 	$ingid				 				= isset($_GET['ingid']) ? $_GET['ingid'] : '';
   $ingids			 		  		= isset($_GET['ingids']) ? $_GET['ingids'] : '';
   $foodcuisineids				= isset($_GET['foodcuisineids']) ? $_GET['foodcuisineids'] : '';
+  $foodtypeids	  			= isset($_GET['foodtypeids']) ? $_GET['foodtypeids'] : '';
+  $userids	  	    		= isset($_GET['$userids']) ? $_GET['$userids'] : '';
+  $category     	  		= isset($_GET['category']) ? $_GET['category'] : '';
   
   $role       				  = isset($_GET['role']) ? $_GET['role'] : '';
   $mobile     				  = isset($_GET['mobile']) ? $_GET['mobile'] : '';
   $email      				  = isset($_GET['email']) ? $_GET['email'] : '';
   $userid      				  = isset($_GET['userid']) ? $_GET['userid'] : '';
-
+  
 
 
 	$img = "IMG_TO_BE_UPLOADED";
@@ -65,13 +77,13 @@
 		echo User::showAllUsers();
 	}
 	else if(SAVE_INGREDIENT == $function_key){
-		echo Save::saveIgredient($ingredientname, $ingredientakaname, $img);
+		echo Save::saveIngredient($ingname, $categoryid, $ingtagid);
 	}
 	else if(SAVE_FOOD_TYPE == $function_key){
-		echo Save::saveFoodType($foodtypename, $img);
+		echo Save::saveFoodType($foodtypenameadd);
 	}
 	else if(SAVE_FOOD_CUISINE == $function_key){
-		echo Save::saveFoodCuisine($foodcuisinename, $img);
+		echo Save::saveFoodCuisine($foodcuisine);
 	}
 	else if(FETCH_INGREDIENTS == $function_key){
 		echo Master::fetchIngredients();
@@ -95,13 +107,13 @@
 		echo Master::filterIngredient($ingid);
 	}
 	else if(UPDATE_INGREDIENTS == $function_key){
-		echo Master::updateIngredient($ingid, $ingredientname, $ingredientakaname);
+		echo Save::updateIngredient($ingid, $ingredientname, $ingredientakaname);
 	}
 	else if(UPDATE_FOOD_TYPE == $function_key){
-		echo Master::updateFoodType($foodtypeid, $foodtypename);
+		echo Save::updateFoodType($foodtypeid, $foodtypename);
 	}
 	else if(UPDATE_FOOD_CUISINE == $function_key){
-		echo Master::updateFoodCuisine($foodcsnid, $foodcuisinename);
+		echo Save::updateFoodCuisine($foodcsnid, $foodcuisinename);
 	}
   else if(MULTI_FOOD_CUISINE_DELETE == $function_key){
 		echo Save::multipleFoodCuisineDelete($foodcuisineids);
@@ -128,11 +140,55 @@
 		echo User::logout();
 	}
   else if(ADMIN_SAVE_USER == $function_key){
-		echo User::adminSaveUser($username, $password, $role, $mobile, $email);
+		echo User::adminSaveUser($adminusername, $adminpassword, $role, $mobile, $email);
 	}
   else if(UPDATE_ADMIN_USER_ROLE == $function_key){
 		echo User::updateAdminUserRole($userid, $role);
 	}
+  else if(SETUP_FOOD_CUISINE_DASHBOARD == $function_key){
+		echo Master::fetchFoodCuisineDashboard();
+	}
+  else if(SETUP_FOOD_TYPE_DASHBOARD == $function_key){
+		echo Master::fetchFoodTypeDashboard();
+	}
+  else if(SETUP_INGREDIENTS_DASHBOARD == $function_key){
+		echo Master::fetchIngredientsDashboard();
+	}
+  else if(SETUP_USERS_DASHBOARD == $function_key){
+		echo Master::fetchUsersDashboard();
+	}
+  else if(SEARCH_FOOD_TYPE == $function_key){
+		echo Master::searchFoodType($foodtypenamesearch);
+	}
+  else if(SEARCH_FOOD_CUISINE == $function_key){
+		echo Master::searchFoodCuisine($foodcuisinesearch);
+	}
+  else if(SETUP_MAIN_DASHBOARD == $function_key){
+		echo Master::setupMainDashboard();
+	}
+  else if(FETCH_ING_CATEGORY == $function_key){
+		echo Master::fetchIngCategory();
+	}
+  else if(FETCH_ING_BY_CATEGORY == $function_key){
+		echo Master::fetchIngByCategory($category);
+	}
+  else if(SEARCH_INGRIDIENTS == $function_key){
+		echo Master::searchIngredient($ingredientname);
+	}
+  else if(SEARCH_USER == $function_key){
+		echo Master::searchUser($adminusername);
+	}
+  else if(MULTI_ADMIN_USER_DELETE == $function_key){
+    echo Save::multipleUserDelete($userids);
+	}
+
+
+
+
+
+
+
+
 
 
 

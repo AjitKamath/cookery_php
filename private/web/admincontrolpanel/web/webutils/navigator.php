@@ -8,7 +8,7 @@
                             <img src="http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Admin</p>
+                            <p>Hello, <?php echo $_SESSION['username']  ?></p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -37,9 +37,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="addingredient.php"><i class="fa fa-angle-double-right"></i> Add Ingredient</a></li>
-                                <li><a href="modifyingredient.php"><i class="fa fa-angle-double-right"></i> Modify Ingredient</a></li>
-                                <li><a href="deleteingredient.php"><i class="fa fa-angle-double-right"></i> Delete Ingredient</a></li>
+                                <li><a href="manageingredient.php"><i class="fa fa-angle-double-right"></i> Manage Ingredient</a></li>
                             </ul>
                         </li>
 												<li class="treeview">
@@ -49,9 +47,7 @@
 																	<i class="fa fa-angle-left pull-right"></i>
 															</a>
 															<ul class="treeview-menu">
-																	<li><a href="addfoodtype.php"><i class="fa fa-angle-double-right"></i> Add Food Type</a></li>
-																	<li><a href="modifyfoodtype.php"><i class="fa fa-angle-double-right"></i> Modify Food Type</a></li>
-																	<li><a href="deletefoodtype.php"><i class="fa fa-angle-double-right"></i> Delete Food Type</a></li>
+																	<li><a href="managefoodtype.php"><i class="fa fa-angle-double-right"></i> Manage Food Type</a></li>
 															</ul>
 													</li>
 												<li class="treeview">
@@ -61,9 +57,7 @@
 																	<i class="fa fa-angle-left pull-right"></i>
 															</a>
 															<ul class="treeview-menu">
-																	<li><a href="addfoodcuisine.php"><i class="fa fa-angle-double-right"></i> Add Food Cuisine</a></li>
-																	<li><a href="modifyfoodcuisine.php"><i class="fa fa-angle-double-right"></i> Modify Food Cuisine</a></li>
-																	<li><a href="deletefoodcuisine.php"><i class="fa fa-angle-double-right"></i> Delete Food Cuisine</a></li>
+																	<li><a href="managefoodcuisine.php"><i class="fa fa-angle-double-right"></i> Manage Food Cuisine</a></li>
 															</ul>
 													</li>
 													<li class="treeview">
@@ -73,10 +67,7 @@
 																	<i class="fa fa-angle-left pull-right"></i>
 															</a>
 															<ul class="treeview-menu">
-																	<li><a href="adduser.php"><i class="fa fa-angle-double-right"></i> Add User</a></li>
-																	<li><a href="deleteuser.php"><i class="fa fa-angle-double-right"></i> Remove User</a></li>
-																	<li><a href="manageuserrole.php"><i class="fa fa-angle-double-right"></i> Manage User Role</a></li>
-																	<li><a href="resetpassword.php"><i class="fa fa-angle-double-right"></i> Reset Password</a></li>
+																	<li><a href="manageuser.php"><i class="fa fa-angle-double-right"></i> Manage User</a></li>
 															</ul>
 													</li>
 									</ul>

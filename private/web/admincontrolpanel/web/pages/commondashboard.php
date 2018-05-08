@@ -1,36 +1,23 @@
-<?php
-session_start();
-if($_SESSION['sid']==session_id())
-{
-include_once($_SESSION['webimports']);
-?>
 <!DOCTYPE html>
 <html>
     <head>
-        <?php include_once(COMMON_HEAD); ?>
+        <meta charset="UTF-8">
+        <title>Cookery</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- bootstrap 3.0.2 -->
+				<?php include_once(WEB_IMPORTS); ?>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
     </head>
-    <body class="skin-blue" onload="setUpMainDashboard()">
+    <body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
-        <?php include_once(COMMON_HEADER); ?>
-        <div class="wrapper row-offcanvas row-offcanvas-left">
-            <!-- Left side column. contains the logo and sidebar -->
-             <?php include_once(NAVIGATOR); ?>
-
+        
             <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1>
-                        Dashboard
-                        <small>Control panel</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
-                    </ol>
-                </section>
-
-                <!-- Main content -->
+            <!-- Main content -->
                 <section class="content">
 
                     <!-- Small boxes (Stat box) -->
@@ -39,10 +26,9 @@ include_once($_SESSION['webimports']);
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
-                                    <h3 id="recipecount">
+                                    <h3 id="count">
                                     </h3>
-                                    <p>
-                                        Active Recipes
+                                    <p id="type">
                                     </p>
                                 </div>
                                 <div class="icon">
@@ -57,14 +43,13 @@ include_once($_SESSION['webimports']);
                             <!-- small box -->
                             <div class="small-box bg-green">
                                 <div class="inner">
-                                    <h3 id="liveusers">
+                                    <h3 id="activecount">
                                     </h3>
-                                    <p>
-                                        Live Users
+                                    <p id="active">
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    <i class="ion ion-checkmark-circled"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
@@ -75,14 +60,13 @@ include_once($_SESSION['webimports']);
                             <!-- small box -->
                             <div class="small-box bg-yellow">
                                 <div class="inner">
-                                    <h3 id="registercount">
+                                    <h3 id="inactivecount">
                                     </h3>
-                                    <p>
-                                        User Registrations
+                                    <p id="inactive">
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-trash-a"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
@@ -90,13 +74,6 @@ include_once($_SESSION['webimports']);
                             </div>
                         </div><!-- ./col -->
                 </section><!-- /.content -->
-            </aside><!-- /.right-side -->
-        </div><!-- ./wrapper -->
+           
    </body>
 </html>
-<?php
-}
-else{
-    header('Location : '.LOGIN );
-}
-?>

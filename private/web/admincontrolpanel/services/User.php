@@ -29,6 +29,9 @@
 							if($result_obj->ADMIN_USER_NAME == $username && $result_obj->ADMIN_USER_PASSWORD == $password){
 								session_start();
 								$_SESSION['sid']=session_id();
+                $_SESSION['webimports'] = WEB_IMPORTS;
+                $_SESSION['username'] = $result_obj->ADMIN_USER_NAME;
+                $_SESSION['role'] = $result_obj->ADMIN_USER_ROLE;
 								header("Location:/private/web/admincontrolpanel/web/pages/dashboard.php");
 							}else{
 								$error = "INVALID CREDENTIALS";

@@ -20,7 +20,139 @@
 					DatabaseUtil::getInstance()->close_connection($connection);
 				}
 		}
-		
+    
+    public static function fetchFoodCuisineDashboard(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNT FROM `FOOD_CUISINE`");
+          $activeresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTACTIVE FROM `FOOD_CUISINE` WHERE IS_DEL = 'N'");
+          $inactiveresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTINACTIVE FROM `FOOD_CUISINE` WHERE IS_DEL = 'Y'");
+					$myArray = array();
+        
+          $row = $result->fetch_object();
+          $activerow = $activeresult->fetch_object();
+          $inactiverow = $inactiveresult->fetch_object();
+ 					
+          $tempArray['totalcount'] = $row->TOTALCOUNT;
+          $tempArray['activecount'] = $activerow->TOTALCOUNTACTIVE;
+          $tempArray['inactivecount'] = $inactiverow->TOTALCOUNTINACTIVE;
+          array_push($myArray, $tempArray);
+          
+					echo json_encode($myArray);
+        
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
+    public static function fetchFoodTypeDashboard(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNT FROM `FOOD_TYPE`");
+          $activeresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTACTIVE FROM `FOOD_TYPE` WHERE IS_DEL = 'N'");
+          $inactiveresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTINACTIVE FROM `FOOD_TYPE` WHERE IS_DEL = 'Y'");
+					$myArray = array();
+        
+          $row = $result->fetch_object();
+          $activerow = $activeresult->fetch_object();
+          $inactiverow = $inactiveresult->fetch_object();
+ 					
+          $tempArray['totalcount'] = $row->TOTALCOUNT;
+          $tempArray['activecount'] = $activerow->TOTALCOUNTACTIVE;
+          $tempArray['inactivecount'] = $inactiverow->TOTALCOUNTINACTIVE;
+          array_push($myArray, $tempArray);
+          
+					echo json_encode($myArray);
+        
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
+    public static function fetchUsersDashboard(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNT FROM `ADMIN_USER`");
+          $activeresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTACTIVE FROM `ADMIN_USER` WHERE IS_DEL = 'N'");
+          $inactiveresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTINACTIVE FROM `ADMIN_USER` WHERE IS_DEL = 'Y'");
+					$myArray = array();
+        
+          $row = $result->fetch_object();
+          $activerow = $activeresult->fetch_object();
+          $inactiverow = $inactiveresult->fetch_object();
+ 					
+          $tempArray['totalcount'] = $row->TOTALCOUNT;
+          $tempArray['activecount'] = $activerow->TOTALCOUNTACTIVE;
+          $tempArray['inactivecount'] = $inactiverow->TOTALCOUNTINACTIVE;
+          array_push($myArray, $tempArray);
+          
+					echo json_encode($myArray);
+        
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+      
+    public static function fetchIngredientsDashboard(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNT FROM `ING_AKA`");
+          $activeresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTACTIVE FROM `ING_AKA` WHERE IS_DEL = 'N'");
+          $inactiveresult = mysqli_query($connection,"SELECT count(*) AS TOTALCOUNTINACTIVE FROM `ING_AKA` WHERE IS_DEL = 'Y'");
+					$myArray = array();
+        
+          $row = $result->fetch_object();
+          $activerow = $activeresult->fetch_object();
+          $inactiverow = $inactiveresult->fetch_object();
+ 					
+          $tempArray['totalcount'] = $row->TOTALCOUNT;
+          $tempArray['activecount'] = $activerow->TOTALCOUNTACTIVE;
+          $tempArray['inactivecount'] = $inactiverow->TOTALCOUNTINACTIVE;
+          array_push($myArray, $tempArray);
+          
+					echo json_encode($myArray);
+        
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
+    public static function setupMainDashboard(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT count(*) AS TOTALRECIPECOUNT FROM `RECIPE` WHERE IS_DEL = 'N'");
+          $activeusers = mysqli_query($connection,"SELECT count(*) AS TOTALUSERCOUNT FROM `USER`");
+          $myArray = array();
+        
+          $row = $result->fetch_object();
+          $activerow = $activeusers->fetch_object();
+         
+          $tempArray['recipecount'] = $row->TOTALRECIPECOUNT;
+          $tempArray['registercount'] = $activerow->TOTALUSERCOUNT;
+          array_push($myArray, $tempArray);
+          
+					echo json_encode($myArray);
+        
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
     public static function AdminfetchUsers(){
 			try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
@@ -40,7 +172,54 @@
 					DatabaseUtil::getInstance()->close_connection($connection);
 				}
 		}
-		
+    
+    public static function fetchIngCategory(){
+			try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT * from `ING_CATEGORIES`");
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+        	echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
+    public static function fetchIngByCategory($category){
+			//check for null/empty
+				if(!Utility::check_for_null($category)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty category");
+						return;
+				}
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$sql = "SELECT ING_AKA_ID, ING_AKA_NAME FROM `ING_AKA` 
+          WHERE ING_ID IN
+          (SELECT ING_ID FROM INGREDIENT WHERE ING_CAT_ID IN 
+          (SELECT ING_CAT_ID FROM ING_CATEGORIES WHERE ING_CAT_ID = '$category'))";
+        	$result = mysqli_query($connection,$sql);
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+        	echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
 		public static function fetchFoodType(){
 			try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
@@ -61,7 +240,6 @@
 				}
 		}
 		
-		
 		public static function fetchFoodCuisine(){
 			try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
@@ -81,9 +259,114 @@
 					DatabaseUtil::getInstance()->close_connection($connection);
 				}
 		}
-		
+    
+    public static function searchIngredient($ingredientname){
+			 //check for null/empty
+				if(!Utility::check_for_null($ingredientname)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Ingredient name");
+						return;
+				}
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT * from `ING_AKA` WHERE ING_AKA_NAME LIKE '%$ingredientname%'");
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+					echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+		}
+    
+    public static function searchUser($adminusername){
+       //check for null/empty
+				if(!Utility::check_for_null($adminusername)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty User name");
+						return;
+				}
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT * from `ADMIN_USER` WHERE ADMIN_USER_NAME LIKE '%$adminusername%'");
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+					echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+    }
+    
+    public static function searchFoodType($foodtypename){
+       //check for null/empty
+				if(!Utility::check_for_null($foodtypename)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food type name");
+						return;
+				}
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$sql = "SELECT * from `FOOD_TYPE` WHERE FOOD_TYP_NAME LIKE '%$foodtypename%'";
+          $result = mysqli_query($connection, $sql);
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+        	
+					echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+    }
+    
+    public static function searchFoodCuisine($foodcuisinesearch){
+       //check for null/empty
+				if(!Utility::check_for_null($foodcuisinesearch)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food cuisine name");
+						return;
+				}
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$sql = "SELECT * from `FOOD_CUISINE` WHERE FOOD_CSN_NAME LIKE '%$foodcuisinesearch%'";
+          $result = mysqli_query($connection, $sql);
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+        	
+					echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+    }
+    
 		public static function filterFoodType($food_type_id){
-			try{
+			 //check for null/empty
+				if(!Utility::check_for_null($food_type_id)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food type id");
+						return;
+				}
+      try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
 					$result = mysqli_query($connection,"SELECT * from `FOOD_TYPE` WHERE FOOD_TYP_ID = '$food_type_id'");
 					$myArray = array();
@@ -102,8 +385,13 @@
 				}
 		}
 		
-			public static function filterFoodCuisine($foodcsnid){
-			try{
+		public static function filterFoodCuisine($foodcsnid){
+			//check for null/empty
+				if(!Utility::check_for_null($foodcsnid)){
+						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Food cuisine id");
+						return;
+				}
+       try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
 					$result = mysqli_query($connection,"SELECT * from `FOOD_CUISINE` WHERE FOOD_CSN_ID = '$foodcsnid'");
 					$myArray = array();
@@ -122,7 +410,12 @@
 				}
 		}
 		
-			public static function filterIngredient($ingid){
+		public static function filterIngredient($ingid){
+      //check for null/empty
+      if(!Utility::check_for_null($ingid)){
+          Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty Ingredient id");
+          return;
+      }
 			try{
 					$connection = DatabaseUtil::getInstance()->open_connection();
 					$result = mysqli_query($connection,"SELECT * from `INGREDIENT` ING INNER JOIN `ING_AKA` AKA ON ING.ING_ID = AKA.ING_ID WHERE ING.ING_ID = '$ingid'");
@@ -143,69 +436,6 @@
 		}
 		
 		
-		public static function updateIngredient($ingid, $ingredientname, $ingredientakaname){
-			try{
-					$connection = DatabaseUtil::getInstance()->open_connection();
-					$result = mysqli_query($connection,"UPDATE `INGREDIENT` SET ING_NAME='$ingredientname' WHERE ING_ID = '$ingid'");
-					$resultaka = mysqli_query($connection,"UPDATE `ING_AKA` SET ING_AKA_NAME='$ingredientakaname' WHERE ING_ID = '$ingid'");
-					if($result && $resultaka)
-					{
-						$data['message'] = "success";
-					}
-					else
-					{
-						$data['message'] = "failed";
-					}
-					echo json_encode($myArray);
-				}catch(Exception $e){
-					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-				}
-				finally{
-					DatabaseUtil::getInstance()->close_connection($connection);
-				}
-		}
 		
-		public static function updateFoodType($foodtypeid, $foodtypename){
-			try{
-					$connection = DatabaseUtil::getInstance()->open_connection();
-					$result = mysqli_query($connection,"UPDATE `FOOD_TYPE` SET FOOD_TYP_NAME='$foodtypename' WHERE FOOD_TYP_ID = '$foodtypeid'");
-					if($result)
-					{
-						$data['message'] = "success";
-					}
-					else
-					{
-						$data['message'] = "failed";
-					}
-					echo json_encode($myArray);
-				}catch(Exception $e){
-					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-				}
-				finally{
-					DatabaseUtil::getInstance()->close_connection($connection);
-				}
-		}
-		
-		public static function updateFoodCuisine($foodcsnid, $foodcuisinename){
-			try{
-					$connection = DatabaseUtil::getInstance()->open_connection();
-					$result = mysqli_query($connection,"UPDATE `FOOD_CUISINE` SET FOOD_CSN_NAME='$foodcuisinename' WHERE FOOD_CSN_ID = '$foodcsnid'");
-					if($result)
-					{
-						$data['message'] = "success";
-					}
-					else
-					{
-						$data['message'] = "failed";
-					}
-					echo json_encode($myArray);
-				}catch(Exception $e){
-					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
-				}
-				finally{
-					DatabaseUtil::getInstance()->close_connection($connection);
-				}
-		}
-  
   }
 ?>

@@ -7,6 +7,19 @@
 define("LOGS_FILE_NAME", $_SERVER['DOCUMENT_ROOT'] ."/private/web/admincontrolpanel/logs/log.log");
 define("CSS_PATH", "http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/css");
 define("JS_PATH", "http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/js");
+define("COMMON_HEAD", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commonhead.php");
+define("COMMON_HEADER", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commonheader.php");
+define("WEB_IMPORTS", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/webutils/webimportscripts.php");
+define("NAVIGATOR", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/webutils/navigator.php");
+define("COMMON_DASHBOARD", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commondashboard.php");
+define("LOGIN", "/private/web/admincontrolpanel/web/pages/index.php");
+define("ING_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/ingredients/");
+define("FOOD_TYPE_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/food_type/");
+define("FOOD_CUISINE_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/cuisines/");
+define("COMMON_IMG_UPLOAD_PATH", "/app_data/master_data/");
+define("CUISINES_DIR", "cuisines/");
+define("INGREDIENTS_DIR", "ingredients/");
+define("FOOD_TYPE_DIR", "food_type/");
 
 // function keys
 define("AUTHENTICATE_USER", "AUTHENTICATE_USER");
@@ -34,6 +47,33 @@ define("ADMIN_SAVE_USER", "ADMIN_SAVE_USER");
 define("ADMIN_FETCH_USERS", "ADMIN_FETCH_USERS");
 define("DELETE_ADMIN_USER", "DELETE_ADMIN_USER");
 define("UPDATE_ADMIN_USER_ROLE", "UPDATE_ADMIN_USER_ROLE");
+define("SETUP_FOOD_CUISINE_DASHBOARD", "SETUP_FOOD_CUISINE_DASHBOARD");
+define("SETUP_FOOD_TYPE_DASHBOARD", "SETUP_FOOD_TYPE_DASHBOARD");
+define("SETUP_INGREDIENTS_DASHBOARD", "SETUP_INGREDIENTS_DASHBOARD");
+define("SEARCH_FOOD_TYPE", "SEARCH_FOOD_TYPE");
+define("SEARCH_FOOD_CUISINE", "SEARCH_FOOD_CUISINE");
+define("SETUP_MAIN_DASHBOARD", "SETUP_MAIN_DASHBOARD");
+define("FETCH_ING_CATEGORY", "FETCH_ING_CATEGORY");
+define("FETCH_ING_BY_CATEGORY", "FETCH_ING_BY_CATEGORY");
+define("SEARCH_INGRIDIENTS", "SEARCH_INGRIDIENTS");
+define("SETUP_USERS_DASHBOARD", "SETUP_USERS_DASHBOARD");
+define("SEARCH_USER", "SEARCH_USER");
+define("MULTI_ADMIN_USER_DELETE", "MULTI_ADMIN_USER_DELETE");
+define("CREATE", "CREATE");
+define("READ", "READ");
+define("UPDATE", "UPDATE");
+define("DELETE", "DELETE");
+define("ADMIN", "Admin");
+define("EMPLOYEE", "Employee");
+define("INGREDIENT_IMAGE", "INGREDIENT_IMAGE");
+define("FOOD_TYPE_IMAGE", "FOOD_TYPE_IMAGE");
+define("FOOD_CUISINE_IMAGE", "FOOD_CUISINE_IMAGE");
+
+// Role based Access Specifiers
+define("ADMIN_ACCESS", serialize(array("CREATE", "READ", "UPDATE", "DELETE")));
+define("EMPLOYEE_ACCESS", serialize(array("CREATE", "READ")));
+
+
 
 
 ?>

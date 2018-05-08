@@ -1,16 +1,11 @@
-<?php
-session_start();
-if($_SESSION['sid']==session_id())
-{
-?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Cookery | Food Cuisine</title>
+        <title>Cookery</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
-        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/private/web/admincontrolpanel/web/webutils/webimportscripts.php'); ?>
+				<?php include_once(WEB_IMPORTS); ?>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -19,8 +14,7 @@ if($_SESSION['sid']==session_id())
         <![endif]-->
     </head>
     <body class="skin-blue">
-        <!-- header logo: style can be found in header.less -->
-        <header class="header">
+       <header class="header">
             <a href="dashboard.php" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 Cookery
@@ -41,7 +35,7 @@ if($_SESSION['sid']==session_id())
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Admin <i class="caret"></i></span>
+                                <span><?php echo $_SESSION['role']  ?><i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -61,36 +55,5 @@ if($_SESSION['sid']==session_id())
                 </div>
             </nav>
         </header>
-        <div class="wrapper row-offcanvas row-offcanvas-left">
-            <!-- Left side column. contains the logo and sidebar -->
-             <?php include_once($_SERVER['DOCUMENT_ROOT'].'/private/web/admincontrolpanel/web/webutils/navigator.php'); ?>
-
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1>
-                        Delete Food Cuisine
-                        <small>you can delete food cuisine here !!!</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li>Food Cuisine</li>
-												<li class="active">Delete Food Cuisine</li>
-                    </ol>
-                </section>
-
-                <!-- Main content -->
-                <section class="content">
-								
-								</section><!-- /.content -->
-            </aside><!-- /.right-side -->
-        </div><!-- ./wrapper -->
-    </body>
+   </body>
 </html>
-<?php
-}
-else{
-    header('Location : /private/web/admincontrolpanel/web/pages/index.php' );
-}
-?>
