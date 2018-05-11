@@ -65,7 +65,7 @@
 		}
 		
 		private static function clean_logs(){
-			//zip log files whic are older than today on every LOGS_MAX_HISTORY day of the month
+			//zip log files which are older than today on every LOGS_MAX_HISTORY day of the month
 			try{
 				//get the list of log files in logs folder
 				if (fmod(date("d"), LOGS_MAX_HISTORY) == 0 &&  is_dir(LOGS_DIRECTORY)){
@@ -99,7 +99,7 @@
 			catch (Exception $e) {
 				//TODO: mail the admins
 			}
-			//zip log files whic are loder than LOGS_MAX_HISTORY on every LOGS_MAX_HISTORY day of the month
+			//zip log files which are loder than LOGS_MAX_HISTORY on every LOGS_MAX_HISTORY day of the month
 		}
 
 		public static function checkFile($logType){

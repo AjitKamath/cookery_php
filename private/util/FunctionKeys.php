@@ -1,6 +1,4 @@
 <?php
-    define("UNIDENTIFIED_FUNCTION_KEY", "UNIDENTIFIED_FUNCTION_KEY");
-
     //master
     define("MASTER_DATA_FETCH_ALL", "MASTER_DATA_FETCH_ALL");           //Postman completed
     //master
@@ -74,6 +72,8 @@
     define("USER_UPDATE_IMAGE", "USER_UPDATE_IMAGE");                   //Postman completed
     define("USER_REGISTER_CHECK", "USER_REGISTER_CHECK");     
     define("USER_SEARCH", "USER_SEARCH");                               //Postman completed
+	define("USER_BIO_SUBMIT", "USER_BIO_SUBMIT");                       //Postman completed
+	define("USER_BIO_FETCH", "USER_BIO_FETCH");                       	//Postman completed
     //user
 
     //like

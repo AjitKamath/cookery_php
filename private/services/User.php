@@ -1,5 +1,195 @@
 <?php
 	class User{
+		public static function submitUserBio($user_id, $user_bio_id=null, $user_bio){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($user_bio)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_bio");
+				return;
+			}
+			//check for null/empty
+			
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
+				if(!Util::check_for_null($user_bio_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, NULL_OR_EMPTY."user_bio_id which means the user is trying to add a new bio");
+					
+					$query = "UPDATE `USER_BIO`
+						SET IS_ACTIVE = 'N',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND IS_ACTIVE = 'Y'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
+						
+						$query = "INSERT INTO `USER_BIO` (`USER_ID`, `USER_BIO`, `IS_ACTIVE`, `CREATE_DTM`) 
+								VALUES ('$user_id', '$user_bio', 'Y', CURRENT_TIMESTAMP)";
+					
+						if(mysqli_query($con, $query)){
+							$user_bio_id = mysqli_insert_id($con);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "New bio(".$user_bio_id.") added");
+							
+							//register timeline
+							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_ADD, $user_bio_id);
+							//register timeline
+						}
+						else{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while adding a new bio");
+							throw new Exception("Failed to add a new bio");
+						}
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making all the bio for the user(".$user_id.") as inactive");
+						throw new Exception("Failed to make old bio's as inactive");
+					}
+				}
+				else{
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Setting bio(".$user_bio_id.") as active bio for the user(".$user_id.")");
+					
+					$query = "UPDATE `USER_BIO`
+						SET IS_ACTIVE = 'N',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND IS_ACTIVE = 'Y'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
+						
+						$query = "UPDATE `USER_BIO`
+							SET IS_ACTIVE = 'Y',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'
+							AND USER_BIO_ID = '".$user_bio_id."'";
+						
+						if(mysqli_query($con, $query)){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Bio(".$user_bio_id.") for user(".$user_id.") has been set to active");
+							
+							//register timeline
+							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_UPDATE, $user_bio_id);
+							//register timeline
+						}
+						else{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making the bio(".$user_bio_id.") for the user(".$user_id.") as active");
+							throw new Exception("Failed to make selected bio's as active");
+						}
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making all the bio for the user(".$user_id.") as inactive");
+						throw new Exception("Failed to make old bio's as inactive");
+					}
+				}
+				
+				//transaction end
+				DatabaseUtil::endTransaction($con);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
+			}
+			finally{
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
+				
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
+		public static function fetchUserBios($user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				$response = self::getUserBios($con, $user_id);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
+		public static function getUserBios($con, $user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$query = "SELECT USER_BIO_ID, USER_BIO, IS_ACTIVE, CREATE_DTM
+							FROM `USER_BIO` 
+							WHERE USER_ID = '$user_id'
+							ORDER BY CREATE_DTM DESC";
+				$result = mysqli_query($con, $query);
+
+				$response = array();
+				while($result_obj = $result->fetch_object()){
+					$temp_array['USER_BIO_ID'] = $result_obj->USER_BIO_ID;
+					$temp_array['USER_BIO'] = $result_obj->USER_BIO;
+					$temp_array['IS_ACTIVE'] = $result_obj->IS_ACTIVE;
+					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
+					
+					array_push($response, $temp_array); 
+				}
+				
+				return $response;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
+		public static function getUserActiveBio($con, $user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$query = "SELECT USER_BIO_ID, USER_BIO, CREATE_DTM
+							FROM `USER_BIO` 
+							WHERE USER_ID = '$user_id'
+							AND IS_ACTIVE = 'Y'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					$temp_array['USER_BIO_ID'] = $result_obj->USER_BIO_ID;
+					$temp_array['USER_BIO'] = $result_obj->USER_BIO;
+					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
+					
+					return $temp_array; 
+				}
+				
+				return array();
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
 		public static function searchUsers($search_query, $logged_in_user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($search_query)){
@@ -253,6 +443,9 @@
 					
 					//comments count
 					$temp_array['commentsCount'] = Comment::getCommentsCount($con, "USER", $user_id);
+					
+					//bio
+					$temp_array['bio'] = self::getUserActiveBio($con, $user_id);
 					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){

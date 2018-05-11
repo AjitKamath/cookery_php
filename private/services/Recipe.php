@@ -151,8 +151,13 @@
 					$temparr['ING_UOM_VALUE'] = $result_data->ING_UOM_VALUE;
 					$temparr['ING_CAT_ID'] = $result_data->ING_CAT_ID;
 					$temparr['ingredientCategoryName'] = $result_data->ING_CAT_NAME;
+					
+					//get ingredient primary image
 					$temparr['images'] = Ingredient::getIngredientPrimaryImage($con, $result_data->ING_ID);
 
+					//get ingredient nutritions
+					$temparr['ingredientNutritionCategories'] = Ingredient::getIngredientNutritions($con, $result_data->ING_ID);
+					
 					array_push($result_array, $temparr);  
 				}
 
@@ -313,7 +318,7 @@
 		}
 		
 		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_nm, $ing_uom_id, $ing_uom_value, 
-											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
+											$rcp_steps, $food_typ_id, $user_id, $rcp_images){
 			//check for null/empty
 			//mandatory
 			if(!Util::check_for_null($user_id)){
@@ -350,16 +355,6 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_uom_value");
 				return;
 			}
-
-			if(!Util::check_for_null($tst_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_id");
-				return;
-			}
-
-			if(!Util::check_for_null($tst_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_qty");
-				return;
-			}  
 
 			if(count($rcp_images['name']) == 0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_images");
@@ -491,36 +486,6 @@
 							}
 						}
 						//insert recipe steps into RECIPE_STEPS table
-
-						//delete the old tastes from RECIPE_TASTE table
-						$query = "DELETE FROM `RECIPE_TASTE` WHERE RCP_ID = '".$rcp_id."'";
-						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "All tastes for Recipe(".$rcp_id.") are deleted from RECIPE_TASTE table");
-						}
-						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-							throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-						}
-						//delete the old recipe tastes from RECIPE_TASTE table
-
-						//insert tastes into TASTE table
-						for($i = 0; $i< count($tst_id); $i++){
-							$query = "INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY` , `CREATE_DTM`)
-									  VALUES ('$rcp_id' , '$tst_id[$i]' , '$tst_qty[$i]' , CURRENT_TIMESTAMP)";
-							if(mysqli_query($con, $query)){
-								$rcp_tst_id = mysqli_insert_id($con); 
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into RECIPE_INGREDIENTS table");
-							}
-							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-								throw new Exception("Failed to insert into RECIPE_TASTE table");
-							}
-						}
-						//insert tastes into TASTE table
 					}
 					else{
 						throw new Exception("Query failure : ".$query);
@@ -535,10 +500,10 @@
 						//NOTE : not deleting the images from its phyiscal path as of now.
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete images for Recipe(".$rcp_id.") from RECIPE_IMG table.");
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-						throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+						throw new Exception("Failed to delete images for Recipe(".$rcp_id.") from RECIPE_IMG table.");
 					}
 					//delete the old recipe tastes from RECIPE_TASTE table
 
@@ -684,23 +649,6 @@
 							}
 						}
 						//insert recipe steps into RECIPE_STEPS table
-
-						//insert tastes into TASTE table
-						for($i = 0; $i< count($tst_id); $i++){
-							$query = "INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY` , `CREATE_DTM`)
-									  VALUES ('$rcp_id' , '$tst_id[$i]' , '$tst_qty[$i]' , CURRENT_TIMESTAMP)";
-							if(mysqli_query($con, $query)){
-								$rcp_tst_id = mysqli_insert_id($con); 
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into RECIPE_INGREDIENTS table");
-							}
-							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-								throw new Exception("Failed to insert into RECIPE_TASTE table");
-							}
-						}
-						//insert tastes into TASTE table
 					}
 					else{
 						throw new Exception("Query failure : ".$query);
@@ -786,10 +734,6 @@
 
 				mysqli_commit($con);
 				//submit recipe transaction ends here
-				
-				//response
-				$response = json_encode($response);
-				//response
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());

@@ -145,6 +145,7 @@
 		
 		public static function setResponseHeader($code) {
 			header('X-PHP-Response-Code: '.$code, true, $code);
+			header('Content-Type: application/json');
 		}
 	}
 ?>

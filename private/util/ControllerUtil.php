@@ -54,8 +54,6 @@
 			$ing_uom_id       	= isset($_POST['ing_uom_id']) ? $_POST['ing_uom_id'] : '';
 			$ing_uom_value     	= isset($_POST['ing_uom_value']) ? $_POST['ing_uom_value'] : '';
 			$rcp_steps    	  	= isset($_POST['rcp_steps']) ? $_POST['rcp_steps'] : '';
-			$tst_id      	  	= isset($_POST['tst_id']) ? $_POST['tst_id'] : '';
-			$tst_qty     	  	= isset($_POST['tst_qty']) ? $_POST['tst_qty'] : '';
 			$food_typ_id 	   	= isset($_POST['food_typ_id']) ? $_POST['food_typ_id'] : '';
 			$rcp_images 	    = isset($_FILES['images']) ? $_FILES['images'] : '';
 
@@ -81,6 +79,9 @@
 			$scope_id			= isset($_POST['scope_id']) ? $_POST['scope_id'] : '';
 
 			$ing_id				= isset($_POST['ing_id']) ? $_POST['ing_id'] : '';
+			
+			$user_bio_id		= isset($_POST['user_bio_id']) ? $_POST['user_bio_id'] : '';
+			$user_bio			= isset($_POST['user_bio']) ? $_POST['user_bio'] : '';
 			//params
 
 			$response = "";
@@ -139,7 +140,7 @@
 			}
 			else if(RECIPE_SUBMIT == $function_key){
 				$response = Recipe::submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_name, $ing_uom_id, $ing_uom_value, 
-										  $rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images);
+										  $rcp_steps, $food_typ_id, $user_id, $rcp_images);
 			}
 			else if(RECIPE_SEARCH == $function_key){
 				$response = Recipe::searchRecipes($user_id, $searchQuery);
@@ -257,6 +258,12 @@
 			}
 			else if(USER_SEARCH == $function_key){
 				$response = User::searchUsers($searchQuery, $logged_in_user_id, $index);
+			}
+			else if(USER_BIO_SUBMIT == $function_key){
+				$response = User::submitUserBio($user_id, $user_bio_id, $user_bio);
+			}
+			else if(USER_BIO_FETCH == $function_key){
+				$response = User::fetchUserBios($user_id);
 			}
 			//user
 

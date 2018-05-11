@@ -127,6 +127,8 @@
     define("USER_PHOTO_MODIFY","USER_PHOTO_MODIFY");
     define("USER_FOLLOW","USER_FOLLOW");
     define("USER_UNFOLLOW","USER_UNFOLLOW");
+	define("USER_BIO_ADD","USER_BIO_ADD");
+	define("USER_BIO_UPDATE","USER_BIO_UPDATE");
     //user
 
     //recipe
@@ -187,5 +189,5 @@
 
     //Constants
     define("CONTROLLER_SERVICE", "Controller");
-    define("NULL_OR_EMPTY", "function parameter is null/empty : ");
+    
 ?>

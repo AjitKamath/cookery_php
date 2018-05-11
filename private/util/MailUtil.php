@@ -288,62 +288,11 @@
 		
         private static function sendMails($fromEmail, $fromName, $recipientEmails, $recipientNames, $subject, $bodies, $attachments) {
            	for($i = 0; $i < count($recipientEmails); $i++){
-				self::sendMail($fromEmail, $fromName, $recipientEmails[$i], $recipientNames[$i], $subject, $bodies[$i], $attachments);
-			}
-			return;
-			
-			// Passing `true` enables exceptions
-            $mail = new PHPMailer(true);                              
-            try {
-                //Server settings
-				$mail->SMTPDebug = MAIL_DEBUG;
-                $mail->isSMTP();        
-				$mail->SMTPAuth = true;
-                $mail->Host = MAIL_HOST;	// can specify main and backup SMTP servers
-                $mail->Port = MAIL_PORT;
-				$mail->SMTPSecure = MAIL_ENCRYPTION; 
-				$mail->Username = MAIL_USERNAME;                 
-				$mail->Password = MAIL_PASSWORD;  
-				//Server settings
-				
-                $mail->setFrom($fromEmail, $fromName);
-                $mail->addReplyTo(MAIL_REPLY_EMAIL, MAIL_REPLY_NAME);
-                                
-                //Recipients
-                for($i = 0; $i < count($recipientEmails); $i++){
-                    $mail->addAddress($recipientEmails[$i], $recipientNames[$i]);     // Optional name
-					
-					//Attachments
-					for($j = 0; $j < count($attachments); $j++){
-						if(file_exists($attachments[$j])){
-							$mail->addAttachment($attachments[$j], basename($attachments[$j]));
-						} else {
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! File does not exist " . $attachments[$j]);
-						}
-					}
-					//Attachments
-
-					//Content
-					$mail->isHTML(true);                                  // Set email format to HTML
-					$mail->Subject = $subject;
-					//Content
-
-					//body
-					$mail->Body = $bodies[$i];
-					
-					$mail->send();
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Email sent with subject('".$subject."') to email -> '".$recipientEmails[$i]."'");
-					//body
+				if(! self::sendMail($fromEmail, $fromName, $recipientEmails[$i], $recipientNames[$i], $subject, $bodies[$i], $attachments)){
+					return false;
 				}
-				//Recipients
-                
-                return true;
-            } catch (Exception $e) {
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, $mail->ErrorInfo);
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Email(s) failed to send with subject('".$subject."') to ".count($recipientEmails)." emails -> '".json_encode($recipientEmails)."'");
-            }
-			
-			return false;
+			}
+			return true;
         }
 		
 		 private static function sendMail($fromEmail, $fromName, $recipientEmail, $recipientName, $subject, $body, $attachments) {

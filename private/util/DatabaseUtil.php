@@ -122,10 +122,13 @@
 		}
 		
 		public static function showDatabaseAuditParameters(){
-			echo "DATABASE_CONNECTION_COUNTER : ".$_SESSION[DATABASE_CONNECTION_COUNTER]."\n";
-			echo "DATABASE_CONNECTION_LEAK_TIMESTAMP : ".$_SESSION[DATABASE_CONNECTION_LEAK_TIMESTAMP]."\n\n";
-			echo "DATABASE_TRANSACTION_COUNTER : ".$_SESSION[DATABASE_TRANSACTION_COUNTER]."\n";
-			echo "DATABASE_TRANSACTION_LEAK_TIMESTAMP : ".$_SESSION[DATABASE_TRANSACTION_LEAK_TIMESTAMP]."\n";
+			$response = "";
+			$response = $response. "DATABASE_CONNECTION_COUNTER : ".$_SESSION[DATABASE_CONNECTION_COUNTER]."\n";
+			$response = $response. "DATABASE_CONNECTION_LEAK_TIMESTAMP : ".$_SESSION[DATABASE_CONNECTION_LEAK_TIMESTAMP]."\n\n";
+			$response = $response. "DATABASE_TRANSACTION_COUNTER : ".$_SESSION[DATABASE_TRANSACTION_COUNTER]."\n";
+			$response = $response. "DATABASE_TRANSACTION_LEAK_TIMESTAMP : ".$_SESSION[DATABASE_TRANSACTION_LEAK_TIMESTAMP]."\n";
+			
+			return $response;
 		}
 		
 		public static function deleteDatabaseAuditParameters(){
@@ -134,8 +137,9 @@
 			$_SESSION[DATABASE_TRANSACTION_COUNTER] = "";
 			$_SESSION[DATABASE_TRANSACTION_LEAK_TIMESTAMP] = "";
 			
-			echo "All Database Audit parameters have been cleared !\n\n";
-			self::showDatabaseAuditParameters();
+			$response = "All Database Audit parameters have been cleared !\n\n";
+			$response = $response . self::showDatabaseAuditParameters();
+			return $response;
 		}
 		
 		public static function cleanUpString($con, $string){
