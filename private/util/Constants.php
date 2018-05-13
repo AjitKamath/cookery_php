@@ -128,7 +128,7 @@
     define("USER_FOLLOW","USER_FOLLOW");
     define("USER_UNFOLLOW","USER_UNFOLLOW");
 	define("USER_BIO_ADD","USER_BIO_ADD");
-	define("USER_BIO_UPDATE","USER_BIO_UPDATE");
+	define("USER_BIO_DELETE","USER_BIO_DELETE");
     //user
 
     //recipe

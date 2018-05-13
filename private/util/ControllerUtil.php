@@ -265,6 +265,9 @@
 			else if(USER_BIO_FETCH == $function_key){
 				$response = User::fetchUserBios($user_id);
 			}
+			else if(USER_BIO_DELETE == $function_key){
+				$response = User::deleteUserBio($user_id, $user_bio_id);
+			}
 			//user
 
 			//like

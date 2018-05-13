@@ -1,14 +1,9 @@
 <?php
 	class User{
-		public static function submitUserBio($user_id, $user_bio_id=null, $user_bio){
+		public static function submitUserBio($user_id, $user_bio_id=null, $user_bio=null){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
-				return;
-			}
-			
-			if(!Util::check_for_null($user_bio)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_bio");
 				return;
 			}
 			//check for null/empty
@@ -27,7 +22,8 @@
 						SET IS_ACTIVE = 'N',
 						MOD_DTM = CURRENT_TIMESTAMP
 						WHERE USER_ID = '".$user_id."'
-						AND IS_ACTIVE = 'Y'";
+						AND IS_ACTIVE = 'Y'
+						AND IS_DEL = 'N'";
 				
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
@@ -60,7 +56,8 @@
 						SET IS_ACTIVE = 'N',
 						MOD_DTM = CURRENT_TIMESTAMP
 						WHERE USER_ID = '".$user_id."'
-						AND IS_ACTIVE = 'Y'";
+						AND IS_ACTIVE = 'Y'
+						AND IS_DEL = 'N'";
 				
 					if(mysqli_query($con, $query)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
@@ -69,13 +66,14 @@
 							SET IS_ACTIVE = 'Y',
 							MOD_DTM = CURRENT_TIMESTAMP
 							WHERE USER_ID = '".$user_id."'
-							AND USER_BIO_ID = '".$user_bio_id."'";
+							AND USER_BIO_ID = '".$user_bio_id."'
+							AND IS_DEL = 'N'";
 						
 						if(mysqli_query($con, $query)){
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Bio(".$user_bio_id.") for user(".$user_id.") has been set to active");
 							
 							//register timeline
-							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_UPDATE, $user_bio_id);
+							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_ADD, $user_bio_id);
 							//register timeline
 						}
 						else{
@@ -91,6 +89,8 @@
 				
 				//transaction end
 				DatabaseUtil::endTransaction($con);
+				
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
@@ -100,8 +100,6 @@
 				DatabaseUtil::rollbackTransaction($con);
 			}
 			finally{
-				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
-				
 				DatabaseUtil::getInstance()->close_connection($con);
 				return json_encode($response);
 			}
@@ -128,6 +126,51 @@
 			}
 		}
 		
+		public static function deleteUserBio($user_id, $user_bio_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($user_bio_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_bio_id");
+				return;
+			}
+			//check for null/empty
+			
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				$query = "UPDATE `USER_BIO`
+						SET IS_DEL = 'Y',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND USER_BIO_ID = '".$user_bio_id."'";
+				
+				if(mysqli_query($con, $query)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "deleted bio(".$user_bio_id.")");
+					
+					//register timeline
+					Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_DELETE, $user_bio_id);
+					//register timeline
+				}
+				else{
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not delete bio(".$user_bio_id.")");
+				}
+					
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
 		public static function getUserBios($con, $user_id){
 			//check for null/empty
 			if(!Util::check_for_null($user_id)){
@@ -140,6 +183,7 @@
 				$query = "SELECT USER_BIO_ID, USER_BIO, IS_ACTIVE, CREATE_DTM
 							FROM `USER_BIO` 
 							WHERE USER_ID = '$user_id'
+							AND IS_DEL = 'N'
 							ORDER BY CREATE_DTM DESC";
 				$result = mysqli_query($con, $query);
 
@@ -172,7 +216,8 @@
 				$query = "SELECT USER_BIO_ID, USER_BIO, CREATE_DTM
 							FROM `USER_BIO` 
 							WHERE USER_ID = '$user_id'
-							AND IS_ACTIVE = 'Y'";
+							AND IS_ACTIVE = 'Y'
+							AND IS_DEL = 'N'";
 				$result = mysqli_query($con, $query);
 
 				if($result_obj = $result->fetch_object()){
@@ -182,8 +227,6 @@
 					
 					return $temp_array; 
 				}
-				
-				return array();
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
@@ -446,6 +489,9 @@
 					
 					//bio
 					$temp_array['bio'] = self::getUserActiveBio($con, $user_id);
+					
+					//bios
+					$temp_array['bios'] = self::getUserBios($con, $user_id);
 					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
@@ -1220,6 +1266,7 @@
             }
             //check for null/empty
 			
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1234,8 +1281,7 @@
 					$password = base64_encode($password);
 					
 					if($result_obj->EMAIL == $email && $result_obj->PASSWORD == $password){
-						$temp = self::getUser($con, $result_obj->USER_ID, $result_obj->USER_ID, USER_FETCH_SELF);
-						array_push($result_array, $temp);
+						$result_array = self::getUser($con, $result_obj->USER_ID, $result_obj->USER_ID, USER_FETCH_SELF);
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "User Login Failed with email id as: ".$email);
@@ -1245,13 +1291,14 @@
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "User Login Failed with email id as: ".$email);
 				}
 				
-				return json_encode($result_array);
+				$response = $result_array;
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		
