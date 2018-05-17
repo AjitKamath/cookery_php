@@ -89,7 +89,10 @@
 			else{
 				$ipaddress = 'UNKNOWN';
 			}
-			return $ipaddress;
+			
+			$ipaddressArray = explode(",", $ipaddress);
+			
+			return $ipaddressArray[0];
 		}
 		
 		private static function getApiKey(){
@@ -166,19 +169,22 @@
 		}
 		
 		private static function getClientGeoLocation(){
-			/*Get user ip address*/
-			$ip_address=AuditUtil::getClientIP();
+			try {
+				/*Get user ip address*/
+				$ip_address=self::getClientIP();
 
-			/*Get user ip address details with geoplugin.net*/
-			$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
-			$addrDetailsArr = unserialize(file_get_contents($geopluginURL));
+				/*Get user ip address details with geoplugin.net*/
+				$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
+				$addrDetailsArr = unserialize(file_get_contents($geopluginURL));
 
-			if(isset($addrDetailsArr)){
-				return $addrDetailsArr;
+				if(isset($addrDetailsArr)){
+					return $addrDetailsArr;
+				}
+			}catch (Exception $e) {
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e);
 			}
-			else{
-				return "";
-			}
+			
+			return "";
 		}
 		
 		private static function getNumberInTwoDecimals($number){

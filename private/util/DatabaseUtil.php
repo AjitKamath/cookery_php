@@ -84,7 +84,7 @@
 			LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Database Status : connected [connections alive-".$_SESSION[DATABASE_CONNECTION_COUNTER]."]");
 			
 			//Offset default mysql timezone to IST
-			mysqli_query($conn, "SET time_zone = '".DATABASE_TIMEZONE_OFFSET."'");
+			//mysqli_query($conn, "SET time_zone = '".DATABASE_TIMEZONE_OFFSET."'");
 			
 			return $conn;
 		}

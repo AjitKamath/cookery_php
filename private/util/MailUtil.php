@@ -4,9 +4,9 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
-    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/Exception.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/PHPMailer.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/'.'private/libraries/PHPMailer/src/SMTP.php';
+    require './private/libraries/PHPMailer/src/Exception.php';
+    require './private/libraries/PHPMailer/src/PHPMailer.php';
+    require './private/libraries/PHPMailer/src/SMTP.php';
 
 	//SMTP needs accurate times, and the PHP time zone MUST be set
 	//This should be done in your php.ini, but this is how to do it if you don't have access to that
@@ -320,7 +320,7 @@
                 //Attachments
 				for($i = 0; $i< count($attachments['tmp_name']); $i++){
 					$extension = end(explode(".", $attachments['name'][$i]));
- 					$uploadFile = APP_DATA_TEMP_DIRECTORY.hash('sha256', $attachments['name'][$i]).".".$extension;
+ 					$uploadFile = TEMP_DIRECTORY.hash('sha256', $attachments['name'][$i]).".".$extension;
 					
 					if (isset($attachments['tmp_name'][$i])){
 						try{

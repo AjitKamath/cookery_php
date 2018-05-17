@@ -1,7 +1,7 @@
 <?php
 	// !!! This file is public !!! Make sure no sensitive info's are recorded here. !!!	
 
-	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
+	include_once('../private/util/ImportUtil.php');
 	
 	$function_key = isset($_POST['function_key']) ? $_POST['function_key'] : '';
 	$from = isset($_POST['from']) ? $_POST['from'] : '';
@@ -81,7 +81,7 @@
         
         //for each directory
         foreach($directorys as $directory){
-			$file_path = $_SERVER['DOCUMENT_ROOT'].'/'.$directory.$class_name . '.php';
+			$file_path = '../'.$directory.$class_name . '.php';
 			
 			//see if the file exsists
             if(file_exists($file_path)){

@@ -65,67 +65,14 @@
 			return true;
 		}
 
+		//TODO:remove this function after Recipe Update has been implemented.
 		public static function prepare_directories($user_id){
-			$filename = "util.php";
-
-			if(!file_exists(APP_DATA_DIRECTORY)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".APP_DATA_DIRECTORY.") does not exist ! Create it manually with 0777 permission !");
-				return false;
-			}
-
-			if(!file_exists(APP_DATA_USERS_DIRECTORY)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".APP_DATA_USERS_DIRECTORY.") does not exist. Creating it.");
-				if(!self::create_directory(APP_DATA_USERS_DIRECTORY)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".APP_DATA_USERS_DIRECTORY.") could not be created !");
-					return false;
-				}
-			}
-
-			$directory = APP_DATA_USERS_DIRECTORY.$user_id;
-			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
-				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
-					return false;
-				}
-			}
-			
-			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY;
-			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
-				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
-					return false;
-				}
-			}
-			
-			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY.APP_DATA_PROFILE_IMAGES_DIRECTORY;
-			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
-				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
-					return false;
-				}
-			}
-
-			$directory = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY;
-			if(!file_exists($directory)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Directory(".$directory.") does not exist. Creating it.");
-				if(!self::create_directory($directory)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Directory(".$directory.") could not be created !");
-					return false;
-				}
-			}
-
 			return true;
 		}
 
+		//TODO:remove this function after Recipe Update has been implemented.
 		public static function get_relative_path($absolute_path){
-			return str_replace(HOME_DIRECTORY,"",$absolute_path);
-		}
-		
-		public static function getAbsolutePath($relativePath){
-			return HOME_DIRECTORY.$relativePath;
+			//return str_replace(HOME_DIRECTORY,"",$absolute_path);
 		}
 		
 		public static function getSmartDecimal($decimal){

@@ -1,4 +1,6 @@
 <?php
+	
+
 	class User{
 		public static function submitUserBio($user_id, $user_bio_id=null, $user_bio=null){
 			//check for null/empty
@@ -153,7 +155,7 @@
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "deleted bio(".$user_bio_id.")");
 					
 					//register timeline
-					Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_DELETE, $user_bio_id);
+					Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_REMOVE, $user_bio_id);
 					//register timeline
 				}
 				else{
@@ -613,40 +615,31 @@
 				return;
 			}
 			
-			if(count($image) == 0){
+			if(!Util::check_for_null($image)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."image");
 				return;
 			}
 			//check for null/empty
-
+			
 			$response = array();
 			try{
+				//This import has to be used wherever we want to use AWSUtil.php
+				//This issue has been explained in AWSImportUtil.php
+				include_once '../private//util/AWSImportUtil.php';	
+				
+				//upload image
+				$s3 = AWSUtil::getAWSConnection();
+				$s3Path = AWSUtil::uploadFilesToS3($s3, $image, 0, AWS_APP_DATA_PROFILE_IMAGES_DIRECTORY);
+				//upload image
+				
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
 				//transaction begin
 				DatabaseUtil::beginTransaction($con);
-				
-				//prepare directories
-				if(!Util::prepare_directories($user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Cannot submit the profile image as the file directories could not be created for the user($user_id).");  
-					return;
-				}
-				//prepare directories
-
-				//upload image
-				$profile_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY.APP_DATA_PROFILE_IMAGES_DIRECTORY;
-				$new_image = $profile_images_dir.uniqid().".jpg";
-
-				if (isset($image['tmp_name'][0])){
-					$image = $image['tmp_name'][0];
-					
-					move_uploaded_file($image, $new_image);
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "User Profile Image(".$new_image.") uploaded");
-				}
 
 				//update into USER table
 				$query = "UPDATE `USER`
-						SET IMG = '".Util::get_relative_path($new_image)."',
+						SET IMG = '".$s3Path."',
 						MOD_DTM = CURRENT_TIMESTAMP
 						WHERE USER_ID = '".$user_id."'";
 				
@@ -671,8 +664,6 @@
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to remove all the likes for USER(".$user_id.") in LIKES table");
 						throw new Exception("Failed to remove all the likes");
 					}
-					
-					$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 				}
 				else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to update user image");
@@ -682,6 +673,8 @@
 				
 				//transaction end
 				DatabaseUtil::endTransaction($con);
+				
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");

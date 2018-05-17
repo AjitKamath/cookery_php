@@ -1,6 +1,6 @@
 <?php
-	include_once($_SERVER['DOCUMENT_ROOT'].'/'.'private/util/ImportUtil.php');
-
+	include_once('ImportUtil.php');
+	
 	class ControllerUtil{
 		public static function serviceController(){
 			LoggerUtil::logger(__FILE__, __METHOD__, __LINE__, LOG_TYPE_INFO, "");
@@ -334,7 +334,7 @@
 
 		//for each directory
 		foreach($directorys as $directory){
-			$file_path = $_SERVER['DOCUMENT_ROOT'].'/'.$directory.$class_name . '.php';
+			$file_path = './'.$directory.$class_name . '.php';
 
 			//see if the file exsists
 			if(file_exists($file_path)){

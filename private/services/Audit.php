@@ -19,7 +19,7 @@
 				}
             }
             catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e);
             }
             finally{
                 DatabaseUtil::getInstance()->close_connection($con);

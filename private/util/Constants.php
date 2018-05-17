@@ -4,18 +4,9 @@
     define("APP_NAME", "Cookery");
 
     //paths
-    define("HOME_DIRECTORY", $_SERVER['DOCUMENT_ROOT']."/");
-    define("LOGS_DIRECTORY", HOME_DIRECTORY."logs/");
-    define("APP_DATA_DIRECTORY", HOME_DIRECTORY."app_data/");
-    define("APP_DATA_USERS_DIRECTORY", APP_DATA_DIRECTORY."users/");
-	define("APP_DATA_TEMP_DIRECTORY", APP_DATA_DIRECTORY."temp/");
-    define("APP_DATA_PROFILE_DIRECTORY", "profile/");
-    define("APP_DATA_PROFILE_IMAGES_DIRECTORY", "images/");
-    define("APP_DATA_RECIPES_DIRECTORY", "recipes/");
-    define("APP_DATA_RECIPES_IMAGES_DIRECTORY", "images/");
-	define("STATS_DIRECTORY", HOME_DIRECTORY."private/stats/");
-    define("STATS_DATABASE_FILE", "database_stats.ini");
-    define("WEB_DIRECTORY", HOME_DIRECTORY."private/web/");
+    define("LOGS_DIRECTORY", "logs/");
+    define("TEMP_DIRECTORY", "/tmp/temp_files/");
+    define("WEB_DIRECTORY", "./private/web/");
     define("MAIL_TEMPLATES_DIRECTORY", WEB_DIRECTORY."templates/");
     define("MAIL_TEMPLATES_EMAILS_DIRECTORY", MAIL_TEMPLATES_DIRECTORY."emails/");
     define("FILE_SERVER_PATH", "www.finappl.com/");
@@ -76,11 +67,17 @@
     //---------------------mail server config---------------------
 
     //---------------------database config---------------------
-    define("DATABASE_HOSTNAME", "db4free.net");
+    define("DATABASE_HOSTNAME", "cookery-dev.cmvyhx4jvtsc.ap-south-1.rds.amazonaws.com");
     define("DATABASE_USER", "cookeryuser");
     define("DATABASE_PASSWORD", "cookeryuser");
     define("DATABASE_NAME", "cookery");
     define("DATABASE_PORT", "3306");
+
+// 	define("DATABASE_HOSTNAME", "db4free.net");
+//     define("DATABASE_USER", "cookeryuser");
+//     define("DATABASE_PASSWORD", "cookeryuser");
+//     define("DATABASE_NAME", "cookery");
+//     define("DATABASE_PORT", "3306");
 	
 	define("DATABASE_TIMEZONE_OFFSET", "+5:30");	//this is relative to UTC timezone. For eg: IST is +5:30
 
@@ -91,7 +88,23 @@
     define("DATABASE_TRANSACTION_LEAK_TIMESTAMP", "database.transaction.leak.timestamp");
     //---------------------database config---------------------
 
-    //---------------------------API----------------------------
+	//---------------------AWS config---------------------
+	define("AWS_IAM_KEY", "AKIAJB3VMOM7RRESE4CA");
+	define("AWS_IAM_SECRET", "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");
+	define("AWS_IAM_REGION", "ap-south-1");
+	define("AWS_BUCKET", "proj-dev");									//NOTE: proj-dev -> Development, proj-preprod -> Pre Production, proj-prod -> Production
+   
+	define("AWS_APP_DATA_DIRECTORY", "cookery/app_data/");
+	
+	define("AWS_APP_DATA_USERS_DIRECTORY", AWS_APP_DATA_DIRECTORY."users/");
+	define("AWS_APP_DATA_PROFILE_DIRECTORY", AWS_APP_DATA_USERS_DIRECTORY."profile/");
+    define("AWS_APP_DATA_PROFILE_IMAGES_DIRECTORY", AWS_APP_DATA_PROFILE_DIRECTORY."images/");
+	
+	define("AWS_APP_DATA_RECIPES_DIRECTORY", AWS_APP_DATA_DIRECTORY."recipes/");
+	define("AWS_APP_DATA_RECIPES_IMAGES_DIRECTORY", AWS_APP_DATA_RECIPES_DIRECTORY."images/");
+	//---------------------AWS config---------------------
+	
+	//---------------------------API----------------------------
     define("API_KEY_IDENTFIER", "x-api-key");
     define("API_KEY_ANDROID", "AIzaSyAxI2I8Wvt784ExlS_BBHY8uWPakM7XRBo");
     define("API_KEY_WEB", "AIzaSyB6K3ksqK8KAH5GBuf2RWqtoEG7qYvOEu0");
@@ -128,7 +141,7 @@
     define("USER_FOLLOW","USER_FOLLOW");
     define("USER_UNFOLLOW","USER_UNFOLLOW");
 	define("USER_BIO_ADD","USER_BIO_ADD");
-	define("USER_BIO_DELETE","USER_BIO_DELETE");
+	define("USER_BIO_REMOVE","USER_BIO_REM");
     //user
 
     //recipe

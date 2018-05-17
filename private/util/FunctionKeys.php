@@ -74,6 +74,7 @@
     define("USER_SEARCH", "USER_SEARCH");                               //Postman completed
 	define("USER_BIO_SUBMIT", "USER_BIO_SUBMIT");                       //Postman completed
 	define("USER_BIO_FETCH", "USER_BIO_FETCH");                       	//Postman completed
+	define("USER_BIO_DELETE", "USER_BIO_DELETE");                      	//Postman completed
     //user
 
     //like

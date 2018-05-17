@@ -7,3 +7,6 @@ logs/*
 
 # sonar
 .scannerwork/*
+
+# libraries in vendor
+vendor
