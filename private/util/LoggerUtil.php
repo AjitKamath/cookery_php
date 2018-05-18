@@ -5,7 +5,7 @@
 		public static function logger($className, $methodName, $lineNumber, $type, $message){
 			try{
 				if(!file_exists(LOGS_DIRECTORY)){
-					echo "Error ! Directory(".LOGS_DIRECTORY.") does not exist !";
+					//echo "Error ! Directory(".LOGS_DIRECTORY.") does not exist !";
 					return;
 				}
 
