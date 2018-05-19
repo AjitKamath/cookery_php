@@ -13,3 +13,8 @@
 12. Configure GitHub WebHooks
 13. Set MAIL_DEBUG to 0 in prod.
 14. Set FILE_SERVER_PATH as the url where the file server is hosted.
+15. Set AWS_BUCKET to proj-prod in production(ensure that proj-prod is ready in AWS S3).
+
+
+***** libraries installed using composer *****
+1. aws-sdk-php

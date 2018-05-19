@@ -53,7 +53,7 @@
 							OR USR.NAME LIKE '%".$searchQuery."%')
 							AND RCP.IS_DEL = 'N'
 							AND ING_AKA.IS_REG = 'Y'
-							LIMIT 10";
+							LIMIT ".RECIPES_COUNT;
 				
 				$result = mysqli_query($con, $query);
 				//check if the query matches any recipe with its name or ingredients or the user who submitted it
@@ -151,8 +151,13 @@
 					$temparr['ING_UOM_VALUE'] = $result_data->ING_UOM_VALUE;
 					$temparr['ING_CAT_ID'] = $result_data->ING_CAT_ID;
 					$temparr['ingredientCategoryName'] = $result_data->ING_CAT_NAME;
+					
+					//get ingredient primary image
 					$temparr['images'] = Ingredient::getIngredientPrimaryImage($con, $result_data->ING_ID);
 
+					//get ingredient nutritions
+					$temparr['ingredientNutritionCategories'] = Ingredient::getIngredientNutritions($con, $result_data->ING_ID);
+					
 					array_push($result_array, $temparr);  
 				}
 
@@ -313,7 +318,7 @@
 		}
 		
 		public static function submitRecipe($rcp_id, $rcp_nm, $food_csn_id, $ing_aka_id, $ing_aka_nm, $ing_uom_id, $ing_uom_value, 
-											$rcp_steps, $tst_id, $tst_qty, $food_typ_id, $user_id, $rcp_images){
+											$rcp_steps, $food_typ_id, $user_id, $rcp_images){
 			//check for null/empty
 			//mandatory
 			if(!Util::check_for_null($user_id)){
@@ -350,16 +355,6 @@
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_uom_value");
 				return;
 			}
-
-			if(!Util::check_for_null($tst_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_id");
-				return;
-			}
-
-			if(!Util::check_for_null($tst_qty)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."tst_qty");
-				return;
-			}  
 
 			if(count($rcp_images['name']) == 0){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."rcp_images");
@@ -491,36 +486,6 @@
 							}
 						}
 						//insert recipe steps into RECIPE_STEPS table
-
-						//delete the old tastes from RECIPE_TASTE table
-						$query = "DELETE FROM `RECIPE_TASTE` WHERE RCP_ID = '".$rcp_id."'";
-						if(mysqli_query($con, $query)){
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "All tastes for Recipe(".$rcp_id.") are deleted from RECIPE_TASTE table");
-						}
-						else{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-							throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
-						}
-						//delete the old recipe tastes from RECIPE_TASTE table
-
-						//insert tastes into TASTE table
-						for($i = 0; $i< count($tst_id); $i++){
-							$query = "INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY` , `CREATE_DTM`)
-									  VALUES ('$rcp_id' , '$tst_id[$i]' , '$tst_qty[$i]' , CURRENT_TIMESTAMP)";
-							if(mysqli_query($con, $query)){
-								$rcp_tst_id = mysqli_insert_id($con); 
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into RECIPE_INGREDIENTS table");
-							}
-							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-								throw new Exception("Failed to insert into RECIPE_TASTE table");
-							}
-						}
-						//insert tastes into TASTE table
 					}
 					else{
 						throw new Exception("Query failure : ".$query);
@@ -535,10 +500,10 @@
 						//NOTE : not deleting the images from its phyiscal path as of now.
 					}
 					else{
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to delete images for Recipe(".$rcp_id.") from RECIPE_IMG table.");
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-						throw new Exception("Failed to delete tastes for Recipe(".$rcp_id.") from RECIPE_TASTE table.");
+						throw new Exception("Failed to delete images for Recipe(".$rcp_id.") from RECIPE_IMG table.");
 					}
 					//delete the old recipe tastes from RECIPE_TASTE table
 
@@ -550,7 +515,7 @@
 						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
 					}
 
-					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
+					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".AWS_APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".AWS_APP_DATA_RECIPES_IMAGES_DIRECTORY;
 					if(!Util::create_directory($recipe_images_dir)){
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to create directory(".$recipe_images_dir.")");
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
@@ -684,54 +649,41 @@
 							}
 						}
 						//insert recipe steps into RECIPE_STEPS table
-
-						//insert tastes into TASTE table
-						for($i = 0; $i< count($tst_id); $i++){
-							$query = "INSERT INTO `RECIPE_TASTE` (`RCP_ID` , `TST_ID` , `TST_QTY` , `CREATE_DTM`)
-									  VALUES ('$rcp_id' , '$tst_id[$i]' , '$tst_qty[$i]' , CURRENT_TIMESTAMP)";
-							if(mysqli_query($con, $query)){
-								$rcp_tst_id = mysqli_insert_id($con); 
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Taste(".$rcp_tst_id.") added into RECIPE_INGREDIENTS table");
-							}
-							else{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into RECIPE_TASTE table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-								throw new Exception("Failed to insert into RECIPE_TASTE table");
-							}
-						}
-						//insert tastes into TASTE table
 					}
 					else{
 						throw new Exception("Query failure : ".$query);
 					}
 					//insert into RECIPE table
 
-					//upload images. if atleast one image is uploaded, warn the user but recipe mut be added without rolling back
-					//prepare directories
-					if(!Util::prepare_directories($user_id)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Cannot submit the recipe as the file directories could not be created for the user($user_id).");  
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-						throw new Exception("Cannot submit the recipe as the file directories could not be created for the user($user_id).");
-					}
-
-					$recipe_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_RECIPES_DIRECTORY.$rcp_id."/".APP_DATA_RECIPES_IMAGES_DIRECTORY;
-					if(!Util::create_directory($recipe_images_dir)){
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to create directory(".$recipe_images_dir.")");
-						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
-						throw new Exception("Failed to create directory(".$recipe_images_dir.")");
-					}
-					//prepare directories
-
 					$upload_failed = false;
 					$primaryRecipeImage = "";
-					for($i = 0; $i< count($rcp_images['tmp_name']); $i++){
+					
+					//This import has to be used wherever we want to use AWSUtil.php
+					//This issue has been explained in AWSImportUtil.php
+					include_once '../private/util/AWSImportUtil.php';	
+					$s3 = AWSUtil::getAWSConnection();
+					
+					for($i = 0; $i < count($rcp_images['tmp_name']); $i++){
+						//upload image
+						$s3Path = AWSUtil::uploadFilesToS3($s3, $rcp_images, $i, AWS_APP_DATA_RECIPES_IMAGES_DIRECTORY);
+						//upload image
+						
+						if(Util::check_for_null($s3Path)){
+							$atleast_one_uploaded = true;
+						}
+						else{
+							$upload_failed = true;
+						}
+						
+						if(!Util::check_for_null($primaryRecipeImage)){
+							$primaryRecipeImage = $s3Path;
+						}
+						
 						try{
-							$recipe_image = $recipe_images_dir.uniqid().".jpg";
-
 							//insert into RECIPE_IMG table
 							$query = "INSERT INTO `RECIPE_IMG` (`RCP_ID` , `RCP_IMG`, `CREATE_DTM`) 
-									  VALUES ('$rcp_id' , '".Util::get_relative_path($recipe_image)."', CURRENT_TIMESTAMP)";   
+									  VALUES ('$rcp_id' , '".$s3Path."', CURRENT_TIMESTAMP)";   
+							
 							if(mysqli_query($con, $query)){
 								$rcp_img_id = mysqli_insert_id($con); 
 								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$rcp_img_id.") added into RECIPE_IMG table");
@@ -743,17 +695,6 @@
 								throw new Exception("Failed to insert into RECIPE_IMG table");
 							}
 							//insert into RECIPE_IMG table
-
-							if (isset($rcp_images['tmp_name'][$i])){
-								$tmpFilePath = $rcp_images['tmp_name'][$i];
-								move_uploaded_file($tmpFilePath, $recipe_image);
-								$atleast_one_uploaded = true;
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, "I", "Recipe Image(".$recipe_image.") uploaded");
-								
-								if(!Util::check_for_null($primaryRecipeImage)){
-									$primaryRecipeImage = $recipe_image;
-								}  
-							}
 						}
 						catch(Exception $e){
 							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Image upload fail exception : ".$e->getMessage());
@@ -786,10 +727,6 @@
 
 				mysqli_commit($con);
 				//submit recipe transaction ends here
-				
-				//response
-				$response = json_encode($response);
-				//response
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
@@ -1411,8 +1348,8 @@
 					
 					//register timeline
 					Timeline::addTimeline($con, $user_id, $user_id, RECIPE_REMOVE, $rcp_id, DEFAULT_SCOPE_ID);
-					MailUtil::recipeEmail(RECIPE_REMOVE, User::getEmail($con, $user_id), User::getUsername($con, $user_id), "Your Recipe is Deleted", 
-										  Util::getAbsolutePath($primaryRecipeImage[0]["RCP_IMG"]), $rcp_nm);
+					MailUtil::recipeEmail(RECIPE_REMOVE, User::getEmail($con, $user_id), User::getUsername($con, $user_id), 
+										  "Your Recipe is Deleted", $primaryRecipeImage[0]["RCP_IMG"], $rcp_nm);
 				}
 				else{
 					$result_arr["err_code"] = "1";

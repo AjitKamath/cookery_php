@@ -11,11 +11,8 @@
 				//cuisines
 				$result_array['foodCuisines'] = FoodCuisine::getAllFoodCuisines($con);
 				
-				//tastes
-				$result_array['tastes'] = Taste::getAllTastes($con);
-				
 				//quantity
-				$result_array['ingredientUOMs'] = IngredientUOM::getAllIngredientUOM($con);
+				$result_array['ingredientUOMs'] = Ingredient::getAllIngredientUOM($con);
 
 				$response = $result_array;
 			}

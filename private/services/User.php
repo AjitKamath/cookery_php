@@ -1,5 +1,240 @@
 <?php
+	
+
 	class User{
+		public static function submitUserBio($user_id, $user_bio_id=null, $user_bio=null){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+
+				//transaction begin
+				DatabaseUtil::beginTransaction($con);
+				
+				if(!Util::check_for_null($user_bio_id)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, NULL_OR_EMPTY."user_bio_id which means the user is trying to add a new bio");
+					
+					$query = "UPDATE `USER_BIO`
+						SET IS_ACTIVE = 'N',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND IS_ACTIVE = 'Y'
+						AND IS_DEL = 'N'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
+						
+						$query = "INSERT INTO `USER_BIO` (`USER_ID`, `USER_BIO`, `IS_ACTIVE`, `CREATE_DTM`) 
+								VALUES ('$user_id', '$user_bio', 'Y', CURRENT_TIMESTAMP)";
+					
+						if(mysqli_query($con, $query)){
+							$user_bio_id = mysqli_insert_id($con);
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "New bio(".$user_bio_id.") added");
+							
+							//register timeline
+							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_ADD, $user_bio_id);
+							//register timeline
+						}
+						else{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while adding a new bio");
+							throw new Exception("Failed to add a new bio");
+						}
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making all the bio for the user(".$user_id.") as inactive");
+						throw new Exception("Failed to make old bio's as inactive");
+					}
+				}
+				else{
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Setting bio(".$user_bio_id.") as active bio for the user(".$user_id.")");
+					
+					$query = "UPDATE `USER_BIO`
+						SET IS_ACTIVE = 'N',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND IS_ACTIVE = 'Y'
+						AND IS_DEL = 'N'";
+				
+					if(mysqli_query($con, $query)){
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "All bio for user(".$user_id.") has been set to inactive");
+						
+						$query = "UPDATE `USER_BIO`
+							SET IS_ACTIVE = 'Y',
+							MOD_DTM = CURRENT_TIMESTAMP
+							WHERE USER_ID = '".$user_id."'
+							AND USER_BIO_ID = '".$user_bio_id."'
+							AND IS_DEL = 'N'";
+						
+						if(mysqli_query($con, $query)){
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Bio(".$user_bio_id.") for user(".$user_id.") has been set to active");
+							
+							//register timeline
+							Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_ADD, $user_bio_id);
+							//register timeline
+						}
+						else{
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making the bio(".$user_bio_id.") for the user(".$user_id.") as active");
+							throw new Exception("Failed to make selected bio's as active");
+						}
+					}
+					else{
+						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! while making all the bio for the user(".$user_id.") as inactive");
+						throw new Exception("Failed to make old bio's as inactive");
+					}
+				}
+				
+				//transaction end
+				DatabaseUtil::endTransaction($con);
+				
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				
+				//roll back
+				DatabaseUtil::rollbackTransaction($con);
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
+		public static function fetchUserBios($user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				$response = self::getUserBios($con, $user_id);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
+		public static function deleteUserBio($user_id, $user_bio_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			
+			if(!Util::check_for_null($user_bio_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_bio_id");
+				return;
+			}
+			//check for null/empty
+			
+			$response = array();
+			try{
+				$con = DatabaseUtil::getInstance()->open_connection();
+				
+				$query = "UPDATE `USER_BIO`
+						SET IS_DEL = 'Y',
+						MOD_DTM = CURRENT_TIMESTAMP
+						WHERE USER_ID = '".$user_id."'
+						AND USER_BIO_ID = '".$user_bio_id."'";
+				
+				if(mysqli_query($con, $query)){
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "deleted bio(".$user_bio_id.")");
+					
+					//register timeline
+					Timeline::addTimeline($con, $user_id, $user_id, USER_BIO_REMOVE, $user_bio_id);
+					//register timeline
+				}
+				else{
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Could not delete bio(".$user_bio_id.")");
+				}
+					
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+			finally{
+				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
+			}
+		}
+		
+		public static function getUserBios($con, $user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$query = "SELECT USER_BIO_ID, USER_BIO, IS_ACTIVE, CREATE_DTM
+							FROM `USER_BIO` 
+							WHERE USER_ID = '$user_id'
+							AND IS_DEL = 'N'
+							ORDER BY CREATE_DTM DESC";
+				$result = mysqli_query($con, $query);
+
+				$response = array();
+				while($result_obj = $result->fetch_object()){
+					$temp_array['USER_BIO_ID'] = $result_obj->USER_BIO_ID;
+					$temp_array['USER_BIO'] = $result_obj->USER_BIO;
+					$temp_array['IS_ACTIVE'] = $result_obj->IS_ACTIVE;
+					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
+					
+					array_push($response, $temp_array); 
+				}
+				
+				return $response;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
+		public static function getUserActiveBio($con, $user_id){
+			//check for null/empty
+			if(!Util::check_for_null($user_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
+				return;
+			}
+			//check for null/empty
+			
+			try{
+				$query = "SELECT USER_BIO_ID, USER_BIO, CREATE_DTM
+							FROM `USER_BIO` 
+							WHERE USER_ID = '$user_id'
+							AND IS_ACTIVE = 'Y'
+							AND IS_DEL = 'N'";
+				$result = mysqli_query($con, $query);
+
+				if($result_obj = $result->fetch_object()){
+					$temp_array['USER_BIO_ID'] = $result_obj->USER_BIO_ID;
+					$temp_array['USER_BIO'] = $result_obj->USER_BIO;
+					$temp_array['CREATE_DTM'] = $result_obj->CREATE_DTM;
+					
+					return $temp_array; 
+				}
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
 		public static function searchUsers($search_query, $logged_in_user_id, $index){
 			//check for null/empty
 			if(!Util::check_for_null($search_query)){
@@ -254,6 +489,12 @@
 					//comments count
 					$temp_array['commentsCount'] = Comment::getCommentsCount($con, "USER", $user_id);
 					
+					//bio
+					$temp_array['bio'] = self::getUserActiveBio($con, $user_id);
+					
+					//bios
+					$temp_array['bios'] = self::getUserBios($con, $user_id);
+					
 					//email, phone & gender must be only fetched if the user has permitted it to be shown to public 
 					if(USER_FETCH_PUBLIC == $forWhom){
 						if('1' == $result_data->EMAIL_SCOPE_ID){
@@ -374,40 +615,31 @@
 				return;
 			}
 			
-			if(count($image) == 0){
+			if(!Util::check_for_null($image)){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."image");
 				return;
 			}
 			//check for null/empty
-
+			
 			$response = array();
 			try{
+				//This import has to be used wherever we want to use AWSUtil.php
+				//This issue has been explained in AWSImportUtil.php
+				include_once '../private//util/AWSImportUtil.php';	
+				
+				//upload image
+				$s3 = AWSUtil::getAWSConnection();
+				$s3Path = AWSUtil::uploadFilesToS3($s3, $image, 0, AWS_APP_DATA_PROFILE_IMAGES_DIRECTORY);
+				//upload image
+				
 				$con = DatabaseUtil::getInstance()->open_connection();
 				
 				//transaction begin
 				DatabaseUtil::beginTransaction($con);
-				
-				//prepare directories
-				if(!Util::prepare_directories($user_id)){
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Cannot submit the profile image as the file directories could not be created for the user($user_id).");  
-					return;
-				}
-				//prepare directories
-
-				//upload image
-				$profile_images_dir = APP_DATA_USERS_DIRECTORY.$user_id."/".APP_DATA_PROFILE_DIRECTORY.APP_DATA_PROFILE_IMAGES_DIRECTORY;
-				$new_image = $profile_images_dir.uniqid().".jpg";
-
-				if (isset($image['tmp_name'][0])){
-					$image = $image['tmp_name'][0];
-					
-					move_uploaded_file($image, $new_image);
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "User Profile Image(".$new_image.") uploaded");
-				}
 
 				//update into USER table
 				$query = "UPDATE `USER`
-						SET IMG = '".Util::get_relative_path($new_image)."',
+						SET IMG = '".$s3Path."',
 						MOD_DTM = CURRENT_TIMESTAMP
 						WHERE USER_ID = '".$user_id."'";
 				
@@ -432,8 +664,6 @@
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to remove all the likes for USER(".$user_id.") in LIKES table");
 						throw new Exception("Failed to remove all the likes");
 					}
-					
-					$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 				}
 				else{
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to update user image");
@@ -443,6 +673,8 @@
 				
 				//transaction end
 				DatabaseUtil::endTransaction($con);
+				
+				$response = self::getUser($con, $user_id, $user_id, USER_FETCH_SELF);
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Something went wrong !");
@@ -1027,6 +1259,7 @@
             }
             //check for null/empty
 			
+			$response = array();
 			try{
 				$con = DatabaseUtil::getInstance()->open_connection();
 
@@ -1041,8 +1274,7 @@
 					$password = base64_encode($password);
 					
 					if($result_obj->EMAIL == $email && $result_obj->PASSWORD == $password){
-						$temp = self::getUser($con, $result_obj->USER_ID, $result_obj->USER_ID, USER_FETCH_SELF);
-						array_push($result_array, $temp);
+						$result_array = self::getUser($con, $result_obj->USER_ID, $result_obj->USER_ID, USER_FETCH_SELF);
 					}
 					else{
 						LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "User Login Failed with email id as: ".$email);
@@ -1052,13 +1284,14 @@
 					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "User Login Failed with email id as: ".$email);
 				}
 				
-				return json_encode($result_array);
+				$response = $result_array;
 			}
 			catch(Exception $e){
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
+				return json_encode($response);
 			}
 		}
 		

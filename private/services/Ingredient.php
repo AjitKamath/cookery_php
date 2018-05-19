@@ -1,9 +1,9 @@
 <?php
 	class Ingredient{
-		public static function fetchIngredientNutrientValues($ingId){
+		public static function fetchIngredientNutrientValues($ing_id){
 			//check for null/empty
-			if(!Util::check_for_null($ingId)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ingId");
+			if(!Util::check_for_null($ing_id)){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_id");
 				return;
 			}
 			//check for null/empty
@@ -16,7 +16,7 @@
 							FROM INGREDIENT AS ING
 							INNER JOIN ING_AKA AS ING_AKA ON ING_AKA.ING_ID = ING.ING_ID
 							INNER JOIN ING_CATEGORIES AS ING_CAT ON ING.ING_CAT_ID = ING_CAT.ING_CAT_ID
-							where ING.ING_ID = '".$ingId."'";
+							where ING.ING_ID = '".$ing_id."'";
 				$result = mysqli_query($con, $query);
 				
 				$result_array = array();
@@ -30,45 +30,25 @@
 					//get ingredient images
 					$temp_array['images'] = Ingredient::getIngredientImages($con, $result_obj->ING_ID);
 					
-					//get ingredient nutrient types
-					$query = "SELECT NUT_CAT.NUT_CAT_ID, NUT_CAT_NAME
- 							FROM INGREDIENT_NUTRITION AS ING_NUT
- 							INNER JOIN NUTRITION AS NUT ON NUT.NUT_ID = ING_NUT.NUT_ID
- 							INNER JOIN NUTRITION_CATEGORIES AS NUT_CAT ON NUT_CAT.NUT_CAT_ID = NUT.NUT_CAT_ID
- 							WHERE ING_NUT.ING_ID = '".$ingId."' 
-							GROUP BY NUT_CAT_ID";
-					$nut_cat_result = mysqli_query($con, $query);
+					//get ingredient nutritions
+					$temp_array['ingredientNutritionCategories'] = self::getIngredientNutritions($con, $ing_id);
 					
-					$nut_cat_result_array = array();
-					while($nut_cat_result_obj = $nut_cat_result->fetch_object()){
-						$nut_cat_temp_array['NUT_CAT_ID'] = $nut_cat_result_obj->NUT_CAT_ID;
-						$nut_cat_temp_array['NUT_CAT_NAME'] = $nut_cat_result_obj->NUT_CAT_NAME;
+					//get ingredient health
+					$query = "SELECT ING_HLTH_IND, ING_HLTH_DESC
+ 							FROM ING_HEALTH
+ 							WHERE ING_ID = '".$ing_id."' 
+							ORDER BY ING_HLTH_IND";
+					$ing_hlth_result = mysqli_query($con, $query);
+					
+					$ing_hlth_result_array = array();
+					while($ing_hlth_result_obj = $ing_hlth_result->fetch_object()){
+						$ing_hlth_result_tmp_array['ING_HLTH_IND'] = $ing_hlth_result_obj->ING_HLTH_IND;
+						$ing_hlth_result_tmp_array['ING_HLTH_DESC'] = $ing_hlth_result_obj->ING_HLTH_DESC;
 						
-						//get ingredient nutrient values
-						$query = "SELECT ING_NUT_ID, NUT.NUT_NAME, ING_NUT.ING_NUT_VAL, NUT_UOM.NUT_UOM_NAME
-								FROM INGREDIENT_NUTRITION AS ING_NUT
-								INNER JOIN NUTRITION AS NUT ON NUT.NUT_ID = ING_NUT.NUT_ID
-								INNER JOIN NUTRITION_UOM AS NUT_UOM ON NUT_UOM.NUT_UOM_ID = ING_NUT.NUT_UOM_ID
-								WHERE NUT.NUT_CAT_ID = '".$nut_cat_result_obj->NUT_CAT_ID."'
-								AND ING_NUT.ING_ID = '".$ingId."'";
-						$nut_result = mysqli_query($con, $query);
-
-						$nut_result_array = array();
-						while($nut_result_obj = $nut_result->fetch_object()){
-							$nut_temp_array['ING_NUT_ID'] = $nut_result_obj->ING_NUT_ID;
-							$nut_temp_array['ingredientNutritionName'] = $nut_result_obj->NUT_NAME;
-							$nut_temp_array['nutritionUOMName'] = $nut_result_obj->NUT_UOM_NAME;
-							$nut_temp_array['ING_NUT_VAL'] = $nut_result_obj->ING_NUT_VAL;
-							
-							array_push($nut_result_array, $nut_temp_array);
-						}
-						
-						$nut_cat_temp_array['ingredientNutritions'] = $nut_result_array;
-						
-						array_push($nut_cat_result_array, $nut_cat_temp_array);
+						array_push($ing_hlth_result_array, $ing_hlth_result_tmp_array);
 					}
-					
-					$temp_array['ingredientNutritionCategories'] = $nut_cat_result_array;
+					$temp_array['ingredientHealths'] = $ing_hlth_result_array;
+					//get ingredient health
 					
 					array_push($result_array, $temp_array);
 				}
@@ -87,10 +67,65 @@
             }
 		}	
 		
+		public static function getIngredientNutritions($con, $ing_id){
+			//check for null/empty
+            if(!Util::check_for_null($ing_id)){
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_id");
+                return;
+            }
+			//check for null/empty
+			
+			try{
+				//get ingredient nutrient types
+				$query = "SELECT NUT_CAT.NUT_CAT_ID, NUT_CAT_NAME
+						FROM INGREDIENT_NUTRITION AS ING_NUT
+						INNER JOIN NUTRITION AS NUT ON NUT.NUT_ID = ING_NUT.NUT_ID
+						INNER JOIN NUTRITION_CATEGORIES AS NUT_CAT ON NUT_CAT.NUT_CAT_ID = NUT.NUT_CAT_ID
+						WHERE ING_NUT.ING_ID = '".$ing_id."' 
+						GROUP BY NUT_CAT_ID";
+				$nut_cat_result = mysqli_query($con, $query);
+
+				$nut_cat_result_array = array();
+				while($nut_cat_result_obj = $nut_cat_result->fetch_object()){
+					$nut_cat_temp_array['NUT_CAT_ID'] = $nut_cat_result_obj->NUT_CAT_ID;
+					$nut_cat_temp_array['NUT_CAT_NAME'] = $nut_cat_result_obj->NUT_CAT_NAME;
+
+					//get ingredient nutrient values
+					$query = "SELECT ING_NUT_ID, NUT.NUT_NAME, ING_NUT.ING_NUT_VAL, NUT_UOM.NUT_UOM_NAME
+							FROM INGREDIENT_NUTRITION AS ING_NUT
+							INNER JOIN NUTRITION AS NUT ON NUT.NUT_ID = ING_NUT.NUT_ID
+							INNER JOIN NUTRITION_UOM AS NUT_UOM ON NUT_UOM.NUT_UOM_ID = NUT.NUT_UOM_ID
+							WHERE NUT.NUT_CAT_ID = '".$nut_cat_result_obj->NUT_CAT_ID."'
+							AND ING_NUT.ING_ID = '".$ing_id."'";
+					$nut_result = mysqli_query($con, $query);
+
+					$nut_result_array = array();
+					while($nut_result_obj = $nut_result->fetch_object()){
+						$nut_temp_array['ING_NUT_ID'] = $nut_result_obj->ING_NUT_ID;
+						$nut_temp_array['ingredientNutritionName'] = $nut_result_obj->NUT_NAME;
+						$nut_temp_array['nutritionUOMName'] = $nut_result_obj->NUT_UOM_NAME;
+						$nut_temp_array['ING_NUT_VAL'] = $nut_result_obj->ING_NUT_VAL;
+
+						array_push($nut_result_array, $nut_temp_array);
+					}
+
+					$nut_cat_temp_array['ingredientNutritions'] = $nut_result_array;
+
+					array_push($nut_cat_result_array, $nut_cat_temp_array);
+				}
+				//get ingredient nutrient types
+				
+				return $nut_cat_result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
+		
 		public static function fetchIngredients($searchQuery){
 			//check for null/empty
             if(!Util::check_for_null($searchQuery)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."search query");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."search query");
                 return;
             }
 			//check for null/empty
@@ -122,7 +157,7 @@
 				$response = $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -133,7 +168,7 @@
 		public static function getIngredientPrimaryImage($con, $ing_id){
 			//check for null/empty
             if(!Util::check_for_null($ing_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ing_id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_id");
                 return;
             }
 			//check for null/empty
@@ -154,14 +189,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function getIngredientImages($con, $ing_id){
 			//check for null/empty
             if(!Util::check_for_null($ing_id)){
-                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ing_id");
+                LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_id");
                 return;
             }
 			//check for null/empty
@@ -181,14 +216,14 @@
 				return $result_array;
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 		}
 		
 		public static function checkUserLists($user_id){
 			//check for null/empty start
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user id");
 				return;
 			}
 
@@ -215,7 +250,7 @@
 				return json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 			}
 			finally{
 				DatabaseUtil::getInstance()->close_connection($con);
@@ -225,7 +260,7 @@
 		public static function viewuserIngedrientList($list_id){
 			//check for null/empty start
 			if(!Util::check_for_null($list_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."list_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."list_id");
 				return;
 			}
 			//check for null/empty ends
@@ -252,7 +287,7 @@
 				return json_encode($result_array);
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				mysqli_rollback($con);
 			}
 			finally{
@@ -263,27 +298,27 @@
 		public static function updateUserIngedrientList($list_id, $list_name, $user_id, $listofingredients, $nameofingredients){
 			//check for null/empty start
 			if(!Util::check_for_null($list_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."list_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."list_id");
 				return;
 			}
 
 			if(!Util::check_for_null($list_name)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."list_name");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."list_name");
 				return;
 			}
 
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
 				return;
 			}
 
 			if(!count($listofingredients)>0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredients");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."listofingredients");
 				return;
 			}
 
 			if(!count($nameofingredients)>0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredientscheck");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."listofingredientscheck");
 				return;
 			}
 			//check for null/empty ends
@@ -308,7 +343,7 @@
 						}
 						else
 						{
-							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "List(".$list_id.") failed to update list name as (".$list_name.") into USER_ING_LIST_ID table");
+							LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "List(".$list_id.") failed to update list name as (".$list_name.") into USER_ING_LIST_ID table");
 						}
 
 					for($i = 0; $i< count($listofingredients); $i++)
@@ -331,10 +366,10 @@
 								}
 								else
 								{
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$query);
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$subquery);
-									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Rolling back !");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$subquery);
+									LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 									throw new Exception("Failed to insert into USER_ING_LIST_ITEM table");
 								}
 							}
@@ -350,7 +385,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_INFO, "Transaction failed for List ID(".$list_id.") in USER_ING_LIST_ITEM table");
 				$response['err_message'] = "Something went wrong !";
 				$response['isError'] = true;
@@ -365,12 +400,12 @@
 		public static function updateUserIngedrientListFromRecipe($list_id, $ing_aka_id){
 			//check for null/empty starts
 			if(!Util::check_for_null($list_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."list_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."list_id");
 				return;
 			}
 
 			if(!Util::check_for_null($ing_aka_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."ing_aka_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."ing_aka_id");
 				return;
 			}
 
@@ -388,8 +423,8 @@
 				}
 				else
 				{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$query);
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
 					throw new Exception("Failed to insert into USER_ING_LIST_ITEM table");
 				}
 
@@ -401,7 +436,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				$response['err_message'] = "Something went wrong !";
 				$response['isError'] = true;
 				mysqli_rollback($con);				
@@ -415,17 +450,17 @@
 		public static function saveuserIngedrientList($list_name, $user_id, $listofingredients, $nameofingredients){
 			//check for null/empty start
 			if(!count($listofingredients)>0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."listofingredients");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."listofingredients");
 				return;
 			}
 
 			if(!count($nameofingredients)>0){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."nameofingredients");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."nameofingredients");
 				return;
 			}
 
 			if(!Util::check_for_null($user_id)){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, NULL_OR_EMPTY."user_id");
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, NULL_OR_EMPTY."user_id");
 				return;
 			}
 			//check for null/empty ends
@@ -463,19 +498,19 @@
 							}
 							else
 							{
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$query);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$subquery);
-								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Rolling back !");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into USER_ING_LIST_ITEM table.");
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$subquery);
+								LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 								throw new Exception("Failed to insert into USER_ING_LIST_ITEM table");
 							}
 						}
 				}
 				else
 				{
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Error ! Failed to insert into USER_ING_LIST table.");
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Failed query : ".$query);
-					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, "Rolling back !");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Error ! Failed to insert into USER_ING_LIST table.");
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Failed query : ".$query);
+					LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, "Rolling back !");
 					throw new Exception("Failed to insert into USER_ING_LIST table");
 				}
 
@@ -490,7 +525,7 @@
 				//response
 			}
 			catch(Exception $e){
-				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
 				$response['err_message'] = "Something went wrong !";
 				$response['isError'] = true;
 				mysqli_rollback($con);				
@@ -499,6 +534,22 @@
 				DatabaseUtil::getInstance()->close_connection($con);
 			}
 		}
-				
+		
+		public static function getAllIngredientUOM($con){
+			try{
+				$query = "SELECT * FROM `INGREDIENT_UOM`";
+				$result = mysqli_query($con, $query);
+
+				$result_array = array();
+				while($result_data = $result->fetch_object()) {
+					array_push($result_array, $result_data);
+				}
+
+				return $result_array;
+			}
+			catch(Exception $e){
+				LoggerUtil::logger(__CLASS__, __METHOD__, __LINE__, LOG_TYPE_ERROR, EXCEPTION_MESSAGE .$e->getMessage());
+			}
+		}
 	}
 ?>
