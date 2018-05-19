@@ -23,15 +23,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/private/web/admincontrolpanel/appcontex
         <link href="<?php echo CSS_PATH ?>/customcss.css" rel="stylesheet" type="text/css" />
 
 
-
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/"></script> -->
+       
+        <script src="<?php echo JS_PATH ?>/raphael-min.js" type="text/javascript"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="<?php echo JS_PATH ?>/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="<?php echo JS_PATH ?>/bootstrap.min.js" type="text/javascript"></script>
         <!-- Morris.js charts -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="<?php echo JS_PATH ?>/plugins/morris/morris.min.js" type="text/javascript"></script>
         <!-- Sparkline -->
         <script src="<?php echo JS_PATH ?>/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>

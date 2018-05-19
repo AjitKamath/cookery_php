@@ -32,15 +32,15 @@
                 $_SESSION['webimports'] = WEB_IMPORTS;
                 $_SESSION['username'] = $result_obj->ADMIN_USER_NAME;
                 $_SESSION['role'] = $result_obj->ADMIN_USER_ROLE;
-								header("Location:/private/web/admincontrolpanel/web/pages/dashboard.php");
+								header(LOGIN_SUCCESS);
 							}else{
 								$error = "INVALID CREDENTIALS";
-								header("Location:/private/web/admincontrolpanel/web/pages/index.php?msg=".$error);
+								header(LOGIN_ERROR.$error);
 							}
 					}
 					else{
 								$error = "USER DOES NOT EXISTS";
-								header("Location:/private/web/admincontrolpanel/web/pages/index.php?msg=".$error);
+								header(LOGIN_ERROR.$error);
 							}
 				}
 					catch(Exception $e){
@@ -51,12 +51,10 @@
 					}
 	}
 		
-		
-		public static function logout()
-		{
+		public static function logout(){
 			session_start();
 			session_destroy();
-			header("Location:/private/web/admincontrolpanel/web/pages/index.php");		
+			header(LOGIN_SUCCESS);		
 		}
 		
 		public static function adminSaveUser($username, $passkey, $role, $mobile, $email){
@@ -116,8 +114,7 @@
 				}
 		}
     
-    public static function updateAdminUserRole($userid, $role)
-			{
+    public static function updateAdminUserRole($userid, $role){
 				 //check for null/empty
 				if(!Utility::check_for_null($userid)){
 						Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty user id");

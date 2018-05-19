@@ -45,6 +45,11 @@
 	$foodtypename			 		= isset($_GET['food_type_name']) ? $_GET['food_type_name'] : '';
   $foodtypenameadd	 		= isset($_POST['food_type_name']) ? $_POST['food_type_name'] : '';
   $foodcuisine    	 		= isset($_POST['cuisine_name']) ? $_POST['cuisine_name'] : '';
+  $nutcategory 		      = isset($_POST['nutcategory']) ? $_POST['nutcategory'] : '';
+  $nut 		              = isset($_POST['nut']) ? $_POST['nut'] : '';
+  $nutuom     		      = isset($_POST['nutuom']) ? $_POST['nutuom'] : '';
+  $nutval 	    	      = isset($_POST['nutval']) ? $_POST['nutval'] : '';
+
 
   // will be depcrecated
   $foodtypenamesearch		= isset($_GET['foodtypename']) ? $_GET['foodtypename'] : '';
@@ -65,10 +70,7 @@
   $userid      				  = isset($_GET['userid']) ? $_GET['userid'] : '';
   
 
-
-	$img = "IMG_TO_BE_UPLOADED";
-		
-  Utility::logger(__FILE__, "Controller", __LINE__, "I", "=====>".$function_key);
+  Utility::logger(__FILE__, "controller", __LINE__, "I", "=====>".$function_key);
 
 	if(AUTHENTICATE_USER == $function_key){
 		echo User::authenticateUser($username, $password);
@@ -77,7 +79,7 @@
 		echo User::showAllUsers();
 	}
 	else if(SAVE_INGREDIENT == $function_key){
-		echo Save::saveIngredient($ingname, $categoryid, $ingtagid);
+		echo Save::saveIngredient($ingname, $categoryid, $ingtagid, $nutcategory, $nut, $nutuom, $nutval);
 	}
 	else if(SAVE_FOOD_TYPE == $function_key){
 		echo Save::saveFoodType($foodtypenameadd);
@@ -169,8 +171,17 @@
   else if(FETCH_ING_CATEGORY == $function_key){
 		echo Master::fetchIngCategory();
 	}
+  else if(FETCH_NUT_CATEGORY == $function_key){
+		echo Master::fetchNutCategory();
+	}
   else if(FETCH_ING_BY_CATEGORY == $function_key){
 		echo Master::fetchIngByCategory($category);
+	}
+  else if(FETCH_NUT_BY_CATEGORY == $function_key){
+		echo Master::fetchNutByCategory($category);
+	}
+  else if(FETCH_UOM_BY_NUT == $function_key){
+		echo Master::fetchUomByNut($category);
 	}
   else if(SEARCH_INGRIDIENTS == $function_key){
 		echo Master::searchIngredient($ingredientname);

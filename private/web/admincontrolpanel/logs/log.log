@@ -1,42 +1,397 @@
 
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SAVE_INGREDIENT
-Save__Save::saveIngredient__6__I__Entered save ingredient
-Utility__Utility::uploadImage__100__I__Ingredient image Uploaded successfully
-Save__Save::saveIngredient__87__I__/app_data/master_data/ingredients/Penguins.jpg
-Save__Save::saveIngredient__89__I__INSERT INTO `ING_IMAGES` (`ING_IMG_ID`,`ING_ID`,`ING_IMG`,`IS_DEF`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'105','/app_data/master_data/ingredients/Penguins.jpg','N',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-Save__Save::saveIngredient__95__E__Could not able to execute INSERT INTO `ING_IMAGES` (`ING_IMG_ID`,`ING_ID`,`ING_IMG`,`IS_DEF`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'105','/app_data/master_data/ingredients/Penguins.jpg','N',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) Duplicate entry 'testing' for key 'ING_AKA_NAME'
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_MAIN_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_MAIN_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_FOOD_TYPE_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_FOOD_TYPE
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_FOOD_TYPE_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_FOOD_TYPE
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_INGREDIENTS_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_INGREDIENTS
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_ING_BY_CATEGORY
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_FOOD_CUISINE_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>FETCH_FOOD_CUISINE
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_MAIN_DASHBOARD
-/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__Controller__71__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SAVE_INGREDIENT
+Save__Save::saveIngredient__5__I__Entered save ingredient
+Save__Save::saveIngredient__51__E__Nutrition Category :5
+Save__Save::saveIngredient__51__E__Nutrition Category :6
+Utility__Utility::uploadImage__102__I__Ingredient image is to large
+Save__Save::saveIngredient__66__E__Failed to upload Image
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SAVE_INGREDIENT
+Save__Save::saveIngredient__5__I__Entered save ingredient
+Utility__Utility::uploadImage__102__I__Ingredient image is to large
+Save__Save::saveIngredient__62__E__Failed to upload Image
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SAVE_INGREDIENT
+Save__Save::saveIngredient__5__I__Entered save ingredient
+Utility__Utility::uploadImage__95__I__Ingredient image Uploaded successfully
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SEARCH_INGRIDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_CUISINE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_CUISINE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_CUISINE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_CUISINE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>EDIT_FOOD_CUISINE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_USERS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>ADMIN_FETCH_USERS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>MULTI_INGREDIENT_DELETE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_UOM_BY_NUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SEARCH_INGRIDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_TYPE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_TYPE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_INGREDIENTS
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_INGREDIENTS_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_ING_BY_CATEGORY
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_NUT_BY_CATEGORY
+Master__Master::fetchNutByCategory__320__E__Error ! null/empty category
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>MULTI_INGREDIENT_DELETE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_TYPE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_TYPE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_TYPE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_TYPE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_CUISINE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_CUISINE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_FOOD_TYPE_DASHBOARD
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>FETCH_FOOD_TYPE
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>LOGOUT
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>AUTHENTICATE_USER
+/home/cabox/workspace/private/web/admincontrolpanel/appcontext/controller.php__controller__73__I__=====>SETUP_MAIN_DASHBOARD

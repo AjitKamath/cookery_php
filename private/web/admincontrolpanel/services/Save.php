@@ -1,8 +1,7 @@
 <?php
 	class Save{
 
-    public static function saveIngredient($ingredientname, $categoryid, $ingtagid)
-    {
+    public static function saveIngredient($ingredientname, $categoryid, $ingtagid, $nutcategory, $nut, $nutuom, $nutval){
       Utility::logger(__CLASS__, __METHOD__, __LINE__, "I", "Entered save ingredient");
 		  //check user access
       if(!Utility::check_user_access(CREATE))
@@ -27,6 +26,27 @@
 					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient tag id");
 					return;
 			}
+      if(!Utility::check_for_null($nutcategory))
+      {
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient nutrition category id");
+					return;
+			}
+      if(!Utility::check_for_null($nut))
+      {
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient nutrition id");
+					return;
+			}
+      if(!Utility::check_for_null($nutuom))
+      {
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient nutrition UOM id");
+					return;
+			}
+      if(!Utility::check_for_null($nutval))
+      {
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty ingredient nutrition value");
+					return;
+			}
+      
      	try
       {
         $imagepath = Utility::uploadImage(INGREDIENT_IMAGE);
@@ -34,14 +54,14 @@
         {
             Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Image already exists");
             $error = "IMAGE ALREADY EXISTS";
-				    header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				    header(CUSTOM_MESSAGE_INGREDIENT.$error);
             return;
         }
         else if(!Utility::check_for_null($imagepath))
         {
             Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to upload Image");
             $error = "IMAGE UPLOAD FAILED";
-				    header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				    header(CUSTOM_MESSAGE_INGREDIENT.$error);
             return;
         }
         
@@ -56,53 +76,77 @@
           // Display error message  
           $data['message'] = "INGREDIENT EXISTS ALREADY";
           $error = "INGREDIENT EXISTS ALREADY";
-				  header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				  header(CUSTOM_MESSAGE_INGREDIENT.$error);
           return;
         }
         else
         {
           mysqli_begin_transaction($connection, MYSQLI_TRANS_START_READ_WRITE);
           mysqli_autocommit($connection, FALSE);
+          
+          if($ingtagid == 0)
+          {
             $ingquery = "INSERT INTO `INGREDIENT` (`ING_ID`,`ING_CAT_ID`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'$categoryid', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
             $result = mysqli_query($connection,$ingquery);
             $ing_id = mysqli_insert_id($connection); 
             if(!$result){
               $data['message'] = "failed";
               $error = "ERROR OCCURED";
-				      header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				      header(CUSTOM_MESSAGE_INGREDIENT.$error);
               Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $ingquery " . mysqli_error($connection));
               mysqli_rollback($connection);
               return;
             }
-
-            $ingakaquery = "INSERT INTO `ING_AKA` (`ING_AKA_ID`,`ING_ID`,`ING_AKA_NAME`,`SOURCE`,`IS_REG`,`IS_DEL`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'$ingtagid','$ingredientname','NULL','Y','N',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+          }
+          else
+          {
+            $ing_id = $ingtagid;
+          }
+          
+            $ingakaquery = "INSERT INTO `ING_AKA` (`ING_AKA_ID`,`ING_ID`,`ING_AKA_NAME`,`SOURCE`,`IS_REG`,`IS_DEL`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'$ing_id','$ingredientname','NULL','Y','N',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
             $result = mysqli_query($connection,$ingakaquery);
             if(!$result){
               $data['message'] = "failed";
               $error = "ERROR OCCURED";
-				      header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				      header(CUSTOM_MESSAGE_INGREDIENT.$error);
               Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $ingakaquery " . mysqli_error($connection));
               mysqli_rollback($connection);
               return;
             }
           
-          
-            Utility::logger(__CLASS__, __METHOD__, __LINE__, "I", $imagepath);
+            
             $ingimagequery = "INSERT INTO `ING_IMAGES` (`ING_IMG_ID`,`ING_ID`,`ING_IMG`,`IS_DEF`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'$ing_id','$imagepath','N',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
-            Utility::logger(__CLASS__, __METHOD__, __LINE__, "I", $ingimagequery);
-            $result = mysqli_query($connection,$ingakaquery);
+            $result = mysqli_query($connection,$ingimagequery);
             if(!$result){
               $data['message'] = "failed";
               $error = "ERROR OCCURED";
-				      header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				      header(CUSTOM_MESSAGE_INGREDIENT.$error);
               Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $ingimagequery " . mysqli_error($connection));
               mysqli_rollback($connection);
               return;
             }
+          
+          
+            $max = sizeof($nut);
+            for($i = 0; $i < $max;$i++)
+            {
+              $ingnutriquery = "INSERT INTO `INGREDIENT_NUTRITION` (`ING_NUT_ID`,`ING_ID`,`NUT_ID`,`ING_NUT_VAL`,`CREATE_DTM`,`MOD_DTM`) values(NULL,'$ing_id','$nut[$i]','$nutval[$i]',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+              $result = mysqli_query($connection,$ingnutriquery);
+              if(!$result){
+                $data['message'] = "failed";
+                $error = "ERROR OCCURED";
+                header(CUSTOM_MESSAGE_INGREDIENT.$error);
+                Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $ingnutriquery " . mysqli_error($connection));
+                mysqli_rollback($connection);
+                return;
+              }
+            }
+         
+          
         }
- 				
+ 				mysqli_commit($connection);
         $error = "INGREDIENT ADDED SUCCESSFULLY";
-				header("Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=".$error);
+				header(CUSTOM_MESSAGE_INGREDIENT.$error);
 			}catch(Exception $e){
 					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 					mysqli_rollback($connection);
@@ -135,7 +179,7 @@
 					if($obj->FOOD_TYP_NAME == $foodtypename){
 							$data['message'] = "exists";
               $error = "FOOD TYPE EXISTS ALREADY";
-              header("Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=".$error);
+              header(CUSTOM_MESSAGE_FOODTYPE.$error);
               return;
 					}
 					else
@@ -145,14 +189,14 @@
             {
                 Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Image already exists");
                 $error = "IMAGE ALREADY EXISTS";
-                header("Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=".$error);
+                header(CUSTOM_MESSAGE_FOODTYPE.$error);
                 return;
             }
             else if(!Utility::check_for_null($imagepath))
             {
                 Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to upload Image");
                 $error = "IMAGE UPLOAD FAILED";
-                header("Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=".$error);
+                header(CUSTOM_MESSAGE_FOODTYPE.$error);
                 return;
             }
             
@@ -167,13 +211,13 @@
 							$data['message'] = "failed";
 							Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
               $error = "ERROR OCCURED";
-              header("Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=".$error);          
+              header(CUSTOM_MESSAGE_FOODTYPE.$error);          
               return;
 						}
 					}
  					echo json_encode($data);
          $error = "FOOD TYPE ADDED SUCCESSFULLY";
-         header("Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=".$error);
+         header(CUSTOM_MESSAGE_FOODTYPE.$error);
 				}catch(Exception $e){
 					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				}
@@ -204,7 +248,7 @@
 					if($obj->FOOD_CSN_NAME == $foodcuisinename){
 							$data['message'] = "exists";
               $error = "FOOD CUISINE EXISTS ALREADY";
-              header("Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=".$error);
+              header(CUSTOM_MESSAGE_FOODCUISINE.$error);
               return;
 					}
 					else
@@ -214,14 +258,14 @@
               {
                   Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Image already exists");
                   $error = "IMAGE ALREADY EXISTS";
-                  header("Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=".$error);
+                  header(CUSTOM_MESSAGE_FOODCUISINE.$error);
                   return;
               }
               else if(!Utility::check_for_null($imagepath))
               {
                   Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Failed to upload Image");
                   $error = "IMAGE UPLOAD FAILED";
-                  header("Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=".$error);
+                  header(CUSTOM_MESSAGE_FOODCUISINE.$error);
                   return;
               }
             
@@ -238,13 +282,13 @@
 							$data['message'] = "failed";
 							Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Could not able to execute $query " . mysqli_error($connection));
               $error = "ERROR OCCURED";
-              header("Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=".$error);
+              header(CUSTOM_MESSAGE_FOODCUISINE.$error);
               return;
 						}
 					}
  					echo json_encode($data);
           $error = "FOOD CUISINE ADDED SUCCESSFULLY";
-         header("Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=".$error);
+         header(CUSTOM_MESSAGE_FOODCUISINE.$error);
 				}catch(Exception $e){
 					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
 				}

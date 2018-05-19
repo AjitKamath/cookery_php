@@ -17,16 +17,13 @@
 			}
 		}
     
-    
-    public static function logger($class, $method, $line, $type, $msg)
-		{
+    public static function logger($class, $method, $line, $type, $msg){
       $file = fopen(LOGS_FILE_NAME,"a");
       fwrite($file,"\n".$class."__".$method."__".$line."__".$type."__".$msg);
       fclose($file);
     }
     
-    public static function check_user_access($operation)
-    {
+    public static function check_user_access($operation){
      //check for null/empty
 			if(!Utility::check_for_null($operation)){
 					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty operation");
@@ -51,9 +48,7 @@
       }
     }
     
-    
-    public static function uploadImage($category)
-    {
+    public static function uploadImage($category){
       try
       {
         if(INGREDIENT_IMAGE == $category)
@@ -114,7 +109,12 @@
 			}
     }
     
-    
-  }
+
+
+
+  
+  
+  
+}
 
 ?>

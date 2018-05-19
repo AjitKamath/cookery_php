@@ -35,38 +35,23 @@ include_once($_SESSION['webimports']);
                 <section class="content">
                   <?php include_once(COMMON_DASHBOARD); ?>
                     <div class="col-md-10" >
-                        <span style="color: darkviolet;font-family: initial;"><?php $msg = isset($_GET['msg']) ? $_GET['msg'] : ''; echo $msg?></span><br>    
-                        <form action="/private/web/admincontrolpanel/appcontext/controller.php" method="post" enctype="multipart/form-data">
-                              <div class="form-group">
-                                <label class="control-label col-sm-2" >Cuisine Name</label>
-                                  <div class="col-sm-3">
-                                    <input type="text" id="cuisine_name" name="cuisine_name" class="form-control" required placeholder="Food Cuisine Name">
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                <input type="hidden" name="function_key" id="function_key" value="SAVE_FOOD_CUISINE">
-                                <label class="control-label col-sm-2" >Cuisine Image</label>
-                                  <div class="col-sm-3">
-                                    <input type="file" name="photo" id="fileSelect">
-                                  </div>
-                              </div>
-                              <input class="btn btn-success btn-sm" id="btn-chat" type='submit' value='Save Cuisine'>
-                          </form>
+                        <span style="color: white;font-family: initial;"><?php $msg = isset($_GET['msg']) ? $_GET['msg'] : ''; echo $msg?></span><br>    
                       </div>
                       <br><br><hr>
-                      <div class="col-md-10">
-                        <form>
-                           <label class="control-label col-sm-2" >Looking for</label>
-                           <div class="col-sm-3">
-                            <input type="text" id="food_csn_name_search" class="form-control" required placeholder="Search for..">
-                           </div>
-                           <div class="col-sm-3">
-                            <input class="btn btn-success btn-sm"  onclick="searchCuisine()" type='button' value='Search'>
-                           </div>
-                          </form>
-                           <div class="col-sm-3">
-                            <input class="btn btn-primary btn-sm" onclick="multipleFoodCuisineDelete('food_csn_id');" type='submit' value='Delete'>
-                           </div>
+                      <div>
+                         <label class="control-label col-sm-1" >Looking for</label>
+                         <div class="col-sm-3">
+                          <input type="text" id="food_csn_name_search" class="form-control" required placeholder="Search for..">
+                         </div>
+                         <div class="col-sm-3">
+                          <input class="btn btn-success btn-sm"  onclick="searchCuisine()" type='button' value='Search'>
+                         </div>
+                         <div class="col-sm-1">
+                          <input class="btn btn-danger btn-sm" onclick="multipleFoodCuisineDelete('food_csn_id');" type='submit' value='Delete'>
+                         </div>
+                         <div class="col-sm-3">
+                          <input class="btn btn-primary btn-sm" onclick="showAddFoodCuisine();" type='submit' value='Add Food Cuisine'>
+                         </div>
                       </div>
                   <br><br><hr>
                 	<div style="display: block; height: 400px; overflow-y: auto;">
@@ -116,6 +101,37 @@ include_once($_SESSION['webimports']);
 												</div>	
 											</div>
 										</div>
+                    <div class="modal fade" id="AddFoodCuisineModal" role="dialog">
+								`		<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												 <div class="modal-header">
+														 <button type="button" class="close" data-dismiss="modal">&times;</button>
+														 <h4 class="modal-title">Add Food Cuisine</h4>
+												 </div>
+													<div class="modal-body">
+														<form action="<?php echo CONTROLLER; ?>" method="post" enctype="multipart/form-data">
+                              <div class="form-group">
+                                <label class="control-label col-sm-3" >Cuisine Name</label>
+                                  <div class="col-sm-4">
+                                    <input type="text" id="cuisine_name" name="cuisine_name" class="form-control" required placeholder="Food Cuisine Name">
+                                  </div>
+                              </div><br><br><br>
+                              <div class="form-group">
+                                <input type="hidden" name="function_key" id="function_key" value="SAVE_FOOD_CUISINE">
+                                <label class="control-label col-sm-3" >Cuisine Image</label>
+                                  <div class="col-sm-4">
+                                    <input type="file" name="photo" id="fileSelect">
+                                  </div><br><br>
+                              </div>
+                              <div class="col-sm-4">
+                                <input class="btn btn-success btn-sm" id="btn-chat" type='submit' value='Save Cuisine'>
+                              </div><br><br>
+                            </form>        
+													</div>
+												</div>	
+											</div>
+										</div>
 								</section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
@@ -124,6 +140,8 @@ include_once($_SESSION['webimports']);
 <?php
 }
 else{
-    header('Location : '.LOGIN );
+    //include_once($_SERVER['DOCUMENT_ROOT'].'/private/web/admincontrolpanel/appcontext/constants.php');
+    include_once('../../appcontext/constants.php');
+    header(LOGIN);
 }
 ?>

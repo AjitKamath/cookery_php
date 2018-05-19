@@ -2,21 +2,40 @@
 
 // paths
 
-//define("HOME_DIRECTORY", $_SERVER['DOCUMENT_ROOT']."/");
+//define("HOME_DIRECTORY", $_SERVER['DOCUMENT_ROOT']);
 //define("LOGS_FILE_PATH", HOME_DIRECTORY."logs/");
-define("LOGS_FILE_NAME", $_SERVER['DOCUMENT_ROOT'] ."/private/web/admincontrolpanel/logs/log.log");
-define("CSS_PATH", "http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/css");
-define("JS_PATH", "http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/js");
+
+define("SERVER_NAME", "http://cookery_php-dial2vishal53897.codeanyapp.com");
+
+
+define("LOGS_FILE_NAME", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/logs/log.log");
+define("CSS_PATH", SERVER_NAME."/private/web/admincontrolpanel/web/webutils/assets/css");
+define("INDEX_CSS_PATH", SERVER_NAME."/private/web/admincontrolpanel/web/webutils/assets/css/style.css");
+define("JS_PATH", SERVER_NAME."/private/web/admincontrolpanel/web/webutils/assets/js");
+
 define("COMMON_HEAD", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commonhead.php");
 define("COMMON_HEADER", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commonheader.php");
 define("WEB_IMPORTS", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/webutils/webimportscripts.php");
 define("NAVIGATOR", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/webutils/navigator.php");
 define("COMMON_DASHBOARD", $_SERVER['DOCUMENT_ROOT']."/private/web/admincontrolpanel/web/pages/commondashboard.php");
-define("LOGIN", "/private/web/admincontrolpanel/web/pages/index.php");
+define("UTILITY", $_SERVER['DOCUMENT_ROOT']."/private/services/Utility.php");
+
+define("CONTROLLER", "/private/web/admincontrolpanel/appcontext/controller.php");
+define("USER_IMAGE", "/private/web/admincontrolpanel/web/webutils/assets/img/avatar3.png");
+define("LOGIN", "Location: /private/web/admincontrolpanel/web/pages/index.php");
+define("LOGOUTUSER", "/private/web/admincontrolpanel/appcontext/controller.php?function_key=LOGOUT");
+
+define("CUSTOM_MESSAGE_INGREDIENT", "Location:/private/web/admincontrolpanel/web/pages/manageingredient.php?msg=");
+define("CUSTOM_MESSAGE_FOODCUISINE", "Location:/private/web/admincontrolpanel/web/pages/managefoodcuisine.php?msg=");
+define("CUSTOM_MESSAGE_FOODTYPE", "Location:/private/web/admincontrolpanel/web/pages/managefoodtype.php?msg=");
+define("LOGIN_SUCCESS", "Location:/private/web/admincontrolpanel/web/pages/dashboard.php");
+define("LOGIN_ERROR", "Location:/private/web/admincontrolpanel/web/pages/index.php?msg=");
+
 define("ING_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/ingredients/");
 define("FOOD_TYPE_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/food_type/");
 define("FOOD_CUISINE_IMG_PATH" , "/home/cabox/workspace/app_data/master_data/cuisines/");
-define("COMMON_IMG_UPLOAD_PATH", "/app_data/master_data/");
+
+define("COMMON_IMG_UPLOAD_PATH", "app_data/master_data/");
 define("CUISINES_DIR", "cuisines/");
 define("INGREDIENTS_DIR", "ingredients/");
 define("FOOD_TYPE_DIR", "food_type/");
@@ -68,6 +87,10 @@ define("EMPLOYEE", "Employee");
 define("INGREDIENT_IMAGE", "INGREDIENT_IMAGE");
 define("FOOD_TYPE_IMAGE", "FOOD_TYPE_IMAGE");
 define("FOOD_CUISINE_IMAGE", "FOOD_CUISINE_IMAGE");
+define("FETCH_NUT_CATEGORY", "FETCH_NUT_CATEGORY");
+define("FETCH_NUT_BY_CATEGORY", "FETCH_NUT_BY_CATEGORY");
+define("FETCH_UOM_BY_NUT", "FETCH_UOM_BY_NUT");
+
 
 // Role based Access Specifiers
 define("ADMIN_ACCESS", serialize(array("CREATE", "READ", "UPDATE", "DELETE")));

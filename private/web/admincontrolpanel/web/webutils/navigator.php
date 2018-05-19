@@ -5,7 +5,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="http://cookery_php-dial2vishal53897.codeanyapp.com/private/web/admincontrolpanel/web/webutils/assets/img/avatar3.png" class="img-circle" alt="User Image" />
+                            <img src="<?php echo USER_IMAGE; ?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p>Hello, <?php echo $_SESSION['username']  ?></p>

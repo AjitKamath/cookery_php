@@ -156,6 +156,8 @@ include_once($_SESSION['webimports']);
 <?php
 }
 else{
-    header('Location : '.LOGIN );
+    //include_once($_SERVER['DOCUMENT_ROOT'].'/private/web/admincontrolpanel/appcontext/constants.php');
+    include_once('../../appcontext/constants.php');
+    header(LOGIN);
 }
 ?>

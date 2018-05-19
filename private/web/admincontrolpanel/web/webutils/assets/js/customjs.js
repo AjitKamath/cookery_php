@@ -1,119 +1,13 @@
-function saveIngredient()
-{
-	var key = "SAVE_INGREDIENT"
-	var ing_name = document.getElementById("ing_name").value;
-	var ing_aka_name = document.getElementById("ing_aka_name").value;
-	 $.ajax({
-						type	    : "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
-						data			:
-												{
-													function_key: key,
-													ing_name: ing_name,
-													ing_aka_name: ing_aka_name
-												},
-						success : function(data) 
-						{ 
-							var response = $.parseJSON(data);
-							var result = response.message;
-							if(result == "success")
-							{
-									bootbox.alert("Ingredient saved sucessfully");
-							}
-							else if(result == "exists")
-							{
-								bootbox.alert("Ingredient already exists");
-							}
-              else if(result == "ACCESS DENIED")
-              {
-                  bootbox.alert("ACCESS DENIED TO PERFORM THIS OPERATION");
-              }
-							else
-							{
-									bootbox.alert("Error Occured");	
-							}
-						}
-					});
-}
-
-function saveFoodType()
-{
-	var key = "SAVE_FOOD_TYPE"
-	var food_type_name = document.getElementById("food_type_name").value;
-	 $.ajax({
-						type	    : "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
-						data			:
-												{
-													function_key: key,
-													food_type_name: food_type_name
-												},
-						success : function(data) 
-						{ 
-							var response = $.parseJSON(data);
-							var result = response.message;
-							if(result == "success")
-							{
-									bootbox.alert("Food Type saved sucessfully");
-							}
-							else if(result == "exists")
-							{
-								bootbox.alert("Food Type already exists");
-							}
-              else if(result == "ACCESS DENIED")
-              {
-                  bootbox.alert("ACCESS DENIED TO PERFORM THIS OPERATION");
-              }
-							else
-							{
-									bootbox.alert("Error Occured");	
-							}
-						}
-					});
-}
-
-function saveCuisine()
-{
-	var key = "SAVE_FOOD_CUISINE"
-	var food_cuisine_name = document.getElementById("cuisine_name").value;
-	 $.ajax({
-						type	    : "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
-						data			:
-												{
-													function_key: key,
-													food_cuisine_name: food_cuisine_name
-												},
-						success : function(data) 
-						{ 
-							var response = $.parseJSON(data);
-							var result = response.message;
-							if(result == "success")
-							{
-									bootbox.alert("Food Cuisine saved sucessfully");
-							}
-							else if(result == "exists")
-							{
-								bootbox.alert("Food Cuisine already exists");
-							}
-              else if(result == "ACCESS DENIED")
-              {
-                  bootbox.alert("ACCESS DENIED TO PERFORM THIS OPERATION");
-              }
-							else
-							{
-									bootbox.alert("Error Occured");	
-							}
-						}
-					});
-}
+// Globals
+var controller = "/private/web/admincontrolpanel/appcontext/controller.php";
+var counter = 0;
 
 function fetchIngredients()
 {
 	var key = "FETCH_INGREDIENTS";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -150,12 +44,118 @@ function fetchIngByCat()
   fetchAvailableIngredientsUnderSelectedCategory(selectedcategory); 
 }
 
+function fetchNutritionCategory(nutcategory,nutrition,nutuom)
+{
+  var key = "FETCH_NUT_CATEGORY";
+			$.ajax({
+								type			: "GET",
+								url				: controller ,
+								data			:
+														{
+															function_key: key,
+														},
+								success : function(data) 
+								{
+                  var response = $.parseJSON(data);
+                  var selectuser = document.getElementById(nutcategory);
+                  for (j = 0; j < response.length; j++) 
+                  {
+                    var options = document.createElement('option');
+                    options.value = response[j].NUT_CAT_ID;
+                    options.text = response[j].NUT_CAT_NAME;
+                    selectuser.add(options, 0);
+                  } 
+                  fetchSubNutritionCategory(nutcategory,nutrition,nutuom);
+                }
+            });
+}
+
+function fetchSubNutritionCategory(nutrientcategory,nutrition,nutuom)
+{
+  var nutcategory = $(nutrientcategory).val();
+  
+  var key = "FETCH_NUT_BY_CATEGORY";
+			$.ajax({
+								type			: "GET",
+								url				: controller ,
+								data			:
+														{
+															function_key: key,
+                              category: nutcategory
+														},
+								success : function(data) 
+								{
+                  var response = $.parseJSON(data);
+                  if(response.length > 0)
+                  {
+                    // Cleaning Existing values
+                    $(nutrition).html('');
+                    $(nutuom).html('');
+                    
+                    for (var j = 0; j < response.length; j++) 
+                    {
+                      var choices = document.createElement('option');
+                      choices.value  = response[j].NUT_ID;
+                      choices.text = response[j].NUT_NAME;
+                      nutrition.add(choices, 0);
+                    } 
+                  }
+                  else
+                  {
+                    // Cleaning Existing values
+                    $(nutrition).html('');
+                    $(nutuom).html('');
+                  }
+                }
+            });
+}
+
+
+function fetchNutritionUOM(nutrition,nutritionuom)
+{
+  var nutriid = $(nutrition).val();
+  
+  var key = "FETCH_UOM_BY_NUT";
+			$.ajax({
+								type			: "GET",
+								url				: controller ,
+								data			:
+														{
+															function_key: key,
+                              category: nutriid
+														},
+								success : function(data) 
+								{
+                  var response = $.parseJSON(data);
+                  if(response.length > 0)
+                  {
+                    // Cleaning Existing values
+                    $(nutritionuom).html('');
+                    
+                    for (var j = 0; j < response.length; j++) 
+                    {
+                      var options = document.createElement('option');
+                      options.value = response[j].NUT_UOM_ID;
+                      options.text = response[j].NUT_UOM_NAME;
+                      nutritionuom.add(options, 0);
+                    } 
+                  }
+                  else
+                  {
+                    // Cleaning Existing values
+                    $(nutritionuom).html('');
+                  }
+                }
+            }); 
+}
+
+
 function fetchCategories()
 {
   var key = "FETCH_ING_CATEGORY";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -164,14 +164,20 @@ function fetchCategories()
 								{
                   var response = $.parseJSON(data);
                   var selectuser = document.getElementById("category");
+                  // Creating First element to make it optional
+                    var options = document.createElement('option');
+                    options.value = 0;
+                    options.text  = "--New--";
+                    selectuser.add(options, 0);
+                  
                   for (j = 0; j < response.length; j++) 
                   {
-                    var options = document.createElement('option');
+                    options = document.createElement('option');
                     options.value = response[j].ING_CAT_ID;
                     options.text = response[j].ING_CAT_NAME;
                     selectuser.add(options, 0);
-                  } 
-                  fetchAvailableIngredientsUnderSelectedCategory(response[0].ING_CAT_ID); 
+                  }
+                  fetchAvailableIngredientsUnderSelectedCategory(0);
                 }
             });
 }
@@ -181,7 +187,7 @@ function fetchAvailableIngredientsUnderSelectedCategory(category)
   var key = "FETCH_ING_BY_CATEGORY";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -191,17 +197,34 @@ function fetchAvailableIngredientsUnderSelectedCategory(category)
 								{
                   var response = $.parseJSON(data);
                   var selectuser = document.getElementById("availableingredientsunderselectedcategory");
-                  
-                  
                   if(response.length > 0)
                   {
-                    for (j = 0; j < response.length; j++) 
+                    // Cleaning Existing values
+                    $('#availableingredientsunderselectedcategory').html('');
+                    
+                    // Creating First element to make it optional
+                    choices = document.createElement('option');
+                    choices.value = 0;
+                    choices.text  = "--New--";
+                    selectuser.add(choices, 0);
+                    
+                    for (var j = 0; j < response.length; j++) 
                     {
                       choices = document.createElement('option');
                       choices.value  = response[j].ING_AKA_ID;
                       choices.text = response[j].ING_AKA_NAME;
                       selectuser.add(choices, 0);
                     } 
+                  }
+                  else
+                  {
+                    // Cleaning Existing values
+                    $('#availableingredientsunderselectedcategory').html('');
+                    
+                    choices = document.createElement('option');
+                    choices.value = 0;
+                    choices.text  = "--New--";
+                    selectuser.add(choices, 0);
                   }
                 }
             });
@@ -212,7 +235,7 @@ function fetchUsers()
 	var key = "ADMIN_FETCH_USERS";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -243,10 +266,10 @@ function fetchUsers()
 
 function fetchFoodType(status)
 {
-	var key = "FETCH_FOOD_TYPE";
+  var key = "FETCH_FOOD_TYPE";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -281,7 +304,7 @@ function fetchFoodCuisine(status)
 	var key = "FETCH_FOOD_CUISINE";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -318,7 +341,7 @@ function searchIngredient()
  var ingredientname = document.getElementById("ing_name_search").value;
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -356,7 +379,7 @@ function searchFoodtype()
  var foodtypename = document.getElementById("foodtypenamesearch").value;
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -393,7 +416,7 @@ function searchCuisine()
  var food_csn_name_search = document.getElementById("food_csn_name_search").value;
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -431,7 +454,7 @@ function searchUser()
  var user_name_search = document.getElementById("user_name_search").value;
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -465,7 +488,7 @@ function editfoodType(type_id)
 	var key = "EDIT_FOOD_TYPE";
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -499,7 +522,7 @@ function editfoodCuisine(type_id)
 	var key = "EDIT_FOOD_CUISINE";
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -533,7 +556,7 @@ function editIngredient(type_id)
 	var key = "EDIT_INGREDIENT";
 	$.ajax({
 						type			: "GET",
-						url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+						url				: controller ,
 						data			:
 												{
 													function_key: key,
@@ -582,7 +605,7 @@ function multipleIngredientDelete(checkboxName)
 					{
              $.ajax({
                         type		: "GET",
-                        url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                        url			: controller ,
                         data		: 
 																	{
 																	 function_key: key,
@@ -636,7 +659,7 @@ function multipleFoodTypeDelete(checkboxName)
 					{
              $.ajax({
                         type		: "GET",
-                        url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                        url			: controller ,
                         data		: 
 																	{
 																	 function_key: key,
@@ -689,7 +712,7 @@ function multipleFoodCuisineDelete(checkboxName)
 					{
              $.ajax({
                         type		: "GET",
-                        url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                        url			: controller ,
                         data		: 
 																	{
 																	 function_key: key,
@@ -743,7 +766,7 @@ function multipleUserDelete(checkboxName)
 					{
              $.ajax({
                         type		: "GET",
-                        url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                        url			: controller ,
                         data		: 
 																	{
 																	 function_key: key,
@@ -786,7 +809,7 @@ function deleteAdminUser(userid)
 		{
 			$.ajax({
 								type		: "GET",
-				  			url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+				  			url			: controller ,
 								data		: 
 													{ 
 													 function_key: key,	
@@ -828,7 +851,7 @@ function deleteIngredient(ingid)
 		{
 			$.ajax({
 								type		: "GET",
-				  			url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+				  			url			: controller ,
 								data		: 
 													{ 
 													 function_key: key,	
@@ -870,7 +893,7 @@ function deleteFoodType(foodtypeid)
 		{
 			$.ajax({
 								type		: "GET",
-				  			url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+				  			url			: controller ,
 								data		: 
 													{ 
 													 function_key: key,	
@@ -912,7 +935,7 @@ function deleteFoodCuisine(foodcuisineid)
 		{
 			$.ajax({
 								type		: "GET",
-				  			url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+				  			url			: controller ,
 								data		: 
 													{ 
 													 function_key: key,	
@@ -954,7 +977,7 @@ function updateIngredients()
 	
 	$.ajax({
                 type		: "GET",
-                url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                url			: controller ,
                 data		: 
 													{
 														function_key:key,
@@ -990,7 +1013,7 @@ function updateFoodType()
 	
 	$.ajax({
                 type		: "GET",
-                url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                url			: controller ,
                 data		: 
 													{
 														function_key:key,
@@ -1025,7 +1048,7 @@ function updateFoodCuisine()
 	
 	$.ajax({
                 type		: "GET",
-                url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                url			: controller ,
                 data		: 
 													{
 														function_key:key,
@@ -1063,7 +1086,7 @@ function saveUser()
   
   $.ajax({
                 type		: "GET",
-                url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                url			: controller ,
                 data		: 
 													{
 														function_key          :key,
@@ -1112,7 +1135,7 @@ function updateAdminUserRole()
   
    $.ajax({
                 type		: "GET",
-                url			: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+                url			: controller ,
                 data		: 
 													{
 														function_key  :key,
@@ -1149,8 +1172,9 @@ function setUpFoodCuisine()
 function setUpIngredients()
 {
   setUpIngredientsDashboard();
-  fetchIngredients();
-  fetchCategories();
+  fetchCategories();  // For ingredients
+  fetchIngredients(); // For table Data
+  addRow("ONLOAD");   // For Nutrition Data
 }
 
 function setUpFoodType()
@@ -1170,7 +1194,7 @@ function setupFoodCuisineDashboard()
  var key = "SETUP_FOOD_CUISINE_DASHBOARD";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -1193,7 +1217,7 @@ function setUpMainDashboard()
  var key = "SETUP_MAIN_DASHBOARD";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -1204,7 +1228,38 @@ function setUpMainDashboard()
                   $("#recipecount").html(response[0].recipecount);
                   $("#liveusers").html(response[0].registercount);
                   $("#registercount").html(response[0].registercount);
-                } 
+                  
+                  
+                  $("#ipaddhighest").html(response[0].ip[0].ipadd ? response[0].ip[0].ipadd : 'Unknown');
+                  $("#ipaddhighestcount").html(response[0].ip[0].ipaddcount);
+                  $("#ipaddsecondhighest").html(response[0].ip[1].ipadd ? response[0].ip[1].ipadd : 'Unknown');
+                  $("#ipaddsecondhighestcount").html(response[0].ip[1].ipaddcount);
+                  $("#ipaddthirdhighest").html(response[0].ip[2].ipadd ? response[0].ip[2].ipadd : 'Unknown');
+                  $("#ipaddthirdhighestcount").html(response[0].ip[2].ipaddcount);
+                  $("#ipaddtotalcount").html(response[0].ipaddtotalcount);
+                  
+                  $("#areahighest").html(response[0].country[0].area ? response[0].country[0].area : 'Unknown');
+                  $("#areahighestcount").html(response[0].country[0].areacount);
+                  $("#areasecondhighest").html(response[0].country[1].area ? response[0].country[1].area : 'Unknown' );
+                  $("#areasecondhighestcount").html(response[0].country[1].areacount);
+                  $("#areathirdhighest").html(response[0].country[2].area ? response[0].country[2].area : 'Unknown');
+                  $("#areathirdhighestcount").html(response[0].country[2].areacount);
+                  $("#areatotalcount").html(response[0].areatotalcount);
+                  
+                  $("#cityhighest").html(response[0].city[0].city ? response[0].city[0].city: 'Unkwown');
+                  $("#cityhighestcount").html(response[0].city[0].citycount);
+                  $("#citysecondhighest").html(response[0].city[1].city ? response[0].city[1].city: 'Unkwown');
+                  $("#citysecondhighestcount").html(response[0].city[1].citycount);
+                  $("#citythirdhighest").html(response[0].city[2].city ? response[0].city[2].city: 'Unkwown');
+                  $("#citythirdhighestcount").html(response[0].city[2].citycount);
+                  $("#citytotalcount").html(response[0].citytotalcount);
+                  
+                  
+                  
+                  $("#useronedaycount").html(response[0].useronedaycount);
+                  $("#useroneweekcount").html(response[0].useroneweekcount);
+                  $("#useronemonthcount").html(response[0].useronemonthcount);
+               } 
             })
 }
 
@@ -1213,7 +1268,7 @@ function setUpFoodTypeDashboard()
  var key = "SETUP_FOOD_TYPE_DASHBOARD";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -1236,7 +1291,7 @@ function setUpIngredientsDashboard()
  var key = "SETUP_INGREDIENTS_DASHBOARD";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -1259,7 +1314,7 @@ function setUpUsersDashboard()
  var key = "SETUP_USERS_DASHBOARD";
 			$.ajax({
 								type			: "GET",
-								url				: "/private/web/admincontrolpanel/appcontext/controller.php" ,
+								url				: controller ,
 								data			:
 														{
 															function_key: key,
@@ -1277,5 +1332,51 @@ function setUpUsersDashboard()
             })
 }
 
+function showAddFoodType() {
+  $('#AddFoodTypeModal').modal('show');
+}
+
+function showAddFoodCuisine() {
+  $('#AddFoodCuisineModal').modal('show');
+}
+
+function showAddIngredient() {
+  $('#AddIngredientModal').modal('show');
+}
+
+function addRow(source) {
+        var newRow = $("<tr>");
+        var cols = "";
+        var dynamicnutritioncategoryid = "nutcategory"+counter;
+        var dynamicnutritionid = "nut"+counter;
+        var dynamicnutritionuomid = "nutuom"+counter;
+        var dynamicnutritionvalueid = "nutval"+counter;
+        
+        if(source == "ONLOAD")
+        {
+            cols += '<td><select id = "'+dynamicnutritioncategoryid+'" name="nutcategory[]" onchange="fetchSubNutritionCategory('+dynamicnutritioncategoryid+','+dynamicnutritionid+','+dynamicnutritionuomid+')"></select></td>';
+            cols += '<td><select id = "'+dynamicnutritionid+'" name="nut[]" onchange="fetchNutritionUOM('+dynamicnutritionid+','+dynamicnutritionuomid+')"></select></td>';
+            cols += '<td><select id = "'+dynamicnutritionuomid+'" name="nutuom[]"></select></td>';
+            cols += '<td><input type="text" class="form-control" id="'+dynamicnutritionvalueid+'" name="nutval[]" /></td>';
+        }
+        else
+        {
+            cols += '<td><select id = "'+dynamicnutritioncategoryid+'" name="nutcategory[]" onchange="fetchSubNutritionCategory('+dynamicnutritioncategoryid+','+dynamicnutritionid+','+dynamicnutritionuomid+')"></select></td>';
+            cols += '<td><select id = "'+dynamicnutritionid+'" name="nut[]" onchange="fetchNutritionUOM('+dynamicnutritionid+','+dynamicnutritionuomid+')"></select></td>';
+            cols += '<td><select id = "'+dynamicnutritionuomid+'" name="nutuom[]"></select></td>';
+            cols += '<td><input type="text" class="form-control" id="'+dynamicnutritionvalueid+'" name="nutval[]" /></td>';
+            cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        }
+        
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+        fetchNutritionCategory(dynamicnutritioncategoryid,dynamicnutritionid,dynamicnutritionuomid);
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1
+    });
 
 
+}

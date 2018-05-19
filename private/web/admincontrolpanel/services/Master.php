@@ -134,14 +134,88 @@
 					$connection = DatabaseUtil::getInstance()->open_connection();
 					$result = mysqli_query($connection,"SELECT count(*) AS TOTALRECIPECOUNT FROM `RECIPE` WHERE IS_DEL = 'N'");
           $activeusers = mysqli_query($connection,"SELECT count(*) AS TOTALUSERCOUNT FROM `USER`");
+          
+          // IP's
+          $ipcount = mysqli_query($connection, "SELECT CLNT_IP_ADD, COUNT(CLNT_IP_ADD) AS NUMS FROM AUDIT GROUP BY CLNT_IP_ADD ORDER BY NUMS DESC LIMIT 3");
+          $iptotalcount = mysqli_query($connection, "SELECT COUNT(CLNT_IP_ADD) AS TOTALIPADDCOUNT FROM AUDIT");
+
+          // COUNTRY
+          $countrycount = mysqli_query($connection, "SELECT COUNTRY, COUNT(COUNTRY) AS NUMS FROM AUDIT GROUP BY COUNTRY ORDER BY NUMS DESC LIMIT 3");
+          $countrytotalcount = mysqli_query($connection, "SELECT COUNT(COUNTRY) AS TOTALCOUNTRYCOUNT FROM AUDIT");
+
+          // REGION
+          $citycount = mysqli_query($connection, "SELECT CITY, COUNT(CITY) AS NUMS FROM AUDIT GROUP BY CITY ORDER BY NUMS DESC LIMIT 3");
+          $citytotalcount = mysqli_query($connection, "SELECT COUNT(CITY) AS TOTALCITYCOUNT FROM AUDIT");
+
+          // USERS LAST 24 HOURS
+          $useronedaycount = mysqli_query($connection, "SELECT COUNT(*) AS ONEDAYCOUNT FROM USER WHERE CREATE_DTM >= NOW() - INTERVAL 1 DAY");
+
+          // USERS LAST 7 DAYS
+          $useroneweekcount = mysqli_query($connection, "SELECT COUNT(*) AS ONEWEEKCOUNT FROM USER WHERE CREATE_DTM >= NOW() - INTERVAL 7 DAY");
+
+          // USERS LAST 30 DAYS
+          $useronemonthcount = mysqli_query($connection, "SELECT COUNT(*) AS ONEMONTHCOUNT FROM USER WHERE CREATE_DTM >= NOW() - INTERVAL 30 DAY");
+        
+        
           $myArray = array();
+          $IpArray = array();
+          $CountryArray = array();
+          $CityArray = array();
         
           $row = $result->fetch_object();
           $activerow = $activeusers->fetch_object();
          
-          $tempArray['recipecount'] = $row->TOTALRECIPECOUNT;
-          $tempArray['registercount'] = $activerow->TOTALUSERCOUNT;
-          array_push($myArray, $tempArray);
+          $temporaryArray['recipecount'] = $row->TOTALRECIPECOUNT;
+          $temporaryArray['registercount'] = $activerow->TOTALUSERCOUNT;
+          
+        	while($row = $ipcount->fetch_object()) 
+					{
+             $tempArray['ipadd'] = $row->CLNT_IP_ADD;    
+             $tempArray['ipaddcount'] = $row->NUMS;    
+          
+             array_push($IpArray, $tempArray);
+          }
+        
+          $temporaryArray['ip'] = $IpArray;
+        
+          while($row = $countrycount->fetch_object()) 
+					{
+             $countrytempArray['area'] = $row->COUNTRY;    
+             $countrytempArray['areacount'] = $row->NUMS;    
+            
+             array_push($CountryArray, $countrytempArray);
+          }
+        
+          $temporaryArray['country'] = $CountryArray;
+        
+          while($row = $citycount->fetch_object()) 
+					{
+             $citytempArray['city'] = $row->CITY;    
+             $citytempArray['citycount'] = $row->NUMS;    
+              
+             array_push($CityArray, $citytempArray);
+          }
+        
+          $temporaryArray['city'] = $CityArray;
+        
+          $iptotal           = $iptotalcount->fetch_object();
+          $countrytotal      = $countrytotalcount->fetch_object();
+          $citytotal         = $citytotalcount->fetch_object();
+          $useroneday        = $useronedaycount->fetch_object();
+          $useroneweek       = $useroneweekcount->fetch_object();
+          $useronemonth      = $useronemonthcount->fetch_object();
+        
+        
+          $temporaryArray['ipaddtotalcount'] = $iptotal->TOTALIPADDCOUNT;
+          $temporaryArray['areatotalcount'] = $countrytotal->TOTALCOUNTRYCOUNT;
+          $temporaryArray['citytotalcount'] = $citytotal->TOTALCITYCOUNT;
+        
+          $temporaryArray['useronedaycount'] = $useroneday->ONEDAYCOUNT;
+          $temporaryArray['useroneweekcount'] = $useroneweek->ONEWEEKCOUNT;
+          $temporaryArray['useronemonthcount'] = $useronemonth->ONEMONTHCOUNT;
+          
+        
+          array_push($myArray, $temporaryArray);
           
 					echo json_encode($myArray);
         
@@ -192,6 +266,26 @@
 				}
 		}
     
+    
+    public static function fetchNutCategory(){
+      try{
+					$connection = DatabaseUtil::getInstance()->open_connection();
+					$result = mysqli_query($connection,"SELECT * from `NUTRITION_CATEGORIES`");
+					$myArray = array();
+ 					while($row = $result->fetch_object()) 
+					{
+             $tempArray = $row;
+             array_push($myArray, $tempArray);
+          }
+        	echo json_encode($myArray);
+				}catch(Exception $e){
+					Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+				}
+				finally{
+					DatabaseUtil::getInstance()->close_connection($connection);
+				}
+    }
+      
     public static function fetchIngByCategory($category){
 			//check for null/empty
 				if(!Utility::check_for_null($category)){
@@ -219,6 +313,57 @@
 					DatabaseUtil::getInstance()->close_connection($connection);
 				}
 		}
+    
+    public static function fetchNutByCategory($category){
+    //check for null/empty
+      if(!Utility::check_for_null($category)){
+          Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty category");
+          return;
+      }
+    try{
+        $connection = DatabaseUtil::getInstance()->open_connection();
+        $sql = "SELECT NUT_ID, NUT_NAME FROM `NUTRITION` WHERE NUT_CAT_ID = '$category'";
+        $result = mysqli_query($connection,$sql);
+        $myArray = array();
+        while($row = $result->fetch_object()) 
+        {
+           $tempArray = $row;
+           array_push($myArray, $tempArray);
+        }
+        echo json_encode($myArray);
+      }catch(Exception $e){
+        Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+      }
+      finally{
+        DatabaseUtil::getInstance()->close_connection($connection);
+      }
+  }
+    
+    
+    public static function fetchUomByNut($category){
+    //check for null/empty
+      if(!Utility::check_for_null($category)){
+          Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", "Error ! null/empty category");
+          return;
+      }
+    try{
+        $connection = DatabaseUtil::getInstance()->open_connection();
+        $sql = "SELECT UOM.NUT_UOM_ID, UOM.NUT_UOM_NAME FROM NUTRITION NUTRI INNER JOIN NUTRITION_UOM UOM ON NUTRI.NUT_UOM_ID = UOM.NUT_UOM_ID WHERE NUTRI.NUT_ID = '$category'";
+        $result = mysqli_query($connection,$sql);
+        $myArray = array();
+        while($row = $result->fetch_object()) 
+        {
+           $tempArray = $row;
+           array_push($myArray, $tempArray);
+        }
+        echo json_encode($myArray);
+      }catch(Exception $e){
+        Utility::logger(__CLASS__, __METHOD__, __LINE__, "E", 'Message: ' .$e->getMessage());
+      }
+      finally{
+        DatabaseUtil::getInstance()->close_connection($connection);
+      }
+  }
     
 		public static function fetchFoodType(){
 			try{
