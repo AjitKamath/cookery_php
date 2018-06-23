@@ -1,3 +1,6 @@
 <?php
-	include_once('private/controllers/Controller.php');
+include_once('admincontrolpanel/appcontext/constants.php');
+include_once('admincontrolpanel/web/pages/index.php');
+
+
 ?>
